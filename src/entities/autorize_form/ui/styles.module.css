@@ -1,0 +1,103 @@
+input {
+    width: 100%;
+    background: none;
+    border: none;
+    outline: none;
+    color: black;
+}
+
+.btn {
+    display: inline-block;
+    height: 50px;
+    border: none;
+    border-radius: 40px;
+    background: rgb(65, 95, 243);
+    color: rgb(255, 255, 255);
+    font-size: 24px;
+    font-weight: 500;
+    padding-inline: 40px;
+}
+
+.account ::placeholder,
+.password ::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.account,
+.password {
+    display: flex;
+    border-radius: 10px;
+    box-shadow: 0px 4px 16px 3px rgba(0, 0, 0, 0.2);
+    height: 55px;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 20px;
+    gap: 20px;
+}
+
+.name{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.login {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.remember_password {
+    display: flex;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.6);
+    gap: 10px;
+}
+
+.remember_password input{
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+}
+
+.forgot_password{
+    text-align: center;
+}
+
+.error{
+    position: relative;
+    font-size: 14px;
+    color: rgba(255, 73, 73);
+}
+
+.errorlist{
+	line-height: 150%;
+	margin: 0;
+	list-style-type: none;
+}
+
+.agreement a {
+    color: rgb(65, 95, 243);
+}
+
+.agreement,
+.password_requirements {
+    display: flex;
+    flex-direction: row;
+    margin-left: 20px;
+    color: rgba(0, 0, 0, 0.8);
+    font-size: 14px;
+    line-height: 150%;
+    gap: 20px;
+}
+
+.agreement input{
+    height: 18px;
+    width: 18px;
+    margin-top: 3px;
+}
+
+.agreement p{
+    margin: 0;
+}
+

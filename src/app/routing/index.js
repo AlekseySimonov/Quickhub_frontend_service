@@ -1,0 +1,1 @@
+export {AutorizeRouter} from './autorize'
