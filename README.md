@@ -18,12 +18,12 @@
 [shields-mobx-domain]: https://img.shields.io/badge/MobX-F95?logo=mobx&logoColor=fff&style=for-the-badge
 
 ## Технические особенности
-1. Архитектура приложения - [Feature-Sliced Design] (https://react.dev/)
+1. Архитектура приложения - [Feature-Sliced Design](https://react.dev/)
 2. В **src/pages/** находятся основные компоненты из которых состоит приложение: 
-    - Авторизация **autorize**
-    - Основной интерфейс **base**
+    - Авторизация: **autorize**
+    - Основной интерфейс: **base**
 3. В **src/entities** находятся страницы контента, такие как Проекты (**projects**), Настройки (**settings**), Профиль(**profile**) и т.д.
-4. Составляющие **src/entities** и **src/pages** находятся в остальных папках согласно документации [FSD] (https://react.dev/)
+4. Составляющие **src/entities** и **src/pages** находятся в остальных папках согласно документации [FSD](https://react.dev/)
 
 ## Ближайшие улучшения 
 -  Страница регистрации
