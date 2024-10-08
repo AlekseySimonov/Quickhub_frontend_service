@@ -1,0 +1,22 @@
+.content_header{
+    display: flex;
+    flex-direction: column;
+    height: 100px;
+}
+
+.content_name{
+
+}
+
+.tools{
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav_bar{
+
+}
+
+.tools_bar{
+
+}

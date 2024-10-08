@@ -1,1 +1,2 @@
-export {AutorizeRouter} from './autorize'
+export {AutorizeRouter} from './autorize/autorizeRouter'
+export {BaseRouter} from './base/baseRouter'

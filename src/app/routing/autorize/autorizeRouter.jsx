@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom"
-import { Login } from "../../features/autorize/login"
-import { Registration } from "../../features/autorize/registration"
+import { Login } from "../../../features/autorize/login"
+import { Registration } from "../../../features/autorize/registration"
 
 
 const AutorizeRouter = () => {

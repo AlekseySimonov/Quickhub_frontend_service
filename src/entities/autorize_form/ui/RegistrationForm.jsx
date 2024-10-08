@@ -1,34 +1,49 @@
-import {useState} from "react"
+import {useContext, useState} from "react"
 import styles from './styles.module.css'
 import { Checklist } from "../../../shared/ui/components/autorize/PasswordChecklist"
+import { Context } from "../../../main"
 
 const RegistrationForm = () => {
+
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
+    const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 	const [passwordAgain, setPasswordAgain] = useState("")
 
+    const [checked, setChecked] = useState(false)
+
+    const {store} = useContext(Context)
     
     return (
         <>
         <div className={styles.name}>
             <div className ={styles.account}>
-                <input  placeholder = 'Имя' className = 'firstName'/>
+                <input  
+                placeholder = 'Имя' 
+                onChange={e => setFirstName(e.target.value)}
+                />
             </div>
 
             <div className ={styles.account}>
-                <input  placeholder = 'Фамилия' className = 'secondName'/>
+                <input  
+                placeholder = 'Фамилия' 
+                onChange={e => setLastName(e.target.value)}
+                />
             </div>
         </div>
             
-
             <div className ={styles.account}>
-                <input  placeholder = 'Почта' className = 'email'/>
+                <input  
+                placeholder = 'Почта' 
+                onChange={e => setEmail(e.target.value)}
+                />
             </div>
 
             <div className ={styles.password}>
                 <input 
                 type='password'  
                 placeholder = 'Пароль' 
-                className = 'password' 
                 onChange={e => setPassword(e.target.value)}
                 /> 
             </div>
@@ -37,7 +52,6 @@ const RegistrationForm = () => {
                 <input 
                 type='password'  
                 placeholder = 'Повторите пароль' 
-                className = 'passwordAgain'
                 onChange={e => setPasswordAgain(e.target.value)}
                 /> 
             </div>
@@ -46,14 +60,22 @@ const RegistrationForm = () => {
                 <Checklist password={password} passwordAgain={passwordAgain}/>
             </div>
 
-            
-
             <div className ={styles.login}>
-                <button type="submit" className = {styles.btn}>Зарегестрироваться</button>
+                <button 
+                disabled = {!checked}
+                className = {styles.btn}
+                onClick={() => store.register(firstName, lastName, email, password, passwordAgain)}>
+                Зарегистрироваться
+                </button>
             </div>
 
             <div className={styles.agreement}>
-                <input type="checkbox" name="myCheckbox" /> 
+                <input 
+                type="checkbox" 
+                checked={checked}
+                onChange={() => setChecked(!checked)}
+                name="myCheckbox" /> 
+
                 <p>
                     Регистрируясь, вы подтверждаете, что принимаете <a href="#">Пользовательское соглашение</a> и <a
                     href="#">Согласие</a> на обработку персональных данных.

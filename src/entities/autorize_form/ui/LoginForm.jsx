@@ -1,29 +1,14 @@
 import styles from './styles.module.css'
 import loginImg from '../../../shared/ui/icons/autorize/login.svg'
 import passwordImg from '../../../shared/ui/icons/autorize/password.svg'
+import store from "../../../shared/model/store"
 import { useState } from 'react'
-import { api } from '../../../shared/http/axios'
 
 const LoginForm = () => {
 
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
 
-    const LOGIN_URL = '/account/api/v1/login/'
-
-    const onSubmit = async () => {
-        console.log(email,',', password)
-        try{
-            const response = await api.post(LOGIN_URL, 
-                JSON.stringify({username: email, password:password}))
-                console.log(response)
-        }catch(error){
-            console.log( error);
-        }
-        
-    }
-
-    
     return (
         <>
             <div className ={styles.account}>
@@ -47,7 +32,10 @@ const LoginForm = () => {
 
             <div className ={styles.login}>
 
-                <button type="submit" className = {styles.btn} onClick={onSubmit}>Войти</button>
+                <button 
+                className = {styles.btn}
+                onClick={() => store.login(email, password)}
+                >Войти</button>
 
                 <label className ={styles.remember_password} >
                     <input type="checkbox" name="myCheckbox" />

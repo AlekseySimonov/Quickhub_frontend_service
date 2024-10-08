@@ -1,10 +1,10 @@
-// import styles from './styles.module.css'
+import { CompaniesHeader } from "../../../features/companies/index"
 
 const Companies = () =>{
     return(
-        <div>
-
-        </div>
+        <>
+            <CompaniesHeader/>
+        </>
     )
 }
 
