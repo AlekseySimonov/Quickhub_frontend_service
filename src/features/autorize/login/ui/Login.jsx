@@ -3,6 +3,7 @@ import { LoginForm } from '../../../../entities/autorize_form/index'
 import {  NavLink } from 'react-router-dom'
 
 const Login = () =>{
+
     return(
         <>
         <div className={styles.h1}>Авторизация</div>

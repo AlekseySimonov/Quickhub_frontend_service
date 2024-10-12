@@ -1,4 +1,4 @@
-const API = 'http://localhost:8000/'
+const API = 'http://92.63.67.98/'
 
 const LOGIN = 'account/api/v1/login/'
 const REGISTRATION = 'account/api/v1/registration/'

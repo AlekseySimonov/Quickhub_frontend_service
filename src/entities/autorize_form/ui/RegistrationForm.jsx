@@ -1,7 +1,6 @@
-import {useContext, useState} from "react"
+import { useState} from "react"
 import styles from './styles.module.css'
 import { Checklist } from "../../../shared/ui/components/autorize/PasswordChecklist"
-import { Context } from "../../../main"
 
 const RegistrationForm = () => {
 
@@ -12,8 +11,6 @@ const RegistrationForm = () => {
 	const [passwordAgain, setPasswordAgain] = useState("")
 
     const [checked, setChecked] = useState(false)
-
-    const {store} = useContext(Context)
     
     return (
         <>
@@ -64,7 +61,8 @@ const RegistrationForm = () => {
                 <button 
                 disabled = {!checked}
                 className = {styles.btn}
-                onClick={() => store.register(firstName, lastName, email, password, passwordAgain)}>
+                // onClick={}
+                >
                 Зарегистрироваться
                 </button>
             </div>

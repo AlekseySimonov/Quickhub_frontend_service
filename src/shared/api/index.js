@@ -1,2 +1,2 @@
-export * from './urls'
+export * as authService from './authService'
 

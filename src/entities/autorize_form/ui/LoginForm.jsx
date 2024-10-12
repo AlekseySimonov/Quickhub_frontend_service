@@ -1,13 +1,17 @@
 import styles from './styles.module.css'
 import loginImg from '../../../shared/ui/icons/autorize/login.svg'
 import passwordImg from '../../../shared/ui/icons/autorize/password.svg'
-import store from "../../../shared/model/store"
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { loginAPI } from '../../../app/store/slices/userSlice'
 
 const LoginForm = () => {
 
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
+    const dispatch = useDispatch()
+
+    const handleSubmit = () =>  dispatch(loginAPI({email,password}))
 
     return (
         <>
@@ -34,7 +38,7 @@ const LoginForm = () => {
 
                 <button 
                 className = {styles.btn}
-                onClick={() => store.login(email, password)}
+                onClick={handleSubmit}
                 >Войти</button>
 
                 <label className ={styles.remember_password} >
