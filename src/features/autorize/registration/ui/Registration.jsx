@@ -9,7 +9,7 @@ const Registration = () =>{
         <div className={styles.h1}>Регистрация</div>
         <div className={styles.sign_up_account}>
             <p>У Вас уже есть аккаунт?</p>
-            <NavLink to="/login">Войти</NavLink>
+            <NavLink to="/auth/login">Войти</NavLink>
         </div>
         <RegistrationForm />
         </>

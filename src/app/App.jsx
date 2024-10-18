@@ -1,18 +1,10 @@
-// import { BaseRouter } from './routing/index';
-// import {Base} from '../pages/base/index';
-import { AutorizeRouter } from './routing/index';
-import { AutorizePage } from '../pages/autorize';
+import { useSelector } from 'react-redux';
+import { appRouter } from '../pages/routing/index';
+import { RouterProvider } from 'react-router-dom';
 
 export default function App() {
-
-  return (
-        <AutorizePage>
-          <AutorizeRouter/>
-        </AutorizePage>
-      //<Base>
-      //  <BaseRouter/>
-      //</Base>
-    
-  )
+  const isAuth = useSelector((state) => state.user.isAuth)
+  console.log(isAuth)
+  return (<RouterProvider router={appRouter}/>)
 }
 

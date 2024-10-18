@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { authService } from "../../../shared/api";
 
 const initialState ={
+    isAuth: false,
     email: null,
     token: null,
     id: null,
@@ -27,6 +28,7 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         removeUser(state) {
+            state.isAuth = false;
             state.email = null;
             state.token = null;
             state.id = null;

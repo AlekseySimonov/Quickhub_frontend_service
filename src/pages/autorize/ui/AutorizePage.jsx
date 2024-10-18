@@ -1,7 +1,8 @@
+import { Outlet } from 'react-router-dom'
 import BackgroundImg from './background.svg'
 import styles from  './style.module.css'
 
-const AutorizePage = (props) => {
+const AutorizePage = () => {
 
     return(
         <div className={styles.container}>
@@ -11,7 +12,7 @@ const AutorizePage = (props) => {
 
             <div className={styles.content}>
                 <div className = {styles.form}>
-                    {props.children}
+                    <Outlet/>
                 </div>
             </div>
 
