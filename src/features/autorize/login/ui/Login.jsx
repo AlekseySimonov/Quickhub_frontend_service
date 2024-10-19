@@ -10,7 +10,6 @@ const Login = () =>{
         <div className= {styles.create_account}>
             <p>У вас нет аккаунта?</p>
             <Link to="/auth/registration">Создайте аккаунт</Link>
-            
         </div> 
         <LoginForm />
         </>

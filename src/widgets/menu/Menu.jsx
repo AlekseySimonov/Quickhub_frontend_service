@@ -10,35 +10,38 @@ const Menu = ({isActive}) => {
 
 
     return(
-        <div className= 'menu'>
 
             <div data-testid ='nav-test' className={isActive === false ? styles.nav : styles.nav_close}>
-                <NavLink to ='/tasks' className={styles.nav_link}> 
+                <NavLink to ='/tasks' className={({ isActive }) =>   
+                    isActive ? `${styles.nav_link} ${styles.active}` : styles.nav_link }> 
                     <img src ={tasks}/>
                     <p>Мои задачи </p>
                 </NavLink>
 
-                <NavLink to ='/projects' className={styles.nav_link}>
+                <NavLink to ='/projects' className={({ isActive }) =>   
+                    isActive ? `${styles.nav_link} ${styles.active}` : styles.nav_link }>
                     <img src ={projects}/> 
                     <p>Проекты</p> 
                 </NavLink>
 
-                <NavLink to ='/companies' className={styles.nav_link}>
+                <NavLink to ='/companies' className={({ isActive }) =>   
+                    isActive ? `${styles.nav_link} ${styles.active}` : styles.nav_link }>
                     <img src ={companies}/> 
                     <p>Компании</p>
                 </NavLink>
 
-                <NavLink to ='/settings' className={styles.nav_link}>
+                <NavLink to ='/settings' className={({ isActive }) =>   
+                    isActive ? `${styles.nav_link} ${styles.active}` : styles.nav_link }>
                     <img src ={settings}/> 
                     <p>Настройки </p>
                 </NavLink>
 
-                <NavLink to ='/help' className={styles.nav_link}>
+                <NavLink to ='/help' className={({ isActive }) =>   
+                    isActive ? `${styles.nav_link} ${styles.active}` : styles.nav_link }>
                     <img src ={help}/> 
                     <p>Поддержка</p>
                 </NavLink>
             </div>
-        </div>
     )
 }
 

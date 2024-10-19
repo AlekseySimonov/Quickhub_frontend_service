@@ -12,6 +12,19 @@ import { AutorizePage } from "../autorize/ui/AutorizePage";
 import { Registration } from "../../features/autorize/registration";
 import { Login } from "../../features/autorize/login";
 
+export const authTitles = {
+    '/auth/login': 'Вход',
+    '/auth/registration': 'Регистрация',
+}
+
+export const baseTitles = {
+    '/tasks': 'Мои задачи',
+    '/projects': 'Проекты',
+    '/companies': 'Компании',
+    '/settings': 'Настройки',
+    '/help': 'Поддержка',
+}
+
 export const appRouter = createBrowserRouter([
     {
         path: '/',
@@ -21,27 +34,22 @@ export const appRouter = createBrowserRouter([
             {
                 index: true,
                 path: 'tasks',
-                title: 'Мои задачи',
                 element: <MyTasks />,
             },
             {
                 path: 'projects',
-                title: 'Проекты',
                 element: <Projects />,
             },
             {
                 path: 'companies',
-                title: 'Компании',
                 element: <Companies />,
             },
             {
                 path: 'settings',
-                title: 'Настройки',
                 element: <Settings />,
             },
             {
                 path: 'help',
-                title: 'Поддержка',
                 element: <Help />,
             },
         ],
@@ -53,12 +61,10 @@ export const appRouter = createBrowserRouter([
         children: [
             {
                 path:'login',
-                title: 'Вход',
                 element: <Login/>,
             },
             {
                 path:'registration',
-                title: 'Регистрация',
                 element: <Registration />,
             },
         ],

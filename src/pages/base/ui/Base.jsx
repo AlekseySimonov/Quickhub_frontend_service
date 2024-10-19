@@ -1,10 +1,15 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import {Header} from "../../../widgets/header/index";
 import {Menu} from "../../../widgets/menu/index";
 import styles from './styles.module.css';
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { baseTitles } from "../../routing";
 
 export const Base = () => {
+    const location = useLocation()
+    useEffect(() => {  
+        document.title = baseTitles[location.pathname] ?? 'Ошибка';  
+    }, [location]);
     
     const [isActive, setIsActive] = useState(false)
     
@@ -20,12 +25,13 @@ export const Base = () => {
         <div className = {styles.header}>
             <Header burgerClick = {menu} />
         </div>
-            <div className= {styles.menu}>
-                <Menu isActive = {isActive} />
-            </div>
-            <div className={styles.content}>
-                <Outlet/>
-            </div>
+        
+        <div className= {styles.menu}>
+            <Menu isActive = {isActive} />
+        </div>
+        <div className={styles.content}>
+            <Outlet/>
+        </div>
         </div>  
     )
 }
