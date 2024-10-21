@@ -4,7 +4,9 @@ import * as URL from './urls';
 
 const login = (email, password)=>{
     console.log(email, ' ,', password)
-    return api.post(URL.LOGIN_URL, {email, password})
+    console.log(URL.API + URL.LOGIN, {email, password})
+    console.log(axios.post(URL.API + URL.LOGIN, {email, password}))
+    return api.post(URL.API + URL.LOGIN, {email, password})
 }
 
 const register =  (first_name,  last_name, email, password,password2)=>{

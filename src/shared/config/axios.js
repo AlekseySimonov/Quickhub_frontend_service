@@ -9,17 +9,17 @@ const api = axios.create({
     },
 })
 
-api.interceptors.request.use((request) =>{
-    request.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
-    return request
-})
+// api.interceptors.request.use((request) =>{
+//     request.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
+//     return request
+// })
 
-api.interceptors.response.use( (response) => {
-    response.headers.add()
-    return response;
-    }, (error) => {
-    return Promise.reject(error);
-    });
+// api.interceptors.response.use( (response) => {
+//     response.headers.add()
+//     return response;
+//     }, (error) => {
+//     return Promise.reject(error);
+//     });
 
 
 export {api}

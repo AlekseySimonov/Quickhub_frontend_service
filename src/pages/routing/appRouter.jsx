@@ -11,6 +11,7 @@ import { Help } from "../../entities/help";
 import { AutorizePage } from "../autorize/ui/AutorizePage";
 import { Registration } from "../../features/autorize/registration";
 import { Login } from "../../features/autorize/login";
+import { CheckAuth, IsAuth } from "../../shared/config";
 
 export const authTitles = {
     '/auth/login': 'Вход',
@@ -28,7 +29,9 @@ export const baseTitles = {
 export const appRouter = createBrowserRouter([
     {
         path: '/',
-        element: <Base />,
+        element: <CheckAuth>
+                <Base />
+                </CheckAuth>,
         errorElement: <ErrorPage />,
         children: [
             {
@@ -56,7 +59,9 @@ export const appRouter = createBrowserRouter([
     },
     {
         path: '/auth',
-        element: <AutorizePage />,
+        element: <IsAuth>
+                <AutorizePage />
+                </IsAuth>,
         errorElement: <ErrorPage />,
         children: [
             {
