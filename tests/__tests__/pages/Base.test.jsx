@@ -1,13 +1,10 @@
 import { render,screen, fireEvent } from "@testing-library/react";
 import {Base} from '../../../src/pages/base/index';
-import { BrowserRouter } from "react-router-dom";
 
 const base = ()=>{
     return(
-        <BrowserRouter>
             <Base>
             </Base>
-        </BrowserRouter>
     )
 }
 
