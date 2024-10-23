@@ -30,16 +30,16 @@
 `npm run test` для запуска тестов. 
 
 ## Технические особенности
-1. Архитектура приложения - [Feature-Sliced Design] (https://react.dev/)
+1. Архитектура приложения - [Feature-Sliced Design](https://react.dev/)
 2. В **/src/pages** находятся основные компоненты из которых состоит приложение: 
     - Авторизация **autorize**
     - Основной интерфейс **base**
 3. В **/src/entities** находятся страницы контента, такие как Проекты (**/projects**), Настройки (**/settings**), Профиль(**/profile**) и т.д.
-4. Составляющие **/src/entities** и **/src/pages** находятся в остальных папках согласно документации [FSD] (https://react.dev/)
+4. Составляющие **/src/entities** и **/src/pages** находятся в остальных папках согласно документации [FSD](https://react.dev/)
 5. Тесты находятся в папке **/tests**
 
 > [!WARNING]
-> Для взаимодействия с API необходимо пользоваться расширением CORS Unblock[https://chromewebstore.google.com/detail/cors-unblock/lfhmikememgdcahcdlaciloancbhjino], 
+> Для взаимодействия с API необходимо пользоваться расширением [CORS Unblock](https://chromewebstore.google.com/detail/cors-unblock/lfhmikememgdcahcdlaciloancbhjino), 
 если вы пользуетесь Google Chrome. Для других браузеров также необходимо установить расширения для разблокировки CORS-заголовков, или искать другие обходные пути.
 
 ### Store
@@ -51,7 +51,7 @@ Store и Reducers находятся в **/app/store/**.
     - id
 
 ### Routing
-- Основной роутинг приложения находится в **/src/pages/routing**. Данный роутинг реализован с помощью [React-Router] (https://reactrouter.com/), а приложение в **/src/app**
+- Основной роутинг приложения находится в **/src/pages/routing**. Данный роутинг реализован с помощью [React-Router](https://reactrouter.com/), а приложение в **/src/app**
 обернуто в **<RouterProvider router={appRouter}/>**.
 - Переход по страницам сопровождается изменением заголовка (title) страницы.
 - Реализована проверка авторизации пользователя на странице - **RequireAuth** в **/src/shared/config** (скорее всего, данный файл будет перенесен к роутингу). 
