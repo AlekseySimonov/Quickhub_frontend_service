@@ -1,17 +1,22 @@
 import { useState} from "react"
 import styles from './styles.module.css'
 import { Checklist } from "../../../shared/ui/components/autorize/PasswordChecklist"
+import { useDispatch } from "react-redux"
+import { registerAPI } from "../../../app/store/slices/authSlice"
 
 const RegistrationForm = () => {
 
-    const [firstName, setFirstName] = useState("")
-    const [lastName, setLastName] = useState("")
+    const [first_name, setFirstName] = useState("")
+    const [last_name, setLastName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-	const [passwordAgain, setPasswordAgain] = useState("")
+	const [password2, setPassword2] = useState("")
 
     const [checked, setChecked] = useState(false)
-    
+
+    const dispatch = useDispatch()
+    const handleSubmit = () =>  dispatch(registerAPI({first_name,  last_name, email, password, password2}))
+
     return (
         <>
         <div className={styles.name}>
@@ -49,19 +54,19 @@ const RegistrationForm = () => {
                 <input 
                 type='password'  
                 placeholder = 'Повторите пароль' 
-                onChange={e => setPasswordAgain(e.target.value)}
+                onChange={e => setPassword2(e.target.value)}
                 /> 
             </div>
 
             <div className ={styles.password_requirements}>
-                <Checklist password={password} passwordAgain={passwordAgain}/>
+                <Checklist password={password} passwordAgain={password2}/>
             </div>
 
             <div className ={styles.login}>
                 <button 
                 disabled = {!checked}
                 className = {styles.btn}
-                // onClick={}
+                onClick={handleSubmit}
                 >
                 Зарегистрироваться
                 </button>

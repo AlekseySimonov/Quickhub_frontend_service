@@ -89,17 +89,7 @@
 }
 
 .account {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 278px;
-    height: 60px;
-    margin-left: 10px;
-    border: none;
-    background: none;
-    padding: 0;
-    border-radius: 10px;
-    color: white;
+    display: block;
 }
 
 .profile {
@@ -122,11 +112,32 @@
     width: 14px;
 }
 
+.dropdown_toggle{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 278px;
+    height: 60px;
+    margin-left: 10px;
+    border: none;
+    background: none;
+    padding: 0;
+    border-radius: 10px;
+    color: white;
+}
+
+.dropdown_toggle .active{
+    background: rgba(217, 217, 217, 0.3);
+}
+
+.dropdown_menu{
+
+}
 
 .right a:hover {
     background-color: rgba(217, 217, 217, 0.3);
 }
 
-.right .account:hover{
+.right .dropdown_toggle:hover{
     background-color: rgba(217, 217, 217, 0.3);
 }

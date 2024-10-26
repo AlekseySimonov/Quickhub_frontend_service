@@ -3,18 +3,20 @@ import loginImg from '../../../shared/ui/icons/autorize/login.svg'
 import passwordImg from '../../../shared/ui/icons/autorize/password.svg'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { loginAPI } from '../../../app/store/slices/userSlice'
+import { loginAPI } from '../../../app/store/slices/authSlice'
 
 const LoginForm = () => {
 
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
-    const dispatch = useDispatch()
+    
 
+    const dispatch = useDispatch()
     const handleSubmit = () =>  dispatch(loginAPI({email,password}))
 
     return (
         <>
+
             <div className ={styles.account}>
                 <img src={loginImg} alt="#"/>
                 <input  

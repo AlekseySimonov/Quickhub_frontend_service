@@ -1,5 +1,5 @@
 import axios from "axios";
-import {API} from "../api/urls";
+import {API, REFRESH} from "../api/urls";
 
 const api = axios.create({
     withCredentials: true, 
@@ -9,19 +9,22 @@ const api = axios.create({
     },
 })
 
-// api.interceptors.request.use((request) =>{
-//     request.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
-//     return request
-// })
+api.interceptors.request.use((request) =>{
+        request.headers.Authorization = `Bearer ${localStorage.getItem('accessToken')}`
+    return request
+})
 
-api.interceptors.response.use( (response) => {
-    response.headers.add()
-    return response;
-    }, (error) => {
-    // return Promise.reject(error);
-    return console.log(error)
-    });
-
+api.interceptors.response.use((config) =>{
+    return config
+}, async (error) =>{
+    const originalRequest = error.config
+    if (error.response.status == 401 || error.response.status == 403)
+        var response = await axios.post(API + REFRESH, {withCredentials:true})
+        localStorage.setItem('access', response.data.access)
+        localStorage.setItem('refresh', response.data.refresh)
+        return api.request(originalRequest)
+    }
+)
 
 export {api}
 

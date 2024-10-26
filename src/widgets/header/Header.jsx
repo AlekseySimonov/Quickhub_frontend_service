@@ -6,8 +6,19 @@ import notifications from '../../shared/ui/icons/header/notifications.svg'
 import profile from '../../shared/ui/icons/header/profile.svg'
 import logoSVG from '../../shared/ui/icons/header/logoSVG.svg'
 import burger from '../../shared/ui/icons/header/burger.svg'
+import {DropDown} from '../../shared/ui/components/index'
+import { useDispatch } from 'react-redux'
+import { logoutAPI } from './../../app/store/slices/authSlice';
 
-const Header = ({burgerClick}) => {
+const dropDownOptions = ['Выйти']
+
+export const Header = ({burgerClick}) => {
+
+        const dispatch = useDispatch()
+        const handleLogout = () => {  
+            dispatch(logoutAPI())
+            console.log("Пользователь вышел из приложения.")
+        }
 
     return (
     <>
@@ -44,26 +55,24 @@ const Header = ({burgerClick}) => {
                 <img src={messages}/>
             </a>
 
-            <button className={styles.account}>
-                <div className={styles.profile}>
-
-                    <div className={styles.profile_icon}>
-                        <img src={profile}/>
-                    </div>
-
-                    <div className={styles.name}>
-                        <p>Симонов Алексей</p>
-                    </div>
+            <div className={styles.account}>
+                    <DropDown
+                        styles = {styles}
+                        title = {<>
+                                    <div className={styles.profile_icon}>
+                                        <img src={profile}/>
+                                    </div>
+                                    Симонов Алексей
+                                    <div className={styles.arrow_down}>
+                                        <img src={arrow_down}/>
+                                    </div>
+                                </>
+                                }
+                        options = {dropDownOptions}
+                        onLogout={handleLogout}
+                    />
                 </div>
-
-                <div className={styles.arrow_down}>
-                <img src={arrow_down}/>
-                </div>
-            </button>
-
         </div>
     </>
     )
 }
-
-export {Header}
