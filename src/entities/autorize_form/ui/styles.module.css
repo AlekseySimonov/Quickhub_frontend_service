@@ -1,3 +1,9 @@
+.form{
+    display:flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 input {
     width: 100%;
     background: none;
@@ -68,12 +74,6 @@ input {
     text-align: center;
 }
 
-.error{
-    position: relative;
-    font-size: 14px;
-    color: rgba(255, 73, 73);
-}
-
 .errorlist{
 	line-height: 150%;
 	margin: 0;
@@ -84,11 +84,9 @@ input {
     color: rgb(65, 95, 243);
 }
 
-.agreement,
-.password_requirements {
+.agreement {
     display: flex;
     flex-direction: row;
-    margin-left: 20px;
     color: rgba(0, 0, 0, 0.8);
     font-size: 14px;
     line-height: 150%;
@@ -104,4 +102,10 @@ input {
 .agreement p{
     margin: 0;
 }
+
+.errorMessage {  
+    color: rgba(255, 73, 73); 
+    font-size: 14px;
+    margin-top: 4px; 
+}  
 

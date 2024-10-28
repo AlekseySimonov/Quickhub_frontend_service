@@ -1,92 +1,118 @@
-import { useState} from "react"
 import styles from './styles.module.css'
-import { Checklist } from "../../../shared/ui/components/autorize/PasswordChecklist"
-import { useDispatch } from "react-redux"
+import { useDispatch} from "react-redux"
 import { registerAPI } from "../../../app/store/slices/authSlice"
+import { Formik, Form, Field, ErrorMessage } from 'formik'
+import * as Yup from 'yup'
 
-const RegistrationForm = () => {
+export const RegistrationForm = () => {
 
-    const [first_name, setFirstName] = useState("")
-    const [last_name, setLastName] = useState("")
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-	const [password2, setPassword2] = useState("")
-
-    const [checked, setChecked] = useState(false)
+    // const {error} = useSelector(state => state.auth)
+    
+    const initialValues = {
+        first_name: '',
+        last_name: '',
+        email: '',
+        password: '',
+        password2: '',
+        checkbox: false,
+    }
 
     const dispatch = useDispatch()
-    const handleSubmit = () =>  dispatch(registerAPI({first_name,  last_name, email, password, password2}))
+    const handleSubmit = (values) =>  dispatch(registerAPI(
+        {first_name: values.first_name, 
+        last_name: values.last_name, 
+        email: values.email, 
+        password: values.password, 
+        password2: values.password2}))
+    
+    const validationSchema = Yup.object({
+        first_name: Yup.string()
+            .required('Имя обязательно')
+            .matches(/^[A-Za-zА-Яа-яЁё]+$/, 'Имя может содержать только буквы'),
+        last_name: Yup.string()
+            .required('Фамилия обязательна')
+            .matches(/^[A-Za-zА-Яа-яЁё]+$/, 'Фамилия может содержать только буквы'),
+        email: Yup.string()
+            .email('Некорректный email')
+            .required('Email обязателен'),
+        password: Yup.string()
+            .required('Пароль обязателен')
+            .min(6, 'Пароль должен содержать минимум 6 символов'),
+        password2: Yup.string()
+            .oneOf([Yup.ref('password'), null], 'Пароли должны совпадать')
+            .required('Подтверждение пароля обязательно'),
+        checkbox: Yup.boolean()
+            .oneOf([true], 'Вы должны согласиться с условиями использования')
+            .required('Вы должны согласиться с условиями использования'),
+    })
 
     return (
-        <>
-        <div className={styles.name}>
-            <div className ={styles.account}>
-                <input  
-                placeholder = 'Имя' 
-                onChange={e => setFirstName(e.target.value)}
-                />
-            </div>
+        <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+        >
 
-            <div className ={styles.account}>
-                <input  
-                placeholder = 'Фамилия' 
-                onChange={e => setLastName(e.target.value)}
-                />
-            </div>
-        </div>
-            
-            <div className ={styles.account}>
-                <input  
-                placeholder = 'Почта' 
-                onChange={e => setEmail(e.target.value)}
-                />
-            </div>
+        {({ isValid, dirty, values }) => (
+            <Form className={styles.form}>
+                <div className={styles.name}>
+                    <div>
+                        <div className ={styles.account}>
+                            <Field placeholder='Имя' name="first_name" />
+                        </div>
+                        <ErrorMessage name="first_name" component="div" className={styles.errorMessage} />
+                    </div>
+                    
+                    <div>
+                        <div className ={styles.account}>
+                            <Field placeholder='Фамилия' name="last_name" />
+                        </div>
+                        <ErrorMessage name="last_name" component="div" className={styles.errorMessage} />
+                    </div>
+                </div>
 
-            <div className ={styles.password}>
-                <input 
-                type='password'  
-                placeholder = 'Пароль' 
-                onChange={e => setPassword(e.target.value)}
-                /> 
-            </div>
+                <div>
+                    <div className={styles.account}>
+                        <Field name="email" placeholder='Почта' />
+                    </div>
+                    <ErrorMessage name="email" component="div" className={styles.errorMessage} />
+                </div>
 
-            <div className ={styles.password}>
-                <input 
-                type='password'  
-                placeholder = 'Повторите пароль' 
-                onChange={e => setPassword2(e.target.value)}
-                /> 
-            </div>
+                <div>
+                    <div className={styles.password}>
+                        <Field name="password" type="password" placeholder="Пароль" />
+                    </div>
+                    <ErrorMessage name="password" component="div" className={styles.errorMessage} />
+                </div>
+                
+                <div>
+                    <div className={styles.password}>
+                        <Field name="password2" type="password" placeholder="Повторите пароль" />
+                    </div>
+                    <ErrorMessage name="password2" component="div" className={styles.errorMessage} />
+                </div>
+                    
+                <div className ={styles.login}>
+                    <button className={`${styles.btn} ${(!isValid || !dirty || !values.checkbox) ? styles.disabled : ''}`}
+                            type="submit"
+                            disabled={!isValid || !dirty || !values.checkbox}>
+                    Зарегистрироваться
+                    </button>
+                </div>
 
-            <div className ={styles.password_requirements}>
-                <Checklist password={password} passwordAgain={password2}/>
-            </div>
-
-            <div className ={styles.login}>
-                <button 
-                disabled = {!checked}
-                className = {styles.btn}
-                onClick={handleSubmit}
-                >
-                Зарегистрироваться
-                </button>
-            </div>
-
-            <div className={styles.agreement}>
-                <input 
-                type="checkbox" 
-                checked={checked}
-                onChange={() => setChecked(!checked)}
-                name="myCheckbox" /> 
-
-                <p>
-                    Регистрируясь, вы подтверждаете, что принимаете <a href="#">Пользовательское соглашение</a> и <a
-                    href="#">Согласие</a> на обработку персональных данных.
-                </p>
-            </div>
-        </>
-        
+                <div>
+                    <ErrorMessage name="checkbox" component="div" className={styles.errorMessage} />
+                    <div className={styles.agreement}>
+                        <Field type="checkbox" name="checkbox"/> 
+                        <p>
+                            Регистрируясь, вы подтверждаете, что принимаете <a href="#">Пользовательское соглашение</a> и <a
+                            href="#">Согласие</a> на обработку персональных данных.
+                        </p>
+                    </div>
+                </div>
+                
+            </Form>
+        )}
+        </Formik>
     )
 }
-
-export { RegistrationForm }

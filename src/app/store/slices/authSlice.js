@@ -16,10 +16,11 @@ export const loginAPI = createAsyncThunk(
             localStorage.setItem('accessToken', response.data.access)
             localStorage.setItem('refreshToken', response.data.refresh)
         } catch (err) {
-            console.log(err.response.data)
-            return rejectWithValue(err.message)
-        }
-    }
+            if (err.response.status === 400 || err.response.status === 401) {  
+                return rejectWithValue('Неверный e-mail или пароль')
+            }
+            return rejectWithValue(err.response.data)
+    }}
 )
 
 export const registerAPI = createAsyncThunk(
@@ -29,12 +30,13 @@ export const registerAPI = createAsyncThunk(
             const response = await authService.register(first_name,  last_name, email, password,password2)
             localStorage.setItem('accessToken', response.data.access)
             localStorage.setItem('refreshToken', response.data.refresh)
-            return (response.data)
         } catch (err) {
-            console.log(err.response.data)
-            return rejectWithValue(err.message)
+            if (err.response.status === 400) { 
+                console.log(err.response)
+                return rejectWithValue(err.response.data.error)  
         }
-    }
+        return rejectWithValue(err.response.data)
+    }}
 )
 
 export const logoutAPI = createAsyncThunk(
@@ -99,7 +101,7 @@ const authSlice = createSlice({
             })
             .addCase(logoutAPI.rejected, (state, action) => {
                 state.status = 'failed';
-                state.error = action.payload; 
+                state.error = action.payload || null; 
             })
         }
     })
