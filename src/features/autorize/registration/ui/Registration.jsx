@@ -2,8 +2,7 @@ import styles from './style.module.css'
 import { RegistrationForm } from '../../../../entities/autorize_form/index'
 import { NavLink } from 'react-router-dom'
 
-
-const Registration = () =>{
+export const Registration = () =>{
     return(
         <>
         <div className={styles.h1}>Регистрация</div>
@@ -16,5 +15,4 @@ const Registration = () =>{
     )
 }
 
-export {Registration}
 

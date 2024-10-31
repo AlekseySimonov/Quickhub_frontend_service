@@ -11,11 +11,11 @@ const register =  (first_name,  last_name, email, password,password2)=>{
 }
 
 const refreshToken = (refresh) =>{
-    return api.post(URL.REFRESH_TOKEN, {refresh});
+    return api.post(URL.REFRESH, {refresh})
 }
 
-const logout = (refresh) => {
-    return api.post(URL.LOGOUT, {refresh});
+const logout = () => {
+    return api.post(URL.LOGOUT)
 }
 
 export {login, register, refreshToken, logout }

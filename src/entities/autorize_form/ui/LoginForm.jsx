@@ -1,10 +1,10 @@
 import styles from './styles.module.css'
-import loginImg from '../../../shared/ui/icons/autorize/login.svg'
-import passwordImg from '../../../shared/ui/icons/autorize/password.svg'
+import { icons } from '../../../shared/ui/icons/autorize'
 import { useDispatch, useSelector } from 'react-redux'
 import { loginAPI } from '../../../app/store/slices/authSlice'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
+import { useState } from 'react'
 
 export const  LoginForm = () => {
     
@@ -12,8 +12,10 @@ export const  LoginForm = () => {
 
     const dispatch = useDispatch()
     const handleSubmit = (values) => {
-        dispatch(loginAPI({ email: values.email, password: values.password }));
+        dispatch(loginAPI({ email: values.email, password: values.password, remember }));
     }
+
+    const [remember, setRemember] = useState(false)
 
     const initialValues = {
         email: '',
@@ -40,7 +42,7 @@ export const  LoginForm = () => {
 
             <div>
                 <div className={styles.account}>
-                    <img src={loginImg} alt="#" />
+                    <img src={icons.login} alt="#" />
                     <Field
                         name="email"
                         placeholder="Логин"
@@ -51,7 +53,7 @@ export const  LoginForm = () => {
             
             <div>
                 <div className={styles.password}>
-                    <img src={passwordImg} alt="#" />
+                    <img src={icons.password} alt="#" />
                     <Field name="password" type="password" placeholder="Пароль"/>
                 </div>
                 <ErrorMessage name="password" component="div" className={styles.errorMessage} />
@@ -66,7 +68,11 @@ export const  LoginForm = () => {
                 </button>
 
                 <label className ={styles.remember_password} >
-                    <input type="checkbox"/>
+                    <input 
+                        type="checkbox"
+                        checked={remember}   
+                        onChange={() => setRemember(!remember)}
+                    />
                     Запомнить пароль
                 </label>
             </div>

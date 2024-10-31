@@ -2,7 +2,7 @@ import styles from './styles.module.css'
 import { LoginForm } from '../../../../entities/autorize_form/index'
 import {  Link } from 'react-router-dom'
 
-const Login = () =>{
+export const Login = () =>{
     
     return(
         <>
@@ -16,5 +16,3 @@ const Login = () =>{
         </>
     )
 }
-
-export {Login}

@@ -1,14 +1,8 @@
 import styles from './styles.module.css'
-import search from '../../shared/ui/icons/header/search.svg'
-import arrow_down from '../../shared/ui/icons/header/arrow_down.svg'
-import messages from '../../shared/ui/icons/header/messages.svg'
-import notifications from '../../shared/ui/icons/header/notifications.svg'
-import profile from '../../shared/ui/icons/header/profile.svg'
-import logoSVG from '../../shared/ui/icons/header/logoSVG.svg'
-import burger from '../../shared/ui/icons/header/burger.svg'
-import {DropDown} from '../../shared/ui/components/index'
+import { icons } from '../../../shared/ui/icons/header';
+import {DropDown} from '../../../shared/ui/components/index'
 import { useDispatch } from 'react-redux'
-import { logoutAPI } from './../../app/store/slices/authSlice';
+import { logoutAPI } from '../../../app/store/slices/authSlice';
 
 const dropDownOptions = ['Выйти']
 
@@ -29,16 +23,16 @@ export const Header = ({burgerClick}) => {
                 onClick={burgerClick} 
                 data-testid ='burger-test'
             >
-                <img src={burger}/>
+                <img src={icons.burger}/>
             </button>
 
             <a href="#" className={styles.logo}>
-                <img src={logoSVG}/>
+                <img src={icons.logoSVG}/>
                 QuickHub
             </a>
 
             <div className={styles.search}>
-                <img src={search}/>
+                <img src={icons.search}/>
                 <input type="text" placeholder="Искать" />
             </div>
         </div>
@@ -48,11 +42,11 @@ export const Header = ({burgerClick}) => {
         <div className={styles.right}>
 
             <a href="" className={styles.notifications}>
-                <img src={notifications}/>
+                <img src={icons.notifications}/>
             </a>
 
             <a href="" className={styles.messages}>
-                <img src={messages}/>
+                <img src={icons.messages}/>
             </a>
 
             <div className={styles.account}>
@@ -60,11 +54,11 @@ export const Header = ({burgerClick}) => {
                         styles = {styles}
                         title = {<>
                                     <div className={styles.profile_icon}>
-                                        <img src={profile}/>
+                                        <img src={icons.profile}/>
                                     </div>
                                     Симонов Алексей
                                     <div className={styles.arrow_down}>
-                                        <img src={arrow_down}/>
+                                        <img src={icons.arrow_down}/>
                                     </div>
                                 </>
                                 }

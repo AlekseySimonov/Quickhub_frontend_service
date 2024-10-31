@@ -1,1 +1,0 @@
-export {CompaniesHeader} from './CompaniesHeader'

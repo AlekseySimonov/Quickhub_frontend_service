@@ -6,7 +6,7 @@ import { authTitles } from '../../routing'
 import { useSelector } from 'react-redux'
 import { Loader } from '../../../shared/ui/components'
 
-const AutorizePage = () => {
+export const AutorizePage = () => {
     const location = useLocation()
     useEffect(() => {  
         document.title = authTitles[location.pathname] ?? 'Ошибка';  
@@ -30,7 +30,4 @@ const AutorizePage = () => {
     )
 }
 
-
-
-export { AutorizePage }
 

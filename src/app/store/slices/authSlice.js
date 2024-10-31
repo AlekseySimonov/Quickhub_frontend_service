@@ -2,19 +2,24 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { authService } from "../../../shared/api";
 
 const initialState ={
-    isAuth: window.localStorage.getItem('isAuth') || 'false' ,
+    isAuth: localStorage.getItem('isAuth') || localStorage.getItem('isAuth') || 'false' ,
     status: null,
     error: null
 }
 
 export const loginAPI = createAsyncThunk(
     'auth/loginAPI',
-    async ({ email, password }, { rejectWithValue }) => {
+    async ({ email, password}, { rejectWithValue }) => {
         try {
             const response = await authService.login(email, password)
-            localStorage.setItem('isAuth', true)
-            localStorage.setItem('accessToken', response.data.access)
-            localStorage.setItem('refreshToken', response.data.refresh)
+            // const storage = remember ? localStorage : sessionStorage
+            console.log(response)
+
+
+
+            // storage.setItem('isAuth', true)
+            // storage.setItem('accessToken', response.data.access)
+            // storage.setItem('refreshToken', response.data.refresh)
         } catch (err) {
             if (err.response.status === 400 || err.response.status === 401) {  
                 return rejectWithValue('Неверный e-mail или пароль')
@@ -43,7 +48,12 @@ export const logoutAPI = createAsyncThunk(
     'auth/logoutAPI',
     async (_, { rejectWithValue }) => {
         try {
-            const response = await authService.logout(localStorage.getItem('refreshToken'))
+            console.log('1')
+            const response = await authService.logout()
+            console.log('2')
+            sessionStorage.removeItem('accessToken')
+            sessionStorage.removeItem('refreshToken')
+            sessionStorage.removeItem('isAuth')
             localStorage.removeItem('accessToken')
             localStorage.removeItem('refreshToken')
             localStorage.removeItem('isAuth')

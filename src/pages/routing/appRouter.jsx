@@ -2,11 +2,11 @@ import { createBrowserRouter } from "react-router-dom";
 
 import { Base } from "../base";
 import { ErrorPage } from "../../shared/ui/components/error/ErrorPage";
-import { Projects } from "../../entities/projects";
-import { Companies } from "../../entities/companies";
-import { MyTasks } from "../../entities/my_tasks";
-import { Settings } from "../../entities/settings";
-import { Help } from "../../entities/help";
+import { Projects } from "../../widgets/projects";
+import { Companies } from "../../widgets/companies";
+import { MyTasks } from "../../widgets/my_tasks";
+import { Settings } from "../../widgets/settings";
+import { Help } from "../../widgets/help";
 
 import { AutorizePage } from "../autorize/ui/AutorizePage";
 import { Registration } from "../../features/autorize/registration";
