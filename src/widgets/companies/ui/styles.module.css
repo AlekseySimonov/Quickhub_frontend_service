@@ -1,0 +1,268 @@
+
+
+.selecting {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+    .selecting__settings {
+        cursor: pointer;
+    }
+
+    .dropdown {
+        position: relative;
+        width: 250px;
+    }
+
+    .arrow {
+        width: 8px;
+        height: 8px;
+        transform: rotateZ(45deg);
+        margin-top: -6px;
+        border-bottom: 2px solid #000;
+        border-right: 2px solid #000;
+        transition: transform 0.2s;
+    }
+
+    .dropdown_toggle{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 250px;
+        height: 40px;
+        border: none;
+        background: none;
+        padding: 0px 20px;
+        border-radius: 10px;
+        background-color: #fff;
+        color: #000;
+        position: relative;
+        z-index: 2;
+    }
+
+    .dropdown_toggle.active {
+        border-radius: 10px 10px 0px 0px;
+    }
+
+    .dropdown_toggle.active .arrow {     
+        transform: rotate(-135deg);
+        margin-top: 3px;
+    }
+
+    .dropdown_menu{
+        position: absolute;
+        top: 18px;
+        padding: 0;
+        width: 250px;
+        list-style: none;
+        background-color: #E1E1E1;
+        color: #000;
+        border-radius: 0px 0px 10px 10px;
+        overflow: hidden;
+    }
+
+    .dropdown_menu li {
+        padding: 12.5px 20px;
+        cursor: pointer;
+    }
+
+    .dropdown_menu li:hover {
+        background-color: #d8d6d6;
+    }
+
+
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 60px;
+}
+
+    .navigation {
+        display: flex;
+    }
+
+    .tabs {
+        display: flex;
+        width: max-content;
+        border-radius: 30px;
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .tabs__item {
+        padding: 8px 26px;
+        color: #fff;
+        border-radius: 30px;
+        cursor: pointer;
+    }
+
+    .tabs__item.active {
+        background: #fff;
+        color: #000;
+    }
+
+
+
+.employee_management {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 10px;
+}
+
+    .employee_management_search {}
+
+    .search {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        width: 230px;
+        height: 40px;
+        border-radius: 30px;
+        padding: 0px 10px;
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .search:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+    }
+    
+    .search_icon {
+        width: 18px;
+        height: 18px;
+    }
+
+
+
+    .employee_management_filter {}
+
+    .arrowFilt {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%) rotate(45deg);
+        width: 9px;
+        height: 9px;
+        border-top: 2px solid #000;
+        border-right: 2px solid #000;
+        transition: 0.2s;
+    }
+
+    .filter {
+        box-sizing: border-box;
+        position: relative;
+        color: #000;
+    }
+    
+    .filter__toggle {
+        width: 150px;
+        margin: 0 auto;
+        height: 40px;
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(255, 255, 255, 0.2);
+        color: #fff;
+        border-radius: 30px;
+        overflow: hidden;
+        cursor: pointer;
+    }
+    
+    .filter__toggle:hover, .filter__toggle.active {
+        background-color: rgba(255, 255, 255, 0.3);
+    }
+    
+    .filter__menu {
+        border-radius: 10px;
+        width: 220px;
+        height: 0;
+        opacity: 0;
+        overflow: hidden;
+        background-color: #fff;
+        visibility: hidden;
+        position: absolute;
+        top: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+        transition: 0.2s;
+    }
+    
+    .filter__menu.active {
+        height: max-content;
+        visibility: visible;
+        overflow: visible;
+        opacity: 1;
+    }
+    
+    .filter__menu_item {
+        padding: 10px 12px;
+        border-radius: 10px;
+    }
+    
+    .filter__menu_item:hover {
+        background-color: #d9d9d9;
+    }
+   
+    .filter__menu_item.has_child {
+        position: relative;
+    }
+    
+    .filter__menu_item.has_child:hover .filter__submenu {
+        height: max-content;
+        opacity: 1;
+    }
+    
+    .filter__menu_item.has_child:hover .arrowFilt {
+        transform: translateY(-50%) rotate(-135deg);
+    }
+
+
+    .has_child{}
+    
+    .filter__submenu {
+        position: absolute;
+        background-color: #fff;
+        width: 100%;
+        height: 0;
+        overflow: hidden;
+        opacity: 0;
+        border-radius: 10px;
+        top: 0;
+        left: 215px;
+        transition: 0.3s;
+    }
+
+    .filter__submenu_item {
+        padding: 10px 12px;
+        margin: 2px 4px;
+        background-color: #fff;
+        border-radius: 10px;
+    }
+
+    .filter__submenu_item:hover {
+        background-color: #d9d9d9;
+    }
+
+
+    .employee_management__btn {
+        border-radius: 30px;
+        width: 280px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #28E05A;
+        color: #000;
+        cursor: pointer;
+        gap: 8px;
+    }
+
+
+
+
+
+

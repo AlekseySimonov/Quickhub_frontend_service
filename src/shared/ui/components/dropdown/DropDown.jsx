@@ -1,5 +1,5 @@
 import { useState } from "react"
-
+// import { useState, useEffect, useRef } from "react"
 export const DropDown = ({styles, title, options, onLogout})=>{
     const [isOpen, setIsOpen] = useState(false)
 
@@ -10,11 +10,11 @@ export const DropDown = ({styles, title, options, onLogout})=>{
             onLogout() 
         } 
     }
-    
+
 
     return(
-        <div className={styles.dropdown}>
-            <button 
+        <div className={styles.dropdown} /* ref={dropdownRef} */>
+            <button
             className={`${styles.dropdown_toggle} ${isOpen ? styles.active : ''}`}
             onClick={() => setIsOpen(!isOpen)}>  
                 {title}  

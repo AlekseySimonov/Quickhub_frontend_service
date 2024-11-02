@@ -114,6 +114,7 @@
 
 .dropdown_toggle{
     display: flex;
+    position: relative;
     align-items: center;
     justify-content: space-between;
     width: 278px;
@@ -131,7 +132,7 @@
 }
 
 .dropdown_menu{
-
+    position: absolute;
 }
 
 .right a:hover {
