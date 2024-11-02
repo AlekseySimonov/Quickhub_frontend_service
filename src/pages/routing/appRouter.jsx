@@ -29,9 +29,10 @@ export const baseTitles = {
 export const appRouter = createBrowserRouter([
     {
         path: '/',
-        element: <CheckAuth>
+        element: //<CheckAuth>
                 <Base />
-                </CheckAuth>,
+                //</CheckAuth>
+                ,
         errorElement: <ErrorPage />,
         children: [
             {
@@ -59,9 +60,10 @@ export const appRouter = createBrowserRouter([
     },
     {
         path: '/auth',
-        element: <IsAuth>
+        element: //<IsAuth>
                 <AutorizePage />
-                </IsAuth>,
+                //</IsAuth>
+                ,
         errorElement: <ErrorPage />,
         children: [
             {

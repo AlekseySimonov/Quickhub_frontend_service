@@ -1,10 +1,10 @@
-import {DropDown} from '../../../shared/ui/components/index'
+import {Select} from '../../../shared/ui/components/index'
 import {Search} from '../../../shared/ui/components/index'
 import {Filter} from '../../../shared/ui/components/index'
 import {icons} from '../../../shared/ui/icons/companies'
 import styles from './styles.module.css'
 export const CompaniesHeader = () => {
-    const dropDownOptions = ['Nike', 'Adidas', 'Добавить компанию'];
+    const selectOptions = ['QuickHub','Nike', 'Adidas', '+ Добавить компанию'];
     const menuItems = [
         { label: 'Все'},
         { label: 'Непрочитанные' },
@@ -26,15 +26,13 @@ export const CompaniesHeader = () => {
                 <div className={styles.selecting__title}>
                         Выбрать компанию
                     </div> 
-                    <DropDown
+                    <Select
                         styles = {styles}
                         title = {<>
                                     QuickHub
-                                    <div className={styles.arrow}> 
-                                    </div>
                                 </>
                                 }
-                        options = {dropDownOptions}
+                        options = {selectOptions}
                     />
                     <div className={styles.selecting__settings}>
                         <img src={icons.settings} />
