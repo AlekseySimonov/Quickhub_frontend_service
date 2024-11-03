@@ -1,8 +1,6 @@
-const API = 'http://92.63.67.98/'
+export const API = 'http://92.63.67.98/'
 
-const LOGIN = 'account/api/v1/login/'
-const REGISTRATION = 'account/api/v1/registration/'
-const LOGOUT = 'account/api/v1/logout/'
-const REFRESH = 'account/api/v1/token/refresh/'
-
-export {API, LOGIN, REGISTRATION, LOGOUT, REFRESH}
+export const LOGIN = 'account/api/v1/login/'
+export const REGISTRATION = 'account/api/v1/registration/'
+export const LOGOUT = 'account/api/v1/logout/'
+export const REFRESH = 'account/api/v1/token/refresh/'
