@@ -1,5 +1,5 @@
+import { Outlet } from "react-router-dom"
 import { CompaniesHeader } from "./CompaniesHeader"
-import { CompaniesMain } from "./CompaniesMain"
 import styles from './styles.module.css'
 
 const Companies = () =>{
@@ -7,7 +7,9 @@ const Companies = () =>{
         <>
         <div className={styles.content}>
             <CompaniesHeader/>
-            <CompaniesMain/>
+            <div className="main">
+                <Outlet/>
+            </div>
         </div>
         </>
     )

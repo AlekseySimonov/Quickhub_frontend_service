@@ -7,10 +7,18 @@ import { baseTitles } from "../../routing";
 
 export const Base = () => {
     const location = useLocation()
-    useEffect(() => {  
-        document.title = baseTitles[location.pathname] ?? 'Ошибка';  
+    const [pageTitle, setPageTitle] = useState('Ошибка')
+
+    useEffect(() => {
+        const curTitle = baseTitles.find(item => location.pathname.startsWith(item.path));
+        if (curTitle && curTitle.title) {
+            setPageTitle(curTitle.title);
+            document.title = curTitle.title;
+        } else {
+            setPageTitle('Ошибка')
+            document.title = 'Ошибка';
+        }
     }, [location]);
-    
     const [isActive, setIsActive] = useState(false)
     
     const menu = ()=>{

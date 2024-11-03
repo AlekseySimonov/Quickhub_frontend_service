@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 
 import { Base } from "../base";
 import { ErrorPage } from "../../shared/ui/components/error/ErrorPage";
@@ -11,20 +11,23 @@ import { Help } from "../../widgets/help";
 import { AutorizePage } from "../autorize/ui/AutorizePage";
 import { Registration } from "../../features/autorize/registration";
 import { Login } from "../../features/autorize/login";
-import { CheckAuth, IsAuth } from "../../shared/config";
+
+import { CompanyStructure } from "../../features/company_structure";
+import { CompanyList } from "../../features/company_list";
+// import { CheckAuth, IsAuth } from "../../shared/config";
 
 export const authTitles = {
     '/auth/login': 'Вход',
     '/auth/registration': 'Регистрация',
 }
 
-export const baseTitles = {
-    '/tasks': 'Мои задачи',
-    '/projects': 'Проекты',
-    '/companies': 'Компании',
-    '/settings': 'Настройки',
-    '/help': 'Поддержка',
-}
+export const baseTitles = [
+        { path: '/tasks', title: 'Мои задачи' },
+        { path: '/projects', title: 'Проекты' },
+        { path: '/companies', title: 'Компании' },
+        { path: '/settings', title: 'Настройки' },
+        { path: '/help', title: 'Поддержка' },
+    ];
 
 export const appRouter = createBrowserRouter([
     {
@@ -37,6 +40,9 @@ export const appRouter = createBrowserRouter([
         children: [
             {
                 index: true,
+                element: <Navigate to="/tasks" replace />,
+            },    
+            {
                 path: 'tasks',
                 element: <MyTasks />,
             },
@@ -47,6 +53,16 @@ export const appRouter = createBrowserRouter([
             {
                 path: 'companies',
                 element: <Companies />,
+                children:[
+                    {
+                        path: 'structure',
+                        element: <CompanyStructure />,
+                    },
+                    {
+                        path: 'list',
+                        element: <CompanyList />,
+                    },
+                ],
             },
             {
                 path: 'settings',

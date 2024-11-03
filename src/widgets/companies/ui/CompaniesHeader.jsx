@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom'
 import {Select} from '../../../shared/ui/components/index'
 import {Search} from '../../../shared/ui/components/index'
 import {Filter} from '../../../shared/ui/components/index'
@@ -11,14 +12,14 @@ export const CompaniesHeader = () => {
         { label: 'С меткой' },
         { label: 'С вложениями' },
         { label: 'Сортировка', submenu: true },
-      ];
+    ];
     
-      const submenuItems = [
+    const submenuItems = [
         'По умолчанию',
         'ФИО: от А до Я',
         'ФИО: от Я до А',
         'По должностям',
-      ];
+    ];
 
     return (
         <div>
@@ -41,12 +42,16 @@ export const CompaniesHeader = () => {
             <div className={styles.toolbar}>
                 <div className={styles.navigation}>
                     <div className={styles.tabs}>
-                        <div className={styles.tabs__item}>
+
+                        <NavLink to = 'structure' className={({ isActive }) =>   
+                            isActive ? `${styles.tabs__item} ${styles.active}` : styles.tabs__item}>
                             Структура компании
-                        </div>
-                        <div className={`${styles.tabs__item} ${styles.active}`}>
+                        </NavLink>
+                        <NavLink to = 'list' className={({ isActive }) =>   
+                            isActive ? `${styles.tabs__item} ${styles.active}` : styles.tabs__item}>
                             Сотрудники
-                        </div>
+                        </NavLink>
+
                     </div>
                     <div className="button"></div>
                 </div>

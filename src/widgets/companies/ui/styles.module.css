@@ -97,6 +97,7 @@
         color: #fff;
         border-radius: 30px;
         cursor: pointer;
+        text-decoration: none;
     }
 
     .tabs__item.active {
@@ -207,7 +208,7 @@
     .filter__menu_item:hover {
         background-color: #d9d9d9;
     }
-   
+    
     .filter__menu_item.has_child {
         position: relative;
     }
