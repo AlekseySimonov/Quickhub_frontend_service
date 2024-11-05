@@ -4,8 +4,13 @@ import {Search} from '../../../shared/ui/components/index'
 import {Filter} from '../../../shared/ui/components/index'
 import {icons} from '../../../shared/ui/icons/companies'
 import styles from './styles.module.css'
+import { useSelector } from 'react-redux'
 export const CompaniesHeader = () => {
-    const selectOptions = ['QuickHub','Nike', 'Adidas', '+ Добавить компанию'];
+
+    const {companiesList} = useSelector(state => state.company)
+    console.log(companiesList)
+    
+    const selectOptions = [companiesList.title, '+ Добавить компанию'];
     const menuItems = [
         { label: 'Все'},
         { label: 'Непрочитанные' },

@@ -1,32 +1,46 @@
-import { render,screen, fireEvent } from "@testing-library/react";
-import {Base} from '../../../src/pages/base/index';
+import { render, screen, fireEvent } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom"; 
+import { Base } from './../../../src/pages/base/ui/Base';
+import { Provider } from "react-redux";
+import store from './../../../src/app/store/index';
 
-const base = ()=>{
-    return(
-            <Base>
-            </Base>
+
+
+const renderBase = () => {
+    return (
+        <Provider store={store}>
+        <MemoryRouter>
+        <Base/>
+        </MemoryRouter>
+        </Provider>
     )
 }
 
-describe('Base grid change', ()=>{
+describe('Base grid change', () => {
 
-    test('Base render', ()=>{
-        render(base())
+    test('Base renders', () => {
+        render(renderBase())
         const container = screen.getByTestId('container-test')
         expect(container).toBeInTheDocument()
-        })
-    
-    test('Verify if gridTemplateColumns has changed', ()=>{
-        render(base())
+    })
+
+    test('Verify if gridTemplateColumns has changed', () => {
+        render(renderBase())
 
         const burgerBtn = screen.getByTestId('burger-test')
         const container = screen.getByTestId('container-test')
 
-        fireEvent.click(screen.getByTestId('burger-test'));
-        expect(container).toHaveStyle('gridTemplateColumns: 64px auto');
+        expect(container).toHaveStyle('grid-template-columns: 225px auto')
 
-        fireEvent.click(burgerBtn);
-        expect(container).toHaveStyle('gridTemplateColumns: 225px auto');
-        })  
+        fireEvent.click(burgerBtn)
+        expect(container).toHaveStyle('grid-template-columns: 64px auto')
 
+        fireEvent.click(burgerBtn)
+        expect(container).toHaveStyle('grid-template-columns: 225px auto')
+    })
+
+    test('Page title changes based on location', () => {
+        render(renderBase());
+        expect(document.title).toBe('Ошибка')
+    })
 })

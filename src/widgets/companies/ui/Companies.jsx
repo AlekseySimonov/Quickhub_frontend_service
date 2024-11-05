@@ -1,18 +1,25 @@
 import { Outlet } from "react-router-dom"
 import { CompaniesHeader } from "./CompaniesHeader"
 import styles from './styles.module.css'
+import { useEffect } from "react"
+import { useDispatch } from "react-redux"
+import { getCompaniesAPI } from "../../../app/store/slices/companySlice"
 
-const Companies = () =>{
+export const Companies = () =>{
+    const dispatch = useDispatch()
+
+    useEffect(()=>{
+        dispatch(getCompaniesAPI())
+    },[dispatch])
+
     return(
         <>
         <div className={styles.content}>
             <CompaniesHeader/>
-            <div className="main">
+            <div className={styles.main}>
                 <Outlet/>
             </div>
         </div>
         </>
     )
 }
-
-export {Companies}

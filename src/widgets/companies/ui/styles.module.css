@@ -1,4 +1,7 @@
-
+.main{
+    width: 100%;
+    height: calc(100vh - 260px);
+}
 
 .selecting {
     display: flex;
@@ -78,7 +81,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 60px;
+    margin-bottom: 35px;
 }
 
     .navigation {
