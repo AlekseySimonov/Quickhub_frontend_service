@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from './select.module.css';
 
-export const Select = ({ onAddCompany, styles, options, defaultOption }) => {
+export const Select = ({ testid, onAddCompany, styles, options, defaultOption }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(defaultOption || "QuickHub");
 
@@ -24,8 +24,9 @@ export const Select = ({ onAddCompany, styles, options, defaultOption }) => {
     };
 
     return (
-        <div className={styles.select}>
+        <div data-testid={testid} className={styles.select}>
             <button
+                data-testid='select_btn'
                 className={`${styles.select_toggle} ${isOpen ? styles.active : ''}`}
                 onClick={() => setIsOpen(!isOpen)}
             >  

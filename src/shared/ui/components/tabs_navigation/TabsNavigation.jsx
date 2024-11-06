@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import styles from './tabs_navigation.module.css';
+import styles from './tabsnavigation.module.css';
 
-export const Tabs_Navigation = ({ tabs_navItems }) => {
+export const TabsNavigation = ({ testid, tabs_navItems }) => {
   const initialActiveTab = tabs_navItems.find(item => item.active)?.id || navItems[0].id;
   const [activeTab, setActiveTab] = useState(initialActiveTab);
 
@@ -10,7 +10,7 @@ export const Tabs_Navigation = ({ tabs_navItems }) => {
   };
 
   return (
-      <div className={styles.tabs}>
+      <div data-testid={testid} className={styles.tabs}>
         {tabs_navItems.map((item) => (
           <div
             key={item.id}

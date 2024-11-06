@@ -16,12 +16,12 @@ export const Create_Company = ({ onClose }) => {
   };
 
   return (
-    <div className={styles['pop-up__outer']}>
+    <div data-testid={'createCompany_popup'} className={styles['pop-up__outer']}>
     <div className={styles['pop-up']}>
       <div className={styles['pop-up__header']}>
         <div className={styles.container}>
           <div className={styles['pop-up__title']}>Создать компанию</div>
-          <div className={styles['pop-up__closeBtn']} onClick={onClose}>
+          <div data-testid='popup_close' className={styles['pop-up__closeBtn']} onClick={onClose}>
             <div className={styles['pop-up__closeBtn-component']}></div>
             <div className={styles['pop-up__closeBtn-component']}></div>
           </div>

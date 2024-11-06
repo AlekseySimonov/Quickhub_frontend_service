@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {Select} from '../../../shared/ui/components/index'
 import {Search} from '../../../shared/ui/components/index'
 import {Filter} from '../../../shared/ui/components/index'
-import {Tabs_Navigation} from '../../../shared/ui/components/index'
+import {TabsNavigation} from '../../../shared/ui/components/index'
 // popups
 import {Invite_Employee} from '../../../shared/ui/components/index'
 import {Company_Settings} from '../../../shared/ui/components/index'
@@ -71,7 +71,7 @@ export const CompaniesHeader = () => {
                         Выбрать компанию
                     </div> 
                     <Select
-                        data-testid = 'selecting-select'
+                        testid = {'select'}
                         styles = {styles}
                         title = {<>
                                     QuickHub
@@ -81,22 +81,24 @@ export const CompaniesHeader = () => {
                         onAddCompany={handleOpenCreateCompanyPopUp} 
                     />
                     <div id="company_settings-btn" className={styles.selecting__settings} onClick={handleOpenCompanySettingsPopUp}>
-                        <img src={icons.settings} />
+                        <img src={icons.settings} alt="company_settings-btn" />
                     </div>
             </div>
             <div className={styles.toolbar}>
                 <div className={styles.navigation}>
-                    <Tabs_Navigation tabs_navItems={tabs_navItems} />
+                    <TabsNavigation testid={'tabsnavigation'} tabs_navItems={tabs_navItems} />
                 </div>
                 <div className={styles.employee_management}>
                     <div className={styles.employee_management__search}>
                         <Search
+                                    testid = {'search'}
                                     styles = {styles}
                                     placeholder = {'Поиск подразделения'}
                         />
                     </div>
                     <div className={styles.employee_management__filter}>
                         <Filter 
+                                    testid = {'filter'}
                                     styles = {styles}
                                     menuItems={menuItems} 
                                     submenuItems={submenuItems} 

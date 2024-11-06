@@ -1,6 +1,6 @@
 export { DropDown } from "./dropdown/DropDown";
 export { Select } from "./select/Select";
-export { Tabs_Navigation } from "./tabs_navigation/Tabs_Navigation";
+export { TabsNavigation } from "./tabs_navigation/TabsNavigation";
 export { Search } from "./search/Search";
 export { Filter } from "./filter/Filter";
 

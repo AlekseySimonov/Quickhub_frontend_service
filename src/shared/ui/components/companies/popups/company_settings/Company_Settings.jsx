@@ -10,12 +10,12 @@ export const Company_Settings = ({ onClose }) => {
   ];
 
   return (
-    <div className={styles['pop-up__outer']}>
+    <div data-testid='companySettings_popup' className={styles['pop-up__outer']}>
     <div className={styles['pop-up']}>
       <div className={styles['pop-up__header']}>
         <div className={styles.container}>
           <div className={styles['pop-up__title']}>Настройки компании</div>
-          <div className={styles['pop-up__closeBtn']} onClick={onClose}>
+          <div data-testid='popup_close' className={styles['pop-up__closeBtn']} onClick={onClose}>
             <div className={styles['pop-up__closeBtn-component']}></div>
             <div className={styles['pop-up__closeBtn-component']}></div>
           </div>
@@ -35,7 +35,7 @@ export const Company_Settings = ({ onClose }) => {
             <button className={`${styles['pop-up__btn']} ${styles['pop-up__btn-submit']}`}>
               Сохранить
             </button>
-            <button className={`${styles['pop-up__btn']} ${styles['pop-up__btn-cancel']}`} onClick={onClose}>
+            <button data-testid='popup_cancel' className={`${styles['pop-up__btn']} ${styles['pop-up__btn-cancel']}`} onClick={onClose}>
               Отменить
             </button>
           </div>
