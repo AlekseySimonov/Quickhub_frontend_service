@@ -252,6 +252,7 @@
 
 
     .employee_management__btn {
+        transition: 0.3s;
         border-radius: 30px;
         width: 280px;
         height: 40px;
@@ -264,8 +265,7 @@
         gap: 8px;
     }
 
-
-
-
-
+    .employee_management__btn:hover { 
+        background-color: rgba(40, 224, 90, 0.9);
+    }
 
