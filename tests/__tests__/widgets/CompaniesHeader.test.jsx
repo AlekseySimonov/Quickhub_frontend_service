@@ -1,8 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { CompaniesHeader } from "../../../src/widgets/companies/ui/CompaniesHeader";
-import { Company_Settings } from "../../../src/shared/ui/components";
 
-const companyHeader = () => {
+const CompaniesHeader = () => {
     return (
         <CompaniesHeader>
         </CompaniesHeader>
