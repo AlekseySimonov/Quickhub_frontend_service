@@ -1,17 +1,16 @@
 import { useState } from "react";
 
 export const Select = ({ styles, options}) => {
-    const defaultOption = "QuickHub"; // Опция по умолчанию
+    const defaultOption = "QuickHub"
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState(defaultOption); // Состояние для выбранной опции
+    const [selectedOption, setSelectedOption] = useState(defaultOption)
 
     const handleOptionClick = (option) => {
-        console.log(option); // Здесь можно обрабатывать нажатие на элемент  
+        console.log(option) 
 
         if (option === "+ Добавить компанию") {
-            // Открываем поп-ап и оставляем меню открытым
-            document.querySelector('.pop-up').style.display = 'block'; // Показываем поп-ап
-            return; // Не закрываем меню
+            document.querySelector('.pop-up').style.display = 'block'
+            return
         }
 
         // Обновляем выбранную опцию

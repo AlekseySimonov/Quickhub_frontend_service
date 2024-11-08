@@ -25,7 +25,7 @@ export const Menu = ({isActive}) => {
                 <p>Проекты</p> 
             </NavLink>
 
-            <NavLink to ='/companies/list' className={() =>   
+            <NavLink to ='/companies' className={() =>   
                 isCompaniesActive ? `${styles.nav_link} ${styles.active}` : styles.nav_link }>
                 <img src ={icons.companies}/> 
                 <p>Компании</p>

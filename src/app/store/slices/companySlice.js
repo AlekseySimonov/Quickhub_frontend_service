@@ -2,9 +2,11 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import {companiesService} from "../../../shared/api/"
 
 const initialState ={
-    companiesList: '',
-    id: '',
+    companiesList: [],
+    companyID: null,
+    id: '1',
     status: null,
+    companyTitle: null,
 }
 
 export const getCompaniesAPI = createAsyncThunk(
@@ -12,10 +14,8 @@ export const getCompaniesAPI = createAsyncThunk(
     async (_, { rejectWithValue }) => {
         try {
             const response = await companiesService.getCompanies()
-            console.log(response)
             return response.data
         } catch (err) {
-            console.log(err.response)
             return rejectWithValue(err.response)
     }}
 )
@@ -23,7 +23,22 @@ export const getCompaniesAPI = createAsyncThunk(
 const companySlice = createSlice({
     name: 'company',
     initialState,
-    reducers: {},
+    reducers: {
+        setCompanyID(state) {
+            if (state.companiesList.length > 0) {
+                state.companyID = state.companiesList[0].id
+            } else {
+                console.log('companiesList is empty, cannot set companyID');
+                state.companyID = null
+            }
+        },
+        checkCompanyID(state) {
+            const exists = state.companiesList.some(company => company.id === state.companyID)
+            if (!exists) {
+                state.companyID = state.companiesList[0].id
+            }
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(getCompaniesAPI.pending, (state) => {
@@ -43,4 +58,5 @@ const companySlice = createSlice({
         }
     })
 
+export const { setCompanyID, checkCompanyID } = companySlice.actions
 export default companySlice.reducer

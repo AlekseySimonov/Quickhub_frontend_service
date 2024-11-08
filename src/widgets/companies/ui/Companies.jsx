@@ -2,15 +2,25 @@ import { Outlet } from "react-router-dom"
 import { CompaniesHeader } from "./CompaniesHeader"
 import styles from './styles.module.css'
 import { useEffect } from "react"
-import { useDispatch } from "react-redux"
-import { getCompaniesAPI } from "../../../app/store/slices/companySlice"
+import { useDispatch, useSelector} from "react-redux"
+import { getCompaniesAPI, setCompanyID, checkCompanyID} from "../../../app/store/slices/companySlice"
 
 export const Companies = () =>{
     const dispatch = useDispatch()
+    const {companyID, status} = useSelector(state => state.company)
 
-    useEffect(()=>{
+
+    useEffect(() => {
         dispatch(getCompaniesAPI())
-    },[dispatch])
+    }, [dispatch])
+
+    useEffect(() => {
+        if (status === 'succeeded' && companyID === null) {
+            dispatch(setCompanyID());
+        }else if (status === 'succeeded' && companyID !== null) {
+            dispatch(checkCompanyID())
+        }
+    }, [status, companyID, dispatch]);
 
     return(
         <>
