@@ -1,12 +1,18 @@
-import { useState } from "react";
+import {useState } from "react";
 import styles from './select.module.css';
+import { useSelector } from "react-redux";
 
-export const Select = ({ testid, onAddCompany, styles, options, defaultOption }) => {
+export const Select = ({ styles, options}) => {
+
+    const companyTitle = useSelector(state => state.company.companyTitle)
+
+    const defaultOption = companyTitle
+
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(defaultOption || "QuickHub");
 
     const handleOptionClick = (option) => {
-        console.log(option); // Здесь можно обрабатывать нажатие на элемент  
+        console.log(option) 
 
         if (option === "+ Добавить компанию") {
             onAddCompany();

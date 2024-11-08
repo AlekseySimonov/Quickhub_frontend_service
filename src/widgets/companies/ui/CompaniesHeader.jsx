@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom'
 import {Select} from '../../../shared/ui/components/index'
 import {Search} from '../../../shared/ui/components/index'
 import {Filter} from '../../../shared/ui/components/index'
@@ -12,23 +13,28 @@ import {Create_Company} from '../../../shared/ui/components/index'
 import {icons} from '../../../shared/ui/icons/companies'
 import styles from './styles.module.css'
 
-export const CompaniesHeader = () => {
-    const selectOptions = ['QuickHub','Nike', 'Adidas', '+ Добавить компанию'];
+import { useSelector } from 'react-redux'
 
+export const CompaniesHeader = () => {
+
+    const {companiesList} = useSelector(state => state.company)
+    
+    const selectOptions = [...companiesList.map(company => company.title), '+ Добавить компанию'];
+    
     const menuItems = [
         { label: 'Все'},
         { label: 'Непрочитанные' },
         { label: 'С меткой' },
         { label: 'С вложениями' },
         { label: 'Сортировка', submenu: true },
-      ];
+    ];
     
-      const submenuItems = [
+    const submenuItems = [
         'По умолчанию',
         'ФИО: от А до Я',
         'ФИО: от Я до А',
         'По должностям',
-      ];
+    ];
 
       const tabs_navItems = [
         { id: 'structure_company', label: 'Структура компании', active: false },
@@ -86,7 +92,15 @@ export const CompaniesHeader = () => {
             </div>
             <div className={styles.toolbar}>
                 <div className={styles.navigation}>
-                    <TabsNavigation testid={'tabsnavigation'} tabs_navItems={tabs_navItems} />
+                    <div className={styles.tabs}>
+                        <div className={styles.tabs__item}>
+                            Структура компании
+                        </div>
+                        <div className={`${styles.tabs__item} ${styles.active}`}>
+                            Сотрудники
+                        </div>
+                    </div>
+                    <div className="button"></div>
                 </div>
                 <div className={styles.employee_management}>
                     <div className={styles.employee_management__search}>
