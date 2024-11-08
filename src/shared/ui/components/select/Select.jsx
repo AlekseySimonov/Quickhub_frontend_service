@@ -1,15 +1,10 @@
 import {useState } from "react";
-import styles from './select.module.css';
-import { useSelector } from "react-redux";
 
-export const Select = ({ styles, options}) => {
+export const Select = ({ testid, onAddCompany, styles, options, title}) => {
 
-    const companyTitle = useSelector(state => state.company.companyTitle)
-
-    const defaultOption = companyTitle
 
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState(defaultOption || "QuickHub");
+    const [selectedOption, setSelectedOption] = useState(title|| null);
 
     const handleOptionClick = (option) => {
         console.log(option) 
