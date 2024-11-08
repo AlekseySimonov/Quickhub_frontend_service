@@ -1,7 +1,12 @@
-import { useState } from "react";
+import {useState } from "react";
+import { useSelector } from "react-redux";
 
 export const Select = ({ styles, options}) => {
-    const defaultOption = "QuickHub"
+
+    const companyTitle = useSelector(state => state.company.companyTitle)
+
+    const defaultOption = companyTitle
+
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(defaultOption)
 

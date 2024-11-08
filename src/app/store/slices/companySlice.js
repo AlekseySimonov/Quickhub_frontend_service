@@ -4,9 +4,9 @@ import {companiesService} from "../../../shared/api/"
 const initialState ={
     companiesList: [],
     companyID: null,
+    companyTitle: null,
     id: '1',
     status: null,
-    companyTitle: null,
 }
 
 export const getCompaniesAPI = createAsyncThunk(
@@ -27,8 +27,10 @@ const companySlice = createSlice({
         setCompanyID(state) {
             if (state.companiesList.length > 0) {
                 state.companyID = state.companiesList[0].id
+                state.companyTitle = state.companiesList[0].title
             } else {
                 console.log('companiesList is empty, cannot set companyID');
+                state.companyTitle = null
                 state.companyID = null
             }
         },
@@ -36,6 +38,7 @@ const companySlice = createSlice({
             const exists = state.companiesList.some(company => company.id === state.companyID)
             if (!exists) {
                 state.companyID = state.companiesList[0].id
+                state.companyTitle = state.companiesList[0].title
             }
         },
     },
