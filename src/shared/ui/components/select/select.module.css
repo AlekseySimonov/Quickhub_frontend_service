@@ -1,0 +1,63 @@
+.select {
+    position: relative;
+    width: 250px;
+}
+
+.arrow {
+    width: 8px;
+    height: 8px;
+    transform: rotateZ(45deg);
+    margin-top: -6px;
+    border-bottom: 2px solid #000;
+    border-right: 2px solid #000;
+    transition: transform 0.2s;
+}
+
+.select_toggle{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 250px;
+    height: 40px;
+    border: none;
+    background: none;
+    padding: 0px 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    color: #000;
+    position: relative;
+    z-index: 2;
+    white-space: nowrap;
+}
+
+.select_toggle.active {
+    border-radius: 10px 10px 0px 0px;
+}
+
+.select_toggle.active .arrow {     
+    transform: rotate(-135deg);
+    margin-top: 3px;
+}
+
+.select_menu{
+    position: absolute;
+    top: 18px;
+    padding: 0;
+    width: 250px;
+    list-style: none;
+    background-color: #E1E1E1;
+    color: #000;
+    border-radius: 0px 0px 10px 10px;
+    overflow: hidden;
+    z-index: 4;
+}
+
+.select_menu li {
+    white-space: nowrap;
+    padding: 12.5px 20px;
+    cursor: pointer;
+}
+
+.select_menu li:hover {
+    background-color: #d8d6d6;
+}

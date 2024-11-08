@@ -1,16 +1,15 @@
 import { useState } from "react";
+import styles from './select.module.css';
 
-export const Select = ({ styles, options}) => {
-    const defaultOption = "QuickHub"; // Опция по умолчанию
+export const Select = ({ testid, onAddCompany, styles, options, defaultOption }) => {
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState(defaultOption); // Состояние для выбранной опции
+    const [selectedOption, setSelectedOption] = useState(defaultOption || "QuickHub");
 
     const handleOptionClick = (option) => {
         console.log(option); // Здесь можно обрабатывать нажатие на элемент  
 
         if (option === "+ Добавить компанию") {
-            // Открываем поп-ап и оставляем меню открытым
-            document.querySelector('.pop-up').style.display = 'block'; // Показываем поп-ап
+            onAddCompany();
             return; // Не закрываем меню
         }
 
@@ -25,8 +24,9 @@ export const Select = ({ styles, options}) => {
     };
 
     return (
-        <div className={styles.select}>
+        <div data-testid={testid} className={styles.select}>
             <button
+                data-testid='select_btn'
                 className={`${styles.select_toggle} ${isOpen ? styles.active : ''}`}
                 onClick={() => setIsOpen(!isOpen)}
             >  

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {icons} from '../../../../shared/ui/icons/companies'
-export const Filter = ({ styles, menuItems, submenuItems }) => {
+export const Filter = ({ testid, styles, menuItems, submenuItems }) => {
     const [isActive, setIsActive] = useState(false);
     const [activeSubmenuIndex, setActiveSubmenuIndex] = useState(null);
   
@@ -18,7 +18,7 @@ export const Filter = ({ styles, menuItems, submenuItems }) => {
     };
   
     return (
-      <div className={styles.filter}>
+      <div data-testid={testid} className={styles.filter}>
         <div className={styles.filter__toggle} onClick={toggleMenu}>
             <img src={icons.filter}/>
           Фильтр

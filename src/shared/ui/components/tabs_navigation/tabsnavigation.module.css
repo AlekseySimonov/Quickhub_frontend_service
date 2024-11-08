@@ -1,0 +1,21 @@
+.tabs {
+    box-sizing: border-box;
+    display: flex;
+    width: max-content;
+    border-radius: 30px;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+.tabs__item {
+    cursor: pointer;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding: 0px 26px;
+    border-radius: 30px;
+    background-color: transparent;
+    transition: 0.2s;
+}
+.tabs__item.active {
+    background-color: #fff;
+    color: #000;
+}
