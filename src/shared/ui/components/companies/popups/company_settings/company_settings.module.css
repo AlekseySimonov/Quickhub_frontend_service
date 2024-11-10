@@ -89,6 +89,8 @@
 .pop-up {
     background-color: #fff;
     color: #000;
+    border-radius: 15px;
+    overflow: hidden;
 }
 .pop-up__header {
     width: 800px;

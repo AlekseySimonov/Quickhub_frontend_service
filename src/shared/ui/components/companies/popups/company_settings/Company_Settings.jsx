@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './company_settings.module.css'; // Импортируем стили из CSS модуля
 import { Select } from '../../../index';
+import useOnclickOutside from "react-cool-onclickoutside";
 
 export const Company_Settings = ({ onClose }) => { 
   const settingsOptions = [
@@ -9,9 +10,14 @@ export const Company_Settings = ({ onClose }) => {
     { label: 'Кто может изменять контактную информацию сотрудников', options: ['Все пользователи', 'Только руководитель', 'Никто'], defaultOption: 'Все пользователи' },
   ];
 
+  const ref = useOnclickOutside(() => {
+    console.log('Ты кликнул вне формы')
+    onClose()
+  });
+
   return (
     <div data-testid='companySettings_popup' className={styles['pop-up__outer']}>
-    <div className={styles['pop-up']}>
+    <div ref={ref} className={styles['pop-up']}>
       <div className={styles['pop-up__header']}>
         <div className={styles.container}>
           <div className={styles['pop-up__title']}>Настройки компании</div>
