@@ -2,6 +2,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { CompaniesHeader } from "../../../src/widgets/companies/ui/CompaniesHeader";
 
 const CompaniesHeader = () => {
+    
     return (
         <CompaniesHeader>
         </CompaniesHeader>

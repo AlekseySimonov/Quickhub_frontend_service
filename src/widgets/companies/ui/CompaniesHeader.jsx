@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom'
 import {Select} from '../../../shared/ui/components/index'
 import {Search} from '../../../shared/ui/components/index'
@@ -17,11 +17,11 @@ import { useSelector } from 'react-redux'
 
 export const CompaniesHeader = () => {
 
-    const {companiesList} = useSelector(state => state.company)
+    const companiesList = useSelector(state => state.company.companiesList)
 
     const selectOptions = [...companiesList.map(company => company.title), '+ Добавить компанию'];
     const companyTitle = useSelector(state => state.company.companyTitle)
-
+    
     const menuItems = [
         { label: 'Все'},
         { label: 'Непрочитанные' },

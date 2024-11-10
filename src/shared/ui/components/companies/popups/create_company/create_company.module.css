@@ -131,3 +131,9 @@
 .pop-up__btn-cancel:hover {
     background-color: rgba(225, 225, 225, 0.85);
 }
+
+.errorMessage {  
+    color: rgba(255, 73, 73); 
+    font-size: 14px;
+    margin-top: 4px; 
+}  

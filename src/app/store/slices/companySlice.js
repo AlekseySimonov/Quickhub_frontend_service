@@ -5,8 +5,8 @@ const initialState ={
     companiesList: [],
     companyID: null,
     companyTitle: null,
-    id: '1',
     status: null,
+    error: null,
 }
 
 export const getCompaniesAPI = createAsyncThunk(
@@ -14,6 +14,17 @@ export const getCompaniesAPI = createAsyncThunk(
     async (_, { rejectWithValue }) => {
         try {
             const response = await companiesService.getCompanies()
+            return response.data
+        } catch (err) {
+            return rejectWithValue(err.response)
+    }}
+)
+
+export const postCompanyAPI = createAsyncThunk(
+    'company/postCompanyAPI',
+    async ({title,email}, { rejectWithValue }) => {
+        try {
+            const response = await companiesService.postCompany(title, email)
             return response.data
         } catch (err) {
             return rejectWithValue(err.response)
@@ -41,21 +52,36 @@ const companySlice = createSlice({
                 state.companyTitle = state.companiesList[0].title
             }
         },
+        changeCompanyID(state, action) {
+            console.log(action.payload)
+        },
     },
     extraReducers: (builder) => {
         builder
             .addCase(getCompaniesAPI.pending, (state) => {
                 state.status = 'loading'
-                state.error = null
             })
             .addCase(getCompaniesAPI.fulfilled, (state,action) => {
                 state.status = 'succeeded'
-                state.companiesList = action.payload
-                state.error = null
+                state.companiesList = action.payload;
             })
             .addCase(getCompaniesAPI.rejected, (state, action) => {
                 state.status = 'failed'
                 state.error = action.payload
+            })
+
+            .addCase(postCompanyAPI.pending, (state) => {
+                state.status = 'loading'
+            })
+            .addCase(postCompanyAPI.fulfilled, (state,action) => {
+                state.status = 'succeeded'
+                state.companiesList.push(action.payload)
+                state.companyTitle = action.payload.title
+                state.companyID = action.payload.id
+            })
+            .addCase(postCompanyAPI.rejected, (state) => {
+                state.status = 'failed'
+                state.error = 'postError'
             })
 
         }
