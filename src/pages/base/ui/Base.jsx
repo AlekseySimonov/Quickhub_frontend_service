@@ -1,4 +1,4 @@
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import {Header} from "../../../widgets/header/index";
 import {Menu} from "../../../widgets/menu/index";
 import styles from './styles.module.css';
@@ -6,13 +6,22 @@ import { useEffect, useState } from "react";
 import { baseTitles } from "../../routing";
 
 export const Base = () => {
-    const location = useLocation()
-    useEffect(() => {  
-        document.title = baseTitles[location.pathname] ?? 'Ошибка';  
+    const [pageTitle, setPageTitle] = useState('Ошибка')
+
+    useEffect(() => {
+        const curTitle = baseTitles.find(item => location.pathname.startsWith(item.path));
+        if (curTitle && curTitle.title) {
+            setPageTitle(curTitle.title);
+            document.title = curTitle.title;
+        } else {
+            setPageTitle('Ошибка')
+            document.title = 'Ошибка';
+        }
     }, [location]);
-    
+
+    // ! Добавить редирект на страницу ошибки
+
     const [isActive, setIsActive] = useState(false)
-    
     const menu = ()=>{
         setIsActive(!isActive)
     }

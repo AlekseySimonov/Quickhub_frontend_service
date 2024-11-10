@@ -7,6 +7,7 @@ input::placeholder{
 	height: 100vh;
 	color: white;
 	overflow-y: hidden;
+	overflow-x: hidden;
 	background-image: linear-gradient(180.00deg,
 			rgb(40, 117, 224),
 			rgba(53, 135, 225, 0.72) 50%,

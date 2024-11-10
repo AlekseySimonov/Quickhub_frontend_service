@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom'
 
 // reusable components
 import {icons} from '../../../shared/ui/icons/companies'
@@ -15,8 +16,14 @@ import {Create_Company} from '../../../shared/ui/components/index'
 
 import styles from './styles.module.css'
 
+import { useSelector } from 'react-redux'
+
 export const CompaniesHeader = () => {
-    const selectOptions = ['QuickHub','Nike', 'Adidas', '+ Добавить компанию'];
+
+    const {companiesList} = useSelector(state => state.company)
+
+    const selectOptions = [...companiesList.map(company => company.title), '+ Добавить компанию'];
+    const companyTitle = useSelector(state => state.company.companyTitle)
 
     const menuItems = [
         { label: 'Все'},
@@ -24,48 +31,48 @@ export const CompaniesHeader = () => {
         { label: 'С меткой' },
         { label: 'С вложениями' },
         { label: 'Сортировка', submenu: true },
-      ];
+    ];
     
-      const submenuItems = [
+    const submenuItems = [
         'По умолчанию',
         'ФИО: от А до Я',
         'ФИО: от Я до А',
         'По должностям',
-      ];
+    ];
 
-      const tabs_navItems = [
+    const tabs_navItems = [
         { id: 'structure_company', label: 'Структура компании', active: false },
         { id: 'company_employees', label: 'Сотрудники', active: true },
-      ];
+    ];
 
 
-      const [isInviteEmployeePopUpVisible, setIsInvitePopUpVisible] = useState(false);
-      const [isCompanySettingsPopUpVisible, setIsSettingsPopUpVisible] = useState(false);
-      const [isCreateCompanyPopUpVisible, setIsCreateCompanyPopUpVisible] = useState(false);
-    
-      const handleOpenInviteEmployeePopUp = () => {
-        setIsInvitePopUpVisible(true);
-      };
-    
-      const handleCloseInviteEmployeePopUp = () => {
-        setIsInvitePopUpVisible(false);
-      };
-    
-      const handleOpenCompanySettingsPopUp = () => {
-        setIsSettingsPopUpVisible(true);
-      };
-    
-      const handleCloseCompanySettingsPopUp = () => {
-        setIsSettingsPopUpVisible(false);
-      };
+    const [isInviteEmployeePopUpVisible, setIsInvitePopUpVisible] = useState(false);
+    const [isCompanySettingsPopUpVisible, setIsSettingsPopUpVisible] = useState(false);
+    const [isCreateCompanyPopUpVisible, setIsCreateCompanyPopUpVisible] = useState(false);
 
-      const handleOpenCreateCompanyPopUp = () => {
-        setIsCreateCompanyPopUpVisible(true);
-      };
-    
-      const handleCloseCreateCompanyPopUp = () => {
-        setIsCreateCompanyPopUpVisible(false);
-      };
+    const handleOpenInviteEmployeePopUp = () => {
+    setIsInvitePopUpVisible(true);
+    };
+
+    const handleCloseInviteEmployeePopUp = () => {
+    setIsInvitePopUpVisible(false);
+    };
+
+    const handleOpenCompanySettingsPopUp = () => {
+    setIsSettingsPopUpVisible(true);
+    };
+
+    const handleCloseCompanySettingsPopUp = () => {
+    setIsSettingsPopUpVisible(false);
+    };
+
+    const handleOpenCreateCompanyPopUp = () => {
+    setIsCreateCompanyPopUpVisible(true);
+    };
+
+    const handleCloseCreateCompanyPopUp = () => {
+    setIsCreateCompanyPopUpVisible(false);
+    };
 
 
     return (
@@ -77,10 +84,7 @@ export const CompaniesHeader = () => {
                     <Select
                         testid = {'select'}
                         styles = {styles}
-                        title = {<>
-                                    QuickHub
-                                </>
-                                }
+                        title = {companyTitle}
                         options = {selectOptions}
                         onAddCompany={handleOpenCreateCompanyPopUp} 
                     />
@@ -90,7 +94,17 @@ export const CompaniesHeader = () => {
             </div>
             <div className={styles.toolbar}>
                 <div className={styles.navigation}>
-                    <TabsNavigation testid={'tabsnavigation'} tabs_navItems={tabs_navItems} />
+                    <div className={styles.tabs}>
+                        <NavLink to = 'structure' className={({ isActive }) =>   
+                            isActive ? `${styles.tabs__item} ${styles.active}` : styles.tabs__item}>
+                            Структура компании
+                        </NavLink>
+                        <NavLink to = 'list' className={({ isActive }) =>   
+                            isActive ? `${styles.tabs__item} ${styles.active}` : styles.tabs__item}>
+                            Сотрудники
+                        </NavLink>
+                    </div>
+                    <div className="button"></div>
                 </div>
                 <div className={styles.employee_management}>
                     <div className={styles.employee_management__search}>

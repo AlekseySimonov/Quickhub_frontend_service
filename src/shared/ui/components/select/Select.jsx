@@ -1,9 +1,11 @@
-import { useState } from "react";
+import {useState } from "react";
 import useOnClickOutside from "react-cool-onclickoutside";
 
-export const Select = ({ testid, onAddCompany, styles, options, defaultOption }) => {
+export const Select = ({ testid, onAddCompany, styles, options, title}) => {
+
+
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState(defaultOption || "QuickHub");
+    const [selectedOption, setSelectedOption] = useState(title|| null);
 
     const ref = useOnClickOutside(() => {
         setIsOpen(false);
@@ -15,7 +17,7 @@ export const Select = ({ testid, onAddCompany, styles, options, defaultOption })
     };
 
     const handleOptionClick = (option) => {
-        console.log(option); // Здесь можно обрабатывать нажатие на элемент  
+        console.log(option) 
 
         if (option === "+ Добавить компанию") {
             onAddCompany();
