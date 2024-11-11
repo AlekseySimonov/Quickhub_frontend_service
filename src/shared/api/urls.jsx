@@ -6,3 +6,4 @@ export const LOGOUT = 'account/api/v1/logout/'
 export const REFRESH = 'account/api/v1/token/refresh/'
 
 export const COMPANIES = 'company/api/v1/companies/'
+

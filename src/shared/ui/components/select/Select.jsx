@@ -1,11 +1,14 @@
-import {useState } from "react";
+import {useEffect, useState } from "react";
 import useOnClickOutside from "react-cool-onclickoutside";
 
-export const Select = ({ testid, onAddCompany, styles, options, title}) => {
-
+export const Select = ({ testid, onAddCompany, styles, options, title, selectOption}) => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(title|| null);
+
+    useEffect(() => {
+        setSelectedOption(title);
+    }, [title]);
 
     const ref = useOnClickOutside(() => {
         setIsOpen(false);
@@ -17,16 +20,13 @@ export const Select = ({ testid, onAddCompany, styles, options, title}) => {
     };
 
     const handleOptionClick = (option) => {
-        console.log(option) 
-
         if (option === "+ Добавить компанию") {
-            onAddCompany();
-            return; // Не закрываем меню
+            onAddCompany()
+            return
         }
 
-        // Обновляем выбранную опцию
+        selectOption(option)
         setSelectedOption(option); 
-
         setIsOpen(false);
 
         if (option === "Выйти" && onLogout) {  
