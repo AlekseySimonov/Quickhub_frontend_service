@@ -37,10 +37,10 @@ export const CompaniesHeader = () => {
         'По должностям',
     ];
 
-    const tabs_navItems = [
-        { id: 'structure_company', label: 'Структура компании', active: false },
-        { id: 'company_employees', label: 'Сотрудники', active: true },
-    ];
+    // const tabs_navItems = [
+    //     { id: 'structure_company', label: 'Структура компании', active: false },
+    //     { id: 'company_employees', label: 'Сотрудники', active: true },
+    // ];
 
 
     const [isInviteEmployeePopUpVisible, setIsInvitePopUpVisible] = useState(false);

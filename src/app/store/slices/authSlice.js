@@ -3,7 +3,7 @@ import * as authService from "../../../shared/api/authService"
 
 const initialState ={
     isAuth: localStorage.getItem('isAuth') || sessionStorage.getItem('isAuth') || 'false' ,
-    status: null,
+    status: 'loading',
     error: null,
     remember: false,
 }

@@ -14,8 +14,7 @@ import { Login } from "../../features/autorize/login";
 
 import { CompanyStructure } from "../../features/company_structure";
 import { CompanyList } from "../../features/company_list";
-import { CheckAuth, CheckCompanyID, IsAuth } from "../../shared/config";
-// import { CheckAuth, IsAuth } from "../../shared/config";
+// import { CheckAuth, CheckCompanyID, IsAuth } from "../../shared/config";
 
 export const authTitles = {
     '/auth/login': 'Вход',
@@ -77,6 +76,10 @@ export const appRouter = createBrowserRouter([
             {
                 path: 'help',
                 element: <Help />,
+            },
+            {
+                path: 'error',
+                element: <ErrorPage />
             },
         ],
     },

@@ -1,8 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { CompaniesHeader } from "../../../src/widgets/companies/ui/CompaniesHeader";
 
-const CompaniesHeader = () => {
-    
+const CompanyHeader = () => {
     return (
         <CompaniesHeader>
         </CompaniesHeader>
@@ -11,31 +10,31 @@ const CompaniesHeader = () => {
 
 describe('CompaniesHeader', () => {
     test('Проверяем, загружается ли select', () => {
-        render(companyHeader());
+        render(CompanyHeader());
         const selectElement = screen.getByTestId('select');
         expect(selectElement).toBeInTheDocument();
     });
 
     test('Проверяем, загружается ли tabsnavigation', () => {
-        render(companyHeader());
+        render(CompanyHeader());
         const tabsnavigationElement = screen.getByTestId('tabsnavigation');
         expect(tabsnavigationElement).toBeInTheDocument();
     });
 
     test('Проверяем, загружается ли search', () => {
-        render(companyHeader());
+        render(CompanyHeader());
         const searchElement = screen.getByTestId('search');
         expect(searchElement).toBeInTheDocument();
     });
 
     test('Проверяем, загружается ли filter', () => {
-        render(companyHeader());
+        render(CompanyHeader());
         const filterElement = screen.getByTestId('filter');
         expect(filterElement).toBeInTheDocument();
     });
 
     test('Проверяем, открывается ли pop-up: Настройки компании', () => {
-        render(companyHeader());
+        render(CompanyHeader());
 
         const CompanySettings_btn = screen.getByAltText('company_settings-btn');
 
@@ -53,7 +52,7 @@ describe('CompaniesHeader', () => {
     });
     
     test('Проверяем, открывается ли pop-up: Создать компанию', () => {
-        render(companyHeader());
+        render(CompanyHeader());
 
         fireEvent.click(screen.getByTestId('select_btn'));
 
@@ -74,7 +73,7 @@ describe('CompaniesHeader', () => {
     });
 
     test('Проверяем, открывается ли pop-up: Пригласить сотрудника', () => {
-        render(companyHeader());
+        render(CompanyHeader());
 
         fireEvent.click(screen.getByText('Пригласить сотрудника'));
 
