@@ -7,14 +7,11 @@ import {icons} from '../../../shared/ui/icons/companies'
 import {Select} from '../../../shared/ui/components/index'
 import {Search} from '../../../shared/ui/components/index'
 import {Filter} from '../../../shared/ui/components/index'
-import {TabsNavigation} from '../../../shared/ui/components/index'
 // popups
 import {Invite_Employee} from '../../../shared/ui/components/index'
 import {Company_Settings} from '../../../shared/ui/components/index'
 import {Create_Company} from '../../../shared/ui/components/index'
 
-
-import {icons} from '../../../shared/ui/icons/companies/index'
 import styles from './styles.module.css'
 
 import { useDispatch, useSelector } from 'react-redux'
