@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './invite_employee.module.css';
 import {icons} from '../../../../icons/companies/popup/invite_employee';
+import useOnclickOutside from "react-cool-onclickoutside";
 
 export const Invite_Employee = ({onClose}) => {
   const [activeForm, setActiveForm] = useState('by-link');
@@ -32,9 +33,14 @@ export const Invite_Employee = ({onClose}) => {
     console.log('Форма отправлена:', rows);
   };
 
+  const ref = useOnclickOutside(() => {
+    console.log('Ты кликнул вне формы')
+    onClose()
+  });
+
   return (
     <div data-testid={'inviteEmployee_popup'} className={styles['pop-up__outer']}>
-    <div className={styles['pop-up']}>
+    <div ref={ref} className={styles['pop-up']}>
     <div className={styles['pop-up__header']}>
         <div className={styles.container}>
           <div className={styles['pop-up__title']}>Приглашение в компанию</div>

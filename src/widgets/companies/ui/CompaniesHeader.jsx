@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom'
+
+// reusable components
+import {icons} from '../../../shared/ui/icons/companies'
+
 import {Select} from '../../../shared/ui/components/index'
 import {Search} from '../../../shared/ui/components/index'
 import {Filter} from '../../../shared/ui/components/index'
 import {TabsNavigation} from '../../../shared/ui/components/index'
+
 // popups
 import {Invite_Employee} from '../../../shared/ui/components/index'
 import {Company_Settings} from '../../../shared/ui/components/index'
 import {Create_Company} from '../../../shared/ui/components/index'
 
-
-import {icons} from '../../../shared/ui/icons/companies'
 import styles from './styles.module.css'
 
 import { useSelector } from 'react-redux'
@@ -70,6 +73,7 @@ export const CompaniesHeader = () => {
     const handleCloseCreateCompanyPopUp = () => {
     setIsCreateCompanyPopUpVisible(false);
     };
+
 
     return (
         <div>

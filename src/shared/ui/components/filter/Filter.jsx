@@ -1,29 +1,36 @@
 import React, { useState } from 'react';
 import {icons} from '../../../../shared/ui/icons/companies'
+import useOnClickOutside from "react-cool-onclickoutside";
+
 export const Filter = ({ testid, styles, menuItems, submenuItems }) => {
-    const [isActive, setIsActive] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
     const [activeSubmenuIndex, setActiveSubmenuIndex] = useState(null);
-  
-    const toggleMenu = () => {
-      setIsActive(!isActive);
+
+    const ref = useOnClickOutside(() => {
+      setIsOpen(false);
+    });
+
+
+    const handleClickBtn = () => {
+        setIsOpen(true);
     };
   
     const handleItemClick = (index) => {
       if (activeSubmenuIndex === index) {
-        setActiveSubmenuIndex(null); // Закрыть подменю, если оно уже открыто
+        setActiveSubmenuIndex(null);
       } else {
-        setActiveSubmenuIndex(index); // Открыть новое подменю
+        setActiveSubmenuIndex(index);
       }
-      setIsActive(false); // Закрыть основное меню при клике на элемент
+      setIsOpen(false);
     };
   
     return (
       <div data-testid={testid} className={styles.filter}>
-        <div className={styles.filter__toggle} onClick={toggleMenu}>
+        <button className={styles.filter__toggle} onClick={handleClickBtn}>
             <img src={icons.filter}/>
           Фильтр
-        </div>
-        <div className={`${styles.filter__menu} ${isActive ? styles.active : ''}`}>
+        </button>
+        <div ref={ref} className={`${styles.filter__menu} ${isOpen ? styles.active : ''}`}>
           {menuItems.map((item, index) => (
             <div 
               key={index} 
@@ -34,12 +41,12 @@ export const Filter = ({ testid, styles, menuItems, submenuItems }) => {
               {item.submenu && (
                 <>
                   <div className={styles.arrowFilt}></div>
-                  <div className={`${styles.filter__submenu} ${activeSubmenuIndex === index ? styles.active : ''}`}>
+                  <div ref={ref} className={`${styles.filter__submenu} ${activeSubmenuIndex === index ? styles.active : ''}`}>
                     {submenuItems.map((subitem, subIndex) => (
                       <div 
                         key={subIndex} 
                         className={styles.filter__submenu_item} 
-                        onClick={() => setIsActive(false)}
+                        onClick={() => setIsOpen(false)}
                       >
                         {subitem}
                       </div>
