@@ -7,11 +7,12 @@ export const usePageTitle = (baseTitles) => {
 
     useEffect(() => {
         const curTitle = baseTitles.find(item => location.pathname.startsWith(item.path));
+        
         if (curTitle && curTitle.title) {
             document.title = curTitle.title;
-        } else {
+        } else if (document.title !== 'Ошибка') { // Проверяем текущий заголовок
             document.title = 'Ошибка';
             navigate('/error');
         }
     }, [location, baseTitles, navigate]);
-}
+};

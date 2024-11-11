@@ -3,14 +3,12 @@ import { NavLink } from 'react-router-dom'
 import {Select} from '../../../shared/ui/components/index'
 import {Search} from '../../../shared/ui/components/index'
 import {Filter} from '../../../shared/ui/components/index'
-import {TabsNavigation} from '../../../shared/ui/components/index'
-// popups
 import {Invite_Employee} from '../../../shared/ui/components/index'
 import {Company_Settings} from '../../../shared/ui/components/index'
 import {Create_Company} from '../../../shared/ui/components/index'
 
 
-import {icons} from '../../../shared/ui/icons/companies'
+import {icons} from '../../../shared/ui/icons/companies/index'
 import styles from './styles.module.css'
 
 import { useSelector } from 'react-redux'
@@ -36,12 +34,6 @@ export const CompaniesHeader = () => {
         'ФИО: от Я до А',
         'По должностям',
     ];
-
-    // const tabs_navItems = [
-    //     { id: 'structure_company', label: 'Структура компании', active: false },
-    //     { id: 'company_employees', label: 'Сотрудники', active: true },
-    // ];
-
 
     const [isInviteEmployeePopUpVisible, setIsInvitePopUpVisible] = useState(false);
     const [isCompanySettingsPopUpVisible, setIsSettingsPopUpVisible] = useState(false);
