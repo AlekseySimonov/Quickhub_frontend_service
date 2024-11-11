@@ -52,7 +52,7 @@ const companySlice = createSlice({
                 state.companyTitle = state.companiesList[0].title
             }
         },
-        changeCompanyID(state, action) {
+        changeCompany(state, action) {
             console.log(action.payload)
         },
     },
@@ -87,5 +87,5 @@ const companySlice = createSlice({
         }
     })
 
-export const { setCompanyID, checkCompanyID } = companySlice.actions
+export const { setCompanyID, checkCompanyID, changeCompany } = companySlice.actions
 export default companySlice.reducer

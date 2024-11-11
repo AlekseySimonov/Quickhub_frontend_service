@@ -11,14 +11,19 @@ import {Create_Company} from '../../../shared/ui/components/index'
 import {icons} from '../../../shared/ui/icons/companies/index'
 import styles from './styles.module.css'
 
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { changeCompany } from '../../../app/store/slices/companySlice';
 
 export const CompaniesHeader = () => {
+    const dispatch = useDispatch()
 
     const companiesList = useSelector(state => state.company.companiesList)
 
     const selectOptions = [...companiesList.map(company => company.title), '+ Добавить компанию'];
     const companyTitle = useSelector(state => state.company.companyTitle)
+    const handleSelectOption = (option) => {
+        dispatch(changeCompany(option));
+    };
     
     const menuItems = [
         { label: 'Все'},
@@ -26,7 +31,7 @@ export const CompaniesHeader = () => {
         { label: 'С меткой' },
         { label: 'С вложениями' },
         { label: 'Сортировка', submenu: true },
-    ];
+    ]
     
     const submenuItems = [
         'По умолчанию',
@@ -75,6 +80,7 @@ export const CompaniesHeader = () => {
                         title = {companyTitle}
                         options = {selectOptions}
                         onAddCompany={handleOpenCreateCompanyPopUp} 
+                        selectOption={handleSelectOption}
                     />
                     <div id="company_settings-btn" className={styles.selecting__settings} onClick={handleOpenCompanySettingsPopUp}>
                         <img src={icons.settings} alt="company_settings-btn" />

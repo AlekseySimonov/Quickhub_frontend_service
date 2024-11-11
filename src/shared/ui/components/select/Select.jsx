@@ -1,7 +1,6 @@
 import {useEffect, useState } from "react";
 
-export const Select = ({ testid, onAddCompany, styles, options, title}) => {
-
+export const Select = ({ testid, onAddCompany, styles, options, title, selectOption}) => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(title|| null);
@@ -11,13 +10,12 @@ export const Select = ({ testid, onAddCompany, styles, options, title}) => {
     }, [title]);
 
     const handleOptionClick = (option) => {
-        console.log(option) 
-
         if (option === "+ Добавить компанию") {
-            onAddCompany();
+            onAddCompany()
             return
         }
 
+        selectOption(option)
         setSelectedOption(option); 
         setIsOpen(false);
 
