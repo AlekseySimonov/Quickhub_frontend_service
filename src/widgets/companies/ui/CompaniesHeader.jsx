@@ -40,11 +40,6 @@ export const CompaniesHeader = () => {
         'По должностям',
     ];
 
-    const tabs_navItems = [
-        { id: 'structure_company', label: 'Структура компании', active: false },
-        { id: 'company_employees', label: 'Сотрудники', active: true },
-    ];
-
 
     const [isInviteEmployeePopUpVisible, setIsInvitePopUpVisible] = useState(false);
     const [isCompanySettingsPopUpVisible, setIsSettingsPopUpVisible] = useState(false);
@@ -130,7 +125,7 @@ export const CompaniesHeader = () => {
             </div>
             <div className={styles.popups}>
             {isInviteEmployeePopUpVisible && <Invite_Employee onClose={handleCloseInviteEmployeePopUp} />}
-            {isCompanySettingsPopUpVisible && <Company_Settings onClose={handleCloseCompanySettingsPopUp} />}
+            {isCompanySettingsPopUpVisible && <Company_Settings companyTitle={companyTitle} onClose={handleCloseCompanySettingsPopUp} />}
             {isCreateCompanyPopUpVisible && <Create_Company onClose={handleCloseCreateCompanyPopUp} />}
             </div>
         </div>

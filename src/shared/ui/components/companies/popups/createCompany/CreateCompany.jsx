@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './create_company.module.css';
+import styles from './CreateCompany.module.css';
 import useOnclickOutside from "react-cool-onclickoutside";
 
 export const Create_Company = ({ onClose }) => {

@@ -12,8 +12,8 @@ export const Filter = ({ testid, styles, menuItems, submenuItems }) => {
 
 
     const handleClickBtn = () => {
-        setIsOpen(true);
-    };
+      setIsOpen(prevIsOpen => !prevIsOpen);
+  };
   
     const handleItemClick = (index) => {
       if (activeSubmenuIndex === index) {
@@ -21,16 +21,17 @@ export const Filter = ({ testid, styles, menuItems, submenuItems }) => {
       } else {
         setActiveSubmenuIndex(index);
       }
+      
       setIsOpen(false);
     };
   
     return (
-      <div data-testid={testid} className={styles.filter}>
+      <div ref={ref} data-testid={testid} className={styles.filter}>
         <button className={styles.filter__toggle} onClick={handleClickBtn}>
             <img src={icons.filter}/>
           Фильтр
         </button>
-        <div ref={ref} className={`${styles.filter__menu} ${isOpen ? styles.active : ''}`}>
+        <div className={`${styles.filter__menu} ${isOpen ? styles.active : ''}`}>
           {menuItems.map((item, index) => (
             <div 
               key={index} 
