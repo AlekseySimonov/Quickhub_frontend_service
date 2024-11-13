@@ -1,46 +1,27 @@
-import { ReactFlow, Background, Controls, MiniMap, applyNodeChanges } from '@xyflow/react';
+import { ReactFlow, Background, Controls, MiniMap } from '@xyflow/react';
 import '@xyflow/react/dist/style.css'
 import styles from './styles.module.css'
-import { useCallback, useState } from 'react';
+import {nodes as initialNodes,
+        edges as initialEdges} from './initialElements'
+import {DirectorNode, DesignersNode, ChildNode} from './CustomNodes';
 
 export const CompanyStructure = ()=>{
 
-    const initialNodes = [
-    {
-        id: '1',
-        data: { label: 'Hello' },
-        position: { x: 0, y: 0 },
-        type: 'input',
-    },
-    {
-        id: '2',
-        data: { label: 'World' },
-        position: { x: 100, y: 100 },
-    },
-    ];
+    const nodes = initialNodes;
+    const edges = initialEdges;
 
-    const initialEdges = [
-        { id: '1-2', source: '1', target: '2', type: 'step' },
-    ];
+    const nodeTypes = {
+    directorNode: DirectorNode,
+    designerNode: DesignersNode,
+    childNode: ChildNode,
+    };
 
-    const [nodes, setNodes] = useState(initialNodes);
-    const [edges, setEdges] = useState(initialEdges);
-
-    const onNodesChange = useCallback(
-        (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
-        [],
-    );
-    const onEdgesChange = useCallback(
-        (changes) => setEdges((eds) => applyNodeChanges(changes, eds)),
-        [],
-    );
     return (
         <div className={styles.reactFlow}>
-        <ReactFlow 
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
+        <ReactFlow
         nodes={nodes} 
         edges={edges}
+        nodeTypes={nodeTypes}
         fitView>
             <Background color='white'/>
             <Controls />
