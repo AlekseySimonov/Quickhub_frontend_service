@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './invite_employee.module.css';
+import styles from './InviteEmployee.module.css';
 import {icons} from '../../../../icons/companies/popup/invite_employee';
 import useOnclickOutside from "react-cool-onclickoutside";
 
@@ -63,7 +63,7 @@ export const Invite_Employee = ({onClose}) => {
               className={`${styles['pop-up__nav-item']} ${activeForm === 'by-personal' ? styles.current : ''}`} 
               onClick={() => handleNavClick('by-personal')}
             >
-              Email или номер телефона
+              Приглашение по Email
             </div>
           </div>
 
@@ -94,18 +94,17 @@ export const Invite_Employee = ({onClose}) => {
             </form>
           )}
 
-          {/* По Email или номеру телефона */}
           {activeForm === 'by-personal' && (
             <form onSubmit={handleSubmit} className={`${styles['pop-up__form']} ${styles['by-personal']}`}>
               <div className={styles['pop-up__labels']}>
-                {['Email или телефон', 'Имя', 'Фамилия'].map(label => (
+                {['Email', 'Имя', 'Фамилия'].map(label => (
                   <div key={label} className={styles['pop-up__label']}>{label}</div>
                 ))}
               </div>
               <div className={styles['pop-up__rows']}>
                 {rows.map((_, index) => (
                   <div key={index} className={styles['pop-up__row']}>
-                    <input required placeholder="Введите Email или телефон" type="text" className={styles['pop-up__input']} />
+                    <input required placeholder="Введите Email" type="email" className={styles['pop-up__input']} />
                     <input required placeholder="Введите имя" type="text" className={styles['pop-up__input']} />
                     <input required placeholder="Введите фамилию" type="text" className={styles['pop-up__input']} />
                   </div>

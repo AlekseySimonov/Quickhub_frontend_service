@@ -10,15 +10,10 @@ export const Select = ({ testid, onAddCompany, styles, options, title, selectOpt
         setSelectedOption(title);
     }, [title]);
 
-    const ref = useOnClickOutside(() => {
-        setIsOpen(false);
-    });
-
-
     const handleClickBtn = () => {
-        setIsOpen(true);
+        setIsOpen(prevIsOpen => !prevIsOpen);
     };
-
+    
     const handleOptionClick = (option) => {
         if (option === "+ Добавить компанию") {
             onAddCompany()
@@ -34,8 +29,12 @@ export const Select = ({ testid, onAddCompany, styles, options, title, selectOpt
         } 
     };
 
+    const ref = useOnClickOutside(() => {
+        setIsOpen(false);
+    });
+
     return (
-        <div data-testid={testid} className={styles.select}>
+        <div ref={ref} data-testid={testid} className={styles.select}>
             <button
                 data-testid='select_btn'
                 className={`${styles.select_toggle} ${isOpen ? styles.active : ''}`}
@@ -45,7 +44,7 @@ export const Select = ({ testid, onAddCompany, styles, options, title, selectOpt
                 <div className={styles.arrow}></div>
             </button> 
             {isOpen && (  
-                <ul ref={ref} className={styles.select_menu}>  
+                <ul className={styles.select_menu}>  
                     {options.filter(option => option !== selectedOption).map((option, index) => (  
                         <li key={index} onClick={() => handleOptionClick(option)}>  
                             {option}  

@@ -1,19 +1,34 @@
-import React from 'react';
-import styles from './company_settings.module.css'; // Импортируем стили из CSS модуля
+import {useState, useEffect, React} from 'react';
+import styles from './CompanySettings.module.css'; // Импортируем стили из CSS модуля
 import { Select } from '../../../index';
 import useOnclickOutside from "react-cool-onclickoutside";
 
-export const Company_Settings = ({ onClose }) => { 
+export const Company_Settings = ({ onClose, companyTitle }) => { 
   const settingsOptions = [
-    { label: 'Кто может видеть страницу "Отчёты"', options: ['Все пользователи', 'Только руководитель', 'Никто'], defaultOption: 'Все пользователи' },
-    { label: 'Кто может видеть страницу "Лицензия и оплаты"', options: ['Все пользователи', 'Только руководитель', 'Никто'], defaultOption: 'Все пользователи' },
-    { label: 'Кто может изменять контактную информацию сотрудников', options: ['Все пользователи', 'Только руководитель', 'Никто'], defaultOption: 'Все пользователи' },
+    { label: 'Изменить название компании' },
   ];
+
+  useEffect(() => {
+    setCompanyName(companyTitle);
+  }, [companyTitle]);
 
   const ref = useOnclickOutside(() => {
     console.log('Ты кликнул вне формы')
     onClose()
   });
+
+  const [companyName, setCompanyName] = useState('');
+
+  const handleInputChange = (event) => {
+    setCompanyName(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log('Изменить название компании на:', companyName);
+    // Здесь можно добавить логику для отправки данных на сервер
+    onClose();
+  };
 
   return (
     <div data-testid='companySettings_popup' className={styles['pop-up__outer']}>
@@ -29,11 +44,19 @@ export const Company_Settings = ({ onClose }) => {
       </div>
       <div className={styles['pop-up__content']}>
         <div className={styles.container}>
+        <form onSubmit={handleSubmit} className={styles['pop-up__form']}>
           <div className={styles['pop-up__form']}>
             {settingsOptions.map((setting, index) => (
               <div key={index} className={styles['pop-up__row']}>
                 <div className={styles['pop-up__label']}>{setting.label}</div>
-                <Select styles={styles} options={setting.options} defaultOption={setting.defaultOption} />
+                <input
+                  required
+                  placeholder='Введите название компании'
+                  type="text"
+                  className={styles['pop-up__input']}
+                  defaultValue={companyTitle}
+                  onChange={handleInputChange}
+                />
               </div>
             ))}
           </div>
@@ -41,10 +64,11 @@ export const Company_Settings = ({ onClose }) => {
             <button className={`${styles['pop-up__btn']} ${styles['pop-up__btn-submit']}`}>
               Сохранить
             </button>
-            <button data-testid='popup_cancel' className={`${styles['pop-up__btn']} ${styles['pop-up__btn-cancel']}`} onClick={onClose}>
-              Отменить
+            <button className={`${styles['pop-up__btn']} ${styles['pop-up__btn-delete']}`}>
+              Удалить компанию
             </button>
           </div>
+          </form>
         </div>
       </div>
     </div>

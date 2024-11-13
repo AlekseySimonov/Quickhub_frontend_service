@@ -53,6 +53,7 @@ const companySlice = createSlice({
             }
         },
         changeCompany(state, action) {
+            state.companyTitle = action.payload
             console.log(action.payload)
         },
     },

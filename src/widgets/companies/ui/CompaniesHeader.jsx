@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom'
 
-// reusable components
 import {icons} from '../../../shared/ui/icons/companies'
 
 import {Select} from '../../../shared/ui/components/index'
 import {Search} from '../../../shared/ui/components/index'
 import {Filter} from '../../../shared/ui/components/index'
-// popups
+
 import {Invite_Employee} from '../../../shared/ui/components/index'
 import {Company_Settings} from '../../../shared/ui/components/index'
 import {Create_Company} from '../../../shared/ui/components/index'
@@ -128,7 +127,7 @@ export const CompaniesHeader = () => {
             </div>
             <div className={styles.popups}>
             {isInviteEmployeePopUpVisible && <Invite_Employee onClose={handleCloseInviteEmployeePopUp} />}
-            {isCompanySettingsPopUpVisible && <Company_Settings onClose={handleCloseCompanySettingsPopUp} />}
+            {isCompanySettingsPopUpVisible && <Company_Settings companyTitle={companyTitle} onClose={handleCloseCompanySettingsPopUp} />}
             {isCreateCompanyPopUpVisible && <Create_Company onClose={handleCloseCreateCompanyPopUp} />}
             </div>
         </div>
