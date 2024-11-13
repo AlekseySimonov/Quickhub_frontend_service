@@ -10,7 +10,7 @@ export const usePageTitle = (baseTitles) => {
         
         if (curTitle && curTitle.title) {
             document.title = curTitle.title;
-        } else if (document.title !== 'Ошибка') { // Проверяем текущий заголовок
+        } else if (document.title !== 'Ошибка') {
             document.title = 'Ошибка';
             navigate('/error');
         }

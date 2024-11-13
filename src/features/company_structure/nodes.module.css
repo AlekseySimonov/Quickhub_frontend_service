@@ -1,0 +1,52 @@
+.directors{
+    display:flex;
+    justify-content: center;
+    flex-direction: row;
+    gap: 20px;
+    padding-inline: 35px;
+    background-color: #EFEFEF;
+    padding-block: 7px;
+    border-radius: 10px;
+    align-items: center;
+}
+
+.designers{
+    display:flex;
+    justify-content: center;
+    flex-direction: row;
+    gap: 20px;
+    padding-inline: 35px;
+    background-color: #FFF3D6;
+    padding-block: 7px;
+    border-radius: 10px;
+    align-items: center;
+}
+
+.child{
+    display:flex;
+    flex-direction: row;
+    gap: 20px;
+    padding-inline: 25px;
+    background-color: #FFF3D6;
+    padding-block: 7px;
+    border-radius: 10px;
+    align-items: center;
+}
+
+.photo{
+    width: 40px;
+    height: 40px;
+}
+
+.label{
+    display: flex;
+    flex-direction: column;
+}
+
+.name{
+    font-weight: 500;
+}
+
+.position{
+    font-weight: 300;
+}

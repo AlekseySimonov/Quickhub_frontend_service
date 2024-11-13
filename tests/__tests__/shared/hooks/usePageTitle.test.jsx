@@ -1,4 +1,3 @@
-
 import { usePageTitle } from './../../../../src/shared/hooks/usePageTitle';
 import { renderHook } from '@testing-library/react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -47,7 +46,6 @@ describe('usePageTitle', () => {
             { path: '/projects/details', title: 'Детали проекта' },
         ];
 
-        // Устанавливаем путь на вложенный
         mockUseLocation.mockReturnValue({ pathname: '/projects/details' });
 
         renderHook(() => usePageTitle(baseTitles));
