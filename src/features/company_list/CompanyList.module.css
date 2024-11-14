@@ -30,7 +30,8 @@
 .employees__settings {
     position: absolute;
     cursor: pointer;
-    left: 20px;
+    left: 25px;
+    margin-top: 5px;
 }
 
 .employees__labels {
@@ -39,32 +40,39 @@
 
 .employees__label {
     width: 250px;
-    text-align: center;
 }
 .employees__label:first-child {
     width: 200px;
+    text-align: center;
 }
 .employees__label:nth-child(2) {
     width: 300px;
 }
 
 .employees__list {
+    height: 500px;
+}
+
+.employees__list-inner {
     background-color: #fdfbfc;
     display: flex;
     flex-direction: column;
-    overflow-x: auto;
+    overflow-y: auto;
+    height: 100%;
     border-bottom: 1px solid #e1e1e1;
 }
 
 .employee {
-    padding: 10px 0px;
+    padding: 15px 0px;
     display: flex;
 }
+
+
 .employee__column {
     width: 250px;
     text-align: center;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     flex-direction: column;
 }
@@ -93,6 +101,7 @@
 }
 .employee__photo {
     width: 200px;
+    align-items: center;
 }
 .employee__photo-inner {
     width: 70px;
@@ -105,15 +114,15 @@
 .pagination {
     position: absolute;
     width: 100%;
-    height: 38px;
+    background-color: #fff;
+    height: 70px;
     left: 50%;
-    bottom: 20px;
+    bottom: 0px;
     transform: translateX(-50%);
     display: flex;
-    align-items: center;
+    align-items: flex-start;
 }
 .pagination .container {
-    margin-top: 20px;
     justify-content: center;
     align-items: center;
     gap: 8px;
@@ -153,8 +162,10 @@
 .employees__countEmployee {
     position: absolute;
     left: 65px;
+    color: #989898;
 }
 .employees__countPages {
     position: absolute;
     left: calc(165px + 40px);
+    color: #989898;
 }

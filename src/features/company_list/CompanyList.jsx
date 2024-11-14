@@ -7,7 +7,7 @@ export const CompanyList = () => {
     const companiesList = useSelector(state => state.company.companiesList);
 
     console.log(companiesList);
-    // Статические данные сотрудников
+
     const employees = [
     { id: 1, fullName:'Рождественский Август', email:'aleksey.simonov@mail.ru', phone:'+7 (999)99-99-99', position:'Руководитель', job:'Дизайнер', department:'Отдел дизайна' },
     { id: 2, fullName:'Симонов Алексей-Венедиктов', email:'aleksey.simonov@mail.ru', phone:'+7(999)8884422', position:'Руководитель', job:'Дизайнер', department:'Отдел дизайна' },
@@ -56,6 +56,7 @@ export const CompanyList = () => {
             </div>
             
             <div className={styles.employees__list}>
+            <div className={styles['employees__list-inner']}>
                 {currentEmployees.map((employee) => (
                     <div key={employee.id} className={styles.employees__item}>
                         <div className={`${styles.container} ${styles.employee}`}>
@@ -76,6 +77,7 @@ export const CompanyList = () => {
                         </div>
                     </div>
                 ))}
+            </div>
             </div>
 
             
@@ -120,11 +122,11 @@ const Pagination = ({ totalEmployees, totalPages, currentPage, setCurrentPage })
 
         <div className={styles.employees__countEmployee}>
           Всего:
-          <span className={styles.value}>{totalEmployees}</span>
+          <span className={styles.value}> {totalEmployees}</span>
         </div>
         <div className={styles.employees__countPages}>
           Страниц:
-          <span className={styles.value}>{totalPages}</span>
+          <span className={styles.value}> {totalPages}</span>
         </div>
       </div>
     </div>
