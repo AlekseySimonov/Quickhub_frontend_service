@@ -12,6 +12,7 @@ html, body {
 	overflow: hidden;
 	font-family: 'Manrope', sans-serif;
 }
+.react-flow__attribution {display: none;}
 
 article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}
 audio,canvas,progress,video{display:inline-block;vertical-align:baseline}

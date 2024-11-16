@@ -3,7 +3,7 @@ import '@xyflow/react/dist/style.css'
 import styles from './styles.module.css'
 import {nodes as initialNodes,
         edges as initialEdges} from './initialElements'
-import {DirectorNode, DesignersNode, ChildNode} from './CustomNodes';
+import {DepartmentNode} from './CustomNodes';
 
 export const CompanyStructure = ()=>{
 
@@ -11,9 +11,7 @@ export const CompanyStructure = ()=>{
     const edges = initialEdges;
 
     const nodeTypes = {
-    directorNode: DirectorNode,
-    designerNode: DesignersNode,
-    childNode: ChildNode,
+    departmentNode: DepartmentNode,
     };
 
     return (

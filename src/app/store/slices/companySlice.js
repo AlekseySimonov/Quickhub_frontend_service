@@ -14,6 +14,7 @@ export const getCompaniesAPI = createAsyncThunk(
     async (_, { rejectWithValue }) => {
         try {
             const response = await companiesService.getCompanies()
+            console.log(response)
             return response.data
         } catch (err) {
             return rejectWithValue(err.response)
