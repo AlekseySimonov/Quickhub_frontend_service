@@ -5,6 +5,8 @@ import {nodes as initialNodes,
         edges as initialEdges} from './initialElements'
 import {DirectorNode, DesignersNode, ChildNode} from './CustomNodes';
 
+import useOnClickOutside from "react-cool-onclickoutside";
+
 export const CompanyStructure = ()=>{
 
     const nodes = initialNodes;
@@ -16,10 +18,11 @@ export const CompanyStructure = ()=>{
     childNode: ChildNode,
     };
 
+
     return (
         <div className={styles.reactFlow}>
         <ReactFlow
-        nodes={nodes} 
+        nodes={nodes}
         edges={edges}
         nodeTypes={nodeTypes}
         fitView>

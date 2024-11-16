@@ -4,6 +4,7 @@ import settings from './settings.svg'
 import settingsGrey from './settingsGrey.svg'
 import plus from './plus.svg'
 import X from './X.svg'
+import popupX from './popupX.svg'
 
 export const icons = {  
     arrow,
@@ -12,4 +13,5 @@ export const icons = {
     settingsGrey,
     plus,
     X,
+    popupX,
 }

@@ -1,0 +1,19 @@
+.search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 230px;
+    height: 40px;
+    border-radius: 30px;
+    padding: 0px 10px;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.search:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.search_icon {
+    width: 18px;
+    height: 18px;
+}

@@ -7,9 +7,9 @@ import {Select} from '../../../shared/ui/components/index'
 import {Search} from '../../../shared/ui/components/index'
 import {Filter} from '../../../shared/ui/components/index'
 
-import {Invite_Employee} from '../../../shared/ui/components/index'
-import {Company_Settings} from '../../../shared/ui/components/index'
-import {Create_Company} from '../../../shared/ui/components/index'
+import {CompanyInvite} from '../../../features/company_invite/index'
+import {CompanySettings} from '../../../features/company_settings/index'
+import {CompanyCreate} from '../../../features/company_create/index'
 
 import styles from './styles.module.css'
 
@@ -107,14 +107,12 @@ export const CompaniesHeader = () => {
                     <div className={styles.employee_management__search}>
                         <Search
                                     testid = {'search'}
-                                    styles = {styles}
                                     placeholder = {'Поиск подразделения'}
                         />
                     </div>
                     <div className={styles.employee_management__filter}>
                         <Filter 
                                     testid = {'filter'}
-                                    styles = {styles}
                                     menuItems={menuItems} 
                                     submenuItems={submenuItems} 
                         />
@@ -126,9 +124,9 @@ export const CompaniesHeader = () => {
                 </div>
             </div>
             <div className={styles.popups}>
-            {isInviteEmployeePopUpVisible && <Invite_Employee onClose={handleCloseInviteEmployeePopUp} />}
-            {isCompanySettingsPopUpVisible && <Company_Settings companyTitle={companyTitle} onClose={handleCloseCompanySettingsPopUp} />}
-            {isCreateCompanyPopUpVisible && <Create_Company onClose={handleCloseCreateCompanyPopUp} />}
+            {isInviteEmployeePopUpVisible && <CompanyInvite onClose={handleCloseInviteEmployeePopUp} />}
+            {isCompanySettingsPopUpVisible && <CompanySettings companyTitle={companyTitle} onClose={handleCloseCompanySettingsPopUp} />}
+            {isCreateCompanyPopUpVisible && <CompanyCreate onClose={handleCloseCreateCompanyPopUp} />}
             </div>
         </div>
     )

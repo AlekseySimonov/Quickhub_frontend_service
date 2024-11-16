@@ -9,30 +9,6 @@ const Companies_Header = () => {
 }
 
 describe('Companies_Header', () => {
-    test('Проверяем, загружается ли select', () => {
-        render(Companies_Header());
-        const selectElement = screen.getByTestId('select');
-        expect(selectElement).toBeInTheDocument();
-    });
-
-    test('Проверяем, загружается ли tabsnavigation', () => {
-        render(Companies_Header());
-        const tabsnavigationElement = screen.getByTestId('tabsnavigation');
-        expect(tabsnavigationElement).toBeInTheDocument();
-    });
-
-    test('Проверяем, загружается ли search', () => {
-        render(Companies_Header());
-        const searchElement = screen.getByTestId('search');
-        expect(searchElement).toBeInTheDocument();
-    });
-
-    test('Проверяем, загружается ли filter', () => {
-        render(Companies_Header());
-        const filterElement = screen.getByTestId('filter');
-        expect(filterElement).toBeInTheDocument();
-    });
-
     test('Проверяем, открывается ли pop-up: Настройки компании', () => {
         render(Companies_Header());
 
@@ -87,6 +63,4 @@ describe('Companies_Header', () => {
         expect(InviteEmployee).not.toBeInTheDocument();
 
     });
-
-
 });

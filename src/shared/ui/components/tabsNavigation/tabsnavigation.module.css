@@ -1,21 +1,32 @@
 .tabs {
-    box-sizing: border-box;
     display: flex;
+    position: relative;
     width: max-content;
+    overflow: hidden;
     border-radius: 30px;
     background-color: rgba(255, 255, 255, 0.2);
-}
-.tabs__item {
-    cursor: pointer;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    padding: 0px 26px;
+  }
+  
+  .tabs__item {
+    position: relative;
+    padding: 13px 26px;
     border-radius: 30px;
+    cursor: pointer;
     background-color: transparent;
-    transition: 0.2s;
-}
-.tabs__item.active {
+    transition: 0.2s ease;
+  }
+  
+  .active {
     background-color: #fff;
-    color: #000;
-}
+  }
+  
+  .effect {
+    position: absolute;
+    display: inline-block;
+    width: calc(100% / 2); 
+    height: 44px;
+    left: 0;
+    transition: transform 0.4s ease;
+    border-radius: 30px;
+    background-color: #fff;
+  }

@@ -6,8 +6,5 @@ export { Filter } from "./filter/Filter";
 
 export { Loader } from "./loader/Loader";
 
-// Pop-up окна
-export { Invite_Employee } from "./companies/popups/inviteEmployee/InviteEmployee";
-export { Company_Settings } from "./companies/popups/companySettings/CompanySettings";
-export { Create_Company } from "./companies/popups/createCompany/CreateCompany";
+export { ErrorPage } from "./error/ErrorPage";
 

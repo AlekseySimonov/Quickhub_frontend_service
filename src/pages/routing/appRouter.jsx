@@ -21,6 +21,8 @@ export const authTitles = {
     '/auth/registration': 'Регистрация',
 }
 
+// selectCompanyId={selectedCompany} - нужно воткнуть в CompaniesList, чтобы он получал выбранную компанию из Select
+
 export const baseTitles = [
         { path: '/tasks', title: 'Мои задачи' },
         { path: '/projects', title: 'Проекты' },
@@ -65,7 +67,7 @@ export const appRouter = createBrowserRouter([
                     },
                     {
                         path: 'list',
-                        element: <CompanyList />,
+                        element: <CompanyList/>,
                     },
                 ],
             },

@@ -44,7 +44,7 @@ button {border: none; background: transparent;}
     justify-content: center;
     align-items: center;
     position: fixed;
-    z-index: 30;
+    z-index: 90;
     top: 0;
     left: 0;
     right: 0;
@@ -78,23 +78,14 @@ button {border: none; background: transparent;}
 }
 .pop-up__closeBtn {
     display: flex;
-    gap: 1.5px;
+    align-items: center;
+    justify-content: center;
+    width: 15px;
+    height: 15px;
+    overflow: hidden;
     cursor: pointer;
 }
-.pop-up__closeBtn-component {
-    width: 7px;
-    height: 7px;
-}
-.pop-up__closeBtn-component:first-child {
-    border-top: 1px solid #000;
-    border-right: 1px solid #000;
-    transform: rotateZ(45deg);
-}
-.pop-up__closeBtn-component:last-child {
-    border-bottom: 1px solid #000;
-    border-left: 1px solid #000;
-    transform: rotateZ(45deg);
-}
+
 
 .pop-up__content {
     height: 100%;

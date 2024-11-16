@@ -1,0 +1,112 @@
+.arrowFilt {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+    width: 9px;
+    height: 9px;
+    border-top: 2px solid #000;
+    border-right: 2px solid #000;
+    transition: 0.2s;
+}
+
+.filter {
+    box-sizing: border-box;
+    position: relative;
+    color: #000;
+}
+
+.filter__toggle {
+    width: 150px;
+    margin: 0 auto;
+    height: 40px;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    border-radius: 30px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.filter__toggle:hover, .filter__toggle.active {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.filter__menu {
+    border-radius: 10px;
+    width: 220px;
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+    background-color: #fff;
+    visibility: hidden;
+    position: absolute;
+    z-index: 50;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: 0.2s;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.filter__menu.active {
+    height: max-content;
+    visibility: visible;
+    overflow: visible;
+    opacity: 1;
+}
+
+.filter__menu_item {
+    padding: 10px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.filter__menu_item:hover {
+    background-color: #d9d9d9;
+}
+
+.filter__menu_item.has_child {
+    position: relative;
+}
+
+.filter__menu_item.has_child:hover .filter__submenu {
+    height: max-content;
+    opacity: 1;
+}
+
+.filter__menu_item.has_child:hover .arrowFilt {
+    transform: translateY(-50%) rotate(-135deg);
+}
+
+
+.has_child{}
+
+.filter__submenu {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    position: absolute;
+    z-index: 50;
+    background-color: #fff;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    border-radius: 10px;
+    top: 0;
+    left: 215px;
+    transition: 0.3s;
+}
+
+.filter__submenu_item {
+    padding: 10px 12px;
+    background-color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.filter__submenu_item:hover {
+    background-color: #d9d9d9;
+}

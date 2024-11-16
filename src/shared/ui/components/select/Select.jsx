@@ -8,7 +8,8 @@ export const Select = ({ testid, onAddCompany, styles, options, title, selectOpt
 
     useEffect(() => {
         setSelectedOption(title);
-    }, [title]);
+    }, 
+    [title]);
 
     const handleClickBtn = () => {
         setIsOpen(prevIsOpen => !prevIsOpen);
@@ -17,6 +18,7 @@ export const Select = ({ testid, onAddCompany, styles, options, title, selectOpt
     const handleOptionClick = (option) => {
         if (option === "+ Добавить компанию") {
             onAddCompany()
+            setIsOpen(false)
             return
         }
 
@@ -33,8 +35,10 @@ export const Select = ({ testid, onAddCompany, styles, options, title, selectOpt
         setIsOpen(false);
     });
 
+    
+
     return (
-        <div ref={ref} data-testid={testid} className={styles.select}>
+        <div onDrag={ref} ref={ref} data-testid={testid} className={styles.select}>
             <button
                 data-testid='select_btn'
                 className={`${styles.select_toggle} ${isOpen ? styles.active : ''}`}

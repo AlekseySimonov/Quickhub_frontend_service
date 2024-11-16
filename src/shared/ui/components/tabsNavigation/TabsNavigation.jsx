@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import styles from './tabsnavigation.module.css';
 
-export const TabsNavigation = ({ testid, tabs_navItems }) => {
+export const TabsNavigation = ({ testid }) => {
   const initialActiveTab = tabs_navItems.find(item => item.active)?.id || navItems[0].id;
   const [activeTab, setActiveTab] = useState(initialActiveTab);
 
   const handleTabClick = (id) => {
     setActiveTab(id);
   };
+
+  
 
   return (
       <div data-testid={testid} className={styles.tabs}>

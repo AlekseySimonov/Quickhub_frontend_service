@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
-import styles from './CreateCompany.module.css';
+
+import styles from './CompanyCreate.module.css';
+import { icons } from '../../shared/ui/icons/companies';
+
 import useOnclickOutside from "react-cool-onclickoutside";
 
-export const Create_Company = ({ onClose }) => {
+export const CompanyCreate = ({ onClose }) => {
   const [companyName, setCompanyName] = useState('');
 
   const handleInputChange = (event) => {
@@ -28,8 +31,7 @@ export const Create_Company = ({ onClose }) => {
         <div className={styles.container}>
           <div className={styles['pop-up__title']}>Создать компанию</div>
           <div data-testid='popup_close' className={styles['pop-up__closeBtn']} onClick={onClose}>
-            <div className={styles['pop-up__closeBtn-component']}></div>
-            <div className={styles['pop-up__closeBtn-component']}></div>
+            <img src={icons.popupX}/>
           </div>
         </div>
       </div>

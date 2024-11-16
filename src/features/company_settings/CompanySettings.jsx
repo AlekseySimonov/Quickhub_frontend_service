@@ -1,9 +1,11 @@
 import {useState, useEffect, React} from 'react';
-import styles from './CompanySettings.module.css'; // Импортируем стили из CSS модуля
-import { Select } from '../../../index';
+
+import styles from './CompanySettings.module.css';
+import { icons } from '../../shared/ui/icons/companies';
+
 import useOnclickOutside from "react-cool-onclickoutside";
 
-export const Company_Settings = ({ onClose, companyTitle }) => { 
+export const CompanySettings = ({ onClose, companyTitle }) => { 
   const settingsOptions = [
     { label: 'Изменить название компании' },
   ];
@@ -37,8 +39,7 @@ export const Company_Settings = ({ onClose, companyTitle }) => {
         <div className={styles.container}>
           <div className={styles['pop-up__title']}>Настройки компании</div>
           <div data-testid='popup_close' className={styles['pop-up__closeBtn']} onClick={onClose}>
-            <div className={styles['pop-up__closeBtn-component']}></div>
-            <div className={styles['pop-up__closeBtn-component']}></div>
+            <img src={icons.popupX}/>
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import {icons} from '../../../../shared/ui/icons/header'
-export const Search = ({ testid, styles, placeholder})=>{
+import styles from './search.module.css'
+export const Search = ({ testid, placeholder})=>{
     return(
         <>
         <div data-testid={testid} className={styles.search}>

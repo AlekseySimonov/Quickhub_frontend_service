@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import styles from './InviteEmployee.module.css';
-import {icons} from '../../../../icons/companies/popup/invite_employee';
+import styles from './CompanyInvite.module.css';
+
+import { socials } from '../../shared/ui/icons/companies/popup/invite_employee';
+import { icons } from '../../shared/ui/icons/companies';
+
 import useOnclickOutside from "react-cool-onclickoutside";
 
-export const Invite_Employee = ({onClose}) => {
+export const CompanyInvite = ({onClose}) => {
   const [activeForm, setActiveForm] = useState('by-link');
   const [rows, setRows] = useState([{}]); 
 
@@ -45,8 +48,7 @@ export const Invite_Employee = ({onClose}) => {
         <div className={styles.container}>
           <div className={styles['pop-up__title']}>Приглашение в компанию</div>
           <div data-testid='popup_close' className={styles['pop-up__closeBtn']} onClick={onClose}>
-            <div className={styles['pop-up__closeBtn-component']}></div>
-            <div className={styles['pop-up__closeBtn-component']}></div>
+              <img src={icons.popupX} />
           </div>
         </div>
       </div>
@@ -81,13 +83,13 @@ export const Invite_Employee = ({onClose}) => {
                 <div className={styles['pop-up__label']}>Отправить ссылку</div>
                 <div className={styles['pop-up__sendTo']}>
                     <div className={styles['pop-up__sendTo-item']}>
-                        <img src={icons.vk}/>
+                        <img src={socials.vk}/>
                     </div>
                     <div className={styles['pop-up__sendTo-item']}>
-                        <img src={icons.tg}/>             
+                        <img src={socials.tg}/>             
                     </div>
                     <div className={styles['pop-up__sendTo-item']}>
-                        <img src={icons.whapp}/>   
+                        <img src={socials.whapp}/>   
                     </div>
                 </div>
               </div>
