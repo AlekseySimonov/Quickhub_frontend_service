@@ -203,7 +203,7 @@ const jsonData = [
     { 
         id :7, 
         title :'Отдел IT',  
-        parent :1,  
+        parent :3,  
         users :[  
             {  
                 id :27,  
@@ -283,38 +283,43 @@ const createGraph = (data) => {
     g.setGraph({ rankdir: 'TB' })
     g.setDefaultEdgeLabel(() => ({}))
 
+    let zIndexCounter = 1000; // Инициализация счетчика zIndex
+
     data.forEach(department => {
-        g.setNode(String(department.id), { width: 550,height: 200, label: department.title })
+        g.setNode(String(department.id), { width: 550, height: 200, label: department.title });
         if (department.parent !== 0) {
-            g.setEdge(String(department.parent), String(department.id))
+            g.setEdge(String(department.parent), String(department.id));
         }
-    })
+    });
 
     dagre.layout(g);
-
     const nodes = [];
     const edges = [];
 
     g.nodes().forEach(nodeId => {
-        const { x, y } = g.node(nodeId)
-        const departmentData = data.find(dep => dep.id === Number(nodeId))
+        const { x, y } = g.node(nodeId);
+        const departmentData = data.find(dep => dep.id === Number(nodeId));
 
         nodes.push({
+            style: { zIndex: zIndexCounter }, // Установка текущего значения zIndex
             id: nodeId,
             type: 'departmentNode',
-            data: { 
+            data: {
                 title: g.node(nodeId).label,
                 photo: icons.profile,
-                psrent: g.node(nodeId).parent,
+                parent: g.node(nodeId).parent,
                 users: departmentData.users,
             },
             position: { x, y },
             draggable: false,
-        })
+        });
+
+        zIndexCounter--; // Увеличение счетчика zIndex на 1 для следующего узла
     });
 
     g.edges().forEach(edge => {
         edges.push({
+            style:{zIndex:-9999},
             id: `e${edge.v}-${edge.w}`,
             source: edge.v,
             target: edge.w,

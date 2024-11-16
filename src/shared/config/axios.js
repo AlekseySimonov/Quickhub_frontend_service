@@ -13,6 +13,11 @@ export const api = axios.create({
     },
 })
 
+api.interceptors.request.use((request) =>{
+    request.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
+    return request
+})
+
 // api.interceptors.response.use((config) =>{
 //     return config
 // }, async (error) =>{
