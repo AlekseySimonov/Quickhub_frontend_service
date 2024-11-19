@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import * as authService from "../../../shared/api/authService"
+import {authService}from "../../../shared/api/index"
 
 const initialState ={
     status: null,
@@ -32,9 +32,8 @@ export const registerAPI = createAsyncThunk(
             const response = await authService.register(first_name,  last_name, email, password,password2)
             return response
         } catch (err) {
-            if (err.response.status === 400) { 
-                console.log(err.response)
-                return rejectWithValue(err.response.data.error)  
+            if (err.response.status === 400) {
+                return rejectWithValue(err.response.data.error)
         }
         return rejectWithValue(err.response.data)
     }}
@@ -51,7 +50,6 @@ export const logoutAPI = createAsyncThunk(
             localStorage.removeItem('accessToken')
             sessionStorage.removeItem('refreshToken')
             localStorage.removeItem('refreshToken')
-            console.log('Пользователь успешно вышел')
             window.location.reload()
         } catch (err) {
             return rejectWithValue(err)
@@ -63,8 +61,6 @@ export const refreshTokenAPI = createAsyncThunk(
     'auth/refreshTokenAPI',
     async (_, {rejectWithValue, getState }) => {
         try {
-
-            console.log('first')
             const state = getState().auth
             const storage = (state.remember === 'true') ? localStorage : sessionStorage
             const response = await authService.refreshToken( storage.getItem('refreshToken'))
@@ -74,7 +70,6 @@ export const refreshTokenAPI = createAsyncThunk(
             return response
         } catch (err) {
             if (err.response.status == 401) { 
-                console.log(err.response)
                 return rejectWithValue(err.response.detail)  
             }
             return rejectWithValue(err);

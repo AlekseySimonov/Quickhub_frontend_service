@@ -1,7 +1,5 @@
-export * as authService from './authService'
 import {getCompanies, postCompany} from './companiesService';
+import { register,login,refreshToken,logout } from './authService';
 
-export const companiesService = {
-    getCompanies,
-    postCompany,
-}
+export const authService = {register,login,refreshToken,logout}
+export const companiesService = {getCompanies, postCompany,}
