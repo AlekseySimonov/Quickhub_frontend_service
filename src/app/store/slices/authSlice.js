@@ -2,19 +2,21 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import * as authService from "../../../shared/api/authService"
 
 const initialState ={
-    isAuth: localStorage.getItem('isAuth') || sessionStorage.getItem('isAuth') || 'false' ,
     status: null,
     error: null,
-    remember: false,
+    remember: localStorage.getItem('remember') || sessionStorage.getItem('remember') || 'false' ,
 }
 
 export const loginAPI = createAsyncThunk(
     'auth/loginAPI',
     async ({ email, password, remember}, { rejectWithValue }) => {
         try {
-            await authService.login(email, password)
-            const storage = remember ? localStorage : sessionStorage
-            storage.setItem('isAuth', true)
+            const response = await authService.login(email, password)
+            localStorage.setItem('remember', String(remember))
+            const storage = (String(remember) === 'true') ? localStorage : sessionStorage
+            storage.setItem('accessToken', response.data.access_token)
+            storage.setItem('refreshToken', response.data.refresh_token)
+            window.location.reload()
         } catch (err) {
             if (err.response.status === 400 || err.response.status === 401) {  
                 return rejectWithValue('Неверный e-mail или пароль')
@@ -40,27 +42,44 @@ export const registerAPI = createAsyncThunk(
 
 export const logoutAPI = createAsyncThunk(
     'auth/logoutAPI',
-    async (_, { rejectWithValue }) => {
+    async (_, { rejectWithValue, getState }) => {
         try {
-            const response = await authService.refreshToken()
-            sessionStorage.removeItem('isAuth')
-            localStorage.removeItem('isAuth')
-            return (response.data)
+            const state = getState().auth
+            const storage = (state.remember === 'true') ? localStorage : sessionStorage
+            await authService.logout( storage.getItem('refreshToken'))
+            sessionStorage.removeItem('accessToken')
+            localStorage.removeItem('accessToken')
+            sessionStorage.removeItem('refreshToken')
+            localStorage.removeItem('refreshToken')
+            console.log('Пользователь успешно вышел')
+            window.location.reload()
         } catch (err) {
-            return rejectWithValue(err.error)
+            return rejectWithValue(err)
         }
     }
 )
 
-export const refreshTokenAPI = createAsyncThunk(  
-    'auth/refreshTokenAPI',  
-    async (_, { rejectWithValue }) => {  
-        try {  
-            await authService.refreshToken();  
-        } catch (err) {  
-            return rejectWithValue(err.message) 
-        }  
-    }  
+export const refreshTokenAPI = createAsyncThunk(
+    'auth/refreshTokenAPI',
+    async (_, {rejectWithValue, getState }) => {
+        try {
+
+            console.log('first')
+            const state = getState().auth
+            const storage = (state.remember === 'true') ? localStorage : sessionStorage
+            const response = await authService.refreshToken( storage.getItem('refreshToken'))
+
+            storage.setItem('accessToken', response.data.access)
+            storage.setItem('refreshToken', response.data.refresh)
+            return response
+        } catch (err) {
+            if (err.response.status == 401) { 
+                console.log(err.response)
+                return rejectWithValue(err.response.detail)  
+            }
+            return rejectWithValue(err);
+        }
+    }
 )
 
 const authSlice = createSlice({
@@ -75,7 +94,6 @@ const authSlice = createSlice({
             })
             .addCase(loginAPI.fulfilled, (state) => {
                 state.status = 'succeeded'
-                state.isAuth = 'true'
                 state.error = null
             })
             .addCase(loginAPI.rejected, (state, action) => {
@@ -104,12 +122,10 @@ const authSlice = createSlice({
             })
             .addCase(logoutAPI.fulfilled, (state) => {
                 state.status = 'succeeded'
-                state.isAuth = 'false'
                 state.error = null
             })
-            .addCase(logoutAPI.rejected, (state, action) => {
+            .addCase(logoutAPI.rejected, (state) => {
                 state.status = 'failed'
-                state.error = action.payload || null
             })
 
 
@@ -119,14 +135,11 @@ const authSlice = createSlice({
                 state.error = null
             })  
             .addCase(refreshTokenAPI.fulfilled, (state) => {  
-                state.isAuth = true
                 state.status = 'succeeded'
                 state.error = null
             })  
-            .addCase(refreshTokenAPI.rejected, (state, action) => {  
-                state.isAuth = false
+            .addCase(refreshTokenAPI.rejected, (state) => {  
                 state.status = 'failed'
-                state.error = action.payload
             })
         }
     })

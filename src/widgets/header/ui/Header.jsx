@@ -4,15 +4,15 @@ import {DropDown} from '../../../shared/ui/components/index'
 import { useDispatch } from 'react-redux'
 import { logoutAPI } from '../../../app/store/slices/authSlice';
 
-const dropDownOptions = ['Выйти']
-
 export const Header = ({burgerClick}) => {
 
         const dispatch = useDispatch()
-        const handleLogout = () => {  
-            dispatch(logoutAPI())
-            console.log("Пользователь вышел из приложения.")
-        }
+
+        const dropDownOptions = [
+        { label: 'Профиль', action: () => console.log('Перейти в профиль') },
+        { label: 'Настройки', action: () => console.log('Открыть настройки') },
+        { label: 'Выйти', action: () => dispatch(logoutAPI()) },
+    ];
 
     return (
     <>
@@ -52,18 +52,9 @@ export const Header = ({burgerClick}) => {
             <div className={styles.account}>
                     <DropDown
                         styles = {styles}
-                        title = {<>
-                                    <div className={styles.profile_icon}>
-                                        <img src={icons.profile}/>
-                                    </div>
-                                    Симонов Алексей
-                                    <div className={styles.arrow_down}>
-                                        <img src={icons.arrow_down}/>
-                                    </div>
-                                </>
-                                }
+                        titleIcon={icons.profile} 
+                        titleName="Симонов Алексей"
                         options = {dropDownOptions}
-                        onLogout={handleLogout}
                     />
                 </div>
         </div>

@@ -283,7 +283,7 @@ const createGraph = (data) => {
     g.setGraph({ rankdir: 'TB' })
     g.setDefaultEdgeLabel(() => ({}))
 
-    let zIndexCounter = 1000; // Инициализация счетчика zIndex
+    let zIndexCounter = 1000
 
     data.forEach(department => {
         g.setNode(String(department.id), { width: 550, height: 200, label: department.title });
@@ -301,7 +301,7 @@ const createGraph = (data) => {
         const departmentData = data.find(dep => dep.id === Number(nodeId));
 
         nodes.push({
-            style: { zIndex: zIndexCounter }, // Установка текущего значения zIndex
+            style: { zIndex: zIndexCounter }, 
             id: nodeId,
             type: 'departmentNode',
             data: {
@@ -314,7 +314,7 @@ const createGraph = (data) => {
             draggable: false,
         });
 
-        zIndexCounter--; // Увеличение счетчика zIndex на 1 для следующего узла
+        zIndexCounter--
     });
 
     g.edges().forEach(edge => {

@@ -24,9 +24,6 @@ export const Select = ({ testid, onAddCompany, styles, options, title, selectOpt
         setSelectedOption(option); 
         setIsOpen(false);
 
-        if (option === "Выйти" && onLogout) {  
-            onLogout(); 
-        } 
     };
 
     const ref = useOnClickOutside(() => {

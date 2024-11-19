@@ -1,19 +1,22 @@
-import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 
-export const CheckAuth = ({children}) => {
-    let isAuth = useSelector((state) => state.auth.isAuth)
-    if (isAuth !== "true"){
-        return <Navigate to='/auth/login' replace/>
+export const CheckAuth = ({ children }) => {
+    const accessToken = localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken');
+    
+    if (!accessToken) {
+        return <Navigate to='/auth/login' replace />;
     }
-    return children
+    
+    return children;
 }
 
-export const IsAuth = ({children}) => {
-    let isAuth = useSelector((state) => state.auth.isAuth)
-    if (isAuth === "true"){
-        return <Navigate to='/tasks' replace/>
+export const IsAuth = ({ children }) => {
+    const accessToken = localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken');
+    
+    if (accessToken) {
+        return <Navigate to='/tasks' replace />;
     }
-    return children
+    
+    return children;
 }
 

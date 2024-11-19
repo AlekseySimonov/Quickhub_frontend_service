@@ -5,5 +5,5 @@ export const REGISTRATION = 'account/api/v1/registration/'
 export const LOGOUT = 'account/api/v1/logout/'
 export const REFRESH = 'account/api/v1/token/refresh/'
 
-export const COMPANIES = 'company-service/api/v1/companies/'
+export const COMPANIES = 'company-service/api/v1/company/companies/'
 
