@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom'
 import {icons} from '../../../shared/ui/icons/companies'
 
 import {Select} from '../../../shared/ui/components/index'
+import {CompanySelector} from '../../../shared/ui/components/index'
 import {Search} from '../../../shared/ui/components/index'
 import {Filter} from '../../../shared/ui/components/index'
 
@@ -16,16 +17,17 @@ import styles from './styles.module.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { changeCompany } from '../../../app/store/slices/companySlice';
 
-export const CompaniesHeader = () => {
+export const CompaniesHeader = ({ selectedCompanyId, setSelectedCompanyId }) => {
     const dispatch = useDispatch()
 
-    const companiesList = useSelector(state => state.company.companiesList)
+    const companiesList = useSelector(state => state.company.companiesList);
 
     const selectOptions = [...companiesList.map(company => company.title), '+ Добавить компанию'];
     const companyTitle = useSelector(state => state.company.companyTitle)
     const handleSelectOption = (option) => {
         dispatch(changeCompany(option));
     };
+    
     
     const menuItems = [
         { label: 'Все'},
@@ -77,13 +79,22 @@ export const CompaniesHeader = () => {
                 <div className={styles.selecting__title}>
                         Выбрать компанию
                     </div> 
-                    <Select
+                    {/* <Select
                         testid = {'select'}
                         styles = {styles}
                         title = {companyTitle}
                         options = {selectOptions}
                         onAddCompany={handleOpenCreateCompanyPopUp} 
                         selectOption={handleSelectOption}
+                    /> */}
+
+                    <CompanySelector 
+                        testid="company_selector"
+                        styles={styles}
+                        companiesList={companiesList}
+                        selectedCompanyId={selectedCompanyId}
+                        setSelectedCompanyId={setSelectedCompanyId}
+                        onAddCompany={handleOpenCreateCompanyPopUp} 
                     />
                     <div id="company_settings-btn" className={styles.selecting__settings} onClick={handleOpenCompanySettingsPopUp}>
                         <img src={icons.settings} alt="company_settings-btn" />

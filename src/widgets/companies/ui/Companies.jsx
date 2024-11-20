@@ -12,8 +12,6 @@ export const Companies = () =>{
         dispatch(getCompaniesAPI())
     }, [dispatch])
 
-
-
     useEffect(() => {
         if (status === 'succeeded' && companyID === null) {
             dispatch(setCompanyID());
@@ -22,12 +20,18 @@ export const Companies = () =>{
         }
     }, [status, companyID, dispatch]);
 
+    
+    const [selectedCompanyId, setSelectedCompanyId] = useState(null);
+
     return(
         <>
         <div className={styles.content}>
-            <CompaniesHeader/>
+            <CompaniesHeader
+                selectedCompanyId={selectedCompanyId} 
+                setSelectedCompanyId={setSelectedCompanyId}
+            />
             <div className={styles.main}>
-                <Outlet/>
+                <Outlet context={{ selectedCompanyId }} />
             </div>
         </div>
         </>

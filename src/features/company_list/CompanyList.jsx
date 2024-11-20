@@ -1,14 +1,16 @@
-import {React, useEffect, useState} from 'react';
+import { React, useState, useEffect } from 'react';
 import styles from './CompanyList.module.css';
+import { useOutletContext } from 'react-router-dom';
 import { icons } from '../../shared/ui/icons/companies';
 import { useSelector } from 'react-redux';
 
-export const CompanyList = () => {
-    const [selectedCompanyId, setSelectedCompanyId] = useState(null);
-    const companiesList = useSelector(state => state.company.companiesList);
-    
-    const selectedCompany = companiesList.find(company => company.id === selectedCompanyId);
-    const employees = selectedCompany ? selectedCompany.users : [];
+export const CompanyList = ({}) => {
+  const { selectedCompanyId } = useOutletContext();
+  const companiesList = useSelector(state => state.company.companiesList);
+
+  // Получаем сотрудников для выбранной компании
+  const selectedCompany = companiesList.find(company => company.id === selectedCompanyId);
+  const employees = selectedCompany ? selectedCompany.users : [];
 
     // Параметры пагинации
     const employeesPerPage = 10;
@@ -38,32 +40,32 @@ export const CompanyList = () => {
                         <div className={styles.employees__label}>Подразделение</div>          
                     </div>
                 </div>
-
                 <div className={styles.employees__list}>
                     <div className={styles['employees__list-inner']}>
                         {currentEmployees.map((employee) => (
                             <div key={employee.id} className={styles.employees__item}>
                                 <div className={`${styles.container} ${styles.employee}`}>
                                     <div className={`${styles.employee__column} ${styles.employee__photo}`}>
-                                        <div className={styles['employee__photo-inner']}>
-                                          {employee.photo || ' '}
-                                        </div>
+                                    <div className={styles['employee__photo-inner']}>
+                                        {employee.photo || ' '}
+                                    </div>
                                     </div>
                                     <div className={`${styles.employee__column} ${styles.employee__info}`}>
-                                        <div className={styles.employee__name}>{employee.fullName || ' '}</div>
-                                        <div className={styles.employee__type}>{employee.position || ' '}</div>
+                                        <div className={styles.employee__name}>{employee.fullName || 'Фамилия Имя'}</div>
+                                        <div className={styles.employee__type}>{employee.position || 'Позиция не указана'}</div>
                                     </div>
-                                    <div className={`${styles.employee__column} ${styles.employee__email}`}>{employee.email || ' '}</div>
-                                    <div className={`${styles.employee__column} ${styles.employee__phone}`}>{employee.phone || ' '}</div>
-                                    <div className={`${styles.employee__column} ${styles.employee__job}`}>{employee.job || '-'}</div>
-                                    <div className={`${styles.employee__column} ${styles.employee__department}`}>{employee.department || '-'}</div>
+                                    <div className={`${styles.employee__column} ${styles.employee__email}`}>{employee.email || 'Почта не указана'}</div>
+                                    <div className={`${styles.employee__column} ${styles.employee__phone}`}>{employee.phone || 'Номер не указан'}</div>
+                                    <div className={`${styles.employee__column} ${styles.employee__job}`}>{employee.job || 'Должность не указана'}</div>
+                                    <div className={`${styles.employee__column} ${styles.employee__department}`}>{employee.department || 'Подразделение не указано'}</div>
                                 </div>
                             </div>
                         ))}
                     </div>
                 </div>
 
-                {totalPages >= 1 && (
+                {/* Пагинация */}
+                {totalPages > 1 && (
                     <Pagination 
                         totalEmployees={totalEmployees} 
                         totalPages={totalPages} 
@@ -106,11 +108,11 @@ const Pagination = ({ totalEmployees, totalPages, currentPage, setCurrentPage })
 
         <div className={styles.employees__countEmployee}>
           Всего:
-          <span className={styles.value}> {totalEmployees}</span>
+          <span className={styles.value}>{totalEmployees}</span>
         </div>
         <div className={styles.employees__countPages}>
           Страниц:
-          <span className={styles.value}> {totalPages}</span>
+          <span className={styles.value}>{totalPages}</span>
         </div>
       </div>
     </div>

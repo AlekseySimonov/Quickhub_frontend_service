@@ -7,7 +7,7 @@ export const DropDown = ({styles, title, options, onLogout})=>{
         console.log(option)
         setIsOpen(false)
         if (option === "Выйти" && onLogout) {  
-            onLogout() 
+            onLogout()
         } 
     }
 

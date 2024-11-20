@@ -4,7 +4,7 @@ import useOnClickOutside from "react-cool-onclickoutside";
 export const Select = ({ testid, onAddCompany, styles, options, title, selectOption}) => {
 
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState(title|| null);
+    const [selectedOption, setSelectedOption] = useState(title || null);
 
     useEffect(() => {
         setSelectedOption(title);
@@ -15,6 +15,10 @@ export const Select = ({ testid, onAddCompany, styles, options, title, selectOpt
         setIsOpen(prevIsOpen => !prevIsOpen);
     };
     
+    const ref = useOnClickOutside(() => {
+        setIsOpen(false);
+    });
+    
     const handleOptionClick = (option) => {
         if (option === "+ Добавить компанию") {
             onAddCompany()
@@ -22,23 +26,15 @@ export const Select = ({ testid, onAddCompany, styles, options, title, selectOpt
             return
         }
 
-        selectOption(option)
-        setSelectedOption(option); 
+        selectOption(option);
         setIsOpen(false);
 
-        if (option === "Выйти" && onLogout) {  
-            onLogout(); 
-        } 
     };
-
-    const ref = useOnClickOutside(() => {
-        setIsOpen(false);
-    });
 
     
 
     return (
-        <div onDrag={ref} ref={ref} data-testid={testid} className={styles.select}>
+        <div ref={ref} data-testid={testid} className={styles.select}>
             <button
                 data-testid='select_btn'
                 className={`${styles.select_toggle} ${isOpen ? styles.active : ''}`}

@@ -7,11 +7,15 @@
 }
 
 
+.employees {
+}
+
 .employees .container {
     display: flex;
     width: 100%;
     justify-content: space-between;
     color: #000;
+    gap: 20px;
 }
 
 .employees__header {
@@ -22,10 +26,6 @@
     height: 80px;
     border-bottom: 1px solid #e1e1e1;
     background-color: #fdfbfc;
-}
-.employees .container {
-    display: flex;
-    gap: 20px;
 }
 .employees__settings {
     position: absolute;
@@ -40,7 +40,9 @@
 
 .employees__label {
     width: 250px;
+    white-space: nowrap;
 }
+
 .employees__label:first-child {
     width: 200px;
     text-align: center;
