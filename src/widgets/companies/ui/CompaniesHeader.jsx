@@ -4,11 +4,11 @@ import { NavLink } from 'react-router-dom'
 import {icons} from '../../../shared/ui/icons/companies'
 
 import {Select} from '../../../shared/ui/components/index'
-import {CompanySelector} from '../../../shared/ui/components/index'
 import {Search} from '../../../shared/ui/components/index'
 import {Filter} from '../../../shared/ui/components/index'
 
 import {CompanyInvite} from '../../../features/company_invite/index'
+import {CompanyChoose} from '../../../features/company_choose/index'
 import {CompanySettings} from '../../../features/company_settings/index'
 import {CompanyCreate} from '../../../features/company_create/index'
 
@@ -78,17 +78,8 @@ export const CompaniesHeader = ({ selectedCompanyId, setSelectedCompanyId }) => 
             <div className={styles.selecting}>
                 <div className={styles.selecting__title}>
                         Выбрать компанию
-                    </div> 
-                    {/* <Select
-                        testid = {'select'}
-                        styles = {styles}
-                        title = {companyTitle}
-                        options = {selectOptions}
-                        onAddCompany={handleOpenCreateCompanyPopUp} 
-                        selectOption={handleSelectOption}
-                    /> */}
-
-                    <CompanySelector 
+                    </div>
+                    <CompanyChoose 
                         testid="company_selector"
                         styles={styles}
                         companiesList={companiesList}

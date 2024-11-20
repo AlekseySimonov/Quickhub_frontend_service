@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import useOnClickOutside from "react-cool-onclickoutside";
 
-export const CompanySelector = ({ testid, onAddCompany, styles, companiesList, selectedCompanyId, setSelectedCompanyId }) => {
+export const CompanyChoose = ({ testid, onAddCompany, styles, companiesList, selectedCompanyId, setSelectedCompanyId }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(null);
 
-    // Устанавливаем выбранную опцию при изменении selectedCompanyId
+
     useEffect(() => {
         const selectedCompany = companiesList.find(company => company.id === selectedCompanyId);
         setSelectedOption(selectedCompany ? selectedCompany.title : "Выберите компанию");
@@ -26,8 +26,8 @@ export const CompanySelector = ({ testid, onAddCompany, styles, companiesList, s
             return;
         }
 
-        setSelectedCompanyId(company.id); // Устанавливаем ID выбранной компании
-        setSelectedOption(company.title); // Обновляем выбранную опцию
+        setSelectedCompanyId(company.id);
+        setSelectedOption(company.title);
         setIsOpen(false);
     };
 
@@ -48,7 +48,6 @@ export const CompanySelector = ({ testid, onAddCompany, styles, companiesList, s
                             {company.title}  
                         </li>  
                     ))}
-                    {/* Опция для добавления новой компании */}
                     <li onClick={() => handleOptionClick({ title: "+ Добавить компанию" })}>
                         + Добавить компанию
                     </li>
