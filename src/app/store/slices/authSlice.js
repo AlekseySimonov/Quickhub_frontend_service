@@ -52,7 +52,7 @@ export const logoutAPI = createAsyncThunk(
             localStorage.removeItem('refreshToken')
             window.location.reload()
         } catch (err) {
-            return rejectWithValue(err)
+            return rejectWithValue(err.response.data)
         }
     }
 )
@@ -70,9 +70,9 @@ export const refreshTokenAPI = createAsyncThunk(
             return response
         } catch (err) {
             if (err.response.status == 401) { 
-                return rejectWithValue(err.response.detail)  
+                return rejectWithValue(err.response.data)  
             }
-            return rejectWithValue(err);
+            return rejectWithValue(err.response.data);
         }
     }
 )
@@ -131,10 +131,13 @@ const authSlice = createSlice({
             })  
             .addCase(refreshTokenAPI.fulfilled, (state) => {  
                 state.status = 'succeeded'
+                state.loading = false
                 state.error = null
             })  
             .addCase(refreshTokenAPI.rejected, (state) => {  
                 state.status = 'failed'
+                state.loading = false
+                state.error = null
             })
         }
     })
