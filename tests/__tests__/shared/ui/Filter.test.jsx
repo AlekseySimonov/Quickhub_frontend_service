@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { Filter } from '../../../../../src/shared/ui/components/index';
+import { Filter } from '../../../../src/shared/ui/components/index';
 
 describe('Filter Component', () => {
     const testid = 'filter-component';

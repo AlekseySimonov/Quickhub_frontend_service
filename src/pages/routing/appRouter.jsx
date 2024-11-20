@@ -14,7 +14,7 @@ import { Login } from "../../features/autorize/login";
 
 import { CompanyStructure } from "../../features/company_structure";
 import { CompanyList } from "../../features/company_list";
-// import { CheckAuth, CheckCompanyID, IsAuth } from "../../shared/config";
+import { IsAuth, CheckAuth } from "../../shared/config";
 
 export const authTitles = {
     '/auth/login': 'Вход',
@@ -35,9 +35,9 @@ export const appRouter = createBrowserRouter([
     {
         path: '/',
         element: 
-                // <CheckAuth>
+                <CheckAuth>
                     <Base />
-                // </CheckAuth>
+                </CheckAuth>
                 ,
         errorElement: <ErrorPage />,
         children: [
@@ -88,9 +88,9 @@ export const appRouter = createBrowserRouter([
     {
         path: '/auth',
         element:
-                // <IsAuth>
+                <IsAuth>
                 <AutorizePage />
-                // </IsAuth>
+                </IsAuth>
                 ,
         errorElement: <ErrorPage />,
         children: [

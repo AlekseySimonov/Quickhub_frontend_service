@@ -1,6 +1,5 @@
-import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { TabsNavigation } from '../../../../../src/shared/ui/components/index';
+import { TabsNavigation } from '../../../../src/shared/ui/components/index';
 
 const tabs_navItems = [
     { id: 'tab1', label: 'Tab 1', active: true },

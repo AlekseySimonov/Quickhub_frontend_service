@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { Search } from '../../../../../src/shared/ui/components/index';
-import { icons } from '../../../../../src/shared/ui/icons/header/index';
+import { Search } from '../../../../src/shared/ui/components/index';
+import { icons } from '../../../../src/shared/ui/icons/header/index';
 
 describe('Search Component', () => {
     const testid = 'search-component';

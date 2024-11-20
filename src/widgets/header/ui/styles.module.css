@@ -100,16 +100,10 @@
 .profile_icon img {
     width: 40px;
     height: 40px;
-    margin-left: 10px;
 }
 
 .name {
     margin-left: 20px;
-}
-
-.arrow_down {
-    margin-right: 20px;
-    width: 14px;
 }
 
 .dropdown_toggle{
@@ -117,14 +111,61 @@
     position: relative;
     align-items: center;
     justify-content: space-between;
+    padding-inline: 10px;
     width: 278px;
     height: 60px;
     margin-left: 10px;
     border: none;
     background: none;
-    padding: 0;
     border-radius: 10px;
     color: white;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.arrow {
+    width: 8px;
+    height: 8px;
+    transform: rotateZ(45deg);
+    margin-top: -6px;
+    border-bottom: 2px solid #ffffff;
+    border-right: 2px solid #ffffff;
+    transition: transform 0.2s;
+}
+
+.dropdown_toggle.active {
+    border-radius: 10px 10px 0px 0px;
+}
+
+.dropdown_toggle.active .arrow {     
+    transform: rotate(-135deg);
+    margin-top: 3px;
+}
+
+.dropdown_menu{
+    position: absolute;
+    top: 38px;
+    padding: 0;
+    width: 278px;
+    list-style: none;
+    background-color: #E1E1E1;
+    color: #000;
+    border-radius: 0px 0px 10px 10px;
+    overflow: hidden;
+    z-index: 4;
+    margin-left: 10px;
+}
+
+.dropdown_menu li {
+    white-space: nowrap;
+    padding: 12.5px 20px;
+    cursor: pointer;
+}
+
+.dropdown_menu li:hover {
+    background-color: #d8d6d6;
 }
 
 .dropdown_toggle .active{
