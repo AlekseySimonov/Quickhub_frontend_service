@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import {Header} from "../../../widgets/header/index";
 import {Menu} from "../../../widgets/menu/index";
 import styles from './styles.module.css';
-import {useState } from "react";
+import {useEffect, useState } from "react";
 import { baseTitles } from "../../routing";
 import { useSelector } from "react-redux";
 import { Loader } from "../../../shared/ui/components";
@@ -18,6 +18,19 @@ export const Base = () => {
         setIsActive(!isActive)
     }
 
+    const [showLoader, setShowLoader] = useState(false)
+    useEffect(() => {
+        if (status === 'loading') {
+            const timer = setTimeout(() => {
+                setShowLoader(true);
+            }, 200)
+
+            return () => clearTimeout(timer)
+        } else {
+            setShowLoader(false)
+        }
+    }, [status]);
+
     return (
         <div className = {styles.container}
             style = { {gridTemplateColumns: isActive === true ? '64px auto' : '225px auto'}}
@@ -31,9 +44,9 @@ export const Base = () => {
             <Menu isActive = {isActive} />
         </div>
         <div className={`${styles.content} ${status === 'loading' ? styles.loading : ''}`}>
-            {status === 'loading' && (<Loader style = {styles.loader}/>)}
+            {showLoader && (<Loader style = {styles.loader}/>)}
             <Outlet/>
         </div>
-        </div>  
+        </div>
     )
 }

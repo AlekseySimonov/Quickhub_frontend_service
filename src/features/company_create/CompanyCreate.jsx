@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import styles from './CompanyCreate.module.css';
 import { icons } from '../../shared/ui/icons/companies';
@@ -20,7 +20,6 @@ export const CompanyCreate = ({ onClose }) => {
   };
 
   const ref = useOnclickOutside(() => {
-    console.log('Ты кликнул вне формы')
     onClose()
   });
 

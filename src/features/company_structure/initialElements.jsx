@@ -286,7 +286,7 @@ const createGraph = (data) => {
     let zIndexCounter = 1000
 
     data.forEach(department => {
-        g.setNode(String(department.id), { width: 550, height: 200, label: department.title });
+        g.setNode(String(department.id), { width: 650, height: 200, label: department.title });
         if (department.parent !== 0) {
             g.setEdge(String(department.parent), String(department.id));
         }

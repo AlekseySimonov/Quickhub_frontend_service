@@ -31,13 +31,18 @@
         left: 100%;
         top: 75%;
         transform: translateX(10px);
-        padding: 7px;
+        padding: 15px;
+        padding-top: 20px;
+        padding-bottom: 20px;
         display:flex;
         flex-direction: column;
+        justify-content: flex-end;
+        align-items: end;
         gap: 20px;
         border-radius: 10px;
         box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.2);
-        background: white
+        background: white;
+        cursor: default;
     }
 
     .employee{
@@ -52,6 +57,14 @@
         padding-block: 7px;
         border-radius: 10px;
         align-items: center;
+    }
+
+    .closeBtn{
+        width: 11px;
+        height: 13px;
+        overflow: hidden;
+        cursor: pointer;
+        margin-bottom: 5px;
     }
 
     .photo{
@@ -87,8 +100,24 @@
         display: flex;
         background-color: #FFF3D6;
         width: 270px;
-        padding-inline: 35px;
+        justify-content: space-between;
+        padding-inline: 25px;
+        padding-left: 35px;
         padding-block: 7px;
         border-radius: 10px;
         align-items: center;
+    }
+
+    .arrow {
+    width: 8px;
+    height: 8px;
+    transform: rotateZ(-45deg);
+    align-items: center;
+    border-bottom: 2px solid #000;
+    border-right: 2px solid #000;
+    transition: transform 0.2s;
+    }
+
+    .dropdown.active .arrow {     
+    transform: rotate(135deg);
     }
