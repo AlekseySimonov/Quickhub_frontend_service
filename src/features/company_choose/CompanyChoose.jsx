@@ -1,15 +1,24 @@
 import { useEffect, useState } from "react";
 import useOnClickOutside from "react-cool-onclickoutside";
 
-export const CompanyChoose = ({ testid, onAddCompany, styles, companiesList, selectedCompanyId, setSelectedCompanyId }) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState(null);
+import { changeCompany } from "../../app/store/slices/companySlice";
+import { useDispatch, useSelector } from "react-redux";
 
+export const CompanyChoose = ({ testid, onAddCompany, styles }) => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const dispatch = useDispatch();
+    
+    const {companiesList,companyTitle} = useSelector(state => state.company)
+
+    const [selectedOption, setSelectedOption] = useState(companyTitle || "Выберите компанию")
 
     useEffect(() => {
-        const selectedCompany = companiesList.find(company => company.id === selectedCompanyId);
-        setSelectedOption(selectedCompany ? selectedCompany.title : "Выберите компанию");
-    }, [selectedCompanyId, companiesList]);
+        setSelectedOption(companyTitle || "Выберите компанию");
+    }, [companyTitle]);
+
+    useEffect(() => {
+    }, [companiesList]);
 
     const handleClickBtn = () => {
         setIsOpen(prevIsOpen => !prevIsOpen);
@@ -25,9 +34,7 @@ export const CompanyChoose = ({ testid, onAddCompany, styles, companiesList, sel
             setIsOpen(false);
             return;
         }
-
-        setSelectedCompanyId(company.id);
-        setSelectedOption(company.title);
+        dispatch(changeCompany(company.title));
         setIsOpen(false);
     };
 
@@ -37,7 +44,7 @@ export const CompanyChoose = ({ testid, onAddCompany, styles, companiesList, sel
                 data-testid='select_btn'
                 className={`${styles.select_toggle} ${isOpen ? styles.active : ''}`}
                 onClick={handleClickBtn}
-            >  
+            >
                 {selectedOption || "Выберите компанию"}
                 <div className={styles.arrow}></div>
             </button> 

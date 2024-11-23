@@ -1,11 +1,10 @@
-import { React, useState, useEffect } from 'react';
+import { useState } from 'react';
 import styles from './CompanyList.module.css';
-import { useOutletContext } from 'react-router-dom';
 import { icons } from '../../shared/ui/icons/companies';
 import { useSelector } from 'react-redux';
 
-export const CompanyList = ({}) => {
-  const { selectedCompanyId } = useOutletContext();
+export const CompanyList = () => {
+  const selectedCompanyId = useSelector(state => state.company.companyID)
   const companiesList = useSelector(state => state.company.companiesList);
 
   // Получаем сотрудников для выбранной компании

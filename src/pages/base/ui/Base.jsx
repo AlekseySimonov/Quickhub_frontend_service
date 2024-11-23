@@ -6,7 +6,7 @@ import {useEffect, useState } from "react";
 import { baseTitles } from "../../routing";
 import { useSelector } from "react-redux";
 import { Loader } from "../../../shared/ui/components";
-import { usePageTitle } from "../../../shared/hooks";
+import { usePageTitle } from "../../../shared/hooks/index";
 
 export const Base = () => {
 

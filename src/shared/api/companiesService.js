@@ -13,3 +13,8 @@ export const postCompany = (title, email)=>{
         users: [{ email }]
     })
 }
+
+export const getDepartments = (companyId) => {
+    const url = URL.DEPARTMENTS.replace('{company_pk}', companyId)
+    return api.get(url)
+}

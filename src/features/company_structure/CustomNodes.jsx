@@ -15,7 +15,7 @@ export const DepartmentNode = ({ data }) => {
         }
         setOpenEmployeeIds(newOpenEmployeeIds)
     };
-
+    console.log(data.users.length)
     return (
         <div className={styles.node}>
             <div className={styles.department}>
@@ -42,7 +42,7 @@ export const DepartmentNode = ({ data }) => {
                     </div>
                 )}
 
-                {data.title && data.users.length > 0 && (
+                {data.title && data.users.length > 1 && (
                         <button
                         className={`${styles.dropdown} ${openEmployeeIds.has(data.id) ? styles.active : ''}`}
                         onClick={() => toggleEmployees(data.id)}> 
@@ -50,8 +50,7 @@ export const DepartmentNode = ({ data }) => {
                         <div className={styles.arrow}></div>
                         </button> 
                 )}
-                
-                {data.users && data.users.length > 0 && openEmployeeIds.has(data.id) &&(
+                {data.users && data.users.length > 1 && openEmployeeIds.has(data.id) &&(
                     <div className={styles.employees}>
                     <img 
                     src={icons.popupX} 

@@ -7,3 +7,5 @@ export const REFRESH = 'account/api/v1/token/refresh/'
 
 export const COMPANIES = 'company-service/api/v1/company/companies/'
 
+export const DEPARTMENTS = 'company-service/api/v1/company/companies/{company_pk}/departments'
+

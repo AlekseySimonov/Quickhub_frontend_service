@@ -1,11 +1,13 @@
-import {useState, useEffect, React} from 'react';
+import {useState, useEffect} from 'react';
 
 import styles from './CompanySettings.module.css';
 import { icons } from '../../shared/ui/icons/companies';
 
 import useOnclickOutside from "react-cool-onclickoutside";
+import { useSelector } from 'react-redux';
 
-export const CompanySettings = ({ onClose, companyTitle }) => { 
+export const CompanySettings = ({onClose}) => { 
+  const companyTitle = useSelector(state => state.company.companyTitle)
   const settingsOptions = [
     { label: 'Изменить название компании' },
   ];

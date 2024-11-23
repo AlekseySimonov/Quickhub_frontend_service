@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom"
 import { CompaniesHeader } from "./CompaniesHeader"
 import styles from './styles.module.css'
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useDispatch, useSelector} from "react-redux"
 import { getCompaniesAPI, setCompanyID, checkCompanyID} from "../../../app/store/slices/companySlice"
 
@@ -20,18 +20,12 @@ export const Companies = () =>{
         }
     }, [status, companyID, dispatch]);
 
-    
-    const [selectedCompanyId, setSelectedCompanyId] = useState(null);
-
     return(
         <>
         <div className={styles.content}>
-            <CompaniesHeader
-                selectedCompanyId={selectedCompanyId} 
-                setSelectedCompanyId={setSelectedCompanyId}
-            />
+            <CompaniesHeader/>
             <div className={styles.main}>
-                <Outlet context={{ selectedCompanyId }} />
+                <Outlet />
             </div>
         </div>
         </>

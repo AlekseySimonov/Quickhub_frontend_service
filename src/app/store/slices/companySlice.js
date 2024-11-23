@@ -1,10 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import {companiesService} from "../../../shared/api/"
+import {companiesService} from "../../../shared/api/index"
 
 const initialState ={
     companiesList: [],
     companyID: null,
     companyTitle: null,
+    departments: [],
     status: null,
     error: null,
 }
@@ -14,7 +15,6 @@ export const getCompaniesAPI = createAsyncThunk(
     async (_, { rejectWithValue }) => {
         try {
             const response = await companiesService.getCompanies()
-            console.log(response)
             return response.data
         } catch (err) {
             return rejectWithValue(err.response)
@@ -32,6 +32,20 @@ export const postCompanyAPI = createAsyncThunk(
     }}
 )
 
+export const getDepartmentsAPI = createAsyncThunk(
+    'company/getDepartmentsAPI',
+    async (_, { rejectWithValue, getState }) => {
+        try {
+            const state = getState().company
+            const response = await companiesService.getDepartments(state.companyID)
+            return response.data
+        } catch (err) {
+            console.log(err)
+            return rejectWithValue(err.response)
+        }
+    }
+);
+
 const companySlice = createSlice({
     name: 'company',
     initialState,
@@ -41,7 +55,6 @@ const companySlice = createSlice({
                 state.companyID = state.companiesList[0].id
                 state.companyTitle = state.companiesList[0].title
             } else {
-                console.log('companiesList is empty, cannot set companyID');
                 state.companyTitle = null
                 state.companyID = null
             }
@@ -84,6 +97,18 @@ const companySlice = createSlice({
             .addCase(postCompanyAPI.rejected, (state) => {
                 state.status = 'failed'
                 state.error = 'postError'
+            })
+
+            .addCase(getDepartmentsAPI.pending, (state) => {
+                state.status = 'loading'
+            })
+            .addCase(getDepartmentsAPI.fulfilled, (state,action) => {
+                state.status = 'succeeded'
+                state.departments = action.payload;
+            })
+            .addCase(getDepartmentsAPI.rejected, (state, action) => {
+                state.status = 'failed'
+                state.error = action.payload
             })
 
         }

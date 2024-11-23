@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styles from './CompanyInvite.module.css';
 
 import { socials } from '../../shared/ui/icons/companies/popup/invite_employee';
@@ -37,7 +37,6 @@ export const CompanyInvite = ({onClose}) => {
   };
 
   const ref = useOnclickOutside(() => {
-    console.log('Ты кликнул вне формы')
     onClose()
   });
 
