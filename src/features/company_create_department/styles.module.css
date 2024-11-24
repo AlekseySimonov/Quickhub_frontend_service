@@ -177,42 +177,28 @@ input {
     color: #FF5454;
 }
 
+.addEmployee{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+}
+
 .add {
-    position: relative; 
     font-size: 16px; 
     color: #2668B0;
-}
-
-.add > span { 
-    display: flex; 
-    align-items: center; 
-    gap: 5px;  
-    cursor: pointer;     
-}
-
-.add span::before { 
-    content: '+' ;
-    font-size: 24px;
-}
-
-.add-inner { 
-    position: absolute; 
-    height: 0; 
-    visibility: hidden; 
-    opacity: 0;
-}
-
-.add-inner.active { 
-    height: max-content; 
-    visibility: visible; 
-    opacity: 1;
-}
-
-.add-inner form { 
     display: flex;
-    gap: 5px;  
-    align-items: center;  
-    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+
+.add span { 
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    font-size: 24px;
+    align-items: center;
 }
 
 .actions { 
@@ -220,6 +206,17 @@ input {
     display: flex;  
     justify-content: center;  
     gap: 30px;
+}
+
+.btnAdd{
+    width: 160px;
+    height: 50px;
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    border-radius: 5px;
+    background-color: #E1E1E1;
+    margin-top: 10px;
 }
 
 .btn { 
@@ -245,4 +242,8 @@ input {
 
 .btn-cancel:hover {
     background-color: rgba(225, 225, 225, 0.85);
+}
+
+.plus{
+    font-size: 24px;
 }

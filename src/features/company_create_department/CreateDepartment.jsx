@@ -1,12 +1,19 @@
 import useOnclickOutside from "react-cool-onclickoutside";
 import styles from "./styles.module.css"
 import { icons } from '../../shared/ui/icons/companies';
+import { useSelector } from "react-redux";
+import { Selector } from "../../shared/ui/components/selector/index";
+import { useState } from "react";
 
 export const CreateDepartment = ({ onClose }) => {
+    const departments = useSelector(state => state.company.departments)
 
     const ref = useOnclickOutside(() => {
-    onClose()
+        onClose()
     });
+
+    const [newEmployee, setNewEmployee] = useState('');
+    const [showInput, setShowInput] = useState(false);
     
     return (
     <div className={styles['outer']}>
@@ -23,51 +30,61 @@ export const CreateDepartment = ({ onClose }) => {
             <div className={styles.container}>
             <div className={styles['form']}>
                 <div className={styles['row']}>
-                <div className={styles['label']}>Название подразделения</div>
-                <input placeholder="Введите название подразделения" type="text" className={styles['input']} />
+                    <div className={styles['label']}>Название подразделения</div>
+                    <input placeholder="Введите название подразделения" type="text" className={styles['input']} />
                 </div>
-                <div className={styles['row']}>
-                <div className={styles['label']}>Вышестоящее подразделение</div>
-                <div className={styles['select']}>Выберите подразделение</div>
-                </div>
-                <div className={styles['row']}>
-                <div className={styles['label']}>Руководитель</div>
-                <div className={styles['select']}>Выберите руководителя</div>
-                </div>
-                <div className={styles['row']}>
-                <div className={styles['label']}>Сотрудники</div>
-                <div className={styles['added-list']}>
-                    {["Якушев Илья", "Михайлов Максим", "Куцев Алексей", "Куцев Алексей", "Куцев Алексей"].map((employee, index) => (
-                    <div key={index} className={`${styles['added-item']} ${styles.employee}`}>
-                        <div className={styles.employee__avatar}></div>
-                        <div className={styles.employee__name}>{employee}</div>
-                        <div className={styles.employee__delete}>×</div>
-                    </div>
-                    ))}
-                </div>
-                <div className={styles['add']} id="add-employee_btn">
-                    <span className={styles['add-toggle']}>Добавить сотрудника</span>
-                    <div className={styles['add-inner']}>
-                    <form method="GET">
-                        <input
-                            className={styles['input']}
-                            name="employee_email"
-                            placeholder="Укажите почту сотрудника"
-                            type="email"
-                            required
-                        />
-                        <button type="submit" className={styles['btn']}>Добавить</button>
-                    </form>
-                    </div>
-                </div>
+                <Selector
+                    list={departments}
+                    label={'Вышестоящее подразделение'}
+                    inputLabel={'Выберите подразделение'}
+                />
+                <Selector
+                    list={departments}
+                    label={'Руководитель'}
+                    inputLabel={'Выберите руководителя'}
+                />
+
+                    <div className={styles.row}>
+                        <div className={styles.label}>Сотрудники</div>
+                        <div className={styles['added-list']}>
+                            {["Якушев Илья", "Михайлов Максим", "Куцев Алексей", "Куцев Алексей", "Куцев Алексей"].map((employee, index) => (
+                                <div key={index} className={`${styles['added-item']} ${styles.employee}`}>
+                                    <div className={styles.employee__avatar}></div>
+                                    <div className={styles.employee__name}>{employee}</div>
+                                    <div className={styles.employee__delete}>×</div>
+                                </div>
+                            ))}
+                        </div>
+                        
+                        <div className={styles.addEmployee}>
+                            <button className={styles.add} id="add-employee_btn" onClick={() => setShowInput(true)}>
+                                <span className={styles.plus}>+</span>
+                                Добавить сотрудника
+                            </button>
+                            {showInput ? (
+                                <>
+                                    <Selector
+                                    list={departments}
+                                    inputLabel={'Введите имя сотрудника'}
+                                    label={''}
+                                    />
+                                    <button 
+                                        type="button" 
+                                        className={styles.btnAdd}
+                                    >
+                                        Добавить
+                                    </button>
+                                </>
+                                ): ''}
+                        </div>
                 </div>
             </div>
             <div className={styles['actions']}>
                 <button type="button" className={`${styles['btn']} ${styles['btn-submit']}`}>
-                Сохранить
+                    Сохранить
                 </button>
                 <button type="button" className={`${styles['btn']} ${styles['btn-cancel']}`} onClick={onClose}>
-                Отменить
+                    Отменить
                 </button>
             </div>
             </div>
