@@ -6,7 +6,6 @@ import {API} from "../api/urls";
 // import store from './../../app/store/index';
 
 export const api = axios.create({
-    withCredentials: true, 
     baseURL: API,
     headers: {
         'Content-Type': 'application/json',

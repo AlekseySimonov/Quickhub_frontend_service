@@ -7,13 +7,12 @@ import { useSelector } from 'react-redux';
 export const CompanyList = ({}) => {
   const { selectedCompanyId } = useOutletContext();
   const companiesList = useSelector(state => state.company.companiesList);
-
   // Получаем сотрудников для выбранной компании
   const selectedCompany = companiesList.find(company => company.id === selectedCompanyId);
   const employees = selectedCompany ? selectedCompany.users : [];
 
     // Параметры пагинации
-    const employeesPerPage = 10;
+    const employeesPerPage = 8;
     const totalEmployees = employees.length;
     const totalPages = Math.ceil(totalEmployees / employeesPerPage);
     
@@ -27,17 +26,26 @@ export const CompanyList = ({}) => {
     return (
         <div className={styles.main}>
             <div className={styles.employees}>
+              <div className={styles.employees__inner}>
                 <div className={styles.employees__header}>
                     <div className={styles.employees__settings}>
                         <img src={icons.settingsGrey} alt="Settings"/>
                     </div>
                     <div className={`${styles.employees__labels} ${styles.container}`}>
-                        <div className={styles.employees__label}>Фото</div>
-                        <div className={styles.employees__label}>Имя и фамилия</div>
-                        <div className={styles.employees__label}>Email</div>
-                        <div className={styles.employees__label}>Рабочий телефон</div>
-                        <div className={styles.employees__label}>Должность</div>
-                        <div className={styles.employees__label}>Подразделение</div>          
+                        <div className={`${styles.employees__label} ${styles['label-photo']}`}>Фото</div>
+                        <div className={`${styles.employees__label} ${styles['label-fsname']}`}>Имя и фамилия</div>
+                        <div className={`${styles.employees__label} ${styles['label-lname']}`}>Отчество</div>
+                        <div className={`${styles.employees__label} ${styles['label-city']}`}>Город</div>
+                        <div className={`${styles.employees__label} ${styles['label-gender']}`}>Пол</div>
+                        <div className={`${styles.employees__label} ${styles['label-birthDate']}`}>Дата рождения</div> 
+                        <div className={`${styles.employees__label} ${styles['label-position']}`}>Должность</div>
+                        <div className={`${styles.employees__label} ${styles['label-department']}`}>Подразделение</div>
+                        <div className={`${styles.employees__label} ${styles['label-email']}`}>Email</div>
+                        <div className={`${styles.employees__label} ${styles['label-workPhone']}`}>Рабочий телефон</div>
+                        <div className={`${styles.employees__label} ${styles['label-personalPhone']}`}>Мобильный телефон</div>
+                        <div className={`${styles.employees__label} ${styles['label-tg']}`}>Telegram</div>
+                        <div className={`${styles.employees__label} ${styles['label-vk']}`}>VK</div>
+                        <div className={`${styles.employees__label} ${styles['label-regDate']}`}>Дата регистрации</div>         
                     </div>
                 </div>
                 <div className={styles.employees__list}>
@@ -51,19 +59,27 @@ export const CompanyList = ({}) => {
                                     </div>
                                     </div>
                                     <div className={`${styles.employee__column} ${styles.employee__info}`}>
-                                        <div className={styles.employee__name}>{employee.fullName || 'Фамилия Имя'}</div>
+                                        <div className={styles.employee__fsname}>{employee.last_name || 'Фамилия'} {employee.first_name || 'Имя'}</div>
                                         <div className={styles.employee__type}>{employee.position || 'Позиция не указана'}</div>
                                     </div>
-                                    <div className={`${styles.employee__column} ${styles.employee__email}`}>{employee.email || 'Почта не указана'}</div>
-                                    <div className={`${styles.employee__column} ${styles.employee__phone}`}>{employee.phone || 'Номер не указан'}</div>
-                                    <div className={`${styles.employee__column} ${styles.employee__job}`}>{employee.job || 'Должность не указана'}</div>
-                                    <div className={`${styles.employee__column} ${styles.employee__department}`}>{employee.department || 'Подразделение не указано'}</div>
+                                    <div className={`${styles.employee__column} ${styles.employee__lname}`}>{employee.lname || '-'}</div>
+                                    <div className={`${styles.employee__column} ${styles.employee__city}`}>{employee.city || '-'}</div>
+                                    <div className={`${styles.employee__column} ${styles.employee__gender}`}>{employee.gender || '-'}</div>
+                                    <div className={`${styles.employee__column} ${styles.employee__birthDate}`}>{employee.birthDate || '-'}</div>
+                                    <div className={`${styles.employee__column} ${styles.employee__position}`}>{employee.position || '-'}</div>
+                                    <div className={`${styles.employee__column} ${styles.employee__department}`}>{employee.department || '-'}</div>
+                                    <div className={`${styles.employee__column} ${styles.employee__email}`}>{employee.email || '-'}</div>
+                                    <div className={`${styles.employee__column} ${styles.employee__workPhone}`}>{employee.workPhone || '-'}</div>
+                                    <div className={`${styles.employee__column} ${styles.employee__personalPhone}`}>{employee.personalPhone || '-'}</div>
+                                    <div className={`${styles.employee__column} ${styles.employee__tg}`}>{employee.tg || '-'}</div>
+                                    <div className={`${styles.employee__column} ${styles.employee__vk}`}>{employee.vk || '-'}</div>
+                                    <div className={`${styles.employee__column} ${styles.employee__regDate}`}>{employee.regDate || '-'}</div>
                                 </div>
                             </div>
                         ))}
                     </div>
                 </div>
-
+              </div>
                 {/* Пагинация */}
                 {totalPages > 1 && (
                     <Pagination 
@@ -84,7 +100,7 @@ const Pagination = ({ totalEmployees, totalPages, currentPage, setCurrentPage })
       <div className={`${styles.container}`}>
         {currentPage > 1 && (
           <button onClick={() => setCurrentPage(currentPage - 1)} className={`${styles.pagination__arrow} ${styles.prev}`}>
-            
+              
           </button>
         )}
 
@@ -102,19 +118,18 @@ const Pagination = ({ totalEmployees, totalPages, currentPage, setCurrentPage })
 
         {currentPage < totalPages && (
           <button onClick={() => setCurrentPage(currentPage + 1)} className={`${styles.pagination__arrow} ${styles.next}`}>
-            
+             
           </button>
         )}
-
-        <div className={styles.employees__countEmployee}>
-          Всего:
-          <span className={styles.value}>{totalEmployees}</span>
+      </div>
+      <div className={styles.employees__countEmployee}>
+          Сотрудников:
+          <span className={styles.value}> {totalEmployees}</span>
         </div>
         <div className={styles.employees__countPages}>
           Страниц:
-          <span className={styles.value}>{totalPages}</span>
+          <span className={styles.value}> {totalPages}</span>
         </div>
-      </div>
     </div>
   );
 };

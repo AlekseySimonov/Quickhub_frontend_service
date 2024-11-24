@@ -29,7 +29,7 @@ export const CompanyCreate = ({ onClose }) => {
     <div ref={ref} className={styles['pop-up']}>
       <div className={styles['pop-up__header']}>
         <div className={styles.container}>
-          <div className={styles['pop-up__title']}>Создать компанию</div>
+          <div data-testid="popup_title" className={styles['pop-up__title']}>Создать компанию</div>
           <div data-testid='popup_close' className={styles['pop-up__closeBtn']} onClick={onClose}>
             <img src={icons.popupX}/>
           </div>
@@ -37,7 +37,7 @@ export const CompanyCreate = ({ onClose }) => {
       </div>
       <div className={styles['pop-up__content']}>
         <div className={styles.container}>
-          <form onSubmit={handleSubmit} className={styles['pop-up__form']}>
+          <form onSubmit={handleSubmit} className={styles['pop-up__form']} aria-label="Create Company Form">
             <div className={styles['pop-up__row']}>
               <div className={styles['pop-up__label']}>Название компании</div>
               <input

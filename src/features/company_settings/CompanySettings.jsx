@@ -45,7 +45,7 @@ export const CompanySettings = ({ onClose, companyTitle }) => {
       </div>
       <div className={styles['pop-up__content']}>
         <div className={styles.container}>
-        <form onSubmit={handleSubmit} className={styles['pop-up__form']}>
+        <form data-testid="form_company-settings" onSubmit={handleSubmit} className={styles['pop-up__form']}>
           <div className={styles['pop-up__form']}>
             {settingsOptions.map((setting, index) => (
               <div key={index} className={styles['pop-up__row']}>

@@ -46,7 +46,7 @@ export const CompanyInvite = ({onClose}) => {
     <div ref={ref} className={styles['pop-up']}>
     <div className={styles['pop-up__header']}>
         <div className={styles.container}>
-          <div className={styles['pop-up__title']}>Приглашение в компанию</div>
+          <div data-testid="popup_title" className={styles['pop-up__title']}>Приглашение в компанию</div>
           <div data-testid='popup_close' className={styles['pop-up__closeBtn']} onClick={onClose}>
               <img src={icons.popupX} />
           </div>
@@ -71,7 +71,7 @@ export const CompanyInvite = ({onClose}) => {
 
           {/* По ссылке */}
           {activeForm === 'by-link' && (
-            <form onSubmit={handleSubmit} className={`${styles['pop-up__form']} ${styles['by-link']}`}>
+            <form data-testid="form_by-link" onSubmit={handleSubmit} className={`${styles['pop-up__form']} ${styles['by-link']}`}>
               <div className={styles['pop-up__row']}>
                 <div className={styles['pop-up__label']}>Ссылка для приглашения</div>
                 <div className={styles['pop-up__row-container']}>
@@ -97,7 +97,7 @@ export const CompanyInvite = ({onClose}) => {
           )}
 
           {activeForm === 'by-personal' && (
-            <form onSubmit={handleSubmit} className={`${styles['pop-up__form']} ${styles['by-personal']}`}>
+            <form data-testid="form_by-personal" onSubmit={handleSubmit} className={`${styles['pop-up__form']} ${styles['by-personal']}`}>
               <div className={styles['pop-up__labels']}>
                 {['Email', 'Имя', 'Фамилия'].map(label => (
                   <div key={label} className={styles['pop-up__label']}>{label}</div>
