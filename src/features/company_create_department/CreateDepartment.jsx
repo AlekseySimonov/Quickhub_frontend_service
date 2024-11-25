@@ -12,8 +12,18 @@ export const CreateDepartment = ({ onClose }) => {
         onClose()
     });
 
+    const [addedEmployees, setAddedEmployees] = useState([])
+
     const [newEmployee, setNewEmployee] = useState('');
     const [showInput, setShowInput] = useState(false);
+
+    const handleAddEmployee = () => {
+        if (newEmployee && !addedEmployees.includes(newEmployee)) {
+            setAddedEmployees([...addedEmployees, newEmployee])
+            setNewEmployee('')
+            setShowInput(false)
+        }
+    };
     
     return (
     <div className={styles['outer']}>
@@ -47,14 +57,16 @@ export const CreateDepartment = ({ onClose }) => {
                     <div className={styles.row}>
                         <div className={styles.label}>Сотрудники</div>
                         <div className={styles['added-list']}>
-                            {["Якушев Илья", "Михайлов Максим", "Куцев Алексей", "Куцев Алексей", "Куцев Алексей"].map((employee, index) => (
-                                <div key={index} className={`${styles['added-item']} ${styles.employee}`}>
-                                    <div className={styles.employee__avatar}></div>
-                                    <div className={styles.employee__name}>{employee}</div>
-                                    <div className={styles.employee__delete}>×</div>
+                                    {addedEmployees.map((employee, index) => (
+                                        <div key={index} className={`${styles['added-item']} ${styles.employee}`}>
+                                            <div className={styles.employee__avatar}></div>
+                                            <div className={styles.employee__delete} onClick={() => {
+                                                setAddedEmployees(addedEmployees.filter((_, i) => i !== index))
+                                            }}>×</div>
+                                            <div className={styles.employee__name}>{employee}</div>
+                                        </div>
+                                    ))}
                                 </div>
-                            ))}
-                        </div>
                         
                         <div className={styles.addEmployee}>
                             <button className={styles.add} id="add-employee_btn" onClick={() => setShowInput(true)}>
@@ -67,10 +79,12 @@ export const CreateDepartment = ({ onClose }) => {
                                     list={departments}
                                     inputLabel={'Введите имя сотрудника'}
                                     label={''}
+                                    onSelect={(value) => setNewEmployee(value)}
                                     />
                                     <button 
                                         type="button" 
                                         className={styles.btnAdd}
+                                        onClick={handleAddEmployee}
                                     >
                                         Добавить
                                     </button>

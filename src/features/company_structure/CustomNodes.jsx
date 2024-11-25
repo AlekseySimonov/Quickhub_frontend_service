@@ -15,7 +15,6 @@ export const DepartmentNode = ({ data }) => {
         }
         setOpenEmployeeIds(newOpenEmployeeIds)
     };
-    console.log(data.users.length)
     return (
         <div className={styles.node}>
             <div className={styles.department}>

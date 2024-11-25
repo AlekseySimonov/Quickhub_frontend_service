@@ -4,6 +4,7 @@ import { refreshTokenAPI } from "../../app/store/slices/authSlice";
 import store from './../../app/store/index';
 
 export const api = axios.create({
+    withCredentials: false,
     baseURL: API,
     headers: {
         'Content-Type': 'application/json',
