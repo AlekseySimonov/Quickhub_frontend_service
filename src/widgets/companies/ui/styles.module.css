@@ -1,7 +1,22 @@
 .main{
     width: 100%;
     height: calc(100vh - 260px);
+    position: relative;
 }
+
+.loader{
+	position: absolute;
+	top: 50%;            
+    left: 50%; 
+	transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+
+.loading {  
+    opacity: 0.5;       
+    transition: opacity 0.3s ease;  
+	pointer-events: none;
+}  
 
 .selecting {
     display: flex;
