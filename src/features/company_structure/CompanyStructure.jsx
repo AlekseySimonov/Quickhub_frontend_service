@@ -20,9 +20,8 @@ export const CompanyStructure = ()=>{
     const { nodes, edges } = createGraph(departments)
 
     const nodeTypes = {
-    departmentNode: DepartmentNode,
+    departmentNode: DepartmentNode
     };
-
 
     return (
         <div className={styles.reactFlow}>

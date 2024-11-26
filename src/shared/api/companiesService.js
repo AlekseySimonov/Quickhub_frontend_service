@@ -18,3 +18,8 @@ export const getDepartments = (companyId) => {
     const url = URL.DEPARTMENTS.replace('{company_pk}', companyId)
     return api.get(url)
 }
+
+export const deleteDepartment = (companyId, id) => {
+    const url =`${URL.DEPARTMENTS.replace('{company_pk}', companyId)}/${id}`
+    return api.delete(url)
+}

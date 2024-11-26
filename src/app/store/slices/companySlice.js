@@ -40,8 +40,19 @@ export const getDepartmentsAPI = createAsyncThunk(
             const response = await companiesService.getDepartments(state.companyID)
             return response.data
         } catch (err) {
-            console.log(err)
-            return rejectWithValue(err.response)
+            return rejectWithValue(err)
+        }
+    }
+);
+
+export const deleteDepartmentAPI = createAsyncThunk(
+    'company/deleteDepartmentAPI',
+    async (id, { rejectWithValue, getState }) => {
+        try {
+            const state = getState().company
+            await companiesService.deleteDepartment(state.companyID, id)
+        } catch (err) {
+            return rejectWithValue(err)
         }
     }
 );
@@ -106,11 +117,22 @@ const companySlice = createSlice({
                 state.status = 'succeeded'
                 state.departments = action.payload;
             })
-            .addCase(getDepartmentsAPI.rejected, (state, action) => {
+            .addCase(getDepartmentsAPI.rejected, (state) => {
                 state.status = 'failed'
-                state.error = action.payload
             })
 
+            .addCase(deleteDepartmentAPI.pending, (state) => {
+                state.status = 'loading'
+            })
+            .addCase(deleteDepartmentAPI.fulfilled, (state,action) => {
+                state.status = 'succeeded'
+                const idToDelete = action.payload;
+                state.departments = state.departments.filter(department => 
+                    department.id !== idToDelete);
+            })
+            .addCase(deleteDepartmentAPI.rejected, (state) => {
+                state.status = 'failed'
+            })
         }
     })
 

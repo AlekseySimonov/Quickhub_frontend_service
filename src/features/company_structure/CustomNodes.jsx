@@ -2,8 +2,11 @@ import { Handle, Position } from '@xyflow/react';
 import styles from './nodes.module.css'
 import { useState } from 'react';
 import { icons } from '../../shared/ui/icons/companies';
+import { useDispatch } from 'react-redux';
+import { deleteDepartmentAPI } from '../../app/store/slices/companySlice';
 
 export const DepartmentNode = ({ data }) => {
+    const dispatch = useDispatch()
     const [openEmployeeIds, setOpenEmployeeIds] = useState(new Set())
 
     const toggleEmployees = (id) => {
@@ -15,6 +18,12 @@ export const DepartmentNode = ({ data }) => {
         }
         setOpenEmployeeIds(newOpenEmployeeIds)
     };
+
+    const deleteClick = (id) =>{
+        console.log(id)
+        // dispatch(deleteDepartmentAPI(id))
+    }
+
     return (
         <div className={styles.node}>
             <div className={styles.department}>
@@ -24,6 +33,10 @@ export const DepartmentNode = ({ data }) => {
                         <div className={styles.name}>
                             {data.title}
                         </div>
+                        <button className={styles.deleteBtn} onClick={() => deleteClick(data.id)}>
+                            <img src={icons.deleteBtn} />
+                        </button>
+                        
                     </div>
                 )}
 

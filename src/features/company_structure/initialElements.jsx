@@ -21,10 +21,11 @@ export const createGraph = (data) => {
     const edges = [];
 
     g.nodes().forEach(nodeId => {
+        
 
         const node = g.node(nodeId);
+        console.log(node)
         if (!node) {
-            console.error(`Node with id ${nodeId} is undefined`);
             return
         }
 
@@ -46,6 +47,7 @@ export const createGraph = (data) => {
                 photo: icons.profile,
                 parent: g.node(nodeId).parent,
                 users: departmentData.users,
+                id: departmentData.id,
             },
             position: { x, y },
             draggable: false,

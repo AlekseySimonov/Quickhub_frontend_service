@@ -1,5 +1,5 @@
-import {getCompanies, postCompany, getDepartments} from './companiesService';
+import {getCompanies, postCompany, getDepartments, deleteDepartment} from './companiesService';
 import { register,login,refreshToken,logout } from './authService';
 
 export const authService = {register,login,refreshToken,logout}
-export const companiesService = {getCompanies, postCompany, getDepartments,}
+export const companiesService = {getCompanies, postCompany, getDepartments, deleteDepartment}

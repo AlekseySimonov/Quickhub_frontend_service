@@ -76,12 +76,33 @@
         position: relative;
         background-color: #FFF3D6;
         display:flex;
-        padding-inline: 35px;
+        justify-content: space-between;
+        padding-left: 35px;
+        padding-right: 10px;
         padding-block: 7px;
         border-radius: 10px;
         align-items: center;
         width: -webkit-fill-available;
+        cursor: default;
     }
+
+    .label img{
+        width: 15px;
+        height: 15px;
+
+    }
+
+    .deleteBtn {
+    opacity: 0; 
+    transition: opacity 0.15s, transform 0.15s;
+    pointer-events: none;
+}
+
+.label:hover .deleteBtn {
+    opacity: 1; 
+    transform: translateY(0); 
+    pointer-events: auto; 
+}
 
     .name{
         font-weight: 500;
