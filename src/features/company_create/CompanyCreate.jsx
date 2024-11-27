@@ -1,11 +1,20 @@
 import React, { useState } from 'react';
-
 import styles from './CompanyCreate.module.css';
 import { icons } from '../../shared/ui/icons/companies';
-
 import useOnclickOutside from "react-cool-onclickoutside";
+import { useSelector, useDispatch } from 'react-redux';
+import { postCompanyAPI } from '../../app/store/slices/companySlice';
+
 
 export const CompanyCreate = ({ onClose }) => {
+  const ref = useOnclickOutside(() => {
+    onClose()
+  });
+  
+  const dispatch = useDispatch()
+  const companies = useSelector(state => state.company.companiesList)
+  const email = useSelector(state => state.user.email)
+
   const [companyName, setCompanyName] = useState('');
 
   const handleInputChange = (event) => {
@@ -15,15 +24,9 @@ export const CompanyCreate = ({ onClose }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log('Создать компанию:', companyName);
-    //
+    dispatch(postCompanyAPI({title: companyName, email}))
     onClose();
   };
-
-  const ref = useOnclickOutside(() => {
-    console.log('Ты кликнул вне формы')
-    onClose()
-  });
-
   return (
     <div data-testid={'createCompany_popup'} className={styles['pop-up__outer']}>
     <div ref={ref} className={styles['pop-up']}>

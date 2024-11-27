@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import styles from './CompanyList.module.css';
-import { useOutletContext } from 'react-router-dom';
 import { icons } from '../../shared/ui/icons/companies';
 import { useSelector } from 'react-redux';
 import { CompanyListSettings } from '../company_list-settings/CompanyListSettings';
 
 export const CompanyList = () => {
-  const { selectedCompanyId } = useOutletContext();
-  const companiesList = useSelector(state => state.company.companiesList);
-  const selectedCompany = companiesList.find(company => company.id === selectedCompanyId);
+  const {companiesList, companyID} = useSelector(state => state.company);
+  const selectedCompany = companiesList.find(company => company.id === companyID);
   const employees = selectedCompany ? selectedCompany.users : [];
 
   const employeesPerPage = 8;
@@ -17,7 +15,6 @@ export const CompanyList = () => {
   
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Состояние для отображения столбцов
   const [showColumns, setShowColumns] = useState({
     photo: true,
     fullName: true,
@@ -41,10 +38,9 @@ export const CompanyList = () => {
   const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
   const currentEmployees = employees.slice(indexOfFirstEmployee, indexOfLastEmployee);
 
-  // Функция для сохранения настроек
   const handleSaveSettings = (settings) => {
-    setShowColumns(settings); // Обновляем состояние с новыми настройками
-    setIsSettingsOpen(false); // Закрываем поп-ап
+    setShowColumns(settings);
+    setIsSettingsOpen(false);
   };
 
   return (
@@ -144,7 +140,7 @@ export const CompanyList = () => {
         <CompanyListSettings 
           onSave={handleSaveSettings}
           onClose={() => setIsSettingsOpen(false)} 
-          initialSettings={showColumns} // Передаем текущее состояние
+          initialSettings={showColumns}
         />
       )}
       </ div >

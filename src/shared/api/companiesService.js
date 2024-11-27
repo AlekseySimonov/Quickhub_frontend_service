@@ -13,3 +13,8 @@ export const postCompany = (title, email)=>{
         users: [{ email }]
     })
 }
+
+export const deleteCompany = (id) => {
+    const url = `${URL.COMPANIES}/${id}`;
+    return api.delete(url);
+};

@@ -7,7 +7,13 @@ import useOnclickOutside from "react-cool-onclickoutside";
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { deleteCompanyAPI } from '../../app/store/slices/companySlice';
+
 export const CompanySettings = ({ onClose, companyTitle, companyID }) => { 
+  const ref = useOnclickOutside(() => {
+    onClose()
+  });
+
   const settingsOptions = [
     { label: 'Изменить название компании' },
   ];
@@ -16,14 +22,15 @@ export const CompanySettings = ({ onClose, companyTitle, companyID }) => {
     setCompanyName(companyTitle);
   }, [companyTitle]);
 
-  const ref = useOnclickOutside(() => {
-    onClose()
-  });
 
   const [companyName, setCompanyName] = useState('');
 
+  const dispatch = useDispatch();
+  const id = useSelector(state => state.company.companyID);
+
   const handleInputChange = (event) => {
     setCompanyName(event.target.value);
+
   };
 
   const handleSave = (event) => {
@@ -31,6 +38,8 @@ export const CompanySettings = ({ onClose, companyTitle, companyID }) => {
   };
 
   const handleDelete = () => {
+    event.preventDefault()
+    dispatch(deleteCompanyAPI({id}))
   };
 
   return (
