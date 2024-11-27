@@ -1,82 +1,151 @@
-import { React, useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styles from './CompanyList.module.css';
-import { useOutletContext } from 'react-router-dom';
 import { icons } from '../../shared/ui/icons/companies';
 import { useSelector } from 'react-redux';
+import { CompanyListSettings } from '../company_list-settings/CompanyListSettings';
 
-export const CompanyList = ({}) => {
-  const { selectedCompanyId } = useOutletContext();
-  const companiesList = useSelector(state => state.company.companiesList);
-
-  // Получаем сотрудников для выбранной компании
-  const selectedCompany = companiesList.find(company => company.id === selectedCompanyId);
+export const CompanyList = () => {
+  const {companiesList, companyID} = useSelector(state => state.company);
+  const selectedCompany = companiesList.find(company => company.id === companyID);
   const employees = selectedCompany ? selectedCompany.users : [];
 
-    // Параметры пагинации
-    const employeesPerPage = 10;
-    const totalEmployees = employees.length;
-    const totalPages = Math.ceil(totalEmployees / employeesPerPage);
-    
-    const [currentPage, setCurrentPage] = useState(1);
+  const employeesPerPage = 8;
+  const totalEmployees = employees.length;
+  const totalPages = Math.ceil(totalEmployees / employeesPerPage);
+  
+  const [currentPage, setCurrentPage] = useState(1);
 
-    // Вычисляем индекс начала и конца текущей страницы
-    const indexOfLastEmployee = currentPage * employeesPerPage;
-    const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
-    const currentEmployees = employees.slice(indexOfFirstEmployee, indexOfLastEmployee);
+  const [showColumns, setShowColumns] = useState({
+    photo: true,
+    fullName: true,
+    patronymic: false,
+    city: false,
+    gender: false,
+    birthDate: false,
+    position: true,
+    department: true,
+    email: true,
+    workPhone: true,
+    personalPhone: false,
+    tg: false,
+    vk: false,
+    regDate: false,
+  });
 
-    return (
-        <div className={styles.main}>
-            <div className={styles.employees}>
-                <div className={styles.employees__header}>
-                    <div className={styles.employees__settings}>
-                        <img src={icons.settingsGrey} alt="Settings"/>
-                    </div>
-                    <div className={`${styles.employees__labels} ${styles.container}`}>
-                        <div className={styles.employees__label}>Фото</div>
-                        <div className={styles.employees__label}>Имя и фамилия</div>
-                        <div className={styles.employees__label}>Email</div>
-                        <div className={styles.employees__label}>Рабочий телефон</div>
-                        <div className={styles.employees__label}>Должность</div>
-                        <div className={styles.employees__label}>Подразделение</div>          
-                    </div>
-                </div>
-                <div className={styles.employees__list}>
-                    <div className={styles['employees__list-inner']}>
-                        {currentEmployees.map((employee) => (
-                            <div key={employee.id} className={styles.employees__item}>
-                                <div className={`${styles.container} ${styles.employee}`}>
-                                    <div className={`${styles.employee__column} ${styles.employee__photo}`}>
-                                    <div className={styles['employee__photo-inner']}>
-                                        {employee.photo || ' '}
-                                    </div>
-                                    </div>
-                                    <div className={`${styles.employee__column} ${styles.employee__info}`}>
-                                        <div className={styles.employee__name}>{employee.fullName || 'Фамилия Имя'}</div>
-                                        <div className={styles.employee__type}>{employee.position || 'Позиция не указана'}</div>
-                                    </div>
-                                    <div className={`${styles.employee__column} ${styles.employee__email}`}>{employee.email || 'Почта не указана'}</div>
-                                    <div className={`${styles.employee__column} ${styles.employee__phone}`}>{employee.phone || 'Номер не указан'}</div>
-                                    <div className={`${styles.employee__column} ${styles.employee__job}`}>{employee.job || 'Должность не указана'}</div>
-                                    <div className={`${styles.employee__column} ${styles.employee__department}`}>{employee.department || 'Подразделение не указано'}</div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
-                {/* Пагинация */}
-                {totalPages > 1 && (
-                    <Pagination 
-                        totalEmployees={totalEmployees} 
-                        totalPages={totalPages} 
-                        currentPage={currentPage} 
-                        setCurrentPage={setCurrentPage} 
-                    />
-                )}
-            </div>
+  const indexOfLastEmployee = currentPage * employeesPerPage;
+  const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
+  const currentEmployees = employees.slice(indexOfFirstEmployee, indexOfLastEmployee);
+
+  const handleSaveSettings = (settings) => {
+    setShowColumns(settings);
+    setIsSettingsOpen(false);
+  };
+
+  return (
+      <div className={styles.main}>
+          <div className={styles.employees}>
+            <div className={styles.employees__inner}>
+              <div className={styles.employees__header}>
+                  <div className={styles.employees__settings} onClick={() => setIsSettingsOpen(true)}>
+                      <img src={icons.settingsGrey} alt="Настройки"/>
+                  </div>
+                  <div className={`${styles.employees__labels} ${styles.container}`}>
+                      {showColumns.photo && <div className={`${styles.employees__label} ${styles['label-photo']}`}>Фото</div>}
+                      {showColumns.fullName && <div className={`${styles.employees__label} ${styles['label-fsname']}`}>Имя и фамилия</div>}
+                      {showColumns.patronymic && <div className={`${styles.employees__label} ${styles['label-lname']}`}>Отчество</div>}
+                      {showColumns.city && <div className={`${styles.employees__label} ${styles['label-city']}`}>Город</div>}
+                      {showColumns.gender && <div className={`${styles.employees__label} ${styles['label-gender']}`}>Пол</div>}
+                      {showColumns.birthDate && <div className={`${styles.employees__label} ${styles['label-birthDate']}`}>Дата рождения</div>}
+                      {showColumns.position && <div className={`${styles.employees__label} ${styles['label-position']}`}>Должность</div>}
+                      {showColumns.department && <div className={`${styles.employees__label} ${styles['label-department']}`}>Подразделение</div>}
+                      {showColumns.email && <div className={`${styles.employees__label} ${styles['label-email']}`}>Email</div>}
+                      {showColumns.workPhone && <div className={`${styles.employees__label} ${styles['label-workPhone']}`}>Рабочий телефон</div>}
+                      {showColumns.personalPhone && <div className={`${styles.employees__label} ${styles['label-personalPhone']}`}>Мобильный телефон</div>}
+                      {showColumns.tg && <div className={`${styles.employees__label} ${styles['label-tg']}`}>Telegram</div>}
+                      {showColumns.vk && <div className={`${styles.employees__label} ${styles['label-vk']}`}>VK</div>}
+                      {showColumns.regDate && <div className={`${styles.employees__label} ${styles['label-regDate']}`}>Дата регистрации</div>}         
+                  </div>
+              </div>
+              <div className={styles.employees__list}>
+                  <div className={styles['employees__list-inner']}>
+                      {currentEmployees.map((employee) => (
+                          <div key={employee.id} className={styles.employees__item}>
+                              <div className={`${styles.container} ${styles.employee}`}>
+                                  {showColumns.photo && (
+                                      <div className={`${styles.employee__column} ${styles.employee__photo}`}>
+                                          <div className={styles['employee__photo-inner']}></div>
+                                      </div>
+                                  )}
+                                  {showColumns.fullName && (
+                                      <div className={`${styles.employee__column} ${styles.employee__info}`}>
+                                          <div className={styles.employee__fsname}>{employee.fullName || 'Фамилия Имя'}</div>
+                                          <div className={styles.employee__type}>{employee.position || 'Позиция не указана'}</ div >
+                                      </ div >
+                                  )}
+                                  {showColumns.patronymic && (
+                                      < div className={`${ styles.employee__column } ${ styles.employee__lname }`}>{ employee.lname || '-'}</ div >
+                                  )}
+                                  {showColumns.city && (
+                                      < div className={`${ styles.employee__column } ${ styles.employee__city }`}>{ employee.city || '-'}</ div >
+                                  )}
+                                  {showColumns.gender && (
+                                      < div className={`${ styles.employee__column } ${ styles.employee__gender }`}>{ employee.gender || '-'}</ div >
+                                  )}
+                                  {showColumns.birthDate && (
+                                      < div className={`${ styles.employee__column } ${ styles.employee__birthDate }`}>{ employee.birthDate || '-'}</ div >
+                                  )}
+                                  {showColumns.position && (
+                                      < div className={`${ styles.employee__column } ${ styles.employee__position }`}>{ employee.position || '-'}</ div >
+                                  )}
+                                  {showColumns.department && (
+                                      < div className={`${ styles.employee__column } ${ styles.employee__department }`}>{ employee.department || '-'}</ div >
+                                  )}
+                                  {showColumns.email && (
+                                      < div className={`${ styles.employee__column } ${ styles.employee__email }`}>{ employee.email || '-'}</ div >
+                                  )}
+                                  {showColumns.workPhone && (
+                                      < div className={`${ styles.employee__column } ${ styles.employee__workPhone }`}>{ employee.workPhone || '-'}</ div >
+                                  )}
+                                  {showColumns.personalPhone && (
+                                      < div className={`${ styles.employee__column } ${ styles.employee__personalPhone }`}>{ employee.personalPhone || '-'}</ div >
+                                  )}
+                                  {showColumns.tg && (
+                                      < div className={`${ styles.employee__column } ${ styles.employee__tg }`}>{ employee.tg || '-'}</ div >
+                                  )}
+                                  {showColumns.vk && (
+                                      < div className={`${ styles.employee__column } ${ styles.employee__vk }`}>{ employee.vk || '-'}</ div >
+                                  )}
+                                  {showColumns.regDate && (
+                                      < div className={`${ styles.employee__column } ${ styles.employee__regDate }`}>{ employee.regDate || '-'}</ div >
+                                  )}
+                              </ div >
+                          </ div >
+                      ))}
+                  </ div >
+              </ div >
+            </ div >
+            {totalPages > 1 && (
+                  <Pagination 
+                      totalEmployees={totalEmployees}
+                      totalPages={totalPages}
+                      currentPage={currentPage}
+                      setCurrentPage={setCurrentPage}
+                  />
+              )}
         </div>
-    );
-}
+        
+        {isSettingsOpen && (
+        <CompanyListSettings 
+          onSave={handleSaveSettings}
+          onClose={() => setIsSettingsOpen(false)} 
+          initialSettings={showColumns}
+        />
+      )}
+      </ div >
+  );
+};
 
 const Pagination = ({ totalEmployees, totalPages, currentPage, setCurrentPage }) => {
   return (
@@ -84,7 +153,7 @@ const Pagination = ({ totalEmployees, totalPages, currentPage, setCurrentPage })
       <div className={`${styles.container}`}>
         {currentPage > 1 && (
           <button onClick={() => setCurrentPage(currentPage - 1)} className={`${styles.pagination__arrow} ${styles.prev}`}>
-            
+              
           </button>
         )}
 
@@ -102,19 +171,18 @@ const Pagination = ({ totalEmployees, totalPages, currentPage, setCurrentPage })
 
         {currentPage < totalPages && (
           <button onClick={() => setCurrentPage(currentPage + 1)} className={`${styles.pagination__arrow} ${styles.next}`}>
-            
+             
           </button>
         )}
-
-        <div className={styles.employees__countEmployee}>
-          Всего:
-          <span className={styles.value}>{totalEmployees}</span>
+      </div>
+      <div className={styles.employees__countEmployee}>
+          Сотрудников:
+          <span className={styles.value}> {totalEmployees}</span>
         </div>
         <div className={styles.employees__countPages}>
           Страниц:
-          <span className={styles.value}>{totalPages}</span>
+          <span className={styles.value}> {totalPages}</span>
         </div>
-      </div>
     </div>
   );
 };

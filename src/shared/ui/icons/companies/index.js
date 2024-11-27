@@ -5,6 +5,7 @@ import settingsGrey from './settingsGrey.svg'
 import plus from './plus.svg'
 import X from './X.svg'
 import popupX from './popupX.svg'
+import isChecked from './isChecked.svg'
 
 export const icons = {  
     arrow,
@@ -14,4 +15,5 @@ export const icons = {
     plus,
     X,
     popupX,
+    isChecked,
 }

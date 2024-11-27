@@ -1,11 +1,20 @@
 import React, { useState } from 'react';
-
 import styles from './CompanyCreate.module.css';
 import { icons } from '../../shared/ui/icons/companies';
-
 import useOnclickOutside from "react-cool-onclickoutside";
+import { useSelector, useDispatch } from 'react-redux';
+import { postCompanyAPI } from '../../app/store/slices/companySlice';
+
 
 export const CompanyCreate = ({ onClose }) => {
+  const ref = useOnclickOutside(() => {
+    onClose()
+  });
+  
+  const dispatch = useDispatch()
+  const companies = useSelector(state => state.company.companiesList)
+  const email = useSelector(state => state.user.email)
+
   const [companyName, setCompanyName] = useState('');
 
   const handleInputChange = (event) => {
@@ -15,21 +24,15 @@ export const CompanyCreate = ({ onClose }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log('Создать компанию:', companyName);
-    // Здесь можно добавить логику для отправки данных на сервер
+    dispatch(postCompanyAPI({title: companyName, email}))
     onClose();
   };
-
-  const ref = useOnclickOutside(() => {
-    console.log('Ты кликнул вне формы')
-    onClose()
-  });
-
   return (
     <div data-testid={'createCompany_popup'} className={styles['pop-up__outer']}>
     <div ref={ref} className={styles['pop-up']}>
       <div className={styles['pop-up__header']}>
         <div className={styles.container}>
-          <div className={styles['pop-up__title']}>Создать компанию</div>
+          <div data-testid="popup_title" className={styles['pop-up__title']}>Создать компанию</div>
           <div data-testid='popup_close' className={styles['pop-up__closeBtn']} onClick={onClose}>
             <img src={icons.popupX}/>
           </div>
@@ -37,7 +40,7 @@ export const CompanyCreate = ({ onClose }) => {
       </div>
       <div className={styles['pop-up__content']}>
         <div className={styles.container}>
-          <form onSubmit={handleSubmit} className={styles['pop-up__form']}>
+          <form onSubmit={handleSubmit} className={styles['pop-up__form']} aria-label="Create Company Form">
             <div className={styles['pop-up__row']}>
               <div className={styles['pop-up__label']}>Название компании</div>
               <input

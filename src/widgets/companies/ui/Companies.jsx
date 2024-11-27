@@ -19,9 +19,8 @@ export const Companies = () =>{
             dispatch(checkCompanyID())
         }
     }, [status, companyID, dispatch]);
-
-    
-    const [selectedCompanyId, setSelectedCompanyId] = useState(null);
+        
+    const [selectedCompanyId, setSelectedCompanyId] = useState();
 
     return(
         <>
