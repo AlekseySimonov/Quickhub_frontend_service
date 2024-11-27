@@ -19,9 +19,12 @@ export const DepartmentNode = ({ data }) => {
         setOpenEmployeeIds(newOpenEmployeeIds)
     };
 
-    const deleteClick = (id) =>{
+    const handleAddEmployee = (id) =>{
         console.log(id)
-        // dispatch(deleteDepartmentAPI(id))
+    }
+
+    const deleteClick = (id) =>{
+        dispatch(deleteDepartmentAPI(id))
     }
 
     return (
@@ -36,7 +39,6 @@ export const DepartmentNode = ({ data }) => {
                         <button className={styles.deleteBtn} onClick={() => deleteClick(data.id)}>
                             <img src={icons.deleteBtn} />
                         </button>
-                        
                     </div>
                 )}
 
@@ -64,24 +66,28 @@ export const DepartmentNode = ({ data }) => {
                 )}
                 {data.users && data.users.length > 1 && openEmployeeIds.has(data.id) &&(
                     <div className={styles.employees}>
-                    <img 
-                    src={icons.popupX} 
-                    className={styles.closeBtn} 
-                    onClick={() => toggleEmployees(data.id)}
-                    />
-                        {data.users.map(user => (
-                            <div key={user.id} className={styles.employee}>
-                                <img className={styles.photo} src={data.photo} alt={user.fullName} />
-                                <div className={styles.label__employee}>
-                                    <div className={styles.name}>
-                                        {user.fullName}
-                                    </div>
-                                    <div className={styles.position}>
-                                        {user.position}
+                        <img 
+                        src={icons.popupX} 
+                        className={styles.closeBtn} 
+                        onClick={() => toggleEmployees(data.id)}
+                        />
+                            {data.users.map(user => (
+                                <div key={user.id} className={styles.employee}>
+                                    <img className={styles.photo} src={data.photo} alt={user.fullName} />
+                                    <div className={styles.label__employee}>
+                                        <div className={styles.name}>
+                                            {user.fullName}
+                                        </div>
+                                        <div className={styles.position}>
+                                            {user.position}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
+                        <button className = {styles.addEmployee} onClick={() => handleAddEmployee(data.id)}>
+                            <span className={styles.plus}>+</span>
+                            Добавить сотрудника
+                        </button>
                     </div>
                 )}
                 <Handle type="target" position={Position.Top} id="target" style={{ opacity: 0 }} />
