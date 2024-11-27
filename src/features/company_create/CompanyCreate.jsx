@@ -15,7 +15,7 @@ export const CompanyCreate = ({ onClose }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log('Создать компанию:', companyName);
-    // Здесь можно добавить логику для отправки данных на сервер
+    //
     onClose();
   };
 

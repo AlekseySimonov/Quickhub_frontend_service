@@ -23,6 +23,8 @@
 .pop-up {
     background-color: #fff;
     color: #000;
+    border-radius: 10px;
+    overflow: hidden;
 }
 .pop-up__header {
     width: 800px;
@@ -75,33 +77,47 @@
     flex-direction: column;
 }
 .pop-up__actions {
+    position: relative;
     display: flex;
     justify-content: center;
     gap: 30px;
     margin-top: 40px;
 }
 .pop-up .checkbox {
+    cursor: pointer;
     display: flex;
     align-items: center;
     gap: 13px;
 }
-.pop-up .checkbox:hover .checkbox__box {
-    border-color: #626262;
+
+.pop-up .checkbox:hover .checkbox__box, .pop-up .checkbox:hover .checkbox__label{
+    border-color: #2668b0;
+    color: #2668b0;
 }
+
 .pop-up .checkbox__label {
     font-size: 18px;
 }
 .pop-up .checkbox__box {
     width: 20px;
     height: 20px;
-    padding: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: #fff;
     border: 2px solid #989898;
     border-radius: 5px;
 }
+
 .pop-up .checkbox__box.checked {
     border-color: #2668b0;
 }
+
+.checkboxIcon {
+    width: 100%;
+    height: auto;
+  }
+
 .pop-up__btn {
     width: 160px;
     height: 50px;
@@ -111,6 +127,18 @@
     border-radius: 30px;
     cursor: pointer;
 }
+
+.pop-up__btn-default {
+    position: absolute;
+    left: -6px;
+    font-size: 16px;
+}
+
+.pop-up__btn-default:hover {
+    color: #3f3f3f;
+}
+
+
 .pop-up__btn-submit {
     background-color: rgba(40, 224, 90, 1);
 }

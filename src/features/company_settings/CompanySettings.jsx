@@ -5,7 +5,9 @@ import { icons } from '../../shared/ui/icons/companies';
 
 import useOnclickOutside from "react-cool-onclickoutside";
 
-export const CompanySettings = ({ onClose, companyTitle }) => { 
+import { useDispatch, useSelector } from 'react-redux';
+
+export const CompanySettings = ({ onClose, companyTitle, companyID }) => { 
   const settingsOptions = [
     { label: 'Изменить название компании' },
   ];
@@ -15,7 +17,6 @@ export const CompanySettings = ({ onClose, companyTitle }) => {
   }, [companyTitle]);
 
   const ref = useOnclickOutside(() => {
-    console.log('Ты кликнул вне формы')
     onClose()
   });
 
@@ -25,11 +26,11 @@ export const CompanySettings = ({ onClose, companyTitle }) => {
     setCompanyName(event.target.value);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log('Изменить название компании на:', companyName);
-    // Здесь можно добавить логику для отправки данных на сервер
-    onClose();
+  const handleSave = (event) => {
+      event.preventDefault();
+  };
+
+  const handleDelete = () => {
   };
 
   return (
@@ -45,7 +46,7 @@ export const CompanySettings = ({ onClose, companyTitle }) => {
       </div>
       <div className={styles['pop-up__content']}>
         <div className={styles.container}>
-        <form data-testid="form_company-settings" onSubmit={handleSubmit} className={styles['pop-up__form']}>
+        <form data-testid="form_company-settings" className={styles['pop-up__form']}>
           <div className={styles['pop-up__form']}>
             {settingsOptions.map((setting, index) => (
               <div key={index} className={styles['pop-up__row']}>
@@ -65,7 +66,7 @@ export const CompanySettings = ({ onClose, companyTitle }) => {
             <button className={`${styles['pop-up__btn']} ${styles['pop-up__btn-submit']}`}>
               Сохранить
             </button>
-            <button className={`${styles['pop-up__btn']} ${styles['pop-up__btn-delete']}`}>
+            <button className={`${styles['pop-up__btn']} ${styles['pop-up__btn-delete']}`} onClick={handleDelete}>
               Удалить компанию
             </button>
           </div>

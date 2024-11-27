@@ -25,7 +25,6 @@ export const CompanyChoose = ({ testid, onAddCompany, styles, companiesList, sel
             setIsOpen(false);
             return;
         }
-
         setSelectedCompanyId(company.id);
         setSelectedOption(company.title);
         setIsOpen(false);

@@ -16,6 +16,8 @@ export const CompanyList = () => {
   const totalPages = Math.ceil(totalEmployees / employeesPerPage);
   
   const [currentPage, setCurrentPage] = useState(1);
+
+  // Состояние для отображения столбцов
   const [showColumns, setShowColumns] = useState({
     photo: true,
     fullName: true,
@@ -35,15 +37,14 @@ export const CompanyList = () => {
 
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
-
   const indexOfLastEmployee = currentPage * employeesPerPage;
   const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
   const currentEmployees = employees.slice(indexOfFirstEmployee, indexOfLastEmployee);
 
-
+  // Функция для сохранения настроек
   const handleSaveSettings = (settings) => {
-    setShowColumns(settings);
-    setIsSettingsOpen(false);
+    setShowColumns(settings); // Обновляем состояние с новыми настройками
+    setIsSettingsOpen(false); // Закрываем поп-ап
   };
 
   return (
@@ -140,11 +141,12 @@ export const CompanyList = () => {
         </div>
         
         {isSettingsOpen && (
-                <CompanyListSettings 
-                  onSave={handleSaveSettings}
-                  onClose={() => setIsSettingsOpen(false)}
-                />
-              )}
+        <CompanyListSettings 
+          onSave={handleSaveSettings}
+          onClose={() => setIsSettingsOpen(false)} 
+          initialSettings={showColumns} // Передаем текущее состояние
+        />
+      )}
       </ div >
   );
 };
