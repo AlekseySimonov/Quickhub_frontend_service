@@ -33,6 +33,20 @@ export const postCompanyAPI = createAsyncThunk(
     }
 )
 
+export const deleteCompanyAPI = createAsyncThunk(
+    'company/deleteCompanyAPI',
+    async ({ id }, { rejectWithValue }) => {
+        try {
+            console.log('Ты пытаешься удалить следующий id:', id);
+            await companiesService.deleteCompany(id);
+            return id;
+        } catch (err) {
+            console.error('Знакомься, меня зовут ошибка:', err);
+            return rejectWithValue(err.response || err);
+        }
+    }
+);
+
 export const getDepartmentsAPI = createAsyncThunk(
     'company/getDepartmentsAPI',
     async (_, { rejectWithValue, getState }) => {

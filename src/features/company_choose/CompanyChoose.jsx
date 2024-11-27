@@ -42,7 +42,6 @@ export const CompanyChoose = ({ testid, onAddCompany, styles }) => {
                 className={`${styles.select_toggle} ${isOpen ? styles.active : ''}`}
                 onClick={handleClickBtn}
             >
-            >
                 {selectedOption || "Выберите компанию"}
                 <div className={styles.arrow}></div>
             </button> 

@@ -1,12 +1,9 @@
 import {useState, useEffect} from 'react';
+import useOnclickOutside from "react-cool-onclickoutside";
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './CompanySettings.module.css';
 import { icons } from '../../shared/ui/icons/companies';
-
-import useOnclickOutside from "react-cool-onclickoutside";
-import { useSelector } from 'react-redux';
-
-import { useDispatch, useSelector } from 'react-redux';
 
 import { deleteCompanyAPI } from '../../app/store/slices/companySlice';
 
