@@ -2,15 +2,12 @@ import { Outlet } from "react-router-dom";
 import {Header} from "../../../widgets/header/index";
 import {Menu} from "../../../widgets/menu/index";
 import styles from './styles.module.css';
-import {useState } from "react";
+import { useState } from "react";
 import { baseTitles } from "../../routing";
-import { useSelector } from "react-redux";
-import { Loader } from "../../../shared/ui/components";
-import { usePageTitle } from "../../../shared/hooks";
+import { usePageTitle } from "../../../shared/hooks/index";
 
 export const Base = () => {
 
-    const {status} = useSelector(state => state.company)
     usePageTitle(baseTitles)
 
     const [isActive, setIsActive] = useState(false)
@@ -30,10 +27,9 @@ export const Base = () => {
         <div className= {styles.menu}>
             <Menu isActive = {isActive} />
         </div>
-        <div className={`${styles.content} ${status === 'loading' ? styles.loading : ''}`}>
-            {status === 'loading' && (<Loader style = {styles.loader}/>)}
+        <div className={styles.content}>
             <Outlet/>
         </div>
-        </div>  
+        </div>
     )
 }

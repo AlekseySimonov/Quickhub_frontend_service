@@ -1,10 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { companiesService } from './../../../shared/api/index';
+import {companiesService} from "../../../shared/api/index"
 
 const initialState ={
     companiesList: [],
     companyID: null,
     companyTitle: null,
+    departments: [],
     status: null,
     error: null,
 }
@@ -14,7 +15,6 @@ export const getCompaniesAPI = createAsyncThunk(
     async (_, { rejectWithValue }) => {
         try {
             const response = await companiesService.getCompanies()
-            console.log(response)
             return response.data
         } catch (err) {
             return rejectWithValue(err.response)
@@ -33,16 +33,27 @@ export const postCompanyAPI = createAsyncThunk(
     }
 )
 
-export const deleteCompanyAPI = createAsyncThunk(
-    'company/deleteCompanyAPI',
-    async ({ id }, { rejectWithValue }) => {
+export const getDepartmentsAPI = createAsyncThunk(
+    'company/getDepartmentsAPI',
+    async (_, { rejectWithValue, getState }) => {
         try {
-            console.log('Ты пытаешься удалить следующий id:', id);
-            await companiesService.deleteCompany(id);
-            return id;
+            const state = getState().company
+            const response = await companiesService.getDepartments(state.companyID)
+            return response.data
         } catch (err) {
-            console.error('Знакомься, меня зовут ошибка:', err);
-            return rejectWithValue(err.response || err);
+            return rejectWithValue(err)
+        }
+    }
+);
+
+export const deleteDepartmentAPI = createAsyncThunk(
+    'company/deleteDepartmentAPI',
+    async (id, { rejectWithValue, getState }) => {
+        try {
+            const state = getState().company
+            await companiesService.deleteDepartment(state.companyID, id)
+        } catch (err) {
+            return rejectWithValue(err)
         }
     }
 );
@@ -56,7 +67,6 @@ const companySlice = createSlice({
                 state.companyID = state.companiesList[0].id
                 state.companyTitle = state.companiesList[0].title
             } else {
-                console.log('companiesList is empty, cannot set companyID');
                 state.companyTitle = null
                 state.companyID = null
             }
@@ -99,26 +109,32 @@ const companySlice = createSlice({
 
             .addCase(postCompanyAPI.rejected, (state) => {
                 state.status = 'failed'
-                state.error = 'createError'
+                state.error = 'postError'
             })
 
-            .addCase(deleteCompanyAPI.pending, (state) => {
+            .addCase(getDepartmentsAPI.pending, (state) => {
                 state.status = 'loading'
             })
-
-            .addCase(deleteCompanyAPI.fulfilled, (state, action) => {
+            .addCase(getDepartmentsAPI.fulfilled, (state,action) => {
                 state.status = 'succeeded'
-                const idToDelete = action.payload
-                state.companiesList = state.companiesList.filter(company => company.id !== idToDelete)
-                console.log('Ну, в общем-то, поздравляю! Ты снёс к хуям компанию с айди:', idToDelete)
+                state.departments = action.payload;
             })
-
-            .addCase(deleteCompanyAPI.rejected, (state) => {
+            .addCase(getDepartmentsAPI.rejected, (state) => {
                 state.status = 'failed'
-                state.error = 'deleteError'
-                console.log('Ну, в общем, удалить не получилось.')
             })
 
+            .addCase(deleteDepartmentAPI.pending, (state) => {
+                state.status = 'loading'
+            })
+            .addCase(deleteDepartmentAPI.fulfilled, (state,action) => {
+                state.status = 'succeeded'
+                const idToDelete = action.payload;
+                state.departments = state.departments.filter(department => 
+                    department.id !== idToDelete);
+            })
+            .addCase(deleteDepartmentAPI.rejected, (state) => {
+                state.status = 'failed'
+            })
         }
     })
 

@@ -1,9 +1,10 @@
-import {useState, useEffect, React} from 'react';
+import {useState, useEffect} from 'react';
 
 import styles from './CompanySettings.module.css';
 import { icons } from '../../shared/ui/icons/companies';
 
 import useOnclickOutside from "react-cool-onclickoutside";
+import { useSelector } from 'react-redux';
 
 import { useDispatch, useSelector } from 'react-redux';
 

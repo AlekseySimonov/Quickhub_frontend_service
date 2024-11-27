@@ -14,6 +14,17 @@ export const postCompany = (title, email)=>{
     })
 }
 
+export const getDepartments = (companyId) => {
+    const url = URL.DEPARTMENTS.replace('{company_pk}', companyId)
+    return api.get(url)
+}
+
+export const deleteDepartment = (companyId, id) => {
+    const url =`${URL.DEPARTMENTS.replace('{company_pk}', companyId)}/${id}`
+    return api.delete(url)
+}
+
+
 export const deleteCompany = (id) => {
     const url = `${URL.COMPANIES}/${id}`;
     return api.delete(url);

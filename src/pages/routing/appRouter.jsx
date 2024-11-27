@@ -1,4 +1,5 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
+import { Suspense } from 'react';
 
 import { Base } from "../base";
 import { ErrorPage } from "../../shared/ui/components/error/ErrorPage";
@@ -15,13 +16,12 @@ import { Login } from "../../features/autorize/login";
 import { CompanyStructure } from "../../features/company_structure";
 import { CompanyList } from "../../features/company_list";
 import { IsAuth, CheckAuth } from "../../shared/config";
+import { Loader } from "../../shared/ui/components";
 
 export const authTitles = {
     '/auth/login': 'Вход',
     '/auth/registration': 'Регистрация',
 }
-
-// selectCompanyId={selectedCompany} - нужно воткнуть в CompaniesList, чтобы он получал выбранную компанию из Select
 
 export const baseTitles = [
         { path: '/tasks', title: 'Мои задачи' },
@@ -36,7 +36,9 @@ export const appRouter = createBrowserRouter([
         path: '/',
         element: 
                 <CheckAuth>
-                    <Base />
+                    <Suspense fallback={<Loader />}>
+                        <Base />
+                    </Suspense>,
                 </CheckAuth>
                 ,
         errorElement: <ErrorPage />,

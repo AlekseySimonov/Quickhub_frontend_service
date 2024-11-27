@@ -39,7 +39,7 @@
 5. Тесты находятся в папке **/tests**
 
 > [!WARNING]
-> Для взаимодействия с API необходимо пользоваться расширением [CORS Unblock](https://chromewebstore.google.com/detail/cors-unblock/lfhmikememgdcahcdlaciloancbhjino), 
+> Для взаимодействия с API необходимо пользоваться расширением [Moesif Origin/CORS Changer](https://chromewebstore.google.com/detail/moesif-origincors-changer/digfbfaphojjndkpccljibejjbppifbc), 
 если вы пользуетесь Google Chrome. Для других браузеров также необходимо установить расширения для разблокировки CORS-заголовков, или искать другие обходные пути.
 
 ### Store

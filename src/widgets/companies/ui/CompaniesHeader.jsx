@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 
 import {icons} from '../../../shared/ui/icons/companies'
+import styles from './styles.module.css'
 
-import {Select} from '../../../shared/ui/components/index'
 import {Search} from '../../../shared/ui/components/index'
 import {Filter} from '../../../shared/ui/components/index'
 
@@ -11,24 +11,13 @@ import {CompanyInvite} from '../../../features/company_invite/index'
 import {CompanyChoose} from '../../../features/company_choose/index'
 import {CompanySettings} from '../../../features/company_settings/index'
 import {CompanyCreate} from '../../../features/company_create/index'
+import {CreateDepartment} from '../../../features/company_create_department/index';
 
-import styles from './styles.module.css'
+export const CompaniesHeader = () => {
 
-import { useDispatch, useSelector } from 'react-redux'
-import { changeCompany } from '../../../app/store/slices/companySlice';
+    const location = useLocation()
+    const isStructurePage = location.pathname.includes('/structure')
 
-export const CompaniesHeader = ({ selectedCompanyId, setSelectedCompanyId }) => {
-    const dispatch = useDispatch()
-
-    const companiesList = useSelector(state => state.company.companiesList);
-
-    const selectOptions = [...companiesList.map(company => company.title), '+ Добавить компанию'];
-    const companyTitle = useSelector(state => state.company.companyTitle)
-    const handleSelectOption = (option) => {
-        dispatch(changeCompany(option));
-    };
-    
-    
     const menuItems = [
         { label: 'Все'},
         { label: 'Непрочитанные' },
@@ -36,7 +25,7 @@ export const CompaniesHeader = ({ selectedCompanyId, setSelectedCompanyId }) => 
         { label: 'С вложениями' },
         { label: 'Сортировка', submenu: true },
     ]
-    
+
     const submenuItems = [
         'По умолчанию',
         'ФИО: от А до Я',
@@ -47,6 +36,7 @@ export const CompaniesHeader = ({ selectedCompanyId, setSelectedCompanyId }) => 
     const [isInviteEmployeePopUpVisible, setIsInvitePopUpVisible] = useState(false);
     const [isCompanySettingsPopUpVisible, setIsSettingsPopUpVisible] = useState(false);
     const [isCreateCompanyPopUpVisible, setIsCreateCompanyPopUpVisible] = useState(false);
+    const [isCreateDepartmentPopUpVisible, setIsCreateDepartmentPopUpVisible] = useState(false);
 
     const handleOpenInviteEmployeePopUp = () => {
     setIsInvitePopUpVisible(true);
@@ -72,6 +62,13 @@ export const CompaniesHeader = ({ selectedCompanyId, setSelectedCompanyId }) => 
     setIsCreateCompanyPopUpVisible(false);
     };
 
+    const handleOpenCreateDepartmentPopUp = () => {
+    setIsCreateDepartmentPopUpVisible(true);
+    };
+
+    const handleCloseCreateDepartmentPopUp = () => {
+    setIsCreateDepartmentPopUpVisible(false);
+    };
 
     return (
         <div>
@@ -82,9 +79,6 @@ export const CompaniesHeader = ({ selectedCompanyId, setSelectedCompanyId }) => 
                     <CompanyChoose 
                         testid="company_selector"
                         styles={styles}
-                        companiesList={companiesList}
-                        selectedCompanyId={selectedCompanyId}
-                        setSelectedCompanyId={setSelectedCompanyId}
                         onAddCompany={handleOpenCreateCompanyPopUp} 
                     />
                     <div id="company_settings-btn" className={styles.selecting__settings} onClick={handleOpenCompanySettingsPopUp}>
@@ -119,16 +113,26 @@ export const CompaniesHeader = ({ selectedCompanyId, setSelectedCompanyId }) => 
                                     submenuItems={submenuItems} 
                         />
                     </div>
-                    <div id="invite_employee-btn" className={styles.employee_management__btn} onClick={handleOpenInviteEmployeePopUp}>
-                        <img src={icons.plus}/>
-                        Пригласить сотрудника
+                    <div className={styles.employee_management__btn}>
+                        {isStructurePage ? (
+                            <div className = {styles.management__btn} onClick={handleOpenCreateDepartmentPopUp}>
+                                <img src={icons.plus} alt="" />
+                                Добавить отдел
+                            </div>
+                        ) : (
+                            <div className = {styles.management__btn} onClick={handleOpenInviteEmployeePopUp}>
+                                <img src={icons.plus} alt="" />
+                                Пригласить сотрудника
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
             <div className={styles.popups}>
             {isInviteEmployeePopUpVisible && <CompanyInvite onClose={handleCloseInviteEmployeePopUp} />}
-            {isCompanySettingsPopUpVisible && <CompanySettings companyTitle={companyTitle} onClose={handleCloseCompanySettingsPopUp} />}
+            {isCompanySettingsPopUpVisible && <CompanySettings onClose={handleCloseCompanySettingsPopUp} />}
             {isCreateCompanyPopUpVisible && <CompanyCreate onClose={handleCloseCreateCompanyPopUp} />}
+            {isCreateDepartmentPopUpVisible && <CreateDepartment onClose={handleCloseCreateDepartmentPopUp} />}
             </div>
         </div>
     )

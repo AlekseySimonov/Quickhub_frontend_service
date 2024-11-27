@@ -31,13 +31,18 @@
         left: 100%;
         top: 75%;
         transform: translateX(10px);
-        padding: 7px;
+        padding: 15px;
+        padding-top: 20px;
+        padding-bottom: 20px;
         display:flex;
         flex-direction: column;
+        justify-content: flex-end;
+        align-items: end;
         gap: 20px;
         border-radius: 10px;
         box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.2);
-        background: white
+        background: white;
+        cursor: default;
     }
 
     .employee{
@@ -54,24 +59,50 @@
         align-items: center;
     }
 
+    .closeBtn{
+        width: 11px;
+        height: 13px;
+        overflow: hidden;
+        cursor: pointer;
+        margin-bottom: 5px;
+    }
+
     .photo{
         width: 40px;
         height: 40px;
-    }
-
-    .label__employee{
     }
 
     .label{
         position: relative;
         background-color: #FFF3D6;
         display:flex;
-        padding-inline: 35px;
+        justify-content: space-between;
+        padding-left: 35px;
+        padding-right: 10px;
         padding-block: 7px;
         border-radius: 10px;
         align-items: center;
         width: -webkit-fill-available;
+        cursor: default;
     }
+
+    .label img{
+        width: 15px;
+        height: 15px;
+
+    }
+
+    .deleteBtn {
+    opacity: 0; 
+    transition: opacity 0.15s, transform 0.15s;
+    pointer-events: none;
+}
+
+.label:hover .deleteBtn {
+    opacity: 1; 
+    transform: translateY(0); 
+    pointer-events: auto; 
+}
 
     .name{
         font-weight: 500;
@@ -87,8 +118,41 @@
         display: flex;
         background-color: #FFF3D6;
         width: 270px;
-        padding-inline: 35px;
+        justify-content: space-between;
+        padding-inline: 25px;
+        padding-left: 35px;
         padding-block: 7px;
         border-radius: 10px;
+        align-items: center;
+    }
+
+    .arrow {
+    width: 8px;
+    height: 8px;
+    transform: rotateZ(-45deg);
+    align-items: center;
+    border-bottom: 2px solid #000;
+    border-right: 2px solid #000;
+    transition: transform 0.2s;
+    }
+
+    .dropdown.active .arrow {     
+    transform: rotate(135deg);
+    }
+
+    .addEmployee{
+        font-size: 16px; 
+        color: #2668B0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .plus{
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        font-size: 24px;
         align-items: center;
     }

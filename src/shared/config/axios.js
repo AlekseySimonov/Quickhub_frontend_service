@@ -4,6 +4,7 @@ import { refreshTokenAPI } from "../../app/store/slices/authSlice";
 import store from './../../app/store/index';
 
 export const api = axios.create({
+    withCredentials: false,
     baseURL: API,
     headers: {
         'Content-Type': 'application/json',
@@ -14,10 +15,10 @@ api.interceptors.request.use((request) =>{
     const remember = localStorage.getItem('remember')
     const token = remember === 'true' 
         ? localStorage.getItem('accessToken') 
-        : sessionStorage.getItem('accessToken');
+        : sessionStorage.getItem('accessToken')
 
     if (token) {
-        request.headers.Authorization = `Bearer ${token}`;
+        request.headers.Authorization = `Bearer ${token}`
     }
     return request
 })
@@ -34,7 +35,7 @@ api.interceptors.response.use(
         if (error.response 
             && (error.response.status === 401 || error.response.status === 400) 
             && !originalRequest._isRetry) {
-            originalRequest._isRetry = true;
+            originalRequest._isRetry = true
 
             if (!isRefreshing) {
                 isRefreshing = true;
