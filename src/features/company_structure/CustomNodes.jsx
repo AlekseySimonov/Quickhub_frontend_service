@@ -32,7 +32,7 @@ export const DepartmentNode = ({ data }) => {
             <div className={styles.department}>
                 <Handle type="source" position={Position.Bottom} id="source" style={{ opacity: 0 }} />
                 {data.title && (
-                    <div className={styles.label}>
+                    <div className={styles.label} style={{ backgroundColor: data.color }}>
                         <div className={styles.name}>
                             {data.title}
                         </div>
@@ -43,7 +43,7 @@ export const DepartmentNode = ({ data }) => {
                 )}
 
                 {data.users && data.users.length > 0 && (
-                    <div className={styles.head}>
+                    <div className={styles.head} style={{ backgroundColor: data.color }}>
                         <img className={styles.photo} src={data.photo} alt={data.users[0].fullName} />
                         <div className={styles.label__employee}>
                             <div className={styles.name}>
@@ -59,7 +59,8 @@ export const DepartmentNode = ({ data }) => {
                 {data.title && data.users.length > 1 && (
                         <button
                         className={`${styles.dropdown} ${openEmployeeIds.has(data.id) ? styles.active : ''}`}
-                        onClick={() => toggleEmployees(data.id)}> 
+                        onClick={() => toggleEmployees(data.id)}
+                        style={{ backgroundColor: data.color }}> 
                         Сотрудники
                         <div className={styles.arrow}></div>
                         </button> 
@@ -72,7 +73,7 @@ export const DepartmentNode = ({ data }) => {
                         onClick={() => toggleEmployees(data.id)}
                         />
                             {data.users.map(user => (
-                                <div key={user.id} className={styles.employee}>
+                                <div key={user.id} className={styles.employee} style={{ backgroundColor: data.color }}>
                                     <img className={styles.photo} src={data.photo} alt={user.fullName} />
                                     <div className={styles.label__employee}>
                                         <div className={styles.name}>

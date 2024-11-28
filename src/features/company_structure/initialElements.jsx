@@ -48,6 +48,7 @@ export const createGraph = (data) => {
                 parent: g.node(nodeId).parent,
                 users: departmentData.users,
                 id: departmentData.id,
+                color: departmentData.color,
             },
             position: { x, y },
             draggable: false,

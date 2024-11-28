@@ -62,10 +62,11 @@ export const getDepartmentsAPI = createAsyncThunk(
 
 export const deleteDepartmentAPI = createAsyncThunk(
     'company/deleteDepartmentAPI',
-    async (id, { rejectWithValue, getState }) => {
+    async (departmentId, { rejectWithValue, getState }) => {
         try {
             const state = getState().company
-            await companiesService.deleteDepartment(state.companyID, id)
+            await companiesService.deleteDepartment(state.companyID, departmentId)
+            return departmentId
         } catch (err) {
             return rejectWithValue(err)
         }

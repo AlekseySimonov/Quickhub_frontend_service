@@ -24,10 +24,10 @@ export const Companies = () =>{
 
     return(
         <>
-        <div className={styles.content}>
+        <div className={`${styles.content} ${status === 'loading' ? styles.loading : ''}`}>
+            {status === 'loading' && (<Loader style = {styles.loader}/>)}
             <CompaniesHeader/>
-            <div className={`${styles.main} ${status === 'loading' ? styles.loading : ''}`}>
-                {status === 'loading' && (<Loader style = {styles.loader}/>)}
+            <div className={styles.main}>
                 <Outlet/>
             </div>
         </div>

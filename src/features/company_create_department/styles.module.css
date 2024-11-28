@@ -178,6 +178,11 @@
     flex-direction: column;
 }
 
+.showInput{
+    position: absolute;
+    top: 30px;
+}
+
 .add {
     font-size: 16px; 
     color: #2668B0;
@@ -197,7 +202,7 @@
 }
 
 .actions { 
-    margin-top: 80px;
+    margin-top: 100px;
     display: flex;  
     justify-content: center;  
     gap: 30px;
