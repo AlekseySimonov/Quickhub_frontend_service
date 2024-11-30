@@ -8,12 +8,15 @@ import { getDepartmentsAPI } from '../../app/store/slices/companySlice';
 import { useEffect } from 'react';
 
 export const CompanyStructure = ()=>{
+    const companyID = useSelector(state => state.company.companyID)
 
     const dispatch = useDispatch()
-    
+
     useEffect(() => {
-        dispatch(getDepartmentsAPI())
-    }, [dispatch])
+    if (companyID) {
+        dispatch(dispatch(getDepartmentsAPI));
+    }
+    }, [companyID, dispatch]);
 
     const departments = useSelector(state => state.company.departments)
 
