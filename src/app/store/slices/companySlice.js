@@ -165,6 +165,23 @@ const companySlice = createSlice({
                 state.status = 'failed'
             })
 
+            .addCase(deleteCompanyAPI.pending, (state) => {
+                state.status = 'loading'
+            })
+
+            .addCase(deleteCompanyAPI.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                const idToDelete = action.payload
+                state.companiesList = state.companiesList.filter(company => company.id !== idToDelete)
+                console.log('Ну, в общем-то, поздравляю! Ты снёс к хуям компанию с айди:', idToDelete)
+            })
+
+            .addCase(deleteCompanyAPI.rejected, (state) => {
+                state.status = 'failed'
+                state.error = 'deleteError'
+                console.log('Ну, в общем, удалить не получилось.')
+            })
+
             .addCase(renameCompanyAPI.pending, (state) => {
                 state.status = 'loading'
             })
