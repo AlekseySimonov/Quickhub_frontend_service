@@ -86,23 +86,29 @@
         cursor: default;
     }
 
-    .label img{
+    .deleteBtn {
         width: 15px;
         height: 15px;
-
+        opacity: 0; 
+        transition: opacity 0.15s, transform 0.15s;
+        pointer-events: none;
+        justify-content: end;
+        margin-left: auto;
     }
 
-    .deleteBtn {
-    opacity: 0; 
-    transition: opacity 0.15s, transform 0.15s;
-    pointer-events: none;
-}
+    .label:hover .deleteBtn {
+        opacity: 1; 
+        transform: translateY(0); 
+        pointer-events: visible; 
+        cursor: pointer;
+    }
 
-.label:hover .deleteBtn {
-    opacity: 1; 
-    transform: translateY(0); 
-    pointer-events: auto; 
-}
+    .employee:hover .deleteBtn {
+        opacity: 1; 
+        transform: translateY(0); 
+        pointer-events: visible; 
+        cursor: pointer;
+    }
 
     .name{
         font-weight: 500;
@@ -127,13 +133,13 @@
     }
 
     .arrow {
-    width: 8px;
-    height: 8px;
-    transform: rotateZ(-45deg);
-    align-items: center;
-    border-bottom: 2px solid #000;
-    border-right: 2px solid #000;
-    transition: transform 0.2s;
+        width: 8px;
+        height: 8px;
+        transform: rotateZ(-45deg);
+        align-items: center;
+        border-bottom: 2px solid #000;
+        border-right: 2px solid #000;
+        transition: transform 0.2s;
     }
 
     .dropdown.active .arrow {     
@@ -188,19 +194,19 @@
     }
 
     .btn {
-    font-size: 16px;
-    height: 40px;
-    padding: 0px 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: 0.2s;
-}
+        font-size: 16px;
+        height: 40px;
+        padding: 0px 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
 
     .btnSubmit {
-    background-color: rgba(40, 224, 90, 1);
+        background-color: rgba(40, 224, 90, 1);
     }
     .btnSubmit:hover {
         background-color: rgba(40, 224, 90, 0.9);

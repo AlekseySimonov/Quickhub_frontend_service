@@ -26,9 +26,12 @@ export const DepartmentNode = ({ data }) => {
         setIsAddEmployeeOpen(true)
     }
 
-    
+    const deleteEmployeeClick = (id) =>{
+        console.log(id)
+        // dispatch(deleteEmployeeAPI(id))
+    }
 
-    const deleteClick = (id) =>{
+    const deleteDepartmentClick = (id) =>{
         dispatch(deleteDepartmentAPI(id))
     }
 
@@ -41,9 +44,7 @@ export const DepartmentNode = ({ data }) => {
                         <div className={styles.name}>
                             {data.title}
                         </div>
-                        <button className={styles.deleteBtn} onClick={() => deleteClick(data.id)}>
-                            <img src={icons.deleteBtn} />
-                        </button>
+                        <img className={styles.deleteBtn} onClick={() => deleteDepartmentClick(data.id)} src={icons.deleteBtn} />
                     </div>
                 )}
 
@@ -88,6 +89,7 @@ export const DepartmentNode = ({ data }) => {
                                             {user.position}
                                         </div>
                                     </div>
+                                    <img src={icons.deleteBtn} className={styles.deleteBtn} onClick={() => deleteEmployeeClick(user.id)} />
                                 </div>
                             ))}
                         <button className = {styles.addEmployeeBtn} onClick={() => handleAddEmployee(data.id)}>
