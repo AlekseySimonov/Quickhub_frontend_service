@@ -4,13 +4,12 @@ import { changeCompany } from "../../app/store/slices/companySlice";
 import { useDispatch, useSelector } from "react-redux";
 
 export const CompanyChoose = ({ testid, onAddCompany, styles }) => {
-    const [isOpen, setIsOpen] = useState(false);
-
+   
     const dispatch = useDispatch();
+    const [isOpen, setIsOpen] = useState(false);
     
-    const { companiesList, companyTitle, companyID } = useSelector(state => state.company);
-
-    const [selectedOption, setSelectedOption] = useState(companyTitle || "Выберите компанию");
+    const { companiesList, companyTitle } = useSelector(state => state.company);
+    const [ selectedOption, setSelectedOption ] = useState(companyTitle || "Выберите компанию");
 
     useEffect(() => {
         setSelectedOption(companyTitle || "Выберите компанию");
@@ -30,10 +29,11 @@ export const CompanyChoose = ({ testid, onAddCompany, styles }) => {
             setIsOpen(false);
             return;
         }
-        // Передаем id и title выбранной компании
         dispatch(changeCompany({ id: company.id, title: company.title }));
         setIsOpen(false);
     };
+
+    
 
     return (
         <div ref={ref} data-testid={testid} className={styles.select}>

@@ -18,3 +18,10 @@ export const deleteCompany = (id) => {
     const url = `${URL.COMPANIES}/${id}`;
     return api.delete(url);
 };
+
+export const renameCompany = (id, newCompanyName) => {
+    const url = `${URL.COMPANIES}/${id}`;
+    return api.patch(url, {
+        title: newCompanyName
+    });
+};

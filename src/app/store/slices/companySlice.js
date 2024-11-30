@@ -1,10 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { companiesService } from './../../../shared/api/index';
+import {companiesService} from "../../../shared/api/index"
 
 const initialState ={
     companiesList: [],
     companyID: null,
     companyTitle: null,
+    departments: [],
     status: null,
     error: null,
 }
@@ -36,6 +37,7 @@ export const deleteCompanyAPI = createAsyncThunk(
     'company/deleteCompanyAPI',
     async ({ id }, { rejectWithValue }) => {
         try {
+            event.preventDefault();
             console.log('Ты пытаешься удалить следующий id:', id);
             await companiesService.deleteCompany(id);
             return id;
@@ -46,6 +48,44 @@ export const deleteCompanyAPI = createAsyncThunk(
     }
 );
 
+export const renameCompanyAPI = createAsyncThunk(
+    'company/renameCompanyAPI',
+    async ({ id, title }, { rejectWithValue }) => {
+        try {
+            await companiesService.renameCompany(id, title);
+            return { id, title };
+        } catch (err) {
+            return rejectWithValue(err);
+        }
+    }
+);
+
+export const getDepartmentsAPI = createAsyncThunk(
+    'company/getDepartmentsAPI',
+    async (_, { rejectWithValue, getState }) => {
+        try {
+            const state = getState().company
+            const response = await companiesService.getDepartments(state.companyID)
+            return response.data
+        } catch (err) {
+            return rejectWithValue(err)
+        }
+    }
+);
+
+export const deleteDepartmentAPI = createAsyncThunk(
+    'company/deleteDepartmentAPI',
+    async (id, { rejectWithValue, getState }) => {
+        try {
+            const state = getState().company
+            await companiesService.deleteDepartment(state.companyID, id)
+        } catch (err) {
+            return rejectWithValue(err)
+        }
+    }
+);
+
+
 const companySlice = createSlice({
     name: 'company',
     initialState,
@@ -55,7 +95,6 @@ const companySlice = createSlice({
                 state.companyID = state.companiesList[0].id
                 state.companyTitle = state.companiesList[0].title
             } else {
-                console.log('companiesList is empty, cannot set companyID');
                 state.companyTitle = null
                 state.companyID = null
             }
@@ -98,7 +137,31 @@ const companySlice = createSlice({
 
             .addCase(postCompanyAPI.rejected, (state) => {
                 state.status = 'failed'
-                state.error = 'createError'
+                state.error = 'postError'
+            })
+
+            .addCase(getDepartmentsAPI.pending, (state) => {
+                state.status = 'loading'
+            })
+            .addCase(getDepartmentsAPI.fulfilled, (state,action) => {
+                state.status = 'succeeded'
+                state.departments = action.payload;
+            })
+            .addCase(getDepartmentsAPI.rejected, (state) => {
+                state.status = 'failed'
+            })
+
+            .addCase(deleteDepartmentAPI.pending, (state) => {
+                state.status = 'loading'
+            })
+            .addCase(deleteDepartmentAPI.fulfilled, (state,action) => {
+                state.status = 'succeeded'
+                const idToDelete = action.payload;
+                state.departments = state.departments.filter(department => 
+                    department.id !== idToDelete);
+            })
+            .addCase(deleteDepartmentAPI.rejected, (state) => {
+                state.status = 'failed'
             })
 
             .addCase(deleteCompanyAPI.pending, (state) => {
@@ -118,6 +181,22 @@ const companySlice = createSlice({
                 console.log('Ну, в общем, удалить не получилось.')
             })
 
+            .addCase(renameCompanyAPI.pending, (state) => {
+                state.status = 'loading'
+            })
+            .addCase(renameCompanyAPI.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                const { id, title } = action.payload;
+                const company = state.companiesList.find(company => company.id === id);
+                if (company) {
+                    company.title = title;
+                }
+                state.companyTitle = title;
+                console.log('Название компании с id', id, 'изменено на:', title);
+            })
+            .addCase(renameCompanyAPI.rejected, (state) => {
+                state.status = 'failed'
+            })
         }
     })
 
