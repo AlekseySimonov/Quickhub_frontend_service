@@ -6,7 +6,7 @@ const initialState ={
     companyID: null,
     companyTitle: null,
     departments: [],
-    status: null,
+    status: 'loading',
     error: null,
 }
 

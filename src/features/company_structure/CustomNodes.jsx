@@ -62,7 +62,7 @@ export const DepartmentNode = ({ data }) => {
                     </div>
                 )}
 
-                {data.title && data.users.length > 1 && (
+                {data.title && Array.isArray(data.users) && data.users.length > 1 && (
                         <button
                         className={`${styles.dropdown} ${openEmployeeIds.has(data.id) ? styles.active : ''}`}
                         onClick={() => toggleEmployees(data.id)}
@@ -71,14 +71,15 @@ export const DepartmentNode = ({ data }) => {
                         <div className={styles.arrow}></div>
                         </button> 
                 )}
-                {data.users && data.users.length > 1 && openEmployeeIds.has(data.id) &&(
+                {Array.isArray(data.users) && data.users.length > 1 && openEmployeeIds.has(data.id) &&(
                     <div className={styles.employees}>
                         <img 
                         src={icons.popupX} 
                         className={styles.closeBtn} 
+                        alt="Close"
                         onClick={() => toggleEmployees(data.id)}
                         />
-                            {data.users.map(user => (
+                            {data.users.slice(1).map(user => (
                                 <div key={user.id} className={styles.employee} style={{ backgroundColor: data.color }}>
                                     <img className={styles.photo} src={data.photo} alt={user.fullName} />
                                     <div className={styles.label__employee}>
@@ -118,13 +119,11 @@ export const DepartmentNode = ({ data }) => {
                             <button onClick={handleAddEmployee} className={`${styles.btn} ${styles.btnSubmit}`}>Добавить</button>
                             <button onClick={() => setIsAddEmployeeOpen(false)} className={`${styles.btn} ${styles.btnCancel}`}>Отмена</button>
                         </div>
-                        
                     </div>
                 )}
                 
                 <Handle type="target" position={Position.Top} id="target" style={{ opacity: 0 }} />
             </div>
         </div>
-        
     )
 }

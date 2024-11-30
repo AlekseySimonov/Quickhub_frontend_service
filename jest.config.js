@@ -7,6 +7,7 @@ const config = {
     setupFilesAfterEnv: ['<rootDir>/setup-tests.js'],
     transform: {
         '^.+\\.(js|jsx)$': 'babel-jest',
+        ".+\\.(css|scss|png|jpg|svg)$": "jest-transform-stub"
     },
     moduleFileExtensions: ['js', 'jsx'],
     moduleNameMapper: {
