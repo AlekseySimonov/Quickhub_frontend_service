@@ -1,4 +1,4 @@
-import {deleteCompany, getCompanies, postCompany, getDepartments, deleteDepartment, renameCompany} from './companiesService';
+import {deleteCompany, getCompanies, postCompany, getDepartments, deleteDepartment, renameCompany, getCompanyUsers} from './companiesService';
 import { register,login,refreshToken,logout } from './authService';
 
 export const authService = {
@@ -14,4 +14,5 @@ export const companiesService = {
     deleteDepartment,
     deleteCompany,
     renameCompany,
+    getCompanyUsers,
 }

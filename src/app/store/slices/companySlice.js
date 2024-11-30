@@ -5,7 +5,7 @@ const initialState ={
     companiesList: [],
     companyID: null,
     companyTitle: null,
-    departments: [],
+    companyUsers: [],
     departments: [],
     status: 'loading',
     error: null,
@@ -60,6 +60,19 @@ export const renameCompanyAPI = createAsyncThunk(
         }
     }
 );
+
+export const getCompanyUsersAPI = createAsyncThunk(
+    'company/getCompanyUserAPI',
+    async (_, {rejectWithValue, getState}) => {
+        try {
+            const state = getState().company
+            const response = await companiesService.getCompanyUsers(state.companyID)
+            return response.data
+        } catch (err) {
+            return rejectWithValue(err)
+        }
+    }
+)
 
 export const getDepartmentsAPI = createAsyncThunk(
     'company/getDepartmentsAPI',
@@ -196,6 +209,17 @@ const companySlice = createSlice({
                 console.log('Название компании с id', id, 'изменено на:', title);
             })
             .addCase(renameCompanyAPI.rejected, (state) => {
+                state.status = 'failed'
+            })
+
+            .addCase(getCompanyUsersAPI.pending, (state) => {
+                state.status = 'loading'
+            })
+            .addCase(getCompanyUsersAPI.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.companyUsers = action.payload
+            })
+            .addCase(getCompanyUsersAPI.rejected, (state) => {
                 state.status = 'failed'
             })
         }

@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './CompanyList.module.css';
 import { icons } from '../../shared/ui/icons/companies';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { CompanyListSettings } from '../company_list-settings/CompanyListSettings';
+import { getCompanyUsersAPI } from '../../app/store/slices/companySlice';
 
 export const CompanyList = () => {
   const {companiesList, companyID} = useSelector(state => state.company);
@@ -42,6 +43,14 @@ export const CompanyList = () => {
     setShowColumns(settings);
     setIsSettingsOpen(false);
   };
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (companyID) {
+        dispatch(getCompanyUsersAPI());
+    }
+    }, [companyID, dispatch]);
 
   return (
       <div className={styles.main}>

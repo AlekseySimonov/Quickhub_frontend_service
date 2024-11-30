@@ -36,3 +36,10 @@ export const renameCompany = (id, newCompanyName) => {
         title: newCompanyName
     });
 };
+
+export const getCompanyUsers = (id) => {
+    const url = `${URL.COMPANY_USERS}/${id}`
+    return api.get(url, {
+        id: id
+    });
+};
