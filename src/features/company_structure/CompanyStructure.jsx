@@ -28,16 +28,16 @@ export const CompanyStructure = ()=>{
 
     return (
         <div className={styles.reactFlow}>
-        <ReactFlow
-        nodes={nodes}
-        edges={edges}
-        nodeTypes={nodeTypes}
-        fitView>
-            <Background color='white'/>
-            <Controls />
-            <MiniMap pannable zoomable nodeStrokeWidth={3} />
-        </ReactFlow>
-    </div>
+            <ReactFlow
+            nodes={nodes}
+            edges={edges}
+            nodeTypes={nodeTypes}
+            fitView>
+                <Background color='white'/>
+                <Controls />
+                <MiniMap pannable zoomable nodeStrokeWidth={3} />
+            </ReactFlow>
+        </div>
     )
     
 }

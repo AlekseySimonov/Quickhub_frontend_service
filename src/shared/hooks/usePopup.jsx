@@ -12,5 +12,3 @@ export const usePopup = () => {
         closePopup,
     };
 };
-
-export default usePopup;

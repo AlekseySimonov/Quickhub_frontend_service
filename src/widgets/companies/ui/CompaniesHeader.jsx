@@ -96,12 +96,10 @@ export const CompaniesHeader = () => {
                     </div>
                 </div>
             </div>
-            <div className={styles.popups}>
                 {inviteEmployeePopup.isVisible && <CompanyInvite onClose={inviteEmployeePopup.closePopup} />}
                 {companySettingsPopup.isVisible && <CompanySettings onClose={companySettingsPopup.closePopup} />}
                 {createCompanyPopup.isVisible && <CompanyCreate onClose={createCompanyPopup.closePopup} />}
                 {createDepartmentPopup.isVisible && <CreateDepartment onClose={createDepartmentPopup.closePopup} />}
             </div>
-        </div>
     )
 }

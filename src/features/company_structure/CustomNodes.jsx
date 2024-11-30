@@ -4,10 +4,12 @@ import { useState } from 'react';
 import { icons } from '../../shared/ui/icons/companies';
 import { useDispatch } from 'react-redux';
 import { deleteDepartmentAPI } from '../../app/store/slices/companySlice';
+import { Selector } from '../../shared/ui/components/selector';
 
 export const DepartmentNode = ({ data }) => {
     const dispatch = useDispatch()
     const [openEmployeeIds, setOpenEmployeeIds] = useState(new Set())
+    const [isAddEmployeeOpen, setIsAddEmployeeOpen] = useState(false)
 
     const toggleEmployees = (id) => {
         const newOpenEmployeeIds = new Set(openEmployeeIds)
@@ -19,9 +21,12 @@ export const DepartmentNode = ({ data }) => {
         setOpenEmployeeIds(newOpenEmployeeIds)
     };
 
-    const handleAddEmployee = (id) =>{
+    const handleAddEmployee = (id) => {
         console.log(id)
+        setIsAddEmployeeOpen(true)
     }
+
+    
 
     const deleteClick = (id) =>{
         dispatch(deleteDepartmentAPI(id))
@@ -85,12 +90,36 @@ export const DepartmentNode = ({ data }) => {
                                     </div>
                                 </div>
                             ))}
-                        <button className = {styles.addEmployee} onClick={() => handleAddEmployee(data.id)}>
+                        <button className = {styles.addEmployeeBtn} onClick={() => handleAddEmployee(data.id)}>
                             <span className={styles.plus}>+</span>
                             Добавить сотрудника
                         </button>
                     </div>
                 )}
+
+                {isAddEmployeeOpen && (
+                    <div className={styles.addEmployee}>
+                        <div className={styles.addEmployeeTitle}>
+                            Добавить сотрудника
+                            <img 
+                                src={icons.popupX} 
+                                className={styles.closeBtn} 
+                                onClick={() => setIsAddEmployeeOpen(false)}
+                            />
+                        </div>
+                        <Selector
+                            list = {[]}
+                            inputLabel = {'Выберите сотрудника'}
+                            width= {'400px'}
+                        />
+                        <div className={styles.actions}>
+                            <button onClick={handleAddEmployee} className={`${styles.btn} ${styles.btnSubmit}`}>Добавить</button>
+                            <button onClick={() => setIsAddEmployeeOpen(false)} className={`${styles.btn} ${styles.btnCancel}`}>Отмена</button>
+                        </div>
+                        
+                    </div>
+                )}
+                
                 <Handle type="target" position={Position.Top} id="target" style={{ opacity: 0 }} />
             </div>
         </div>
