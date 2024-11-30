@@ -1,5 +1,17 @@
-import {deleteCompany, getCompanies, postCompany, getDepartments, deleteDepartment} from './companiesService';
+import {deleteCompany, getCompanies, postCompany, getDepartments, deleteDepartment, renameCompany} from './companiesService';
 import { register,login,refreshToken,logout } from './authService';
 
-export const authService = {register,login,refreshToken,logout}
-export const companiesService = {getCompanies, postCompany, getDepartments, deleteDepartment, deleteCompany}
+export const authService = {
+    register,
+    login,
+    refreshToken,
+    logout,
+}
+export const companiesService = {
+    getCompanies,
+    postCompany,
+    getDepartments, 
+    deleteDepartment,
+    deleteCompany,
+    renameCompany,
+}
