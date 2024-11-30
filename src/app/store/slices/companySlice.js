@@ -165,30 +165,6 @@ const companySlice = createSlice({
                 state.status = 'failed'
             })
 
-            .addCase(getDepartmentsAPI.pending, (state) => {
-                state.status = 'loading'
-            })
-            .addCase(getDepartmentsAPI.fulfilled, (state,action) => {
-                state.status = 'succeeded'
-                state.departments = action.payload;
-            })
-            .addCase(getDepartmentsAPI.rejected, (state) => {
-                state.status = 'failed'
-            })
-
-            .addCase(deleteDepartmentAPI.pending, (state) => {
-                state.status = 'loading'
-            })
-            .addCase(deleteDepartmentAPI.fulfilled, (state,action) => {
-                state.status = 'succeeded'
-                const idToDelete = action.payload;
-                state.departments = state.departments.filter(department => 
-                    department.id !== idToDelete);
-            })
-            .addCase(deleteDepartmentAPI.rejected, (state) => {
-                state.status = 'failed'
-            })
-
             .addCase(renameCompanyAPI.pending, (state) => {
                 state.status = 'loading'
             })

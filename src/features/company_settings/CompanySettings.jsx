@@ -5,10 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from './CompanySettings.module.css';
 import { icons } from '../../shared/ui/icons/companies';
 
-import useOnclickOutside from "react-cool-onclickoutside";
-
-import { useDispatch, useSelector } from 'react-redux';
-
 import { deleteCompanyAPI, renameCompanyAPI } from '../../app/store/slices/companySlice';
 
 export const CompanySettings = ({ onClose }) => { 
