@@ -73,7 +73,8 @@ export const CreateDepartment = ({ onClose }) => {
                                 <span className={styles.plus}>+</span>
                                 Добавить сотрудника
                             </button>
-                            {showInput ? (
+                            <div className={styles.showInput}>
+                                {showInput ? (
                                 <>
                                     <Selector
                                     list={departments}
@@ -90,6 +91,8 @@ export const CreateDepartment = ({ onClose }) => {
                                     </button>
                                 </>
                                 ): ''}
+                            </div>
+                            
                         </div>
                 </div>
             </div>

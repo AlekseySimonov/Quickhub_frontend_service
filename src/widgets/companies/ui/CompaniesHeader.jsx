@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom'
+import { usePopup } from '../../../shared/hooks/index';
 
 import {icons} from '../../../shared/ui/icons/companies'
 import styles from './styles.module.css'
@@ -33,42 +33,10 @@ export const CompaniesHeader = () => {
         'По должностям',
     ];
 
-    const [isInviteEmployeePopUpVisible, setIsInvitePopUpVisible] = useState(false);
-    const [isCompanySettingsPopUpVisible, setIsSettingsPopUpVisible] = useState(false);
-    const [isCreateCompanyPopUpVisible, setIsCreateCompanyPopUpVisible] = useState(false);
-    const [isCreateDepartmentPopUpVisible, setIsCreateDepartmentPopUpVisible] = useState(false);
-
-    const handleOpenInviteEmployeePopUp = () => {
-    setIsInvitePopUpVisible(true);
-    };
-
-    const handleCloseInviteEmployeePopUp = () => {
-    setIsInvitePopUpVisible(false);
-    };
-
-    const handleOpenCompanySettingsPopUp = () => {
-    setIsSettingsPopUpVisible(true);
-    };
-
-    const handleCloseCompanySettingsPopUp = () => {
-    setIsSettingsPopUpVisible(false);
-    };
-
-    const handleOpenCreateCompanyPopUp = () => {
-    setIsCreateCompanyPopUpVisible(true);
-    };
-
-    const handleCloseCreateCompanyPopUp = () => {
-    setIsCreateCompanyPopUpVisible(false);
-    };
-
-    const handleOpenCreateDepartmentPopUp = () => {
-    setIsCreateDepartmentPopUpVisible(true);
-    };
-
-    const handleCloseCreateDepartmentPopUp = () => {
-    setIsCreateDepartmentPopUpVisible(false);
-    };
+    const inviteEmployeePopup = usePopup();
+    const companySettingsPopup = usePopup();
+    const createCompanyPopup = usePopup();
+    const createDepartmentPopup = usePopup();
 
     return (
         <div>
@@ -79,9 +47,9 @@ export const CompaniesHeader = () => {
                     <CompanyChoose 
                         testid="company_selector"
                         styles={styles}
-                        onAddCompany={handleOpenCreateCompanyPopUp} 
+                        onAddCompany={createCompanyPopup.openPopup} 
                     />
-                    <div id="company_settings-btn" className={styles.selecting__settings} onClick={handleOpenCompanySettingsPopUp}>
+                    <div id="company_settings-btn" className={styles.selecting__settings} onClick={companySettingsPopup.openPopup}>
                         <img src={icons.settings} alt="company_settings-btn" />
                     </div>
             </div>
@@ -115,12 +83,12 @@ export const CompaniesHeader = () => {
                     </div>
                     <div className={styles.employee_management__btn}>
                         {isStructurePage ? (
-                            <div className = {styles.management__btn} onClick={handleOpenCreateDepartmentPopUp}>
+                            <div className = {styles.management__btn} onClick={createDepartmentPopup.openPopup}>
                                 <img src={icons.plus} alt="" />
                                 Добавить отдел
                             </div>
                         ) : (
-                            <div className = {styles.management__btn} onClick={handleOpenInviteEmployeePopUp}>
+                            <div className = {styles.management__btn} onClick={inviteEmployeePopup.openPopup}>
                                 <img src={icons.plus} alt="" />
                                 Пригласить сотрудника
                             </div>
@@ -128,12 +96,10 @@ export const CompaniesHeader = () => {
                     </div>
                 </div>
             </div>
-            <div className={styles.popups}>
-            {isInviteEmployeePopUpVisible && <CompanyInvite onClose={handleCloseInviteEmployeePopUp} />}
-            {isCompanySettingsPopUpVisible && <CompanySettings onClose={handleCloseCompanySettingsPopUp} />}
-            {isCreateCompanyPopUpVisible && <CompanyCreate onClose={handleCloseCreateCompanyPopUp} />}
-            {isCreateDepartmentPopUpVisible && <CreateDepartment onClose={handleCloseCreateDepartmentPopUp} />}
+                {inviteEmployeePopup.isVisible && <CompanyInvite onClose={inviteEmployeePopup.closePopup} />}
+                {companySettingsPopup.isVisible && <CompanySettings onClose={companySettingsPopup.closePopup} />}
+                {createCompanyPopup.isVisible && <CompanyCreate onClose={createCompanyPopup.closePopup} />}
+                {createDepartmentPopup.isVisible && <CreateDepartment onClose={createDepartmentPopup.closePopup} />}
             </div>
-        </div>
     )
 }

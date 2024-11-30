@@ -1,7 +1,10 @@
+.content{
+    position: relative;
+}
+
 .main{
     width: 100%;
     height: calc(100vh - 260px);
-    position: relative;
 }
 
 .loader{

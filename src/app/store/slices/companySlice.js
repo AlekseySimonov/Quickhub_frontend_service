@@ -7,7 +7,7 @@ const initialState ={
     companyTitle: null,
     departments: [],
     departments: [],
-    status: null,
+    status: 'loading',
     error: null,
 }
 
@@ -76,36 +76,11 @@ export const getDepartmentsAPI = createAsyncThunk(
 
 export const deleteDepartmentAPI = createAsyncThunk(
     'company/deleteDepartmentAPI',
-    async (id, { rejectWithValue, getState }) => {
+    async (departmentId, { rejectWithValue, getState }) => {
         try {
             const state = getState().company
-            await companiesService.deleteDepartment(state.companyID, id)
-        } catch (err) {
-            return rejectWithValue(err)
-        }
-    }
-);
-
-
-export const getDepartmentsAPI = createAsyncThunk(
-    'company/getDepartmentsAPI',
-    async (_, { rejectWithValue, getState }) => {
-        try {
-            const state = getState().company
-            const response = await companiesService.getDepartments(state.companyID)
-            return response.data
-        } catch (err) {
-            return rejectWithValue(err)
-        }
-    }
-);
-
-export const deleteDepartmentAPI = createAsyncThunk(
-    'company/deleteDepartmentAPI',
-    async (id, { rejectWithValue, getState }) => {
-        try {
-            const state = getState().company
-            await companiesService.deleteDepartment(state.companyID, id)
+            await companiesService.deleteDepartment(state.companyID, departmentId)
+            return departmentId
         } catch (err) {
             return rejectWithValue(err)
         }
