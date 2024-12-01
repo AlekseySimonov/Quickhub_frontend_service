@@ -39,12 +39,23 @@ export const deleteCompanyAPI = createAsyncThunk(
     async ({ id }, { rejectWithValue }) => {
         try {
             event.preventDefault();
-            console.log('Ты пытаешься удалить следующий id:', id);
             await companiesService.deleteCompany(id);
             return id;
         } catch (err) {
             console.error('Знакомься, меня зовут ошибка:', err);
             return rejectWithValue(err.response || err);
+        }
+    }
+);
+
+export const addDepartmentEmployeeAPI = createAsyncThunk(
+    'company/addDepartmentEmployeeAPI',
+    async ({ id }, { rejectWithValue }) => {
+        try {
+            await companiesService.patchDepartments(id);
+            return id;
+        } catch (err) {
+            return rejectWithValue(err);
         }
     }
 );
@@ -220,6 +231,17 @@ const companySlice = createSlice({
                 state.companyUsers = action.payload
             })
             .addCase(getCompanyUsersAPI.rejected, (state) => {
+                state.status = 'failed'
+            })
+
+            .addCase(addDepartmentEmployeeAPI.pending, (state) => {
+                state.status = 'loading'
+            })
+            .addCase(addDepartmentEmployeeAPI.fulfilled, (state) => {
+                state.status = 'succeeded';
+                // state.companyUsers = action.payload
+            })
+            .addCase(addDepartmentEmployeeAPI.rejected, (state) => {
                 state.status = 'failed'
             })
         }

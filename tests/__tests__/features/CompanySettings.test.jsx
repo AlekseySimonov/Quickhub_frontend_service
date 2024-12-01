@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { CompanySettings } from './../../../src/features/company_settings/index';
 

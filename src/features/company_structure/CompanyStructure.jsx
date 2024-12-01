@@ -18,9 +18,9 @@ export const CompanyStructure = ()=>{
     }
     }, [companyID, dispatch]);
 
-    const departments = useSelector(state => state.company.departments)
+    const {departments, companyUsers} = useSelector(state => state.company)
 
-    const { nodes, edges } = createGraph(departments)
+    const { nodes, edges } = createGraph(departments, companyUsers)
 
     const nodeTypes = {
     departmentNode: DepartmentNode
