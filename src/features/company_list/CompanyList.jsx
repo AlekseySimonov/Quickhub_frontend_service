@@ -4,9 +4,8 @@ import { icons } from '../../shared/ui/icons/companies';
 import { useSelector } from 'react-redux';
 import { CompanyListSettings } from '../company_list-settings/CompanyListSettings';
 export const CompanyList = () => {
-  const {companiesList, companyID} = useSelector(state => state.company);
-  const selectedCompany = companiesList.find(company => company.id === companyID);
-  const employees = selectedCompany ? selectedCompany.users : [];
+  const {companyUsers} = useSelector(state => state.company);
+  const employees = companyUsers ? companyUsers : [];
 
   const employeesPerPage = 8;
   const totalEmployees = employees.length;
@@ -69,6 +68,11 @@ export const CompanyList = () => {
               </div>
               <div className={styles.employees__list}>
                   <div className={styles['employees__list-inner']}>
+                      {totalEmployees === 0 && 
+                        <div className={styles.container_empty}>
+                          На данный момент в компании нет сотрудников.
+                        </div>
+                      }
                       {currentEmployees.map((employee) => (
                           <div key={employee.id} className={styles.employees__item}>
                               <div className={`${styles.container} ${styles.employee}`}>
@@ -79,7 +83,7 @@ export const CompanyList = () => {
                                   )}
                                   {showColumns.fullName && (
                                       <div className={`${styles.employee__column} ${styles.employee__info}`}>
-                                          <div className={styles.employee__fsname}>{employee.fullName || 'Фамилия Имя'}</div>
+                                          <div className={styles.employee__fsname}>{employee.last_name || 'Фамилия'} {employee.first_name || 'Имя'}</div>
                                           <div className={styles.employee__type}>{employee.position || 'Позиция не указана'}</ div >
                                       </ div >
                                   )}
@@ -105,7 +109,7 @@ export const CompanyList = () => {
                                       < div className={`${ styles.employee__column } ${ styles.employee__email }`}>{ employee.email || '-'}</ div >
                                   )}
                                   {showColumns.workPhone && (
-                                      < div className={`${ styles.employee__column } ${ styles.employee__workPhone }`}>{ employee.workPhone || '-'}</ div >
+                                      < div className={`${ styles.employee__column } ${ styles.employee__workPhone }`}>{ employee.phone || '-'}</ div >
                                   )}
                                   {showColumns.personalPhone && (
                                       < div className={`${ styles.employee__column } ${ styles.employee__personalPhone }`}>{ employee.personalPhone || '-'}</ div >

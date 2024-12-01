@@ -27,19 +27,27 @@
 .main {
     color: #000;
     width: 100%;
+    overflow: hidden;
 }
 
 .container {
 display: flex;
 width: max-content;
+overflow: hidden;
 justify-content: space-between;
 margin-left: 40px;
 }
 
+.container_empty {
+    display: flex;
+    padding-top: 15px;
+    padding-left: 60px;
+}
+
 .employees {
-max-width: 1655px;
-width: 100%;
+width: calc(100vw - 15%);
 overflow: hidden;
+overflow-x: auto;
 background-color: #fff;
 border-radius: 10px;
 }
@@ -168,7 +176,8 @@ border-radius: 50%;
 }
 
 .employee__email, .label-email {
-    width: 250px;
+    max-width: 300px;
+    width: 300px;
 }
 .employee__workPhone, .label-workPhone {
     width: 220px;
