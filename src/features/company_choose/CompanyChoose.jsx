@@ -4,7 +4,6 @@ import { changeCompany } from "../../app/store/slices/companySlice";
 import { useDispatch, useSelector } from "react-redux";
 
 export const CompanyChoose = ({ testid, onAddCompany, styles }) => {
-   
     const dispatch = useDispatch();
     const [isOpen, setIsOpen] = useState(false);
     
@@ -24,12 +23,12 @@ export const CompanyChoose = ({ testid, onAddCompany, styles }) => {
     });
     
     const handleOptionClick = (company) => {
-        if (company.title === "+ Добавить компанию") {
-            onAddCompany();
-            setIsOpen(false);
-            return;
-        }
+    if (company.title === "+ Добавить компанию") {
+        onAddCompany();
+    } else {
         dispatch(changeCompany({ id: company.id, title: company.title }));
+    }
+        setSelectedOption(company.title);
         setIsOpen(false);
     };
 

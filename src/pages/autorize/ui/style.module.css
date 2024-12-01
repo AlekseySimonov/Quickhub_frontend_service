@@ -13,7 +13,6 @@ body{
 .content {
 	display: flex;
 	flex-direction: column;
-	width: 500px;
 	padding-inline: 100px;
 	margin: auto;
 	gap: 30px;
@@ -33,6 +32,7 @@ body{
     display: flex;
     flex-direction: column;
     gap: 20px;
+	width: 500px;
 }
 
 .loader{

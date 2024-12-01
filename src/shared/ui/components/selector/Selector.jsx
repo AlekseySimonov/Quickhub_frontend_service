@@ -7,7 +7,9 @@ export const Selector = ({ list, label, inputLabel, onSelect, width }) => {
     const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
-        onSelect(searchTerm);
+        if (typeof onSelect === 'function') {
+            onSelect(searchTerm);
+        }
     }, [searchTerm, onSelect]);
 
     const filter = list.filter(item => 
@@ -47,7 +49,9 @@ export const Selector = ({ list, label, inputLabel, onSelect, width }) => {
                                 onClick={() => {
                                     setSearchTerm(item.title);
                                     setDropdownOpen(false);
-                                    onSelect(item.title, item.id)
+                                    if (typeof onSelect === 'function') {
+                                        onSelect(item.title, item.id);
+                                    }
                                 }}
                             >
                                 {item.title}

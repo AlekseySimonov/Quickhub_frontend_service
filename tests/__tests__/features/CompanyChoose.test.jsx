@@ -1,25 +1,37 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { CompanyChoose } from './../../../src/features/company_choose/index';
+import { Provider } from 'react-redux';
+import configureStore from 'redux-mock-store';
+import { changeCompany } from '../../../src/app/store/slices/companySlice';
+
+const mockStore = configureStore([]);
 
 describe('CompanyChoose Component', () => {
     const mockOnAddCompany = jest.fn();
-    const mockSetSelectedCompanyId = jest.fn();
     const companiesList = [
         { id: 1, title: 'Компания A' },
         { id: 2, title: 'Компания B' },
         { id: 3, title: 'Компания C' },
     ];
 
+    let store;
+
     beforeEach(() => {
+        store = mockStore({
+            company: {
+                companiesList: companiesList,
+                companyTitle: null 
+            }
+        });
+
         render(
-            <CompanyChoose
-                testid="company-choose"
-                onAddCompany={mockOnAddCompany}
-                styles={{ select: '', select_toggle: '', active: '', select_menu: '', arrow: '' }}
-                companiesList={companiesList}
-                selectedCompanyId={null}
-                setSelectedCompanyId={mockSetSelectedCompanyId}
-            />
+            <Provider store={store}>
+                <CompanyChoose
+                    testid="company-choose"
+                    onAddCompany={mockOnAddCompany}
+                    styles={{ select: '', select_toggle: '', active: '', select_menu: '', arrow: '' }}
+                />
+            </Provider>
         );
     });
 
@@ -52,8 +64,12 @@ describe('CompanyChoose Component', () => {
         
         const companyA = screen.getByText('Компания A');
         fireEvent.click(companyA);
+
+        expect(store.getActions()).toContainEqual({
+            type: changeCompany.type,
+            payload: { id: 1, title: 'Компания A' }
+        });
         
-        expect(mockSetSelectedCompanyId).toHaveBeenCalledWith(1);
         expect(button).toHaveTextContent('Компания A');
     });
 
