@@ -1,54 +1,84 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { CompanySettings } from './../../../src/features/company_settings/index';
+import { Provider } from 'react-redux';
+import configureStore from 'redux-mock-store';
+import { deleteCompanyAPI, renameCompanyAPI } from '../../../src/app/store/slices/companySlice';
+
+const mockStore = configureStore([]);
+
+jest.mock('../../../src/app/store/slices/companySlice', () => ({
+    deleteCompanyAPI: jest.fn(),
+    renameCompanyAPI: jest.fn(),
+}));
 
 describe('CompanySettings Component', () => {
+    let store;
     const mockOnClose = jest.fn();
-    const initialTitle = 'Старая Компания';
-
-    beforeAll(() => {
-        jest.spyOn(console, 'log').mockImplementation(() => {});
-    });
-
-    afterAll(() => {
-        jest.restoreAllMocks();
-    });
 
     beforeEach(() => {
-        render(<CompanySettings onClose={mockOnClose} companyTitle={initialTitle} />);
-        jest.resetAllMocks()
+        store = mockStore({
+            company: {
+                companyID: '1',
+                companyTitle: 'Old Company Name',
+            },
+        });
+
+        store.dispatch = jest.fn();
+        render(
+            <Provider store={store}>
+                <CompanySettings onClose={mockOnClose} />
+            </Provider>
+        );
+        jest.resetAllMocks();
     });
 
-    test('renders the component with correct title', () => {
-        const title = screen.getByText('Настройки компании');
-        expect(title).toBeInTheDocument();
+    test('renders correctly with initial state', () => {
+        expect(screen.getByText(/настройки компании/i)).toBeInTheDocument();
+        expect(screen.getByPlaceholderText(/введите название компании/i)).toHaveValue('Old Company Name');
     });
 
-    test('displays the current company title in the input', () => {
-        const input = screen.getByPlaceholderText('Введите название компании');
-        expect(input.value).toBe(initialTitle);
-    });
-
-    test('allows changing the company name', () => {
-        const input = screen.getByPlaceholderText('Введите название компании');
-        fireEvent.change(input, { target: { value: 'Новая Компания' } });
-        expect(input.value).toBe('Новая Компания');
-    });
-
-    test('submits the form and logs the new company name', () => {
-        const input = screen.getByPlaceholderText('Введите название компании');
-        fireEvent.change(input, { target: { value: 'Новая Компания' } });
+    test('handles input change', () => {
+        const input = screen.getByPlaceholderText(/введите название компании/i);
+        fireEvent.change(input, { target: { value: 'New Company Name' } });
         
-        const form = screen.getByTestId('form_company-settings');
-        fireEvent.submit(form);
-
-        expect(console.log).toHaveBeenCalledWith('Изменить название компании на:', 'Новая Компания');
-        expect(mockOnClose).toHaveBeenCalledTimes(1);
+        expect(input).toHaveValue('New Company Name');
     });
 
-    test('calls onClose when close button is clicked', () => {
-        const closeButton = screen.getByTestId('popup_close');
-        fireEvent.click(closeButton);
+    test('saves new company name when valid', () => {
+        const input = screen.getByPlaceholderText(/введите название компании/i);
+        fireEvent.change(input, { target: { value: 'New Company Name' } });
         
-        expect(mockOnClose).toHaveBeenCalledTimes(1);
+        fireEvent.click(screen.getByText(/сохранить/i)); // Click the save button
+
+        expect(store.dispatch).toHaveBeenCalledWith(renameCompanyAPI({ id: '1', title: 'New Company Name' }));
+        expect(mockOnClose).toHaveBeenCalled();
+    });
+
+    test('shows alert when new name is empty', () => {
+        window.alert = jest.fn(); // Mock alert
+        const input = screen.getByPlaceholderText(/введите название компании/i);
+        fireEvent.change(input, { target: { value: '' } });
+        
+        fireEvent.click(screen.getByText(/сохранить/i)); // Click the save button
+
+        expect(window.alert).toHaveBeenCalledWith('Название компании не может быть пустым');
+    });
+
+    test('shows alert when new name is the same as the old name', () => {
+        window.alert = jest.fn(); // Mock alert
+        const input = screen.getByPlaceholderText(/введите название компании/i);
+        
+        fireEvent.change(input, { target: { value: 'Old Company Name' } });
+        
+        fireEvent.click(screen.getByText(/сохранить/i)); // Click the save button
+
+        expect(window.alert).toHaveBeenCalledWith('Новое название компании должно отличаться от предыдущего');
+    });
+
+    test('deletes company when delete button is clicked', () => {
+        fireEvent.click(screen.getByText(/удалить компанию/i));
+
+        expect(store.dispatch).toHaveBeenCalledWith(deleteCompanyAPI({ id: '1' }));
+        expect(mockOnClose).toHaveBeenCalled();
     });
 });

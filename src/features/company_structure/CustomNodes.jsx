@@ -15,6 +15,7 @@ export const DepartmentNode = ({ data }) => {
         const newOpenEmployeeIds = new Set(openEmployeeIds)
         if (newOpenEmployeeIds.has(id)) {
             newOpenEmployeeIds.delete(id)
+            setIsAddEmployeeOpen(false)
         } else {
             newOpenEmployeeIds.add(id)
         }

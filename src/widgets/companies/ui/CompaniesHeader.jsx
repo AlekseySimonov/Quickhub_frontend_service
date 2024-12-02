@@ -71,7 +71,7 @@ export const CompaniesHeader = () => {
                     <div className={styles.employee_management__search}>
                         <Search
                                     testid = {'search'}
-                                    placeholder = {'Поиск подразделения'}
+                                    placeholder = {'Поиск отдела'}
                         />
                     </div>
                     <div className={styles.employee_management__filter}>
