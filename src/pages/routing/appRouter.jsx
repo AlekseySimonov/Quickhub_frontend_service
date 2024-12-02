@@ -10,11 +10,11 @@ import { Settings } from "../../widgets/settings";
 import { Help } from "../../widgets/help";
 
 import { AutorizePage } from "../autorize/ui/AutorizePage";
-import { Registration } from "../../features/autorize/registration";
-import { Login } from "../../features/autorize/login";
+import { Registration } from "../../entities/autorize/registration";
+import { Login } from "../../entities/autorize/login";
 
-import { CompanyStructure } from "../../features/company_structure";
-import { CompanyList } from "../../features/company_list";
+import { CompanyStructure } from "../../entities/company_structure";
+import { CompanyList } from "../../entities/company_list";
 import { IsAuth, CheckAuth } from "../../shared/config";
 import { Loader } from "../../shared/ui/components";
 

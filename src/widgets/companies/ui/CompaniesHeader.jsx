@@ -7,11 +7,7 @@ import styles from './styles.module.css'
 import {Search} from '../../../shared/ui/components/index'
 import {Filter} from '../../../shared/ui/components/index'
 
-import {CompanyInvite} from '../../../features/company_invite/index'
-import {CompanyChoose} from '../../../features/company_choose/index'
-import {CompanySettings} from '../../../features/company_settings/index'
-import {CompanyCreate} from '../../../features/company_create/index'
-import {CreateDepartment} from '../../../features/company_create_department/index';
+import { CompanyFeatures } from '../../../features/company';
 
 export const CompaniesHeader = () => {
 
@@ -44,7 +40,7 @@ export const CompaniesHeader = () => {
                 <div className={styles.selecting__title}>
                         Выбрать компанию
                     </div>
-                    <CompanyChoose 
+                    <CompanyFeatures.CompanyChoose 
                         testid="company_selector"
                         styles={styles}
                         onAddCompany={createCompanyPopup.openPopup} 
@@ -96,10 +92,10 @@ export const CompaniesHeader = () => {
                     </div>
                 </div>
             </div>
-                {inviteEmployeePopup.isVisible && <CompanyInvite onClose={inviteEmployeePopup.closePopup} />}
-                {companySettingsPopup.isVisible && <CompanySettings onClose={companySettingsPopup.closePopup} />}
-                {createCompanyPopup.isVisible && <CompanyCreate onClose={createCompanyPopup.closePopup} />}
-                {createDepartmentPopup.isVisible && <CreateDepartment onClose={createDepartmentPopup.closePopup} />}
+                {inviteEmployeePopup.isVisible && <CompanyFeatures.CompanyInvite onClose={inviteEmployeePopup.closePopup} />}
+                {companySettingsPopup.isVisible && <CompanyFeatures.CompanySettings onClose={companySettingsPopup.closePopup} />}
+                {createCompanyPopup.isVisible && <CompanyFeatures.CompanyCreate onClose={createCompanyPopup.closePopup} />}
+                {createDepartmentPopup.isVisible && <CompanyFeatures.CreateDepartment onClose={createDepartmentPopup.closePopup} />}
             </div>
     )
 }

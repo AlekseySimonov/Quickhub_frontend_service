@@ -1,0 +1,27 @@
+.reactFlow{
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    border-radius: 15px;
+    color: black;
+
+}
+
+.zoomControl {
+    margin-top: 10px;
+}
+
+.zoomControl label {
+    margin-right: 10px;
+}
+
+.container_empty {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #898989;
+    height: 100%;
+    min-height: 350px;
+}
