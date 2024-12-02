@@ -13,7 +13,7 @@ export const CompanyList = () => {
   
   const [currentPage, setCurrentPage] = useState(1);
 
-  const [showColumns, setShowColumns] = useState({
+  const defaultSettings = {
     photo: true,
     fullName: true,
     patronymic: false,
@@ -28,8 +28,14 @@ export const CompanyList = () => {
     tg: false,
     vk: false,
     regDate: false,
-  });
+  };
 
+  const loadSettings = () => {
+    const savedSettings = localStorage.getItem('companyListSettings');
+    return savedSettings ? JSON.parse(savedSettings) : defaultSettings;
+  };
+
+  const [showColumns, setShowColumns] = useState(loadSettings());
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   const indexOfLastEmployee = currentPage * employeesPerPage;
@@ -38,7 +44,13 @@ export const CompanyList = () => {
 
   const handleSaveSettings = (settings) => {
     setShowColumns(settings);
+    localStorage.setItem('companyListSettings', JSON.stringify(settings));
     setIsSettingsOpen(false);
+  };
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
   };
 
   return (
@@ -114,6 +126,7 @@ export const CompanyList = () => {
                                   {showColumns.personalPhone && (
                                       < div className={`${ styles.employee__column } ${ styles.employee__personalPhone }`}>{ employee.personalPhone || '-'}</ div >
                                   )}
+
                                   {showColumns.tg && (
                                       < div className={`${ styles.employee__column } ${ styles.employee__tg }`}>{ employee.tg || '-'}</ div >
                                   )}
@@ -121,7 +134,7 @@ export const CompanyList = () => {
                                       < div className={`${ styles.employee__column } ${ styles.employee__vk }`}>{ employee.vk || '-'}</ div >
                                   )}
                                   {showColumns.regDate && (
-                                      < div className={`${ styles.employee__column } ${ styles.employee__regDate }`}>{ employee.regDate || '-'}</ div >
+                                      < div className={`${ styles.employee__column } ${ styles.employee__regDate }`}>{ formatDate(employee.date_joined) || '-'}</ div >
                                   )}
                               </ div >
                           </ div >
@@ -129,7 +142,7 @@ export const CompanyList = () => {
                   </ div >
               </ div >
             </ div >
-            {totalPages > 1 && (
+            {totalPages >= 1 && (
                   <Pagination 
                       totalEmployees={totalEmployees}
                       totalPages={totalPages}
@@ -155,9 +168,9 @@ const Pagination = ({ totalEmployees, totalPages, currentPage, setCurrentPage })
     <div className={styles.pagination}>
       <div className={`${styles.container}`}>
         {currentPage > 1 && (
-          <button onClick={() => setCurrentPage(currentPage - 1)} className={`${styles.pagination__arrow} ${styles.prev}`}>
-              
-          </button>
+          <div onClick={() => setCurrentPage(currentPage - 1)} className={`${styles.pagination__arrow} ${styles.prev}`}>
+            {/* <img src={icons.arrowPrev} alt="previous page"/> */}
+          </div>
         )}
 
         <div className={styles.pagination__list}>
@@ -173,9 +186,9 @@ const Pagination = ({ totalEmployees, totalPages, currentPage, setCurrentPage })
         </div>
 
         {currentPage < totalPages && (
-          <button onClick={() => setCurrentPage(currentPage + 1)} className={`${styles.pagination__arrow} ${styles.next}`}>
-             
-          </button>
+          <div onClick={() => setCurrentPage(currentPage + 1)} className={`${styles.pagination__arrow} ${styles.next}`}>
+            {/* <img src={icons.arrowNext} alt="next page"/>             */}
+          </div>
         )}
       </div>
       <div className={styles.employees__countEmployee}>

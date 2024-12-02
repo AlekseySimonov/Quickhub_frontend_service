@@ -7,6 +7,8 @@ import X from './X.svg'
 import popupX from './popupX.svg'
 import isChecked from './isChecked.svg'
 import deleteBtn from './delete.png'
+import arrowPrev from './arrowPrev.svg'
+import arrowNext from './arrowNext.svg'
 
 export const icons = {  
     arrow,
@@ -18,4 +20,6 @@ export const icons = {
     popupX,
     deleteBtn,
     isChecked,
+    arrowPrev,
+    arrowNext
 }

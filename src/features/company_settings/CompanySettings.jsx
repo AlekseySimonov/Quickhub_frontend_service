@@ -14,7 +14,7 @@ export const CompanySettings = ({ onClose }) => {
 
   const dispatch = useDispatch();
   const id = useSelector(state => state.company.companyID);
-  const companyTitle = useSelector(state => state.company.companyTitle);
+  const companyTitle = useSelector(state => state.company.companyTitle)
 
   const settingsOptions = [
     { label: 'Изменить название компании' },

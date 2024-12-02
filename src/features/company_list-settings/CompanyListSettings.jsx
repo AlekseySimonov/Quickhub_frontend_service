@@ -3,8 +3,10 @@ import styles from './CompanyListSettings.module.css';
 import { icons } from '../../shared/ui/icons/companies';
 import useOnclickOutside from "react-cool-onclickoutside";
 
-export const CompanyListSettings = ({ onSave, onClose, initialSettings }) => {
-  const [checkboxes, setCheckboxes] = useState(initialSettings || defaultSettings || []);
+export const CompanyListSettings = ({ onSave, onClose }) => { 
+  const ref = useOnclickOutside(() => {
+    onClose();
+  });
 
   const defaultSettings = {
     photo: true,
@@ -41,21 +43,26 @@ export const CompanyListSettings = ({ onSave, onClose, initialSettings }) => {
     tg: "Telegram",
   };
 
-  useEffect(() => {
-    setCheckboxes(initialSettings);
-  }, [initialSettings]);
+  const loadSettings = () => {
+    const savedSettings = localStorage.getItem('companyListSettings');
+    return savedSettings ? JSON.parse(savedSettings) : defaultSettings;
+  };
 
+  const [checkboxes, setCheckboxes] = useState(loadSettings());
+
+  useEffect(() => {
+    localStorage.setItem('companyListSettings', JSON.stringify(checkboxes));
+  }, [checkboxes]);
+
+
+
+  
   const handleCheckboxChange = (name) => {
     setCheckboxes((prev) => ({
       ...prev,
       [name]: !prev[name],
     }));
   };
-
-  const ref = useOnclickOutside(() => {
-    console.log('Ты кликнул вне формы')
-    onClose()
-  });
 
   const handleSubmit = () => {
     onSave(checkboxes);
@@ -69,7 +76,6 @@ export const CompanyListSettings = ({ onSave, onClose, initialSettings }) => {
   const handleResetToDefault = () => {
     setCheckboxes(defaultSettings);
   };
-
 
   return (
    <div className={styles['pop-up__outer']}>

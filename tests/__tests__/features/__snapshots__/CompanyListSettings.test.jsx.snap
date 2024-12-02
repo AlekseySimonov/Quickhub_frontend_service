@@ -1,0 +1,268 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CompanyListSettings renders correctly and matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="pop-up__outer"
+  >
+    <div
+      class="pop-up"
+    >
+      <div
+        class="pop-up__header"
+      >
+        <div
+          class="container"
+        >
+          <div
+            class="pop-up__title"
+          >
+            Настройки списка "Сотрудники"
+          </div>
+          <div
+            class="pop-up__closeBtn"
+          >
+            <img
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="pop-up__content"
+      >
+        <div
+          class="container"
+        >
+          <div
+            class="pop-up__form"
+          >
+            <div
+              class="pop-up__column"
+            >
+              <div
+                class="pop-up__checkbox checkbox"
+              >
+                <div
+                  class="checkbox__box checked"
+                >
+                  <img
+                    class="checkboxIcon"
+                  />
+                </div>
+                <div
+                  class="checkbox__label"
+                >
+                  Фото
+                </div>
+              </div>
+              <div
+                class="pop-up__checkbox checkbox"
+              >
+                <div
+                  class="checkbox__box checked"
+                >
+                  <img
+                    class="checkboxIcon"
+                  />
+                </div>
+                <div
+                  class="checkbox__label"
+                >
+                  Имя и фамилия
+                </div>
+              </div>
+              <div
+                class="pop-up__checkbox checkbox"
+              >
+                <div
+                  class="checkbox__box "
+                />
+                <div
+                  class="checkbox__label"
+                >
+                  Отчество
+                </div>
+              </div>
+              <div
+                class="pop-up__checkbox checkbox"
+              >
+                <div
+                  class="checkbox__box "
+                />
+                <div
+                  class="checkbox__label"
+                >
+                  Город
+                </div>
+              </div>
+              <div
+                class="pop-up__checkbox checkbox"
+              >
+                <div
+                  class="checkbox__box "
+                />
+                <div
+                  class="checkbox__label"
+                >
+                  Пол
+                </div>
+              </div>
+              <div
+                class="pop-up__checkbox checkbox"
+              >
+                <div
+                  class="checkbox__box "
+                />
+                <div
+                  class="checkbox__label"
+                >
+                  Дата рождения
+                </div>
+              </div>
+              <div
+                class="pop-up__checkbox checkbox"
+              >
+                <div
+                  class="checkbox__box checked"
+                >
+                  <img
+                    class="checkboxIcon"
+                  />
+                </div>
+                <div
+                  class="checkbox__label"
+                >
+                  Должность
+                </div>
+              </div>
+            </div>
+            <div
+              class="pop-up__column"
+            >
+              <div
+                class="pop-up__checkbox checkbox"
+              >
+                <div
+                  class="checkbox__box checked"
+                >
+                  <img
+                    class="checkboxIcon"
+                  />
+                </div>
+                <div
+                  class="checkbox__label"
+                >
+                  Подразделение
+                </div>
+              </div>
+              <div
+                class="pop-up__checkbox checkbox"
+              >
+                <div
+                  class="checkbox__box checked"
+                >
+                  <img
+                    class="checkboxIcon"
+                  />
+                </div>
+                <div
+                  class="checkbox__label"
+                >
+                  E-mail
+                </div>
+              </div>
+              <div
+                class="pop-up__checkbox checkbox"
+              >
+                <div
+                  class="checkbox__box checked"
+                >
+                  <img
+                    class="checkboxIcon"
+                  />
+                </div>
+                <div
+                  class="checkbox__label"
+                >
+                  Рабочий телефон
+                </div>
+              </div>
+              <div
+                class="pop-up__checkbox checkbox"
+              >
+                <div
+                  class="checkbox__box "
+                />
+                <div
+                  class="checkbox__label"
+                >
+                  Мобильный телефон
+                </div>
+              </div>
+              <div
+                class="pop-up__checkbox checkbox"
+              >
+                <div
+                  class="checkbox__box "
+                />
+                <div
+                  class="checkbox__label"
+                >
+                  Telegram
+                </div>
+              </div>
+              <div
+                class="pop-up__checkbox checkbox"
+              >
+                <div
+                  class="checkbox__box "
+                />
+                <div
+                  class="checkbox__label"
+                >
+                  Vk
+                </div>
+              </div>
+              <div
+                class="pop-up__checkbox checkbox"
+              >
+                <div
+                  class="checkbox__box "
+                />
+                <div
+                  class="checkbox__label"
+                >
+                  Дата регистрации
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="pop-up__actions"
+          >
+            <button
+              class="pop-up__btn pop-up__btn-default"
+              type="button"
+            >
+              По умолчанию
+            </button>
+            <button
+              class="pop-up__btn pop-up__btn-submit"
+              type="button"
+            >
+              Сохранить
+            </button>
+            <button
+              class="pop-up__btn pop-up__btn-cancel"
+              type="button"
+            >
+              Отменить
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

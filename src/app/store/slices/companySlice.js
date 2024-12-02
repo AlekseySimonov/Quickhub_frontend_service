@@ -5,6 +5,7 @@ const initialState ={
     companiesList: [],
     companyID: null,
     companyTitle: null,
+    companyDescription: null,
     companyUsers: [],
     departments: [],
     status: 'loading',
@@ -147,6 +148,8 @@ const companySlice = createSlice({
             .addCase(postCompanyAPI.fulfilled, (state, action) => {
                 state.status = 'succeeded'
                 state.companiesList.push(action.payload);
+                state.companyID = action.payload.id
+                state.companyTitle = action.payload.title
             })
 
             .addCase(postCompanyAPI.rejected, (state) => {
@@ -194,7 +197,6 @@ const companySlice = createSlice({
                 state.error = 'deleteError'
                 console.log('Ну, в общем, удалить не получилось.')
             })
-
             .addCase(renameCompanyAPI.pending, (state) => {
                 state.status = 'loading'
             })
