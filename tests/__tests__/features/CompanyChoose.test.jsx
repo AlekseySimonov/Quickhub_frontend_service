@@ -1,8 +1,8 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { CompanyChoose } from './../../../src/features/company_choose/index';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { changeCompany } from '../../../src/app/store/slices/companySlice';
+import { CompanyFeatures } from './../../../src/features/company/index';
 
 const mockStore = configureStore([]);
 
@@ -26,7 +26,7 @@ describe('CompanyChoose Component', () => {
 
         render(
             <Provider store={store}>
-                <CompanyChoose
+                <CompanyFeatures.CompanyChoose
                     testid="company-choose"
                     onAddCompany={mockOnAddCompany}
                     styles={{ select: '', select_toggle: '', active: '', select_menu: '', arrow: '' }}

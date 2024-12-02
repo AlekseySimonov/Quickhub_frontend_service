@@ -1,8 +1,8 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { CompanyCreate } from './../../../src/features/company_create/index';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { postCompanyAPI } from '../../../src/app/store/slices/companySlice';
+import { CompanyFeatures } from '../../../src/features/company';
 
 
 const mockStore = configureStore();
@@ -29,7 +29,7 @@ describe('CompanyCreate Component', () => {
         store.dispatch = jest.fn(); 
         render(
             <Provider store={store}>
-                <CompanyCreate onClose={mockOnClose} />
+                <CompanyFeatures.CompanyCreate onClose={mockOnClose} />
             </Provider>
         );
 
