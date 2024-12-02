@@ -19,11 +19,15 @@ export const getDepartments = (companyId) => {
     return api.get(url)
 }
 
+export const patchDepartments =(companyId, id, data) => {
+    const url =`${URL.DEPARTMENTS.replace('{company_pk}', companyId)}/${id}`
+    return api.patch(url, data);
+}
+
 export const deleteDepartment = (companyId, id) => {
     const url =`${URL.DEPARTMENTS.replace('{company_pk}', companyId)}/${id}`
     return api.delete(url)
 }
-
 
 export const deleteCompany = (id) => {
     const url = `${URL.COMPANIES}/${id}`;

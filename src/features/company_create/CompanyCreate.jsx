@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styles from './CompanyCreate.module.css';
 import { icons } from '../../shared/ui/icons/companies';
 import useOnclickOutside from "react-cool-onclickoutside";
@@ -12,7 +12,6 @@ export const CompanyCreate = ({ onClose }) => {
   });
   
   const dispatch = useDispatch()
-  const companies = useSelector(state => state.company.companiesList)
   const email = useSelector(state => state.user.email)
 
   const [companyName, setCompanyName] = useState('');
@@ -23,7 +22,10 @@ export const CompanyCreate = ({ onClose }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('Создать компанию:', companyName);
+    if (!companyName.trim()) {
+      alert('Название компании не может быть пустым')
+      return;
+    }
     dispatch(postCompanyAPI({title: companyName, email}))
     onClose();
   };

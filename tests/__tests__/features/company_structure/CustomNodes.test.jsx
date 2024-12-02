@@ -35,6 +35,10 @@ const noUsersData = {
     users: [],
 };
 
+beforeEach(() => {
+    jest.clearAllMocks()
+});
+
 describe('DepartmentNode Component', () => {
     test('renders department title and user info', () => {
         renderComponent({ data: defaultData });
@@ -82,8 +86,8 @@ describe('DepartmentNode Component - Employees Section', () => {
     renderComponent({ data: defaultData });
 
     fireEvent.click(screen.getByText('Сотрудники'));
-
     const johnDoe = screen.getAllByText('John Doe');
+
     expect(johnDoe.length).toBe(1)
     expect(screen.getByText('Jane Smith')).toBeInTheDocument();
     });
@@ -91,17 +95,33 @@ describe('DepartmentNode Component - Employees Section', () => {
     test('closes employees section when close button is clicked', () => {
         renderComponent({ data: defaultData });
 
-        // Open the employees section first
         fireEvent.click(screen.getByText('Сотрудники'));
-
-        // Check if John Doe is displayed
         expect(screen.getByText('Jane Smith')).toBeInTheDocument();
 
-        // Now click the close button
-        fireEvent.click(screen.getByAltText('Close')); // This will work if alt is added
-
-        // Verify that John Doe is no longer displayed
+        fireEvent.click(screen.getByAltText('Close'));
         expect(screen.queryByText('Jane Smith')).not.toBeInTheDocument();
     });
 
+});
+
+describe('Add Employee Modal', () => {
+    test('opens Add Employee modal when button is clicked', () => {
+        renderComponent({ data: defaultData });
+
+        fireEvent.click(screen.getByText('Сотрудники'));
+        fireEvent.click(screen.getByText('Добавить сотрудника'));
+        const addButton = screen.getByText('Добавить');
+        expect(addButton).toBeInTheDocument();
+    });
+
+    test('closes Add Employee modal when close button is clicked', () => {
+    renderComponent({ data: defaultData });
+    fireEvent.click(screen.getByText('Сотрудники'));
+
+    fireEvent.click(screen.getByText('Добавить сотрудника'));
+
+    fireEvent.click(screen.getByAltText('CloseBtn'));
+
+    expect(screen.queryByText('Добавить')).not.toBeInTheDocument();
+    });
 });

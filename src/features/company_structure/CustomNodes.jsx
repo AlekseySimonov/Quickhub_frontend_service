@@ -15,6 +15,7 @@ export const DepartmentNode = ({ data }) => {
         const newOpenEmployeeIds = new Set(openEmployeeIds)
         if (newOpenEmployeeIds.has(id)) {
             newOpenEmployeeIds.delete(id)
+            setIsAddEmployeeOpen(false)
         } else {
             newOpenEmployeeIds.add(id)
         }
@@ -35,6 +36,19 @@ export const DepartmentNode = ({ data }) => {
         dispatch(deleteDepartmentAPI(id))
     }
 
+    const employees = data.companyUsers || [];
+    const users = Array.isArray(employees) && employees.length > 0 
+    ? employees.map(employee => ({
+        id: employee.id,
+        title: `${employee.first_name} ${employee.last_name}`
+    })) : []
+
+    const [selectedItem, setSelectedItem] = useState({ title: '', id: '' })
+
+    const handleAddEmployeeChange = (newSearchTerm) => {
+        setSelectedItem(newSearchTerm);
+    };
+
     return (
         <div className={styles.node}>
             <div className={styles.department}>
@@ -44,7 +58,12 @@ export const DepartmentNode = ({ data }) => {
                         <div className={styles.name}>
                             {data.title}
                         </div>
-                        <img className={styles.deleteBtn} onClick={() => deleteDepartmentClick(data.id)} src={icons.deleteBtn} />
+                        <img 
+                        className={styles.deleteBtn} 
+                        onClick={() => deleteDepartmentClick(data.id)} 
+                        src={icons.deleteBtn} 
+                        alt={'Delete'}
+                        />
                     </div>
                 )}
 
@@ -81,7 +100,11 @@ export const DepartmentNode = ({ data }) => {
                         />
                             {data.users.slice(1).map(user => (
                                 <div key={user.id} className={styles.employee} style={{ backgroundColor: data.color }}>
-                                    <img className={styles.photo} src={data.photo} alt={user.fullName} />
+                                    <img 
+                                    className={styles.photo} 
+                                    src={data.photo} 
+                                    alt={user.fullName} 
+                                    />
                                     <div className={styles.label__employee}>
                                         <div className={styles.name}>
                                             {user.fullName}
@@ -90,7 +113,10 @@ export const DepartmentNode = ({ data }) => {
                                             {user.position}
                                         </div>
                                     </div>
-                                    <img src={icons.deleteBtn} className={styles.deleteBtn} onClick={() => deleteEmployeeClick(user.id)} />
+                                    <img src={icons.deleteBtn} 
+                                    className={styles.deleteBtn} 
+                                    onClick={() => deleteEmployeeClick(user.id)} 
+                                    />
                                 </div>
                             ))}
                         <button className = {styles.addEmployeeBtn} onClick={() => handleAddEmployee(data.id)}>
@@ -108,12 +134,14 @@ export const DepartmentNode = ({ data }) => {
                                 src={icons.popupX} 
                                 className={styles.closeBtn} 
                                 onClick={() => setIsAddEmployeeOpen(false)}
+                                alt ={'CloseBtn'}
                             />
                         </div>
                         <Selector
-                            list = {[]}
+                            list = {users}
                             inputLabel = {'Выберите сотрудника'}
                             width= {'400px'}
+                            onSelect={handleAddEmployeeChange}
                         />
                         <div className={styles.actions}>
                             <button onClick={handleAddEmployee} className={`${styles.btn} ${styles.btnSubmit}`}>Добавить</button>
@@ -121,7 +149,6 @@ export const DepartmentNode = ({ data }) => {
                         </div>
                     </div>
                 )}
-                
                 <Handle type="target" position={Position.Top} id="target" style={{ opacity: 0 }} />
             </div>
         </div>

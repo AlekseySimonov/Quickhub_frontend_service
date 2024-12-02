@@ -1,70 +1,70 @@
-// import { render, screen, fireEvent } from '@testing-library/react';
-// import { Select } from '../../../../src/shared/ui/components/select/Select';
+import { render, screen, fireEvent } from '@testing-library/react';
+import { Select } from '../../../../src/shared/ui/components/select/Select';
 
-// describe('Select Component', () => {
-//     const mockOnAddCompany = jest.fn();
-//     const mockSelectOption = jest.fn();
-//     const options = ["Option 1", "Option 2", "+ Добавить компанию"];
-//     const title = "Выберите опцию";
+describe('Select Component', () => {
+    const mockOnAddCompany = jest.fn();
+    const mockSelectOption = jest.fn();
+    const options = ["Option 1", "Option 2", "+ Добавить компанию"];
+    const title = "Выберите опцию";
 
-//     beforeEach(() => {
-//         render(
-//             <Select 
-//                 testid="select-component" 
-//                 onAddCompany={mockOnAddCompany} 
-//                 selectOption={mockSelectOption} 
-//                 options={options} 
-//                 title={title} 
-//                 styles={{ select: '', select_toggle: '', active: '', select_menu: '', arrow: '' }} 
-//             />
-//         )
-//     })
+    beforeEach(() => {
+        render(
+            <Select 
+                testid="select-component" 
+                onAddCompany={mockOnAddCompany} 
+                selectOption={mockSelectOption} 
+                options={options} 
+                title={title} 
+                styles={{ select: '', select_toggle: '', active: '', select_menu: '', arrow: '' }} 
+            />
+        );
+    });
 
-//     test('renders with initial title', () => {
-//         expect(screen.getByText(title)).toBeInTheDocument()
-//     });
+    test('renders with initial title', () => {
+        expect(screen.getByText(title)).toBeInTheDocument();
+    });
 
-//     test('toggles dropdown on button click', () => {
-//         const button = screen.getByTestId('select_btn')
+    test('toggles dropdown on button click', () => {
+        const button = screen.getByTestId('select_btn');
+
+        expect(screen.queryByRole('list')).not.toBeInTheDocument();
+
+        fireEvent.click(button);
+        expect(screen.getByRole('list')).toBeInTheDocument();
+
+        fireEvent.click(button);
+        expect(screen.queryByRole('list')).not.toBeInTheDocument();
+    });
+
+    test('selects an option and calls selectOption', () => {
+        const button = screen.getByTestId('select_btn');
         
-//         expect(screen.queryByRole('list')).not.toBeInTheDocument();
+        fireEvent.click(button);
 
-//         fireEvent.click(button);
-//         expect(screen.getByRole('list')).toBeInTheDocument();
+        fireEvent.click(screen.getByText(/Option 1/i)); 
 
-//         fireEvent.click(button);
-//         expect(screen.queryByRole('list')).not.toBeInTheDocument();
-//     });
-
-//     test('selects an option and calls selectOption', () => {
-//         const button = screen.getByTestId('select_btn')
+        expect(mockSelectOption).toHaveBeenCalledWith("Option 1");
         
-//         fireEvent.click(button)
+        expect(screen.queryByRole('list')).not.toBeInTheDocument();
+    });
 
-//         fireEvent.click(screen.getByText("Option 1"))
+    test('calls onAddCompany when "+ Добавить компанию" is clicked', () => {
+        const button = screen.getByTestId('select_btn');
 
-//         expect(mockSelectOption).toHaveBeenCalledWith("Option 1")
-//         expect(screen.getByText("Option 1")).toBeInTheDocument()
-//     });
+        fireEvent.click(button);
+        fireEvent.click(screen.getByText("+ Добавить компанию"));
 
-//     test('calls onAddCompany when "+ Добавить компанию" is clicked', () => {
-//         const button = screen.getByTestId('select_btn');
-        
-//         fireEvent.click(button);
+        expect(mockOnAddCompany).toHaveBeenCalled();
+        expect(screen.queryByRole('list')).not.toBeInTheDocument();
+    });
 
-//         fireEvent.click(screen.getByText("+ Добавить компанию"));
+    test('closes dropdown when clicking outside', () => {
+        const button = screen.getByTestId('select_btn');
 
-//         expect(mockOnAddCompany).toHaveBeenCalled();
-//     });
+        fireEvent.click(button);
+        expect(screen.getByRole('list')).toBeInTheDocument();
 
-//     test('closes dropdown when clicking outside', () => {
-//         const button = screen.getByTestId('select_btn');
-
-//         fireEvent.click(button);
-//         expect(screen.getByRole('list')).toBeInTheDocument();
-
-//         fireEvent.mouseDown(document);
-        
-//         expect(screen.queryByRole('list')).not.toBeInTheDocument();
-//     });
-// });
+        fireEvent.mouseDown(document);
+        expect(screen.queryByRole('list')).not.toBeInTheDocument();
+    });
+});

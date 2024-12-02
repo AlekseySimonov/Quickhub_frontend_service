@@ -25,10 +25,8 @@ export const Select = ({ testid, onAddCompany, styles, options, title, selectOpt
             setIsOpen(false)
             return
         }
-
         selectOption(option);
         setIsOpen(false);
-
     };
 
     
