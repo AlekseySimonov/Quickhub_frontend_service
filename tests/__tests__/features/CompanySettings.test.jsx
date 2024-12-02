@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { CompanySettings } from './../../../src/features/company_settings/index';
+import { CompanyFeatures } from '../../../src/features/company';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { deleteCompanyAPI, renameCompanyAPI } from '../../../src/app/store/slices/companySlice';
@@ -26,7 +26,7 @@ describe('CompanySettings Component', () => {
         store.dispatch = jest.fn();
         render(
             <Provider store={store}>
-                <CompanySettings onClose={mockOnClose} />
+                <CompanyFeatures.CompanySettings onClose={mockOnClose} />
             </Provider>
         );
         jest.resetAllMocks();

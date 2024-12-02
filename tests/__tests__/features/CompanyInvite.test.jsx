@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { CompanyInvite } from './../../../src/features/company_invite/index';
+import { CompanyFeatures } from '../../../src/features/company';
 
 describe('CompanyInvite Component', () => {
     const mockOnClose = jest.fn();
@@ -14,7 +14,7 @@ describe('CompanyInvite Component', () => {
     });
 
     beforeEach(() => {
-        render(<CompanyInvite onClose={mockOnClose} />);
+        render(<CompanyFeatures.CompanyInvite onClose={mockOnClose} />);
     });
 
     test('renders the component with correct title', () => {

@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import { CompanyListSettings } from '../../../src/features/company_list-settings/CompanyListSettings'; 
+import { CompanyFeatures } from '../../../src/features/company';
 
-describe('CompanyListSettings', () => {
+describe('CompanyListSettings ', () => {
   let onSaveMock;
   let onCloseMock;
 
@@ -13,18 +13,18 @@ describe('CompanyListSettings', () => {
   });
 
   test('renders correctly and matches snapshot', () => {
-    const { asFragment } = render(<CompanyListSettings onSave={onSaveMock} onClose={onCloseMock} />);
+    const { asFragment } = render(<CompanyFeatures.CompanyListSettings  onSave={onSaveMock} onClose={onCloseMock} />);
     expect(asFragment()).toMatchSnapshot();
   });
 
   test('loads default settings', () => {
-    const { getByText } = render(<CompanyListSettings onSave={onSaveMock} onClose={onCloseMock} />);
+    const { getByText } = render(<CompanyFeatures.CompanyListSettings  onSave={onSaveMock} onClose={onCloseMock} />);
     expect(getByText('Имя и фамилия')).toBeInTheDocument();
     expect(getByText('Рабочий телефон')).toBeInTheDocument();
   });
 
   test('checkbox state changes on click', () => {
-    const { getByText } = render(<CompanyListSettings onSave={onSaveMock} onClose={onCloseMock} />);
+    const { getByText } = render(<CompanyFeatures.CompanyListSettings  onSave={onSaveMock} onClose={onCloseMock} />);
     
     const fullNameCheckbox = getByText('Имя и фамилия').closest('.pop-up__checkbox');
     fireEvent.click(fullNameCheckbox);
@@ -37,7 +37,7 @@ describe('CompanyListSettings', () => {
   });
 
   test('calls onSave and onClose when saving', () => {
-    const { getByText } = render(<CompanyListSettings onSave={onSaveMock} onClose={onCloseMock} />);
+    const { getByText } = render(<CompanyFeatures.CompanyListSettings  onSave={onSaveMock} onClose={onCloseMock} />);
     
     fireEvent.click(getByText('Сохранить'));
     
@@ -46,7 +46,7 @@ describe('CompanyListSettings', () => {
   });
 
   test('calls onClose when canceling', () => {
-    const { getByText } = render(<CompanyListSettings onSave={onSaveMock} onClose={onCloseMock} />);
+    const { getByText } = render(<CompanyFeatures.CompanyListSettings  onSave={onSaveMock} onClose={onCloseMock} />);
     
     fireEvent.click(getByText('Отменить'));
     
@@ -54,7 +54,7 @@ describe('CompanyListSettings', () => {
   });
 
   test('resets to default settings', () => {
-    const { getByText } = render(<CompanyListSettings onSave={onSaveMock} onClose={onCloseMock} />);
+    const { getByText } = render(<CompanyFeatures.CompanyListSettings  onSave={onSaveMock} onClose={onCloseMock} />);
     
     const vkCheckbox = getByText('Vk').closest('.pop-up__checkbox');
     fireEvent.click(vkCheckbox);

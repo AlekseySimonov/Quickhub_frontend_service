@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
-import { CompanyList } from '../../../src/features/company_list/CompanyList'; 
+import { CompanyList } from '../../../src/entities/company_list/CompanyList'; 
 
 const mockStore = configureStore([]);
 
