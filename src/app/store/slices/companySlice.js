@@ -117,12 +117,20 @@ const companySlice = createSlice({
     initialState,
     reducers: {
         setCompanyID(state) {
-            if (state.companiesList.length > 0) {
-                state.companyID = state.companiesList[0].id
-                state.companyTitle = state.companiesList[0].title
+            const currentCompanyID = localStorage.getItem('currentCompanyID');
+            if (currentCompanyID && state.companiesList.length > 0) {
+                const currentCompany = state.companiesList.find(company => company.id === Number(currentCompanyID));
+                
+                if (currentCompany) {
+                    state.companyID = currentCompany.id;
+                    state.companyTitle = currentCompany.title;
+                } else {
+                    state.companyTitle = state.companiesList[0].id;
+                    state.companyID = state.companiesList[0].title;
+                }
             } else {
-                state.companyTitle = null
-                state.companyID = null
+                state.companyTitle = null;
+                state.companyID = null;
             }
         },
         checkCompanyID(state) {

@@ -220,6 +220,7 @@ border-radius: 50%;
     gap: 8px;
 }
 .pagination__arrow {
+    cursor: pointer;
     position: absolute;
     z-index: 40;
     width: 11px;
@@ -228,13 +229,13 @@ border-radius: 50%;
 }
 .pagination__arrow.prev {
     left: -20px;
-    border-left: 1px solid #000;
-    border-bottom: 1px solid #000;
+    border-left: 1px solid #898989;
+    border-bottom: 1px solid #898989;
 }
 .pagination__arrow.next {
     right: -20px;
-    border-right: 1px solid #000;
-    border-top: 1px solid #000;
+    border-right: 1px solid #898989;
+    border-top: 1px solid #898989;
 }
 .pagination__list {
     display: flex;
