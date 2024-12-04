@@ -39,7 +39,7 @@
 
 button {border: none; background: transparent;}
 
-.pop-up__outer {
+.outer {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,7 +52,7 @@ button {border: none; background: transparent;}
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.pop-up {
+.popup {
     position: relative;
     width: 1380px;
     max-height: calc(700px + 50px);
@@ -61,22 +61,24 @@ button {border: none; background: transparent;}
     background-color: #fff;
     border-radius: 10px;
 }
-.pop-up * {
+
+.popup * {
     box-sizing: border-box;
 }
-.pop-up__header {
+
+.header {
     border-bottom: 1px solid #000;
 }
-.pop-up__header .container {
+.header .container {
     padding: 26px 0px;
     justify-content: space-between;
     align-items: center;
 }
-.pop-up__title {
+.title {
     font-size: 20px;
     font-weight: 600;
 }
-.pop-up__closeBtn {
+.closeBtn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -87,23 +89,23 @@ button {border: none; background: transparent;}
 }
 
 
-.pop-up__content {
+.content {
     height: 100%;
 }
 
-.pop-up__content .container {
+.content .container {
     width: calc(1380px - 30px);
     height: 100%;
     padding: 36px 0px;
     gap: 80px;
 }
-.pop-up__nav {
+.nav {
     width: 300px;
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
-.pop-up__nav-item {
+.nav_item {
     cursor: pointer;
     padding: 17px 34px;
     font-size: 18px;
@@ -111,12 +113,12 @@ button {border: none; background: transparent;}
     align-items: center;
     justify-content: center;
 }
-.pop-up__nav-item.current {
+.nav_item.current {
     background-color: #898888;
     color: #fff;
     border-radius: 30px;
 }
-.pop-up__form {
+.form {
     width: calc(100%-300px);
     min-height: 500px;
     display: flex;
@@ -124,31 +126,31 @@ button {border: none; background: transparent;}
     gap: 25px;
     padding: 10px 0px;
 }
-.pop-up__form.hidden {
+.form.hidden {
     display: none;
 }
-.pop-up__form.by-link .pop-up__input {
+.form.byLink .input {
     background-color: #fff;
 }
-.pop-up__form.by-link .pop-up__sendTo {
+.form.byLink .sendTo {
     display: flex;
     align-items: center;
     gap: 12px;
 }
-.pop-up__form.by-personal {
+.form.byPersonal {
     gap: 0px;
 }
-.pop-up__form.by-personal .pop-up__labels {
+.form.byPersonal .labels {
     display: flex;
     justify-content: space-between;
     margin-bottom: 5px;
 }
-.pop-up__form.by-personal .pop-up__label {
+.form.byPersonal .label {
     width: 300px;
     height: 50px;
     padding: 10px;
 }
-.pop-up__form.by-personal .pop-up__rows {
+.form.byPersonal .rows {
     display: flex;
     height: 300px;
     margin-bottom: 20px;
@@ -157,20 +159,20 @@ button {border: none; background: transparent;}
     padding-right: 10px;
     gap: 10px;
 }
-.pop-up__form.by-personal .pop-up__row {
+.form.byPersonal .row {
     display: flex;
     flex-direction: row;
 }
-.pop-up__form.by-personal .pop-up__input {
+.form.byPersonal .input {
     width: 300px;
     height: 50px;
     background-color: #fff;
 }
-.pop-up__form.by-personal .pop-up__rows-control {
+.form.byPersonal .rows_control {
     display: flex;
     gap: 50px;
 }
-.pop-up__form.by-personal .pop-up__add {
+.form.byPersonal .add {
     cursor: pointer;
     font-size: 16px;
     margin-left: 5px;
@@ -179,11 +181,11 @@ button {border: none; background: transparent;}
     gap: 5px;
     color: #2668b0;
 }
-.pop-up__form.by-personal .pop-up__add:before {
+.form.byPersonal .add:before {
     content: '+';
     font-size: 20px;
 }
-.pop-up__form.by-personal .pop-up__delete {
+.form.byPersonal .delete {
     cursor: pointer;
     font-size: 16px;
     margin-left: 5px;
@@ -192,71 +194,71 @@ button {border: none; background: transparent;}
     gap: 5px;
     color: #2668b0;
 }
-.pop-up__form.by-personal .pop-up__delete:before {
+.form.byPersonal .delete:before {
     content: '-';
     font-size: 20px;
 }
-.pop-up__form.by-personal .pop-up__delete.inactive {
+.form.byPersonal .delete.inactive {
     display: none;
 }
-.pop-up__form.by-personal .pop-up__actions{
+.form.byPersonal .actions{
     position: absolute;
     left: 50%;
     bottom: 35px;
     transform: translateX(-50%);
 }
-.pop-up__row {
+.row {
     width: 100%;
     display: flex;
     gap: 15px;
     flex-direction: column;
 }
-.pop-up__row-container {
+.row_container {
     display: flex;
     align-items: center;
     flex-wrap: nowrap;
     gap: 20px;
 }
-.pop-up__row-container .pop-up__btn {
+.row_container .btn {
     width: 236px;
     height: 50px;
     background-color: rgba(40, 224, 90, 1);
     border-radius: 10px;
 }
-.pop-up__row-container .pop-up__btn:hover {
+.row_container .btn:hover {
     background-color: rgba(40, 224, 90, 0.9);
 }
 
-.pop-up__sendTo {
+.sendTo {
     padding: 0px 10px;
 }
 
-.pop-up__sendTo {
+.sendTo {
     cursor: pointer;
 }
 
-.pop-up__sendTo-item img{
+.sendTo_item img{
     width: 32px;
     height: 32px;
 }
 
-.pop-up__label {
+.label {
     font-size: 18px;
     white-space: wrap;
     line-height: 150%;
 }
-.pop-up__select {
+.select {
     cursor: pointer;
     display: flex;
     align-items: center;
 }
-.pop-up__input:focus {
+.input:focus {
     color: #000;
 }
-.pop-up__input::placeholder {
+.input::placeholder {
     color: #b7b7b7;
 }
-.pop-up__input, .pop-up__select {
+.input, .select {
     width: 600px;
     height: 50px;
     padding: 10px;
@@ -266,12 +268,12 @@ button {border: none; background: transparent;}
     background-color: #e1e1e1;
     border-radius: 5px;
 }
-.pop-up__actions {
+.actions {
     display: flex;
     justify-content: center;
     gap: 30px;
 }
-.pop-up__btn {
+.btn {
     width: 160px;
     height: 50px;
     display: flex;
@@ -280,15 +282,15 @@ button {border: none; background: transparent;}
     border-radius: 30px;
     cursor: pointer;
 }
-.pop-up__btn-submit {
+.btn-submit {
     background-color: rgba(40, 224, 90, 1);
 }
-.pop-up__btn-submit:hover {
+.btn-submit:hover {
     background-color: rgba(40, 224, 90, 0.9);
 }
-.pop-up__btn-cancel {
+.btn-cancel {
     background-color: #e1e1e1;
 }
-.pop-up__btn-cancel:hover {
+.btn-cancel:hover {
     background-color: rgba(225, 225, 225, 0.85);
 }

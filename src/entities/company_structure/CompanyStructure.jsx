@@ -32,12 +32,6 @@ export const CompanyStructure = ()=>{
 
     return (
         <div className={styles.reactFlow}>
-            {totalDepartments === 0 && 
-            <div className={styles.container_empty}>
-            На данный момент в компании нет отделов
-            </div>
-            }
-            {totalDepartments !== 0 &&
                 <ReactFlow
                 nodes={nodes}
                 edges={edges}
@@ -47,7 +41,6 @@ export const CompanyStructure = ()=>{
                     <Controls />
                     <MiniMap pannable zoomable nodeStrokeWidth={3} />
                 </ReactFlow> 
-            } 
         </div>
     )
 

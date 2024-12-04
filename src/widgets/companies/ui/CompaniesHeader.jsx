@@ -65,10 +65,18 @@ export const CompaniesHeader = () => {
                 </div>
                 <div className={styles.employee_management}>
                     <div className={styles.employee_management__search}>
-                        <Search
-                                    testid = {'search'}
-                                    placeholder = {'Поиск отдела'}
-                        />
+                        {isStructurePage ? (
+                            <Search
+                                testid = {'search'}
+                                placeholder = {'Поиск отдела'}
+                            />
+                            ) : (
+                            <Search
+                                testid = {'search'}
+                                placeholder = {'Поиск сотрудника'}
+                            />
+                            )
+                        }
                     </div>
                     <div className={styles.employee_management__filter}>
                         <Filter 

@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 
-.pop-up__outer {
+.outer {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,54 +20,54 @@
     display: flex;
     margin: 0 auto;
 }
-.pop-up {
+.popup {
     background-color: #fff;
     color: #000;
     border-radius: 10px;
     overflow: hidden;
 }
-.pop-up__header {
+.header {
     width: 800px;
     border-bottom: 1px solid #000;
 }
-.pop-up__header .container {
+.header .container {
     padding: 26px 0px;
     justify-content: space-between;
     align-items: center;
 }
-.pop-up__title {
+.title {
     font-size: 20px;
     font-weight: 600;
 }
-.pop-up__closeBtn {
+.closeBtn {
     display: flex;
     gap: 1.5px;
     cursor: pointer;
 }
-.pop-up__closeBtn-component {
+.closeBtn-component {
     width: 7px;
     height: 7px;
 }
-.pop-up__closeBtn-component:first-child {
+.closeBtn-component:first-child {
     border-top: 1px solid #000;
     border-right: 1px solid #000;
     transform: rotateZ(45deg);
 }
-.pop-up__closeBtn-component:last-child {
+.closeBtn-component:last-child {
     border-bottom: 1px solid #000;
     border-left: 1px solid #000;
     transform: rotateZ(45deg);
 }
-.pop-up__content .container {
+.content .container {
     flex-direction: column;
     padding: 36px 0px;
     gap: 56px;
 }
-.pop-up__form {
+.form {
     display: flex;
     gap: 23px;
 }
-.pop-up__column {
+.column {
     flex: 33.333% 0 1;
     padding: 10px 0px;
     display: flex;
@@ -76,29 +76,29 @@
     align-items: flex-start;
     flex-direction: column;
 }
-.pop-up__actions {
+.actions {
     position: relative;
     display: flex;
     justify-content: center;
     gap: 30px;
     margin-top: 40px;
 }
-.pop-up .checkbox {
+.popup .checkbox {
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 13px;
 }
 
-.pop-up .checkbox:hover .checkbox__box, .pop-up .checkbox:hover .checkbox__label{
+.popup .checkbox:hover .checkbox__box, .popup .checkbox:hover .checkbox__label{
     border-color: #2668b0;
     color: #2668b0;
 }
 
-.pop-up .checkbox__label {
+.popup .checkbox__label {
     font-size: 18px;
 }
-.pop-up .checkbox__box {
+.popup .checkbox__box {
     width: 20px;
     height: 20px;
     display: flex;
@@ -109,7 +109,7 @@
     border-radius: 5px;
 }
 
-.pop-up .checkbox__box.checked {
+.popup .checkbox__box.checked {
     border-color: #2668b0;
 }
 
@@ -118,7 +118,7 @@
     height: auto;
   }
 
-.pop-up__btn {
+.btn {
     width: 160px;
     height: 50px;
     display: flex;
@@ -128,26 +128,26 @@
     cursor: pointer;
 }
 
-.pop-up__btn-default {
+.btn-default {
     position: absolute;
     left: -6px;
     font-size: 16px;
 }
 
-.pop-up__btn-default:hover {
+.btn-default:hover {
     color: #3f3f3f;
 }
 
 
-.pop-up__btn-submit {
+.btn-submit {
     background-color: rgba(40, 224, 90, 1);
 }
-.pop-up__btn-submit:hover {
+.btn-submit:hover {
     background-color: rgba(40, 224, 90, 0.9);
 }
-.pop-up__btn-cancel {
+.btn-cancel {
     background-color: #e1e1e1;
 }
-.pop-up__btn-cancel:hover {
+.btn-cancel:hover {
     background-color: rgba(225, 225, 225, 0.85);
 }
