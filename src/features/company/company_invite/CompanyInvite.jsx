@@ -3,6 +3,7 @@ import styles from './CompanyInvite.module.css';
 import { socials } from '../../../shared/ui/icons/companies/popup/invite_employee';
 import { icons } from '../../../shared/ui/icons/companies';
 import useOnclickOutside from "react-cool-onclickoutside";
+import { GenericPopup } from '../../../shared/ui/components/GenericPopup/GenericPopup';
 
 export const CompanyInvite = ({ onClose }) => {
   const [activeForm, setActiveForm] = useState('byLink');
@@ -36,17 +37,11 @@ export const CompanyInvite = ({ onClose }) => {
   });
 
   return (
-    <div data-testid="inviteEmployee_popup" className={styles.outer}>
-      <div ref={ref} className={styles.popup}>
-        <div className={styles.header}>
-          <div className={styles.container}>
-            <div data-testid="popup_title" className={styles.title}>Приглашение в компанию</div>
-            <div data-testid="popup_close" className={styles.closeBtn} onClick={onClose}>
-              <img src={icons.popupX} alt="Закрыть" />
-            </div>
-          </div>
-        </div>
-        <div className={styles.content}>
+    <GenericPopup
+        onClose = {onClose}
+        title = {'Приглашение в компанию'}
+        styles = {styles}
+        children = {
           <div className={styles.container}>
             <div className={styles.nav}>
               <div 
@@ -120,8 +115,6 @@ export const CompanyInvite = ({ onClose }) => {
               </form>
             )}
           </div>
-        </div>
-      </div>    
-    </div>
+        } />
   );
 };

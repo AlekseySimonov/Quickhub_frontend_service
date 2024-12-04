@@ -1,98 +1,78 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import useOnclickOutside from "react-cool-onclickoutside";
 import { useDispatch, useSelector } from 'react-redux';
-
 import styles from './CompanySettings.module.css';
 import { icons } from '../../../shared/ui/icons/companies';
-
 import { deleteCompanyAPI, renameCompanyAPI } from '../../../app/store/slices/companySlice';
+import { GenericPopup } from '../../../shared/ui/components/GenericPopup/GenericPopup';
 
 export const CompanySettings = ({ onClose }) => { 
   const ref = useOnclickOutside(() => {
-    onClose()
+    onClose();
   });
 
   const dispatch = useDispatch();
   const id = useSelector(state => state.company.companyID);
-  const companyTitle = useSelector(state => state.company.companyTitle)
+  const companyTitle = useSelector(state => state.company.companyTitle);
 
-  const settingsOptions = [
-    { label: 'Изменить название компании' },
-  ];
+  const [companyName, setCompanyName] = useState('');
 
   useEffect(() => {
     setCompanyName(companyTitle);
   }, [companyTitle]);
 
-
-  const [companyName, setCompanyName] = useState('');
-
-
   const handleInputChange = (event) => {
     setCompanyName(event.target.value);
-
   };
 
   const handleSave = (event) => {
     event.preventDefault();
     if (!companyName.trim()) {
-      alert('Название компании не может быть пустым')
-      return
+      alert('Название компании не может быть пустым');
+      return;
     }
     if (companyName === companyTitle) {
-      alert('Новое название компании должно отличаться от предыдущего')
-      return
+      alert('Новое название компании должно отличаться от предыдущего');
+      return;
     }
-    dispatch(renameCompanyAPI({id: id, title: companyName}))
-    onClose()
+    dispatch(renameCompanyAPI({ id, title: companyName }));
+    onClose();
   };
 
   const handleDelete = () => {
-    dispatch(deleteCompanyAPI({id: id}))
-    onClose()
+    dispatch(deleteCompanyAPI({ id }));
+    onClose();
   };
 
   return (
-    <div data-testid='companySettings_popup' className={styles['pop-up__outer']}>
-    <div ref={ref} className={styles['pop-up']}>
-      <div className={styles['pop-up__header']}>
+    <GenericPopup
+      onClose = {onClose}
+      title = {'Настройки компании'}
+      styles = {styles}
+      children = {
         <div className={styles.container}>
-          <div className={styles['pop-up__title']}>Настройки компании</div>
-          <div data-testid='popup_close' className={styles['pop-up__closeBtn']} onClick={onClose}>
-            <img src={icons.popupX}/>
-          </div>
-        </div>
-      </div>
-      <div className={styles['pop-up__content']}>
-        <div className={styles.container}>
-        <form data-testid="form_company-settings" className={styles['pop-up__form']}>
-          <div className={styles['pop-up__form']}>
-            {settingsOptions.map((setting, index) => (
-              <div key={index} className={styles['pop-up__row']}>
-                <div className={styles['pop-up__label']}>{setting.label}</div>
+            <form data-testid="form_company-settings" className={styles.form} onSubmit={handleSave}>
+              <div className={styles.row}>
+                <label className={styles.label}>Изменить название компании</label>
                 <input
                   required
-                  placeholder='Введите название компании'
+                  placeholder="Введите название компании"
                   type="text"
-                  className={styles['pop-up__input']}
-                  defaultValue={companyTitle}
+                  className={styles.input}
+                  value={companyName}
                   onChange={handleInputChange}
                 />
               </div>
-            ))}
+              <div className={styles.actions}>
+                <button type="submit" className={`${styles.btn} ${styles['btn-submit']}`}>
+                  Сохранить
+                </button>
+                <button type="button" className={`${styles.btn} ${styles['btn-delete']}`} onClick={handleDelete}>
+                  Удалить компанию
+                </button>
+              </div>
+            </form>
           </div>
-          <div className={styles['pop-up__actions']}>
-            <button type="submit" className={`${styles['pop-up__btn']} ${styles['pop-up__btn-submit']}`} onClick={handleSave}>
-              Сохранить
-            </button>
-            <button className={`${styles['pop-up__btn']} ${styles['pop-up__btn-delete']}`} onClick={handleDelete}>
-              Удалить компанию
-            </button>
-          </div>
-          </form>
-        </div>
-      </div>
-    </div>
-    </div>
+      } />
   );
 };

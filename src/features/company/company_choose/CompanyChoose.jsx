@@ -28,9 +28,10 @@ export const CompanyChoose = ({ testid, onAddCompany, styles }) => {
     } else {
         dispatch(changeCompany({ id: company.id, title: company.title }));
         localStorage.setItem('currentCompanyID', company.id)
-    }
         setSelectedOption(company.title);
-        setIsOpen(false);
+    }
+    setIsOpen(false);
+        
     };
 
     

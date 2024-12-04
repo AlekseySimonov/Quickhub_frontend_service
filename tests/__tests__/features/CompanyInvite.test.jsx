@@ -25,13 +25,13 @@ describe('CompanyInvite Component', () => {
     test('switches to "by-link" form when clicked', () => {
         const byLinkNav = screen.getByText('Приглашение по ссылке');
         fireEvent.click(byLinkNav);
-        expect(screen.getByTestId('form_by-link'));
+        expect(screen.getByTestId('form_byLink'));
     });
 
     test('switches to "by-personal" form when clicked', () => {
         const byPersonalNav = screen.getByText('Приглашение по Email');
         fireEvent.click(byPersonalNav);
-        expect(screen.getByTestId('form_by-personal'));
+        expect(screen.getByTestId('form_byPersonal'));
     });
 
     test('adds a new row when "Добавить ещё" is clicked', () => {
@@ -83,7 +83,7 @@ describe('CompanyInvite Component', () => {
         fireEvent.change(nameInput, { target: { value: 'Имя' } });
         fireEvent.change(surnameInput, { target: { value: 'Фамилия' } });
 
-        const form = screen.getByTestId('form_by-personal');
+        const form = screen.getByTestId('form_byPersonal');
         fireEvent.submit(form);
 
         expect(console.log).toHaveBeenCalledWith('Форма отправлена:', expect.anything());

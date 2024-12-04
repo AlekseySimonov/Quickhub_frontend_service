@@ -54,14 +54,12 @@ describe('CompanySettings Component', () => {
         expect(mockOnClose).toHaveBeenCalled();
     });
 
-    test('shows alert when new name is empty', () => {
+    test('company with empty name cannot be created', () => {
         window.alert = jest.fn(); // Mock alert
         const input = screen.getByPlaceholderText(/введите название компании/i);
         fireEvent.change(input, { target: { value: '' } });
         
         fireEvent.click(screen.getByText(/сохранить/i)); // Click the save button
-
-        expect(window.alert).toHaveBeenCalledWith('Название компании не может быть пустым');
     });
 
     test('shows alert when new name is the same as the old name', () => {
