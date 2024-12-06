@@ -24,7 +24,6 @@ export const createGraph = (data, companyUsers) => {
         
 
         const node = g.node(nodeId);
-        console.log(node)
         if (!node) {
             return
         }

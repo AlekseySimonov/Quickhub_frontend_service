@@ -43,7 +43,6 @@ export const deleteCompanyAPI = createAsyncThunk(
             await companiesService.deleteCompany(id);
             return id;
         } catch (err) {
-            console.error('Знакомься, меня зовут ошибка:', err);
             return rejectWithValue(err.response || err);
         }
     }
@@ -152,6 +151,8 @@ const companySlice = createSlice({
                 state.error = action.payload
             })
 
+            
+
             .addCase(postCompanyAPI.pending, (state) => {
                 state.status = 'loading'
             })
@@ -200,13 +201,11 @@ const companySlice = createSlice({
                 state.status = 'succeeded'
                 const idToDelete = action.payload
                 state.companiesList = state.companiesList.filter(company => company.id !== idToDelete)
-                console.log('Ну, в общем-то, поздравляю! Ты снёс к хуям компанию с айди:', idToDelete)
             })
 
             .addCase(deleteCompanyAPI.rejected, (state) => {
                 state.status = 'failed'
                 state.error = 'deleteError'
-                console.log('Ну, в общем, удалить не получилось.')
             })
             .addCase(renameCompanyAPI.pending, (state) => {
                 state.status = 'loading'
@@ -219,7 +218,6 @@ const companySlice = createSlice({
                     company.title = title;
                 }
                 state.companyTitle = title;
-                console.log('Название компании с id', id, 'изменено на:', title);
             })
             .addCase(renameCompanyAPI.rejected, (state) => {
                 state.status = 'failed'

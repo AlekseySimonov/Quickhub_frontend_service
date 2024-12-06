@@ -9,9 +9,9 @@ import { useEffect } from 'react';
 
 export const CompanyStructure = ()=>{
     const companyID = useSelector(state => state.company.companyID)
+    const departments = useSelector(state => state.company.departments)
 
-    const {Departments} = useSelector(state => state.company);
-    const currentDepartments = Departments ? Departments : [];
+    const currentDepartments = departments ? departments : [];
     const totalDepartments = currentDepartments.length;
 
     const dispatch = useDispatch()
@@ -21,8 +21,6 @@ export const CompanyStructure = ()=>{
         dispatch(dispatch(getDepartmentsAPI));
     }
     }, [companyID, dispatch]);
-
-    const departments = useSelector(state => state.company.departments)
 
     const { nodes, edges } = createGraph(departments)
 
@@ -37,7 +35,7 @@ export const CompanyStructure = ()=>{
             На данный момент в компании нет отделов
             </div>
             }
-            {totalDepartments !== 0 &&
+            {totalDepartments > 0 &&
                 <ReactFlow
                 nodes={nodes}
                 edges={edges}
