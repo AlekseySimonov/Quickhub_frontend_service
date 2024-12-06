@@ -5,10 +5,10 @@ import { icons } from '../../../shared/ui/icons/menu';
 export const Menu = ({isActive}) => {
 
     const isCompaniesActive = useMatch('/companies/*')
-    const isTasksActive = useMatch('/tasks')
-    const isProjectsActive = useMatch('/projects')
-    const isSettingsActive = useMatch('/settings')
-    const isHelpActive = useMatch('/help')
+    const isTasksActive = useMatch('/tasks/*')
+    const isProjectsActive = useMatch('/projects/*')
+    const isSettingsActive = useMatch('/settings/*')
+    const isHelpActive = useMatch('/help/*')
 
 
     return(

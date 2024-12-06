@@ -17,6 +17,9 @@ import { CompanyStructure } from "../../entities/company_structure";
 import { CompanyList } from "../../entities/company_list";
 import { IsAuth, CheckAuth } from "../../shared/config";
 import { Loader } from "../../shared/ui/components";
+import { ProjectsTree } from "../../entities/projects_tree";
+import { ProjectsList } from "../../entities/projects_list";
+import { ProjectsEvents } from "../../entities/projects_events";
 
 export const authTitles = {
     '/auth/login': 'Вход',
@@ -54,6 +57,25 @@ export const appRouter = createBrowserRouter([
             {
                 path: 'projects',
                 element: <Projects />,
+                children:[
+                    {
+                        index: true,
+                        element: <Navigate to="list" replace />,
+                    },
+                    {
+                        path: 'tree',
+                        element: <ProjectsTree />,
+                    },
+                    {
+                        path: 'list',
+                        element: <ProjectsList/>,
+                    },
+                    {
+                        path: 'events',
+                        element: <ProjectsEvents/>,
+                    },
+                ],
+                
             },
             {
                 path: 'companies',

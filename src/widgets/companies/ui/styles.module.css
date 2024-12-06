@@ -136,10 +136,6 @@
     gap: 10px;
 }
 
-    .employee_management_search {}
-
-    .employee_management_filter {}
-
     .employee_management__btn {
         transition: 0.3s;
         border-radius: 30px;

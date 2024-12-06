@@ -1,16 +1,21 @@
-// import styles from './styles.module.css'
+import styles from './projects.module.css'
+import { Outlet } from "react-router-dom"
+import { Loader } from "../../../shared/ui/components"
 
 import { ProjectsHeader } from "./ProjectsHeader"
-import { ProjectsMain } from "./ProjectsMain"
 
-const Projects = () =>{
+export const Projects = () =>{
+    const status = null
+
     return(
         <>
+        <div className={`${styles.content} ${status === 'loading' ? styles.loading : ''}`}>
+            {status === 'loading' && (<Loader style = {styles.loader}/>)}
             <ProjectsHeader/>
-            <ProjectsMain/>
+            <div className={styles.main}>
+                <Outlet/>
+            </div>
+        </div>
         </>
-        
     )
 }
-
-export {Projects}
