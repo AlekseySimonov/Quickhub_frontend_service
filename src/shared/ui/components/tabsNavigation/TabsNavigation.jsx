@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styles from './tabsnavigation.module.css';
 
 export const TabsNavigation = ({ testid }) => {
