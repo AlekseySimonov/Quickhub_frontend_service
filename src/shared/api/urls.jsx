@@ -9,3 +9,5 @@ export const COMPANIES = 'company-service/api/v1/company/companies/'
 export const COMPANY_USERS = '/profile/api/v1/profile/users-info-by-company'
 
 export const DEPARTMENTS = 'company-service/api/v1/company/companies/{company_pk}/departments'
+
+export const PROJECTS = '/company-service/api/v1/company/companies/{company_pk}/projects/'

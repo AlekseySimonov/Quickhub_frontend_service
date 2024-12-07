@@ -33,7 +33,7 @@ export const ProjectsTree = () => {
                     <Background color='white'/>
                     <Controls />
                     <MiniMap pannable zoomable nodeStrokeWidth={3} />
-            </ReactFlow> 
+            </ReactFlow>
         </div>
         
     )
