@@ -2,23 +2,15 @@ import { ReactFlow, Background, Controls, MiniMap } from '@xyflow/react';
 import '@xyflow/react/dist/style.css'
 import styles from './flow.module.css'
 import { ProjectNode } from './CustomNodes';
+import { createGraph } from './initialElements';
+import { useSelector } from 'react-redux';
+import { useGetProjectsQuery } from '../../app/store/slices/projectsSlice';
 
 export const ProjectsTree = () => {
+    const {companyTitle, companyID} = useSelector(state => state.company)
+    const {data = []} = useGetProjectsQuery(companyID)
 
-    const projects = [
-        {
-            id: '1',
-            position: { x: 0, y: 0 },
-            data: { label: 'Hello', description: 'This is project 1' }
-        },
-    ];
-
-    const nodes = projects.map(project => ({
-        id: project.id,
-        type: 'projectNode', 
-        position: project.position,
-        data: project.data,
-    }));
+    const { nodes, edges } = createGraph({ data, companyTitle })
 
     const nodeTypes = {
         projectNode: ProjectNode,
@@ -28,6 +20,7 @@ export const ProjectsTree = () => {
         <div className={styles.reactFlow}>
             <ReactFlow
                 nodes={nodes}
+                edges={edges}
                 nodeTypes={nodeTypes}
                 fitView>
                     <Background color='white'/>

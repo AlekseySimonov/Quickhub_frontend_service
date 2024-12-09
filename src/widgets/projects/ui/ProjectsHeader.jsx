@@ -4,6 +4,8 @@ import { NavLink, useLocation } from 'react-router-dom'
 import {Search} from '../../../shared/ui/components'
 import {Filter} from '../../../shared/ui/components'
 import {icons} from '../../../shared/ui/icons/companies'
+import { usePopup } from "../../../shared/hooks"
+import { ProjectsFeatures } from "../../../features/projects"
 
 export const ProjectsHeader = () => {
 
@@ -25,6 +27,8 @@ export const ProjectsHeader = () => {
             'ФИО: от Я до А',
             'По должностям',
         ];
+
+    const addEmployeePopup = usePopup()
 
     return (
         <div className={styles.header}>
@@ -69,7 +73,7 @@ export const ProjectsHeader = () => {
                             Добавить событие
                         </div>
                     ) : (
-                        <div className = {styles.interactions_popup__btn}>
+                        <div className = {styles.interactions_popup__btn} onClick={addEmployeePopup.openPopup}>
                             <img src={icons.plus} alt="" />
                             Добавить проект
                         </div>
@@ -77,6 +81,9 @@ export const ProjectsHeader = () => {
                 </div>
             </div>
         </div>
+        <>
+            {addEmployeePopup.isVisible && <ProjectsFeatures.AddProject onClose={addEmployeePopup.closePopup} />}
+        </>
         </div>
     )
 }

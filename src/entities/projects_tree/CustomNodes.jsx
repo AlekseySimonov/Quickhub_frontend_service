@@ -7,7 +7,7 @@ export const ProjectNode = ({ data }) => {
         <div className={styles.node}>
             <div className={styles.project}>
                 <Handle type="source" position={Position.Right} id="source" style={{ opacity: 0 }} />
-                <div className={styles.label}>{data.label}</div>
+                    <div className={styles.label}>{data.title}</div>
                 <Handle type="target" position={Position.Left} id="target" style={{ opacity: 0 }} />
             </div>
         </div>

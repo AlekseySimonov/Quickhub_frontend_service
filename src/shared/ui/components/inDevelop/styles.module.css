@@ -1,0 +1,20 @@
+.develop{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    overflow: hidden;
+}
+
+    .develop img{
+        width: 600px;
+    }   
+
+    .develop p{
+        color: black;
+        font-size: 24px;
+    }   

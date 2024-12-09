@@ -1,12 +1,10 @@
 // import styles from './styles.module.css'
-import { TasksHeader } from './TasksHeader';
-import { TasksMain } from './TasksMain';
+import { InDevelop } from './../../../shared/ui/components/inDevelop/InDevelop';
 
 const MyTasks = () =>{
     return(
         <>
-            <TasksHeader/>
-            <TasksMain/>
+            <InDevelop/>
         </>
     )
 }

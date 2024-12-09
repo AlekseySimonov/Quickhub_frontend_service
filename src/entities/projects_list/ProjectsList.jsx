@@ -1,5 +1,7 @@
+import { InDevelop } from "../../shared/ui/components/inDevelop"
+
 export const ProjectsList = () => {
     return (
-        <div>ProjectsList</div>
+        <InDevelop/>
     )
 }
