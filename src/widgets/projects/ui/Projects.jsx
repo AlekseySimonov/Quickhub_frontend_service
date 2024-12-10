@@ -1,28 +1,35 @@
 import styles from './projects.module.css'
-import { Outlet } from "react-router-dom"
-import { Loader } from "../../../shared/ui/components"
+import { Outlet, useNavigate } from "react-router-dom"
 
 import { ProjectsHeader } from "./ProjectsHeader"
 import { useGetProjectsQuery } from '../../../app/store/slices/projectsSlice'
 import { useSelector } from 'react-redux';
+import { useEffect } from 'react'
+import { Loader } from '../../../shared/ui/components';
 
-export const Projects = () =>{
-    const status = null
-    const companyID = useSelector(state => state.company.companyID) 
+export const Projects = () => {
+    const navigate = useNavigate()
+    const companyID = useSelector(state => state.company.companyID);
 
-    const {data = [], isLoading, error} = useGetProjectsQuery(companyID)
+    useEffect(() => {
+        if (companyID === null) {
+            navigate('/companies');
+        }
+    }, [companyID, navigate]);
 
-    console.log(data, isLoading, error)
+    const { isLoading } = useGetProjectsQuery(companyID, {
+        skip: companyID === null 
+    });
 
-    return(
+    return (
         <>
-        <div className={`${styles.content} ${status === 'loading' ? styles.loading : ''}`}>
-            {status === 'loading' && (<Loader style = {styles.loader}/>)}
-            <ProjectsHeader/>
-            <div className={styles.main}>
-                <Outlet/>
+            <div className={`${styles.content} ${isLoading ? styles.loading : ''}`}>
+                {isLoading && (<Loader style={styles.loader} />)}
+                <ProjectsHeader />
+                <div className={styles.main}>
+                    <Outlet />
+                </div>
             </div>
-        </div>
         </>
-    )
+    );
 }

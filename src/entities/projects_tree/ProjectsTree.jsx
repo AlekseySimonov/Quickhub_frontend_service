@@ -18,15 +18,23 @@ export const ProjectsTree = () => {
 
     return (
         <div className={styles.reactFlow}>
-            <ReactFlow
-                nodes={nodes}
-                edges={edges}
-                nodeTypes={nodeTypes}
-                fitView>
+            {data.length === 0 && 
+                <div className={styles.container_empty}>
+                На данный момент в компании нет проектов
+                </div>
+            }
+            {
+                <ReactFlow
+                    nodes={nodes}
+                    edges={edges}
+                    nodeTypes={nodeTypes}
+                    fitView>
                     <Background color='white'/>
                     <Controls />
                     <MiniMap pannable zoomable nodeStrokeWidth={3} />
-            </ReactFlow>
+                </ReactFlow>
+            }
+            
         </div>
         
     )

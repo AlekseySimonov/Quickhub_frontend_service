@@ -20,6 +20,12 @@ import { Loader } from "../../shared/ui/components";
 import { ProjectsTree } from "../../entities/projects_tree";
 import { ProjectsList } from "../../entities/projects_list";
 import { ProjectsEvents } from "../../entities/projects_events";
+import { Project } from "../../widgets/project";
+import { ProjectList } from "../../entities/project_list";
+import { ProjectTable } from "../../entities/project_table";
+import { ProjectCalendar } from "../../entities/project_calendar";
+import { ProjectGantt } from "../../entities/project_gantt";
+import { ProjectMyPlan } from "../../entities/project_myplan";
 
 export const authTitles = {
     '/auth/login': 'Вход',
@@ -74,6 +80,37 @@ export const appRouter = createBrowserRouter([
                         path: 'events',
                         element: <ProjectsEvents/>,
                     },
+                    {
+                        path: 'project/',
+                        element: <Project />,
+                        children:[
+                    {
+                        index: true,
+                        element: <Navigate to="list" replace />,
+                    },
+                    {
+                        path: 'list',
+                        element: <ProjectList />,
+                    },
+                    {
+                        path: 'table',
+                        element: <ProjectTable />,
+                    },
+                    {
+                        path: 'calendar',
+                        element: <ProjectCalendar/>,
+                    },
+                    {
+                        path: 'gantt',
+                        element: <ProjectGantt/>,
+                    },
+                    {
+                        path: 'myplan',
+                        element: <ProjectMyPlan/>,
+                    },
+                ],
+                
+            },
                 ],
                 
             },
