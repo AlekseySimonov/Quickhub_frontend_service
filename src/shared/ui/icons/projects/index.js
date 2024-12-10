@@ -1,2 +1,7 @@
 import folder from "./folder.svg"
-export {folder}
+import backBtn from "./backbtn.svg"
+
+export const icons = {
+    folder,
+    backBtn,
+}

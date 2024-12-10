@@ -1,7 +1,7 @@
 import { ReactFlow, Background, Controls, MiniMap } from '@xyflow/react';
 import '@xyflow/react/dist/style.css'
 import styles from './flow.module.css'
-import { ProjectNode } from './CustomNodes';
+import { CompanyNode, ProjectNode } from './CustomNodes';
 import { createGraph } from './initialElements';
 import { useSelector } from 'react-redux';
 import { useGetProjectsQuery } from '../../app/store/slices/projectsSlice';
@@ -14,6 +14,7 @@ export const ProjectsTree = () => {
 
     const nodeTypes = {
         projectNode: ProjectNode,
+        companyNode: CompanyNode,
     };
 
     return (

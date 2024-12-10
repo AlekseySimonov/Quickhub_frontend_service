@@ -156,7 +156,7 @@
     }
 
     .dropdown.active .arrow {     
-    transform: rotate(135deg);
+        transform: rotate(135deg);
     }
 
     .addEmployeeBtn{

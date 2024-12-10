@@ -80,13 +80,15 @@ export const appRouter = createBrowserRouter([
                         path: 'events',
                         element: <ProjectsEvents/>,
                     },
-                    {
-                        path: 'project/',
-                        element: <Project />,
-                        children:[
+                ],
+            },
+            {
+                path: 'projects/:projectid',
+                element: <Project />,
+                children:[
                     {
                         index: true,
-                        element: <Navigate to="list" replace />,
+                        element: <Navigate to="table" replace />,
                     },
                     {
                         path: 'list',
@@ -109,10 +111,6 @@ export const appRouter = createBrowserRouter([
                         element: <ProjectMyPlan/>,
                     },
                 ],
-                
-            },
-                ],
-                
             },
             {
                 path: 'companies',

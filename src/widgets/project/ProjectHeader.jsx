@@ -1,13 +1,24 @@
 import styles from "./header.module.css"
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 import {Search} from '../../shared/ui/components'
+import { icons } from "../../shared/ui/icons/projects"
 
 export const ProjectHeader = () => {
 
+    const navigate = useNavigate()
+
+    const handleBackBtn = ()=>{
+        localStorage.removeItem('lastVisitedProjectId')
+        navigate('/projects')
+    }
+
     return (
         <div className={styles.header}>
-        <div className={styles.title}>Проекты</div>
+        <div className={styles.title}>
+            <img src = {icons.backBtn} className={styles.arrow} onClick={handleBackBtn}/>
+            Проект
+        </div>
         <div className={styles.toolbar}>
             <div className={styles.navigation}>
                 <div className={styles.tabs}>

@@ -33,10 +33,12 @@ export const createGraph = ({ data, companyTitle }) => {
             projectData = { title: companyTitle }; 
         }
 
+        const nodeType = nodeId === companyNodeId ? 'companyNode' : 'projectNode'
+
         nodes.push({
             style: { zIndex: zIndexCounter },
             id: nodeId,
-            type: 'projectNode', 
+            type: nodeType, 
             data: {
                 title: projectData.title,
                 users: projectData.users || [],

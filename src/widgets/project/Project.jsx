@@ -1,11 +1,19 @@
 import styles from './project.module.css'
-import { Outlet } from "react-router-dom"
+import { Outlet, useParams } from "react-router-dom"
 
 
 import { ProjectHeader } from "./ProjectHeader"
 import { Loader } from '../../shared/ui/components'
+import { useEffect } from 'react'
 
 export const Project = () => {
+
+    const { projectid } = useParams();
+
+    useEffect(() => {
+        localStorage.setItem('lastVisitedProjectId', projectid);
+    }, [projectid]);
+    
     const isLoading = false
 
     return (

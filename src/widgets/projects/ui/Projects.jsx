@@ -17,6 +17,18 @@ export const Projects = () => {
         }
     }, [companyID, navigate]);
 
+    const lastVisitedProjectId = localStorage.getItem('lastVisitedProjectId');
+
+    useEffect(() => {
+        if (lastVisitedProjectId) {
+            // Логика для проверки существования проекта
+            const projectExists = true
+            if (projectExists) {
+                navigate(`/projects/${lastVisitedProjectId}`);
+            }
+        }
+    }, [lastVisitedProjectId, navigate]);
+
     const { isLoading } = useGetProjectsQuery(companyID, {
         skip: companyID === null 
     });
