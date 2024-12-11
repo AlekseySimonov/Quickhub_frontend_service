@@ -77,7 +77,7 @@ export const CompanyListSettings = ({ onSave, onClose }) => {
       onClose = {onClose}
       styles = {styles}
       title = {'Настройки списка сотрудников'}
-      children = {
+      >
         <div className={styles.container}>
           <div className={styles.form}>
             <div className={styles.column}>
@@ -117,7 +117,6 @@ export const CompanyListSettings = ({ onSave, onClose }) => {
             </button>
           </div>
         </div>
-      }
-   />
+      </GenericPopup>
   );
 };

@@ -28,7 +28,7 @@ export const CompanyCreate = ({ onClose }) => {
         onClose = {onClose}
         styles = {styles}
         title = {'Создать компанию'}
-        children = {
+        >
           <div className={styles.container}>
             <form onSubmit={handleSubmit} className={styles.form} aria-label="Create Company Form">
               <div className={styles.row}>
@@ -51,7 +51,6 @@ export const CompanyCreate = ({ onClose }) => {
               </div>
             </form>
           </div>
-        }
-      /> 
+      </GenericPopup>
   );
 };

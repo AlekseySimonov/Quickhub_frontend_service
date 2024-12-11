@@ -3,13 +3,14 @@ import { icons } from '../../../shared/ui/icons/header';
 import {DropDown} from '../../../shared/ui/components/index'
 import { useDispatch } from 'react-redux'
 import { logoutAPI } from '../../../app/store/slices/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 export const Header = ({burgerClick}) => {
-
+        const navigate = useNavigate();
         const dispatch = useDispatch()
 
         const dropDownOptions = [
-        { label: 'Профиль', action: () => console.log('Перейти в профиль') },
+        { label: 'Профиль', action: () => navigate('/profile')  },
         { label: 'Настройки', action: () => console.log('Открыть настройки') },
         { label: 'Выйти', action: () => dispatch(logoutAPI()) },
     ];

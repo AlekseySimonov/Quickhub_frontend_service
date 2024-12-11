@@ -1,0 +1,315 @@
+* {
+    box-sizing: border-box;
+}
+*::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+}
+*::-webkit-scrollbar-track {
+    border-radius: 3px;
+    background-color: #dfe9eb;
+}
+*::-webkit-scrollbar-track:hover {
+    background-color: #dfe9eb;
+}
+*::-webkit-scrollbar-track:active {
+    background-color: #dfe9eb;
+}
+*::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: #838282;
+}
+*::-webkit-scrollbar-thumb:hover {
+    background-color: #777575;
+}
+*::-webkit-scrollbar-thumb:active {
+    background-color: #777575;
+}
+*:focus, *:active {
+    border-color: inherit;
+}
+input {
+    
+}
+input:focus, textarea:focus {
+    border: inherit;
+}
+.user {
+    padding: 10px 10px;
+    display: flex;
+    gap: 20px;
+}
+
+.user *, .user *::placeholder {
+    color: #000;
+}
+.user__nav {
+    width: 250px;
+    height: webkit-fill-available;
+    flex-shrink: 0;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 5px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    background-color: #fff;
+    border-radius: 20px;
+}
+.user__tab {
+    cursor: pointer;
+    display: flex;
+    width: auto;
+    padding: 15px 20px;
+    color: #2875e0;
+    font-weight: 500;
+    border-radius: 20px;
+}
+.user__tab.active {
+    background: rgba(40, 117, 224, 0.1);
+}
+.user__tab:hover {
+    color: #fff;
+    background: rgba(40, 117, 224, 0.9);
+}
+.user__sections {
+    width: 100%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 20px;
+}
+.section {
+    position: relative;
+}
+.section__heading {
+    font-size: 30px;
+    margin-bottom: 40px;
+}
+
+.section__content {}
+
+.section__editIcon {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+}
+.section__row {
+    display: flex;
+    margin-bottom: 20px;
+    gap: 30px;
+}
+.section__row input {
+    width: 250px;
+    height: 40px;
+    padding: 0px 20px;
+    border-radius: 20px;
+    border: 1px solid #898989;
+}
+.section__row input[type="email"] {
+    width: 420px;
+}
+.section__input_label {
+    margin-bottom: 10px;
+    color: #989898;
+}
+.section__actions {
+    margin-top: 40px;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 15px;
+}
+.section.uneditable .section__actions {
+    display: none;
+}
+.section__saveBtn, .section__resetBtn {
+    display: flex;
+    width: max-content;
+    padding: 8px 16px;
+    background-color: #fff;
+    border: 1px solid #898989;
+    border-radius: 20px;
+}
+.profile {
+    display: flex;
+    gap: 10px;
+}
+.profile__card {
+    background-color: #fff;
+    display: flex;
+    height: min-content;
+    align-items: center;
+    flex-direction: column;
+    gap: 15px;
+    padding: 30px 65px;
+    border: 1px solid #898989;
+    border-radius: 20px;
+}
+.profile__picture {
+    position: relative;
+}
+.profile__picture_inner {
+    width: 200px;
+    height: 200px;
+    background-color: #2875e0;
+    border-radius: 50%;
+}
+.profile__editIcon {
+    position: absolute;
+    bottom: 0px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #28E05A;
+}
+.profile__name {
+    text-align: center;
+    border: none;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+.profile__name::placeholder {
+    color: #000;
+}
+.profile__job, .profile__position {
+    width: 230px;
+    text-align: center;
+    padding: 10px 0px;
+    
+    border: 1px solid #898888;
+    border-radius: 20px;
+}
+.profile__detailed {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 10px;
+}
+.profile__personal.uneditable {
+    pointer-events: none;
+}
+.profile__about .section__row {
+    border-radius: 20px;
+    overflow: hidden;
+}
+.profile__about textarea {
+    width: 100%;
+    height: 200px;
+    resize: none;
+    
+    border-radius: 20px;
+    border: 1px solid #898989;
+    padding: 15px;
+}
+.profile__personal, .profile__about {
+    padding: 30px 20px;
+    border: 1px solid #898989;
+    border-radius: 20px;
+    background-color: #fff;
+}
+.notification {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 75vw;
+    padding: 20px 20px;
+    border-radius: 20px;
+    background-color: #fff;
+}
+.notification .reminders__row {
+    margin-bottom: 20px;
+}
+.notification .reminders__row .content_heading {
+    
+    margin-bottom: 10px;
+}
+.notification .reminders__row .content_element {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.notification .reminders__row .select {
+    padding: 7.5px 20px;
+    padding-right: 100px;
+    background-color: #fff;
+    border-radius: 20px;
+    border: 1px solid #898989;
+}
+.notification .pushes__header {
+    display: flex;
+    margin-bottom: 30px;
+}
+.notification .pushes__label {
+    color: #898989;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    width: 95px;
+}
+.notification .pushes__label_alarm {
+    margin-right: 60px;
+}
+.notification .pushes__label_event {
+    width: 350px;
+    text-align: left;
+}
+.notification .pushes__content {
+    display: flex;
+}
+.notification .pushes__events {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.notification .pushes__form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.notification .pushes .event_title {
+    display: flex;
+    align-items: center;
+    width: 350px;
+    height: 26px;
+}
+.notification .pushes .event_toggles {
+    width: 266px;
+    display: flex;
+    justify-content: space-around;
+    gap: 60px;
+}
+.notification .pushes .event_toggler {
+    display: flex;
+    align-items: center;
+    position: relative;
+    background-color: #898989;
+    width: 50px;
+    height: 26px;
+    border-radius: 20px;
+}
+.notification .pushes .event_toggler:before {
+    margin: 0px 3px;
+    content: '';
+    left: 0px;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #fff;
+}
+
+.pushes {}
+
+.notification .pushes .event_toggler.active {
+    background-color: #2875e0;
+}
+.notification .pushes .event_toggler.active:before {
+    transform: translateX(calc(100% + 3px));
+}
+.notification .reminders, .notification .pushes {
+    max-width: 900px;
+    width: 100%;
+    padding: 30px 20px;
+    border-radius: 20px;
+    
+    border: 1px solid #898989;
+}

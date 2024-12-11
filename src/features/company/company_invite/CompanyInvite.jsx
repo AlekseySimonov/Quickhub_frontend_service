@@ -41,80 +41,79 @@ export const CompanyInvite = ({ onClose }) => {
         onClose = {onClose}
         title = {'Приглашение в компанию'}
         styles = {styles}
-        children = {
-          <div className={styles.container}>
-            <div className={styles.nav}>
-              <div 
-                className={`${styles.nav_item} ${activeForm === 'byLink' ? styles.current : ''}`} 
-                onClick={() => handleNavClick('byLink')}
-              >
-                Приглашение по ссылке
-              </div>
-              <div 
-                className={`${styles.nav_item} ${activeForm === 'byPersonal' ? styles.current : ''}`} 
-                onClick={() => handleNavClick('byPersonal')}
-              >
-                Приглашение по Email
-              </div>
+    >
+        <div className={styles.container}>
+          <div className={styles.nav}>
+            <div 
+              className={`${styles.nav_item} ${activeForm === 'byLink' ? styles.current : ''}`} 
+              onClick={() => handleNavClick('byLink')}
+            >
+              Приглашение по ссылке
             </div>
-
-            {/* Форма по ссылке */}
-            {activeForm === 'byLink' && (
-              <form data-testid="form_byLink" onSubmit={handleSubmit} className={`${styles.form} ${styles.byLink}`}>
-                <div className={styles.row}>
-                  <label className={styles.label}>Ссылка для приглашения</label>
-                  <div className={styles.row_container}>
-                    <input type="text" className={styles.input} />
-                    <button type="button" className={`${styles.btn} ${styles.copy}`}>Скопировать ссылку</button>
-                  </div>
+            <div 
+              className={`${styles.nav_item} ${activeForm === 'byPersonal' ? styles.current : ''}`} 
+              onClick={() => handleNavClick('byPersonal')}
+            >
+              Приглашение по Email
+            </div>
+          </div>
+          {/* Форма по ссылке */}
+          {activeForm === 'byLink' && (
+            <form data-testid="form_byLink" onSubmit={handleSubmit} className={`${styles.form} ${styles.byLink}`}>
+              <div className={styles.row}>
+                <label className={styles.label}>Ссылка для приглашения</label>
+                <div className={styles.row_container}>
+                  <input type="text" className={styles.input} />
+                  <button type="button" className={`${styles.btn} ${styles.copy}`}>Скопировать ссылку</button>
                 </div>
-                <div className={styles.row}>
-                  <label className={styles.label}>Отправить ссылку</label>
-                  <div className={styles.sendTo}>
-                    {Object.entries(socials).map(([key, src]) => (
-                      <div key={key} className={styles.sendTo_item}>
-                        <img src={src} alt={`Отправить через ${key}`} />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </form>
-            )}
-
-            {/* Форма по Email */}
-            {activeForm === 'byPersonal' && (
-              <form data-testid="form_byPersonal" onSubmit={handleSubmit} className={`${styles.form} ${styles.byPersonal}`}>
-                <div className={styles.labels}>
-                  {['Email', 'Имя', 'Фамилия'].map(label => (
-                    <label key={label} className={styles.label}>{label}</label>
-                  ))}
-                </div>
-                <div className={styles.rows}>
-                  {rows.map((_, index) => (
-                    <div key={index} className={styles.row}>
-                      <input required placeholder="Введите Email" type="email" className={styles.input} />
-                      <input required placeholder="Введите имя" type="text" className={styles.input} />
-                      <input required placeholder="Введите фамилию" type="text" className={styles.input} />
+              </div>
+              <div className={styles.row}>
+                <label className={styles.label}>Отправить ссылку</label>
+                <div className={styles.sendTo}>
+                  {Object.entries(socials).map(([key, src]) => (
+                    <div key={key} className={styles.sendTo_item}>
+                      <img src={src} alt={`Отправить через ${key}`} />
                     </div>
                   ))}
                 </div>
-                <div className={styles.rows_control}>
-                  <button type="button" onClick={handleAddRow} className={`${styles.add}`}>
-                    Добавить ещё
-                  </button>
-                  <button type="button" onClick={handleDeleteRow}
-                          disabled={rows.length <= 1}
-                          className={`${styles.delete} ${rows.length <= 1 ? styles.inactive : ''}`}>
-                    Удалить
-                  </button>            
-                </div>
-                <div className={styles.actions}>
-                  <button type="submit" className={`${styles.btn} ${styles['btn-submit']}`}>Пригласить</button>
-                  <button type="button" className={`${styles.btn} ${styles['btn-cancel']}`} onClick={onClose}>Отмена</button>
-                </div>
-              </form>
-            )}
-          </div>
-        } />
+              </div>
+            </form>
+          )}
+
+          {/* Форма по Email */}
+          {activeForm === 'byPersonal' && (
+            <form data-testid="form_byPersonal" onSubmit={handleSubmit} className={`${styles.form} ${styles.byPersonal}`}>
+              <div className={styles.labels}>
+                {['Email', 'Имя', 'Фамилия'].map(label => (
+                  <label key={label} className={styles.label}>{label}</label>
+                ))}
+              </div>
+              <div className={styles.rows}>
+                {rows.map((_, index) => (
+                  <div key={index} className={styles.row}>
+                    <input required placeholder="Введите Email" type="email" className={styles.input} />
+                    <input required placeholder="Введите имя" type="text" className={styles.input} />
+                    <input required placeholder="Введите фамилию" type="text" className={styles.input} />
+                  </div>
+                ))}
+              </div>
+              <div className={styles.rows_control}>
+                <button type="button" onClick={handleAddRow} className={`${styles.add}`}>
+                  Добавить ещё
+                </button>
+                <button type="button" onClick={handleDeleteRow}
+                        disabled={rows.length <= 1}
+                        className={`${styles.delete} ${rows.length <= 1 ? styles.inactive : ''}`}>
+                  Удалить
+                </button>            
+              </div>
+              <div className={styles.actions}>
+                <button type="submit" className={`${styles.btn} ${styles['btn-submit']}`}>Пригласить</button>
+                <button type="button" className={`${styles.btn} ${styles['btn-cancel']}`} onClick={onClose}>Отмена</button>
+              </div>
+            </form>
+          )}
+        </div>
+    </GenericPopup>
   );
 };

@@ -1,3 +1,7 @@
+a {
+    color: inherit;
+    text-decoration: none;
+}
 
 *::-webkit-scrollbar {
     height: 6px;
@@ -56,7 +60,6 @@
 }
 
 .employees__inner {
-    width: auto;
     position: relative;
     min-width: 0;
     background-color: #fdfbfc;
@@ -69,6 +72,8 @@
 
 .employees__header {
 display: flex;
+flex-shrink: 0;
+flex-grow: 1;
 align-items: center;
 width: max-content;
 min-width: 100%;
@@ -82,6 +87,7 @@ border-bottom: 1px solid #e1e1e1;
 .employees .container {
 display: flex;
 gap: 20px;
+flex-shrink: 0;
 }
 
 .employees__settings {
@@ -93,8 +99,8 @@ background-color: #fff;
 border-radius: 50%;
 }
 .employees__label {
-max-width: 200px;
-width: 100%;
+width: 200px;
+flex-shrink: 0;
 }
 .employees__list {
     height: calc(100vh - 400px);
@@ -125,8 +131,8 @@ width: max-content;
 display: flex;
 }
 .employee__column {
-max-width: 200px;
-width: 100%;
+width: 200px;
+flex-shrink: 0;
 display: flex;
 align-items: flex-start;
 justify-content: center;
@@ -137,6 +143,7 @@ width: 300px;
 display: flex;
 gap: 5px;
 }
+
 .employee__type {
 font-size: 14px;
 }
@@ -151,12 +158,13 @@ border-radius: 50%;
 }
 
 .employee__photo, .label-photo {
-    width: 70px;
+    max-width: 70px;
     text-align: center;
     margin-right: 15px;
 }
-.employee__fsname, .label-fsname {
-    width: 300px;
+.employee__info, .label-fsname {
+    max-width: 280px;
+    width: 100%;
 }
 
 .employee__lname, .label-lname {
@@ -183,8 +191,7 @@ border-radius: 50%;
 }
 
 .employee__email, .label-email {
-    max-width: 300px;
-    width: 300px;
+    width: 350px;
 }
 .employee__workPhone, .label-workPhone {
     width: 220px;
@@ -193,10 +200,10 @@ border-radius: 50%;
     width: 220px;
 }
 .employee__tg, .label-tg {
-    width: 150px;
+    width: 220px;
 }
 .employee__vk, .label-vk {
-    width: 200px;
+    width: 220px;
 }
 .employee__regDate, .label-regDate {
     width: 220px;

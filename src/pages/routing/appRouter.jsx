@@ -8,6 +8,7 @@ import { Companies } from "../../widgets/companies";
 import { MyTasks } from "../../widgets/my_tasks";
 import { Settings } from "../../widgets/settings";
 import { Help } from "../../widgets/help";
+import { User } from "../../widgets/user"
 
 import { AutorizePage } from "../autorize/ui/AutorizePage";
 import { Registration } from "../../entities/autorize/registration";
@@ -29,6 +30,7 @@ export const baseTitles = [
         { path: '/companies', title: 'Компании' },
         { path: '/settings', title: 'Настройки' },
         { path: '/help', title: 'Поддержка' },
+        { path: '/profile', title: 'Профиль'}
     ];
 
 export const appRouter = createBrowserRouter([
@@ -46,7 +48,11 @@ export const appRouter = createBrowserRouter([
             {
                 index: true,
                 element: <Navigate to="/tasks" replace />,
-            },    
+            },
+            {
+                path: 'profile',
+                element: <User />
+            },   
             {
                 path: 'tasks',
                 element: <MyTasks />,

@@ -49,8 +49,8 @@ export const CompanySettings = ({ onClose }) => {
       onClose = {onClose}
       title = {'Настройки компании'}
       styles = {styles}
-      children = {
-        <div className={styles.container}>
+      >
+          <div className={styles.container}>
             <form data-testid="form_company-settings" className={styles.form} onSubmit={handleSave}>
               <div className={styles.row}>
                 <label className={styles.label}>Изменить название компании</label>
@@ -72,7 +72,7 @@ export const CompanySettings = ({ onClose }) => {
                 </button>
               </div>
             </form>
-          </div>
-      } />
+        </div>
+      </GenericPopup>  
   );
 };
