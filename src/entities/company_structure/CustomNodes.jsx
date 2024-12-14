@@ -2,14 +2,17 @@ import { Handle, Position } from '@xyflow/react';
 import styles from './nodes.module.css'
 import { useState } from 'react';
 import { icons } from '../../shared/ui/icons/companies';
-import { useDispatch } from 'react-redux';
-import { deleteDepartmentAPI } from '../../app/store/slices/companySlice';
+import { useDeleteDepartmentMutation } from '../../app/store/slices/companySlice';
 import { Selector } from '../../shared/ui/components/selector';
+import { useSelector } from 'react-redux';
 
 export const DepartmentNode = ({ data }) => {
-    const dispatch = useDispatch()
     const [openEmployeeIds, setOpenEmployeeIds] = useState(new Set())
     const [isAddEmployeeOpen, setIsAddEmployeeOpen] = useState(false)
+
+    const [deleteDepartment, {isError}] = useDeleteDepartmentMutation()
+
+    const companyID = useSelector(state => state.company.companyID)
 
     const toggleEmployees = (id) => {
         const newOpenEmployeeIds = new Set(openEmployeeIds)
@@ -32,9 +35,14 @@ export const DepartmentNode = ({ data }) => {
         // dispatch(deleteEmployeeAPI(id))
     }
 
-    const deleteDepartmentClick = (id) =>{
-        dispatch(deleteDepartmentAPI(id))
+    const deleteDepartmentClick = async ({companyID, id}) => {
+    try {
+        await deleteDepartment({ companyPk: companyID, id }).unwrap();
+        console.log('Department deleted successfully.');
+    } catch (error) {
+        console.error('Failed to delete department:', error);
     }
+};
 
     const employees = data.companyUsers || [];
     const users = Array.isArray(employees) && employees.length > 0 
@@ -60,7 +68,7 @@ export const DepartmentNode = ({ data }) => {
                         </div>
                         <img 
                         className={styles.deleteBtn} 
-                        onClick={() => deleteDepartmentClick(data.id)} 
+                        onClick={() => deleteDepartmentClick({companyID, id: data.id})} 
                         src={icons.deleteBtn} 
                         alt={'Delete'}
                         />

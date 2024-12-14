@@ -1,5 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import {companiesService} from "../../../shared/api/index"
+import { createApi } from "@reduxjs/toolkit/query/react";
+import {apiBaseQuery} from "../../../shared/config";
+import { URLS } from "../../../shared/api";
 
 const initialState ={
     companiesList: [],
@@ -7,10 +10,52 @@ const initialState ={
     companyTitle: null,
     companyDescription: null,
     companyUsers: [],
-    departments: [],
     status: 'loading',
     error: null,
 }
+
+export const companyApiSlice = createApi({
+    reducerPath: 'companyRtk',
+    baseQuery: apiBaseQuery(),
+    endpoints: (builder) => ({
+        getUsersCompany: builder.query({
+            query: (companyPk) => ({ 
+                url: `${URLS.COMPANY_USERS}/${companyPk}`, 
+                method: 'get' 
+            }),
+        }),
+    })
+})
+export const {useGetUsersCompanyQuery} = companyApiSlice
+
+export const departmentsApiSlice = createApi({
+    reducerPath: 'departments',
+    baseQuery: apiBaseQuery(),
+    tagTypes: ['Departments'],
+    endpoints: (builder) => ({
+        getDepartments: builder.query({
+            query: (companyPk) => ({ 
+                url: URLS.DEPARTMENTS.replace('{company_pk}', companyPk), 
+                method: 'get' 
+            }),
+            providesTags: (result) => result
+                ? [
+                    ...result.map(({id}) => ({type: 'Departments', id})),
+                    {type: 'Departments', id: 'LIST'},
+                ]
+                : [{type: 'Departments', id: 'LIST'}],
+        }),
+        deleteDepartment: builder.mutation({
+            query: ({companyPk, id}) => ({
+                url:`${URLS.DEPARTMENTS.replace('{company_pk}', companyPk)}/${id}`,
+                method: 'delete',
+            }), 
+            invalidatesTags: [{type: 'Departments', id: 'LIST'}]
+        })
+    })
+})
+export const {useGetDepartmentsQuery, useDeleteDepartmentMutation} = departmentsApiSlice
+
 
 export const getCompaniesAPI = createAsyncThunk(
     'company/getCompaniesAPI',
@@ -48,18 +93,6 @@ export const deleteCompanyAPI = createAsyncThunk(
     }
 );
 
-export const addDepartmentEmployeeAPI = createAsyncThunk(
-    'company/addDepartmentEmployeeAPI',
-    async ({ id }, { rejectWithValue }) => {
-        try {
-            await companiesService.patchDepartments(id);
-            return id;
-        } catch (err) {
-            return rejectWithValue(err);
-        }
-    }
-);
-
 export const renameCompanyAPI = createAsyncThunk(
     'company/renameCompanyAPI',
     async ({ id, title }, { rejectWithValue }) => {
@@ -84,32 +117,6 @@ export const getCompanyUsersAPI = createAsyncThunk(
         }
     }
 )
-
-export const getDepartmentsAPI = createAsyncThunk(
-    'company/getDepartmentsAPI',
-    async (_, { rejectWithValue, getState }) => {
-        try {
-            const state = getState().company
-            const response = await companiesService.getDepartments(state.companyID)
-            return response.data
-        } catch (err) {
-            return rejectWithValue(err)
-        }
-    }
-);
-
-export const deleteDepartmentAPI = createAsyncThunk(
-    'company/deleteDepartmentAPI',
-    async (departmentId, { rejectWithValue, getState }) => {
-        try {
-            const state = getState().company
-            await companiesService.deleteDepartment(state.companyID, departmentId)
-            return departmentId
-        } catch (err) {
-            return rejectWithValue(err)
-        }
-    }
-);
 
 const companySlice = createSlice({
     name: 'company',
@@ -169,30 +176,6 @@ const companySlice = createSlice({
                 state.error = 'postError'
             })
 
-            .addCase(getDepartmentsAPI.pending, (state) => {
-                state.status = 'loading'
-            })
-            .addCase(getDepartmentsAPI.fulfilled, (state,action) => {
-                state.status = 'succeeded'
-                state.departments = action.payload;
-            })
-            .addCase(getDepartmentsAPI.rejected, (state) => {
-                state.status = 'failed'
-            })
-
-            .addCase(deleteDepartmentAPI.pending, (state) => {
-                state.status = 'loading'
-            })
-            .addCase(deleteDepartmentAPI.fulfilled, (state,action) => {
-                state.status = 'succeeded'
-                const idToDelete = action.payload;
-                state.departments = state.departments.filter(department => 
-                    department.id !== idToDelete);
-            })
-            .addCase(deleteDepartmentAPI.rejected, (state) => {
-                state.status = 'failed'
-            })
-
             .addCase(deleteCompanyAPI.pending, (state) => {
                 state.status = 'loading'
             })
@@ -231,17 +214,6 @@ const companySlice = createSlice({
                 state.companyUsers = action.payload
             })
             .addCase(getCompanyUsersAPI.rejected, (state) => {
-                state.status = 'failed'
-            })
-
-            .addCase(addDepartmentEmployeeAPI.pending, (state) => {
-                state.status = 'loading'
-            })
-            .addCase(addDepartmentEmployeeAPI.fulfilled, (state) => {
-                state.status = 'succeeded';
-                // state.companyUsers = action.payload
-            })
-            .addCase(addDepartmentEmployeeAPI.rejected, (state) => {
                 state.status = 'failed'
             })
         }

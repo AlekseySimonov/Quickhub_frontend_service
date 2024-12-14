@@ -69,7 +69,7 @@ export const CreateDepartment = ({ onClose }) => {
                                 </div>
                         
                         <div className={styles.addEmployee}>
-                            <button className={styles.add} id="add-employee_btn" onClick={() => setShowInput(true)}>
+                            <button className={styles.add} id="add-employee_btn" onClick={() => setShowInput(prev => !prev)}>
                                 <span className={styles.plus}>+</span>
                                 Добавить сотрудника
                             </button>

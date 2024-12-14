@@ -16,6 +16,7 @@
     display: flex;
     margin: 0 auto;
     color:#000;
+    justify-content: center;
 }
 
 .popUp {
@@ -63,10 +64,12 @@
     transform: rotateZ(45deg);
 }
 
-.content .container {
+.content {
     flex-direction: column;
-    padding: 36px 0px 50px 0;
-    gap: 56px;
+    display: flex;
+    padding: 36px 40px 50px 40px;
+    gap: 20px;
+    color:#000
 }
 
 .form {

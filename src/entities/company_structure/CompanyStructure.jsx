@@ -2,27 +2,18 @@ import { ReactFlow, Background, Controls, MiniMap } from '@xyflow/react';
 import '@xyflow/react/dist/style.css'
 import styles from './styles.module.css'
 import {DepartmentNode} from './CustomNodes';
-import { useDispatch, useSelector } from 'react-redux';
+import {  useSelector } from 'react-redux';
 import { createGraph } from './initialElements';
-import { getDepartmentsAPI } from '../../app/store/slices/companySlice';
-import { useEffect } from 'react';
+import { useGetDepartmentsQuery } from '../../app/store/slices/companySlice';
 
 export const CompanyStructure = ()=>{
     const companyID = useSelector(state => state.company.companyID)
-    const departments = useSelector(state => state.company.departments)
 
-    const currentDepartments = departments ? departments : [];
-    const totalDepartments = currentDepartments.length;
+    const { data = [] } = useGetDepartmentsQuery(companyID, {
+        skip: !companyID,
+    });
 
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-    if (companyID) {
-        dispatch(dispatch(getDepartmentsAPI));
-    }
-    }, [companyID, dispatch]);
-
-    const { nodes, edges } = createGraph(departments)
+    const { nodes, edges } = createGraph(data)
 
     const nodeTypes = {
     departmentNode: DepartmentNode
@@ -30,12 +21,12 @@ export const CompanyStructure = ()=>{
 
     return (
         <div className={styles.reactFlow}>
-            {totalDepartments === 0 && 
+            {data.length === 0 && 
             <div className={styles.container_empty}>
             На данный момент в компании нет отделов
             </div>
             }
-            {totalDepartments > 0 &&
+            {data.length > 0 &&
                 <ReactFlow
                 nodes={nodes}
                 edges={edges}

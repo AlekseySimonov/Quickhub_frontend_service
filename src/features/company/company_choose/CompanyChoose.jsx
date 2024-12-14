@@ -46,7 +46,7 @@ export const CompanyChoose = ({ testid, onAddCompany, styles }) => {
             </button> 
             {isOpen && (  
                 <ul className={styles.select_menu}>  
-                    {companiesList.filter(company => company.title !== selectedOption).map((company) => (  
+                    {Array.isArray(companiesList) && companiesList.filter(company => company.title !== selectedOption).map((company) => (  
                         <li key={company.id} onClick={() => handleOptionClick(company)}>  
                             {company.title}  
                         </li>  
