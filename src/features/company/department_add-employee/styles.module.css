@@ -1,0 +1,62 @@
+.addEmployee{
+    position: absolute; 
+    left: 205%;
+    top: 75%;
+    transform: translateX(10px);
+    padding: 15px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display:flex;
+    flex-direction: column;
+    gap: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.2);
+    background: white;
+    cursor: default;
+}
+
+.addEmployeeTitle{
+    display: flex;
+    margin: 0;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.closeBtn{
+    width: 11px;
+    height: 13px;
+    overflow: hidden;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+.actions{
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+    .btn {
+        font-size: 16px;
+        height: 40px;
+        padding: 0px 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .btnSubmit {
+        background-color: rgba(40, 224, 90, 1);
+    }
+    .btnSubmit:hover {
+        background-color: rgba(40, 224, 90, 0.9);
+    }
+    .btnCancel {
+        background-color: #E1E1E1;
+    }
+    .btnCancel:hover {
+        background-color: rgba(225, 225, 225, 0.85);
+    }

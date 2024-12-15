@@ -5,6 +5,10 @@ import { CompanyInvite } from "./company_invite";
 import { CompanySettings } from "./company_settings";
 import { CompanyListSettings } from "./company_list-settings/CompanyListSettings";
 
+import { DepartmentEmployeesList } from "./department_employees-list/DepartmentEmployeesList";
+import { AddDepartmentEmployee } from "./department_add-employee/AddDepartmentEmployee";
+
+
 export const CompanyFeatures = {
     CompanyInvite,
     CompanyChoose,
@@ -12,4 +16,6 @@ export const CompanyFeatures = {
     CompanyCreate,
     CreateDepartment,
     CompanyListSettings,
+    AddDepartmentEmployee,
+    DepartmentEmployeesList
 }

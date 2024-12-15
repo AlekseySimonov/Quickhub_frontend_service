@@ -64,32 +64,34 @@ export const CompaniesHeader = () => {
                     <div className="button"></div>
                 </div>
                 <div className={styles.employee_management}>
-                    <div className={styles.employee_management__search}>
-                        <Search
-                                    testid = {'search'}
-                                    placeholder = {'Поиск отдела'}
-                        />
-                    </div>
-                    <div className={styles.employee_management__filter}>
-                        <Filter 
-                                    testid = {'filter'}
-                                    menuItems={menuItems} 
-                                    submenuItems={submenuItems} 
-                        />
-                    </div>
-                    <div className={styles.employee_management__btn}>
                         {isStructurePage ? (
-                            <div className = {styles.management__btn} onClick={createDepartmentPopup.openPopup}>
-                                <img src={icons.plus} alt="" />
-                                Добавить отдел
+                            <div className={styles.employee_management__btn}>
+                                <div className = {styles.management__btn} onClick={createDepartmentPopup.openPopup}>
+                                    <img src={icons.plus} alt="" />
+                                    Добавить отдел
+                                </div>
                             </div>
                         ) : (
-                            <div className = {styles.management__btn} onClick={inviteEmployeePopup.openPopup}>
-                                <img src={icons.plus} alt="" />
-                                Пригласить сотрудника
-                            </div>
+                            <>
+                                    <Search
+                                                testid = {'search'}
+                                                placeholder = {'Поиск отдела'}
+                                    />
+                                    <Filter 
+                                        testid = {'filter'}
+                                        menuItems={menuItems} 
+                                        submenuItems={submenuItems} 
+                                    />
+
+                                <div className={styles.employee_management__btn}>
+                                    <div className = {styles.management__btn} onClick={inviteEmployeePopup.openPopup}>
+                                        <img src={icons.plus} alt="" />
+                                        Пригласить сотрудника
+                                    </div>
+                                </div>
+                            </>
+                            
                         )}
-                    </div>
                 </div>
             </div>
                 {inviteEmployeePopup.isVisible && <CompanyFeatures.CompanyInvite onClose={inviteEmployeePopup.closePopup} />}

@@ -3,16 +3,15 @@ import styles from './nodes.module.css'
 import { useState } from 'react';
 import { icons } from '../../shared/ui/icons/companies';
 import { useDeleteDepartmentMutation } from '../../app/store/slices/companySlice';
-import { Selector } from '../../shared/ui/components/selector';
 import { useSelector } from 'react-redux';
+import { CompanyFeatures } from '../../features/company';
 
 export const DepartmentNode = ({ data }) => {
     const [openEmployeeIds, setOpenEmployeeIds] = useState(new Set())
     const [isAddEmployeeOpen, setIsAddEmployeeOpen] = useState(false)
 
-    const [deleteDepartment, {isError}] = useDeleteDepartmentMutation()
-
     const companyID = useSelector(state => state.company.companyID)
+    const [deleteDepartment] = useDeleteDepartmentMutation()
 
     const toggleEmployees = (id) => {
         const newOpenEmployeeIds = new Set(openEmployeeIds)
@@ -30,11 +29,6 @@ export const DepartmentNode = ({ data }) => {
         setIsAddEmployeeOpen(true)
     }
 
-    const deleteEmployeeClick = (id) =>{
-        console.log(id)
-        // dispatch(deleteEmployeeAPI(id))
-    }
-
     const deleteDepartmentClick = async ({companyID, id}) => {
     try {
         await deleteDepartment({ companyPk: companyID, id }).unwrap();
@@ -42,7 +36,7 @@ export const DepartmentNode = ({ data }) => {
     } catch (error) {
         console.error('Failed to delete department:', error);
     }
-};
+    };
 
     const employees = data.companyUsers || [];
     const users = Array.isArray(employees) && employees.length > 0 
@@ -80,7 +74,7 @@ export const DepartmentNode = ({ data }) => {
                         <img className={styles.photo} src={data.photo} alt={data.users[0].fullName} />
                         <div className={styles.label__employee}>
                             <div className={styles.name}>
-                                {data.users[0].fullName}
+                                {data.users[0].first_name + ' ' + data.users[0].last_name}
                             </div>
                             <div className={styles.position}>
                                 {data.users[0].position}
@@ -98,64 +92,25 @@ export const DepartmentNode = ({ data }) => {
                         <div className={styles.arrow}></div>
                         </button> 
                 )}
+
                 {Array.isArray(data.users) && data.users.length > 1 && openEmployeeIds.has(data.id) &&(
-                    <div className={styles.employees}>
-                        <img 
-                        src={icons.popupX} 
-                        className={styles.closeBtn} 
-                        alt="Close"
-                        onClick={() => toggleEmployees(data.id)}
-                        />
-                            {data.users.slice(1).map(user => (
-                                <div key={user.id} className={styles.employee} style={{ backgroundColor: data.color }}>
-                                    <img 
-                                    className={styles.photo} 
-                                    src={data.photo} 
-                                    alt={user.fullName} 
-                                    />
-                                    <div className={styles.label__employee}>
-                                        <div className={styles.name}>
-                                            {user.fullName}
-                                        </div>
-                                        <div className={styles.position}>
-                                            {user.position}
-                                        </div>
-                                    </div>
-                                    <img src={icons.deleteBtn} 
-                                    className={styles.deleteBtn} 
-                                    onClick={() => deleteEmployeeClick(user.id)} 
-                                    />
-                                </div>
-                            ))}
-                        <button className = {styles.addEmployeeBtn} onClick={() => handleAddEmployee(data.id)}>
-                            <span className={styles.plus}>+</span>
-                            Добавить сотрудника
-                        </button>
-                    </div>
+                    <CompanyFeatures.DepartmentEmployeesList
+                        data={data}
+                        onToggle={() => toggleEmployees(data.id)}
+                        onAdd={() => handleAddEmployee(data.id)}
+                        color={data.color}
+                        photo = {data.photo}
+                    />
                 )}
 
                 {isAddEmployeeOpen && (
-                    <div className={styles.addEmployee}>
-                        <div className={styles.addEmployeeTitle}>
-                            Добавить сотрудника
-                            <img 
-                                src={icons.popupX} 
-                                className={styles.closeBtn} 
-                                onClick={() => setIsAddEmployeeOpen(false)}
-                                alt ={'CloseBtn'}
-                            />
-                        </div>
-                        <Selector
-                            list = {users}
-                            inputLabel = {'Выберите сотрудника'}
-                            width= {'400px'}
-                            onSelect={handleAddEmployeeChange}
-                        />
-                        <div className={styles.actions}>
-                            <button onClick={handleAddEmployee} className={`${styles.btn} ${styles.btnSubmit}`}>Добавить</button>
-                            <button onClick={() => setIsAddEmployeeOpen(false)} className={`${styles.btn} ${styles.btnCancel}`}>Отмена</button>
-                        </div>
-                    </div>
+                    <CompanyFeatures.AddDepartmentEmployee
+                        data={data}
+                        isOpen={isAddEmployeeOpen}
+                        onClose={() => setIsAddEmployeeOpen(false)}
+                        onSelect={handleAddEmployeeChange}
+                        onAdd={handleAddEmployee}
+                    />
                 )}
                 <Handle type="target" position={Position.Top} id="target" style={{ opacity: 0 }} />
             </div>

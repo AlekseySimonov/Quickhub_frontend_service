@@ -30,6 +30,8 @@ export const registerAPI = createAsyncThunk(
     async ({ first_name,  last_name, email, password,password2 }, { rejectWithValue }) => {
         try {
             const response = await authService.register(first_name,  last_name, email, password,password2)
+            alert("Вы успешно зарегистрировались");
+            window.location('/login')
             return response
         } catch (err) {
             if (err.response.status === 400) {

@@ -35,7 +35,7 @@ export const departmentsApiSlice = createApi({
     endpoints: (builder) => ({
         getDepartments: builder.query({
             query: (companyPk) => ({ 
-                url: URLS.DEPARTMENTS.replace('{company_pk}', companyPk), 
+                url: URLS.DEPARTMENTS_USERS_DATA.replace('{company_pk}', companyPk), 
                 method: 'get' 
             }),
             providesTags: (result) => result
@@ -45,6 +45,24 @@ export const departmentsApiSlice = createApi({
                 ]
                 : [{type: 'Departments', id: 'LIST'}],
         }),
+        postDepartment: builder.mutation({
+            query: ({companyPk, body}) => ({
+                url:`${URLS.DEPARTMENTS.replace('{company_pk}', companyPk)}`,
+                method: 'POST',
+                body
+            }), 
+            invalidatesTags: [{type: 'Departments', id: 'LIST'}]
+        }),
+
+        patchDepartment: builder.mutation({
+            query: ({companyPk, id, body}) => ({
+                url:`${URLS.DEPARTMENTS.replace('{company_pk}', companyPk)}/${id}`,
+                method: 'patch',
+                body
+            }),
+            invalidatesTags: [{type: 'Departments', id: 'LIST'}]
+        }),
+
         deleteDepartment: builder.mutation({
             query: ({companyPk, id}) => ({
                 url:`${URLS.DEPARTMENTS.replace('{company_pk}', companyPk)}/${id}`,
@@ -54,7 +72,12 @@ export const departmentsApiSlice = createApi({
         })
     })
 })
-export const {useGetDepartmentsQuery, useDeleteDepartmentMutation} = departmentsApiSlice
+export const {
+    useGetDepartmentsQuery, 
+    useDeleteDepartmentMutation,
+    usePostDepartmentMutation, 
+    usePatchDepartmentMutation,
+} = departmentsApiSlice
 
 
 export const getCompaniesAPI = createAsyncThunk(

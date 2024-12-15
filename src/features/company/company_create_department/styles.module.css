@@ -1,80 +1,3 @@
-.outer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    z-index: 90;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-.container {
-    width: 722px;
-    display: flex;
-    margin: 0 auto;
-    color:#000;
-}
-
-.pop-up {
-    background-color: #fff;
-    box-sizing: border-box;
-    border-radius: 10px;
-}
-
-.header {
-    width: 800px;
-    border-bottom: 1px solid #000;
-}
-
-.header .container {
-    padding: 26px 0px;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.title {
-    font-size: 20px;
-    font-weight: 600;
-}
-
-.closeBtn {
-    display: flex;
-    gap: 1.5px;
-    cursor: pointer;
-}
-
-.closeBtn-component {
-    width: 7px;
-    height: 7px;
-}
-
-.closeBtn-component:first-child {
-    border-top: 1px solid #000;
-    border-right: 1px solid #000;
-    transform: rotateZ(45deg);
-}
-
-.closeBtn-component:last-child {
-    border-bottom: 1px solid #000;
-    border-left: 1px solid #000;
-    transform: rotateZ(45deg);
-}
-
-.content .container {
-    flex-direction: column;
-    padding: 36px 0px 50px 0;
-    gap: 56px;
-}
-
-.form {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-}
-
 .row {
     width: 100%;
     display: flex;
@@ -202,7 +125,7 @@
 }
 
 .actions { 
-    margin-top: 100px;
+    margin-top: 140px;
     display: flex;  
     justify-content: center;  
     gap: 30px;
