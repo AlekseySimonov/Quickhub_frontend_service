@@ -26,10 +26,8 @@ export const CompanyCreate = ({ onClose }) => {
   return (
       <GenericPopup
         onClose = {onClose}
-        styles = {styles}
         title = {'Создать компанию'}
         >
-          <div className={styles.container}>
             <form onSubmit={handleSubmit} className={styles.form} aria-label="Create Company Form">
               <div className={styles.row}>
                 <label className={styles.label}>Название компании</label>
@@ -50,7 +48,6 @@ export const CompanyCreate = ({ onClose }) => {
                 </button>
               </div>
             </form>
-          </div>
       </GenericPopup>
   );
 };

@@ -72,9 +72,9 @@ export const refreshTokenAPI = createAsyncThunk(
             return response
         } catch (err) {
             if (err.response.status == 401) { 
-                return rejectWithValue(err.response)  
+                return rejectWithValue(err)  
             }
-            return rejectWithValue(err.response);
+            return rejectWithValue(err);
         }
     }
 )

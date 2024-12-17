@@ -36,6 +36,7 @@ export const CompanyStructure = ()=>{
                     <Controls />
                     <MiniMap pannable zoomable nodeStrokeWidth={3} />
                 </ReactFlow> 
+            }
         </div>
     )
 

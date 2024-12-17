@@ -7,9 +7,7 @@ export const Selector = ({ list, label, inputLabel, onSelect, width }) => {
     const [searchTerm, setSearchTerm] = useState('');
 
     const filter = Array.isArray(list)
-    ? list.filter(item =>
-        item.title.toLowerCase().includes(searchTerm.toLowerCase())
-    )
+    ? list.filter(item => item && item.title && item.title.toLowerCase().includes(searchTerm.toLowerCase()))
     : [];
 
     const ref = useOnclickOutside(() => {

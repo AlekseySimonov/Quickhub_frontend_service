@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import styles from './CompanyListSettings.module.css';
 import { icons } from '../../../shared/ui/icons/companies';
-import useOnclickOutside from "react-cool-onclickoutside";
 import { GenericPopup } from '../../../shared/ui/components/GenericPopup/GenericPopup';
 
 export const CompanyListSettings = ({ onSave, onClose }) => { 
@@ -75,10 +74,8 @@ export const CompanyListSettings = ({ onSave, onClose }) => {
   return (
    <GenericPopup 
       onClose = {onClose}
-      styles = {styles}
       title = {'Настройки списка сотрудников'}
       >
-        <div className={styles.container}>
           <div className={styles.form}>
             <div className={styles.column}>
               {Object.keys(checkboxes).slice(0, 7).map((key) => (
@@ -116,7 +113,6 @@ export const CompanyListSettings = ({ onSave, onClose }) => {
               Отменить
             </button>
           </div>
-        </div>
       </GenericPopup>
   );
 };

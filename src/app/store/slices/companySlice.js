@@ -49,7 +49,7 @@ export const departmentsApiSlice = createApi({
             query: ({companyPk, body}) => ({
                 url:`${URLS.DEPARTMENTS.replace('{company_pk}', companyPk)}`,
                 method: 'POST',
-                body
+                data: body,
             }), 
             invalidatesTags: [{type: 'Departments', id: 'LIST'}]
         }),
@@ -58,7 +58,7 @@ export const departmentsApiSlice = createApi({
             query: ({companyPk, id, body}) => ({
                 url:`${URLS.DEPARTMENTS.replace('{company_pk}', companyPk)}/${id}/`,
                 method: 'patch',
-                body
+                data:body,
             }),
             invalidatesTags: [{type: 'Departments', id: 'LIST'}]
         }),

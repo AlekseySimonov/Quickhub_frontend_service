@@ -12,7 +12,6 @@
 }
 
 .container {
-    width: 722px;
     display: flex;
     margin: 0 auto;
     color:#000;
@@ -23,11 +22,11 @@
     background-color: #fff;
     box-sizing: border-box;
     border-radius: 10px;
-    color:#000;
 }
 
 .header {
-    width: 800px;
+    padding-inline: 40px;
+    width: auto;
     border-bottom: 1px solid #000;
 }
 

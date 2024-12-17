@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import styles from './CompanyInvite.module.css';
 import { socials } from '../../../shared/ui/icons/companies/popup/invite_employee';
-import { icons } from '../../../shared/ui/icons/companies';
-import useOnclickOutside from "react-cool-onclickoutside";
 import { GenericPopup } from '../../../shared/ui/components/GenericPopup/GenericPopup';
 
 export const CompanyInvite = ({ onClose }) => {
@@ -32,15 +30,10 @@ export const CompanyInvite = ({ onClose }) => {
     console.log('Форма отправлена:', rows);
   };
 
-  const ref = useOnclickOutside(() => {
-    onClose();
-  });
-
   return (
     <GenericPopup
         onClose = {onClose}
         title = {'Приглашение в компанию'}
-        styles = {styles}
     >
         <div className={styles.container}>
           <div className={styles.nav}>

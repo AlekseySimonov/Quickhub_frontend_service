@@ -1,15 +1,10 @@
 import { useState, useEffect } from 'react';
-import useOnclickOutside from "react-cool-onclickoutside";
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './CompanySettings.module.css';
-import { icons } from '../../../shared/ui/icons/companies';
 import { deleteCompanyAPI, renameCompanyAPI } from '../../../app/store/slices/companySlice';
 import { GenericPopup } from '../../../shared/ui/components/GenericPopup/GenericPopup';
 
 export const CompanySettings = ({ onClose }) => { 
-  const ref = useOnclickOutside(() => {
-    onClose();
-  });
 
   const dispatch = useDispatch();
   const id = useSelector(state => state.company.companyID);
@@ -48,9 +43,7 @@ export const CompanySettings = ({ onClose }) => {
     <GenericPopup
       onClose = {onClose}
       title = {'Настройки компании'}
-      styles = {styles}
       >
-          <div className={styles.container}>
             <form data-testid="form_company-settings" className={styles.form} onSubmit={handleSave}>
               <div className={styles.row}>
                 <label className={styles.label}>Изменить название компании</label>
@@ -72,7 +65,6 @@ export const CompanySettings = ({ onClose }) => {
                 </button>
               </div>
             </form>
-        </div>
       </GenericPopup>  
   );
 };
