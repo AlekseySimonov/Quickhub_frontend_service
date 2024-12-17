@@ -6,7 +6,7 @@ import { URLS } from "../../../shared/api";
 
 const initialState ={
     companiesList: [],
-    companyID: null,
+    companyID: localStorage.getItem('CompanyId') || sessionStorage.getItem('CompanyId') || null,
     companyTitle: null,
     companyDescription: null,
     companyUsers: [],
@@ -56,7 +56,7 @@ export const departmentsApiSlice = createApi({
 
         patchDepartment: builder.mutation({
             query: ({companyPk, id, body}) => ({
-                url:`${URLS.DEPARTMENTS.replace('{company_pk}', companyPk)}/${id}`,
+                url:`${URLS.DEPARTMENTS.replace('{company_pk}', companyPk)}/${id}/`,
                 method: 'patch',
                 body
             }),
@@ -65,7 +65,7 @@ export const departmentsApiSlice = createApi({
 
         deleteDepartment: builder.mutation({
             query: ({companyPk, id}) => ({
-                url:`${URLS.DEPARTMENTS.replace('{company_pk}', companyPk)}/${id}`,
+                url:`${URLS.DEPARTMENTS.replace('{company_pk}', companyPk)}/${id}/`,
                 method: 'delete',
             }), 
             invalidatesTags: [{type: 'Departments', id: 'LIST'}]

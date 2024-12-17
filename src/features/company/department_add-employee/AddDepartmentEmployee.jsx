@@ -14,7 +14,7 @@ export const AddDepartmentEmployee = ({ isOpen, onClose, data }) => {
     
     const handleAddEmployee = async (newEmail) =>{
         const updatedUsers = data.users.map(user => ({ email: user.email }))
-        updatedUsers.push({ email: newEmail });
+        updatedUsers.push({ email: newEmail })
             console.log(updatedUsers)
 
             try {

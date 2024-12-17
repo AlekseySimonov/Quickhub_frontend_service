@@ -12,9 +12,10 @@ export const DepartmentEmployeesList = ({ data, onToggle,  onAdd, color, photo }
         const updatedUsers = data.users
             .filter(user => user.email !== email)
             .map(user => ({ email: user.email }))
+            console.log({ users: updatedUsers, "is_remove": true  })
 
         try {
-            await deleteEmployee({ companyPk: companyID, id: data.id, body: { users: updatedUsers  }  }).unwrap();
+            await deleteEmployee({ companyPk: companyID, id: data.id, body: { users: updatedUsers, "is_remove": true  } }).unwrap();
             console.log('Employee deleted successfully.');
         } catch (error) {
             console.error('Failed to delete employee:', error);
