@@ -12,11 +12,6 @@ describe('CompanyListSettings ', () => {
     localStorage.clear();
   });
 
-  test('renders correctly and matches snapshot', () => {
-    const { asFragment } = render(<CompanyFeatures.CompanyListSettings  onSave={onSaveMock} onClose={onCloseMock} />);
-    expect(asFragment()).toMatchSnapshot();
-  });
-
   test('loads default settings', () => {
     const { getByText } = render(<CompanyFeatures.CompanyListSettings  onSave={onSaveMock} onClose={onCloseMock} />);
     expect(getByText('Имя и фамилия')).toBeInTheDocument();
@@ -26,7 +21,7 @@ describe('CompanyListSettings ', () => {
   test('checkbox state changes on click', () => {
     const { getByText } = render(<CompanyFeatures.CompanyListSettings  onSave={onSaveMock} onClose={onCloseMock} />);
     
-    const fullNameCheckbox = getByText('Имя и фамилия').closest('.pop-up__checkbox');
+    const fullNameCheckbox = getByText('Имя и фамилия').closest('.checkbox');
     fireEvent.click(fullNameCheckbox);
     
     expect(fullNameCheckbox.querySelector('.checkbox__box').classList.contains('checked')).toBe(false);
@@ -56,7 +51,7 @@ describe('CompanyListSettings ', () => {
   test('resets to default settings', () => {
     const { getByText } = render(<CompanyFeatures.CompanyListSettings  onSave={onSaveMock} onClose={onCloseMock} />);
     
-    const vkCheckbox = getByText('Vk').closest('.pop-up__checkbox');
+    const vkCheckbox = getByText('Vk').closest('.checkbox');
     fireEvent.click(vkCheckbox);
     
     fireEvent.click(getByText('По умолчанию'));

@@ -12,3 +12,5 @@ export const DEPARTMENTS = 'company-service/api/v1/company/companies/{company_pk
 export const DEPARTMENTS_USERS_DATA ='/profile/api/v1/profile/company/{company_pk}/deps/'
 
 export const PROJECTS = '/company-service/api/v1/company/companies/{company_pk}/projects/'
+
+export const PROFILE = '/profile/api/v1/profile/{id}/'

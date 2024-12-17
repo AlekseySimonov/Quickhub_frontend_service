@@ -1,3 +1,7 @@
+a {
+    color: inherit;
+    text-decoration: none;
+}
 
 *::-webkit-scrollbar {
     height: 6px;
@@ -32,9 +36,9 @@
 }
 
 .container {
-display: flex;
-justify-content: space-between;
-margin-left: 40px;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 40px;
 }
 
 .container_empty {
@@ -44,8 +48,8 @@ margin-left: 40px;
     align-items: center;
     text-align: center;
     color: #898989;
-    height: 100%;
-    min-height: 350px;
+    height: calc(100vh - 400px);
+    min-height: 200px;
 }
 
 .employees {
@@ -56,8 +60,11 @@ margin-left: 40px;
 }
 
 .employees__inner {
-    width: auto;
+    position: relative;
     min-width: 0;
+    background-color: #fdfbfc;
+    border-bottom: 1px solid #e1e1e1;
+    overflow: hidden;
     overflow-x: auto;
 }
 
@@ -65,11 +72,13 @@ margin-left: 40px;
 
 .employees__header {
 display: flex;
+flex-shrink: 0;
+flex-grow: 1;
 align-items: center;
 width: max-content;
 min-width: 100%;
 height: 80px;
-position: relative;
+position: sticky;
 padding-left: 20px;
 gap: 50px;
 background-color: #FDFBFC;
@@ -78,6 +87,7 @@ border-bottom: 1px solid #e1e1e1;
 .employees .container {
 display: flex;
 gap: 20px;
+flex-shrink: 0;
 }
 
 .employees__settings {
@@ -89,22 +99,22 @@ background-color: #fff;
 border-radius: 50%;
 }
 .employees__label {
-max-width: 200px;
-width: 100%;
+width: 200px;
+flex-shrink: 0;
 }
 .employees__list {
-    max-height: 560px;
+    height: calc(100vh - 400px);
     padding-left: 20px;
 }
 
 .employees__list-inner {
-    background-color: #fdfbfc;
     display: flex;
     width: max-content;
     min-width: 100%;
-    flex-direction: column;
     height: 100%;
-    border-bottom: 1px solid #e1e1e1;
+    flex-direction: column;
+    overflow: hidden;
+    overflow-y: auto;
 }
 
 .employees__list-inner::-webkit-scrollbar {
@@ -121,8 +131,8 @@ width: max-content;
 display: flex;
 }
 .employee__column {
-max-width: 200px;
-width: 100%;
+width: 200px;
+flex-shrink: 0;
 display: flex;
 align-items: flex-start;
 justify-content: center;
@@ -133,6 +143,7 @@ width: 300px;
 display: flex;
 gap: 5px;
 }
+
 .employee__type {
 font-size: 14px;
 }
@@ -147,12 +158,13 @@ border-radius: 50%;
 }
 
 .employee__photo, .label-photo {
-    width: 70px;
+    max-width: 70px;
     text-align: center;
     margin-right: 15px;
 }
-.employee__fsname, .label-fsname {
-    width: 300px;
+.employee__info, .label-fsname {
+    max-width: 280px;
+    width: 100%;
 }
 
 .employee__lname, .label-lname {
@@ -179,8 +191,7 @@ border-radius: 50%;
 }
 
 .employee__email, .label-email {
-    max-width: 300px;
-    width: 300px;
+    width: 350px;
 }
 .employee__workPhone, .label-workPhone {
     width: 220px;
@@ -189,10 +200,10 @@ border-radius: 50%;
     width: 220px;
 }
 .employee__tg, .label-tg {
-    width: 150px;
+    width: 220px;
 }
 .employee__vk, .label-vk {
-    width: 200px;
+    width: 220px;
 }
 .employee__regDate, .label-regDate {
     width: 220px;
@@ -216,6 +227,7 @@ border-radius: 50%;
     gap: 8px;
 }
 .pagination__arrow {
+    cursor: pointer;
     position: absolute;
     z-index: 40;
     width: 11px;
@@ -224,13 +236,13 @@ border-radius: 50%;
 }
 .pagination__arrow.prev {
     left: -20px;
-    border-left: 1px solid #000;
-    border-bottom: 1px solid #000;
+    border-left: 1px solid #898989;
+    border-bottom: 1px solid #898989;
 }
 .pagination__arrow.next {
     right: -20px;
-    border-right: 1px solid #000;
-    border-top: 1px solid #000;
+    border-right: 1px solid #898989;
+    border-top: 1px solid #898989;
 }
 .pagination__list {
     display: flex;

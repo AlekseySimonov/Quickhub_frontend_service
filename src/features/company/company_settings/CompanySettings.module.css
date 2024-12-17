@@ -1,4 +1,4 @@
-.pop-up__outer {
+.outer {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -82,30 +82,30 @@
     background-color: #d8d6d6;
 }
 
-.pop-up .select_toggle{
+.popup .select_toggle{
     background-color: #e1e1e1;
 }
 
-.pop-up {
+.popup {
     background-color: #fff;
     color: #000;
     border-radius: 15px;
     overflow: hidden;
 }
-.pop-up__header {
+.header {
     width: 800px;
     border-bottom: 1px solid #000;
 }
-.pop-up__header .container {
+.header .container {
     padding: 26px 0px;
     justify-content: space-between;
     align-items: center;
 }
-.pop-up__title {
+.title {
     font-size: 20px;
     font-weight: 600;
 }
-.pop-up__closeBtn {
+.closeBtn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -114,31 +114,31 @@
     overflow: hidden;
     cursor: pointer;
 }
-.pop-up__content .container {
+.content .container {
     flex-direction: column;
     padding: 36px 0px;
     gap: 56px;
 }
-.pop-up__form {
+.form {
     display: flex;
     flex-direction: column;
     gap: 23px;
 }
-.pop-up__row {
+.row {
     width: 100%;
     padding: 10px 0px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.pop-up__label {
+.label {
     flex: 47% 0 1;
     font-size: 18px;
     white-space: wrap;
     line-height: 150%;
 }
 
-.pop-up__input{
+.input{
     width: 273px;
     height: 40px;
     padding: 0px 10px;
@@ -149,7 +149,7 @@
     border-radius: 5px;
 }
 
-.pop-up__select {
+.select {
     cursor: pointer;
     width: 273px;
     height: 40px;
@@ -160,12 +160,12 @@
     align-items: center;
     padding: 0px 22px;
 }
-.pop-up__actions {
+.actions {
     display: flex;
     justify-content: center;
     gap: 30px;
 }
-.pop-up__btn {
+.btn {
     height: 50px;
     padding: 0px 30px;
     display: flex;
@@ -175,19 +175,19 @@
     cursor: pointer;
     transition: 0.2s;
 }
-.pop-up__btn-submit {
+.btn-submit {
     background-color: rgba(40, 224, 90, 1);
 }
-.pop-up__btn-submit:hover {
+.btn-submit:hover {
     background-color: rgba(40, 224, 90, 0.9);
 }
-.pop-up__btn-delete {
+.btn-delete {
     background-color: rgba(243, 73, 73, 1);
 }
-.pop-up__btn-delete:hover {
+.btn-delete:hover {
     background-color: rgba(243, 73, 73, 0.8);
 }
 
-.pop-up .select_toggle{
+.popup .select_toggle{
     background-color: #e1e1e1;
 }

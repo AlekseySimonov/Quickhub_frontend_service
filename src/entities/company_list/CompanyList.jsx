@@ -86,59 +86,113 @@ export const CompanyList = () => {
                         </div>
                       }
                       {currentEmployees.map((employee) => (
-                          <div key={employee.id} className={styles.employees__item}>
-                              <div className={`${styles.container} ${styles.employee}`}>
-                                  {showColumns.photo && (
-                                      <div className={`${styles.employee__column} ${styles.employee__photo}`}>
-                                          <div className={styles['employee__photo-inner']}></div>
-                                      </div>
-                                  )}
-                                  {showColumns.fullName && (
-                                      <div className={`${styles.employee__column} ${styles.employee__info}`}>
-                                          <div className={styles.employee__fsname}>{employee.last_name || 'Фамилия'} {employee.first_name || 'Имя'}</div>
-                                          <div className={styles.employee__type}>{employee.position || 'Позиция не указана'}</ div >
-                                      </ div >
-                                  )}
-                                  {showColumns.patronymic && (
-                                      < div className={`${ styles.employee__column } ${ styles.employee__lname }`}>{ employee.lname || '-'}</ div >
-                                  )}
-                                  {showColumns.city && (
-                                      < div className={`${ styles.employee__column } ${ styles.employee__city }`}>{ employee.city || '-'}</ div >
-                                  )}
-                                  {showColumns.gender && (
-                                      < div className={`${ styles.employee__column } ${ styles.employee__gender }`}>{ employee.gender || '-'}</ div >
-                                  )}
-                                  {showColumns.birthDate && (
-                                      < div className={`${ styles.employee__column } ${ styles.employee__birthDate }`}>{ employee.birthDate || '-'}</ div >
-                                  )}
-                                  {showColumns.position && (
-                                      < div className={`${ styles.employee__column } ${ styles.employee__position }`}>{ employee.position || '-'}</ div >
-                                  )}
-                                  {showColumns.department && (
-                                      < div className={`${ styles.employee__column } ${ styles.employee__department }`}>{ employee.department || '-'}</ div >
-                                  )}
-                                  {showColumns.email && (
-                                      < div className={`${ styles.employee__column } ${ styles.employee__email }`}>{ employee.email || '-'}</ div >
-                                  )}
-                                  {showColumns.workPhone && (
-                                      < div className={`${ styles.employee__column } ${ styles.employee__workPhone }`}>{ employee.phone || '-'}</ div >
-                                  )}
-                                  {showColumns.personalPhone && (
-                                      < div className={`${ styles.employee__column } ${ styles.employee__personalPhone }`}>{ employee.personalPhone || '-'}</ div >
-                                  )}
+    <div key={employee.id} className={styles.employees__item}>
+        <div className={`${styles.container} ${styles.employee}`}>
+            {showColumns.photo && (
+                <div className={`${styles.employee__column} ${styles.employee__photo}`}>
+                    <div className={styles['employee__photo-inner']}></div>
+                </div>
+            )}
+            {showColumns.fullName && (
+                <div className={`${styles.employee__column} ${styles.employee__info}`}>
+                    <div className={styles.employee__fsname}>
+                        {employee.last_name || 'Фамилия'} {employee.first_name || 'Имя'}
+                    </div>
+                    {/* Отображаем только первую позицию */}
+                    <div className={styles.employee__type}>
+                        {employee.positions?.[0]?.title || 'Позиция не указана'}
+                        {/* Скрываем остальные позиции */}
+                        <span style={{ display: employee.positions?.length > 1 ? 'none' : 'inline' }}>
+                            {employee.positions?.slice(1).map((position, index) => (
+                                <span key={index} style={{ display: 'none' }}>{position.title}</span>
+                            ))}
+                        </span>
+                    </div>
+                </div>
+            )}
+            {showColumns.patronymic && (
+                <div className={`${styles.employee__column} ${styles.employee__lname}`}>
+                    {employee.otchestwo || '-'}
+                </div>
+            )}
+            {showColumns.city && (
+                <div className={`${styles.employee__column} ${styles.employee__city}`}>
+                    {employee.city || '-'}
+                </div>
+            )}
+            {showColumns.gender && (
+                <div className={`${styles.employee__column} ${styles.employee__gender}`}>
+                    {employee.gender || '-'}
+                </div>
+            )}
+            {showColumns.birthDate && (
+                <div className={`${styles.employee__column} ${styles.employee__birthDate}`}>
+                    {employee.birthDate || '-'}
+                </div>
+            )}
+            {showColumns.position && employee.positions && employee.positions.length > 0 && (
+                <div className={`${styles.employee__column} ${styles.employee__position}`}>
+                    {/* Отображаем только первую позицию */}
+                    {employee.positions?.[0]?.title || '-'}
+                    {/* Скрываем остальные позиции */}
+                    <span style={{ display: employee.positions?.length > 1 ? 'none' : 'inline' }}>
+                        {employee.positions?.slice(1).map((position, index) => (
+                            <span key={index} style={{ display: 'none' }}>{position.title}</span>
+                        ))}
+                    </span>
+                </div>
+            )}
+            {showColumns.department && employee.departments && employee.departments.length > 0 && (
+                <div className={`${styles.employee__column} ${styles.employee__department}`}>
+                    {/* Отображаем только первое подразделение */}
+                    {employee.departments?.[0]?.title || '-'}
+                    {/* Скрываем остальные подразделения */}
+                    <span style={{ display: employee.departments?.length > 1 ? 'none' : 'inline' }}>
+                        {employee.departments?.slice(1).map((department, index) => (
+                            <span key={index} style={{ display: 'none' }}>{department.title}</span>
+                        ))}
+                    </span>
+                </div>
+            )}
+            {showColumns.email && (
+                <div className={`${styles.employee__column} ${styles.employee__email}`}>
+                    {employee.email || '-'}
+                </div>
+            )}
+            {showColumns.workPhone && (
+                <div className={`${styles.employee__column} ${styles.employee__workPhone}`}>
+                    {employee.business_phone || '-'}
+                </div>
+            )}
+            {showColumns.personalPhone && (
+                <div className={`${styles.employee__column} ${styles.employee__personalPhone}`}>
+                    {employee.phone || '-'}
+                </div>
+            )}
+            {/* Вывод ссылок на социальные сети */}
+            {showColumns.tg && (
+                <div className={`${styles.employee__column} ${styles.employee__tg}`}>
+                    <a href={employee.links?.find(link => link.title === 'tg')?.link ?? '#'}>
+                      {employee.links?.find(link => link.title === 'tg')?.link ?? ''}
+                    </a>                    
+                </div>
+            )}
 
-                                  {showColumns.tg && (
-                                      < div className={`${ styles.employee__column } ${ styles.employee__tg }`}>{ employee.tg || '-'}</ div >
-                                  )}
-                                  {showColumns.vk && (
-                                      < div className={`${ styles.employee__column } ${ styles.employee__vk }`}>{ employee.vk || '-'}</ div >
-                                  )}
-                                  {showColumns.regDate && (
-                                      < div className={`${ styles.employee__column } ${ styles.employee__regDate }`}>{ formatDate(employee.date_joined) || '-'}</ div >
-                                  )}
-                              </ div >
-                          </ div >
-                      ))}
+            {showColumns.vk && (
+                <div className={`${styles.employee__column} ${styles.employee__vk}`}>
+                  <a href={employee.links?.find(link => link.title === 'vk')?.link ?? '#'}>
+                    {employee.links?.find(link => link.title === 'vk')?.link ?? ''}
+                  </a>                    
+                </div>
+            )}
+            {showColumns.regDate && (
+                <div className={`${styles.employee__column} ${styles.employee__regDate}`}>
+                    {formatDate(employee.date_joined) || '-'}
+                </div>
+            )}
+        </div>
+    </div>
+))}
                   </ div >
               </ div >
             </ div >
