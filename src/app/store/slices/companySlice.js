@@ -5,7 +5,7 @@ import {apiBaseQuery} from "../../../shared/config";
 import { URLS } from "../../../shared/api";
 
 const initialState ={
-    companiesList: [],
+    companiesList: undefined,
     companyID: localStorage.getItem('CompanyId') || sessionStorage.getItem('CompanyId') || null,
     companyTitle: null,
     companyDescription: null,
@@ -147,15 +147,16 @@ const companySlice = createSlice({
     reducers: {
         setCompanyID(state) {
             const currentCompanyID = localStorage.getItem('currentCompanyID');
-            if (currentCompanyID && state.companiesList.length > 0) {
+
+            if (Array.isArray(state.companiesList) && state.companiesList.length > 0) {
                 const currentCompany = state.companiesList.find(company => company.id === Number(currentCompanyID));
-                
+
                 if (currentCompany) {
                     state.companyID = currentCompany.id;
                     state.companyTitle = currentCompany.title;
                 } else {
-                    state.companyTitle = state.companiesList[0].id;
-                    state.companyID = state.companiesList[0].title;
+                    state.companyTitle = state.companiesList[0].title;
+                    state.companyID = state.companiesList[0].id;
                 }
             } else {
                 state.companyTitle = null;
@@ -163,16 +164,17 @@ const companySlice = createSlice({
             }
         },
         checkCompanyID(state) {
-            const exists = state.companiesList.some(company => company.id === state.companyID);
-            if (!exists && state.companiesList.length > 0) {
-                state.companyID = state.companiesList[0].id;
-                state.companyTitle = state.companiesList[0].title;
+            if (Array.isArray(state.companiesList)) {
+                const exists = state.companiesList.some(company => company.id === state.companyID);
+                if (!exists && state.companiesList.length > 0) {
+                    state.companyID = state.companiesList[0].id;
+                    state.companyTitle = state.companiesList[0].title;
+                }
             }
         },
         changeCompany(state, action) {
             state.companyTitle = action.payload.title
             state.companyID = action.payload.id
-            console.log(action.payload)
         },
     },
     extraReducers: (builder) => {
@@ -197,6 +199,9 @@ const companySlice = createSlice({
 
             .addCase(postCompanyAPI.fulfilled, (state, action) => {
                 state.status = 'succeeded'
+                            if (!Array.isArray(state.companiesList)) {
+                    state.companiesList = [];
+                }
                 state.companiesList.push(action.payload);
                 state.companyID = action.payload.id
                 state.companyTitle = action.payload.title
@@ -212,9 +217,19 @@ const companySlice = createSlice({
             })
 
             .addCase(deleteCompanyAPI.fulfilled, (state, action) => {
-                state.status = 'succeeded'
-                const idToDelete = action.payload
-                state.companiesList = state.companiesList.filter(company => company.id !== idToDelete)
+                state.status = 'succeeded';
+                const idToDelete = action.payload;
+
+                // Проверяем, что companiesList это массив перед операциями с ним
+                if (Array.isArray(state.companiesList)) {
+                    state.companiesList = state.companiesList.filter(company => company.id !== idToDelete);
+                }
+
+                // Если список пустой, устанавливаем его в undefined и сбрасываем companyID
+                if (state.companiesList && Array.isArray(state.companiesList) && state.companiesList.length === 0) {
+                    state.companiesList = undefined;
+                    state.companyID = null;
+                }
             })
 
             .addCase(deleteCompanyAPI.rejected, (state) => {

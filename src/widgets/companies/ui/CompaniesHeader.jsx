@@ -8,6 +8,8 @@ import {Search} from '../../../shared/ui/components/index'
 import {Filter} from '../../../shared/ui/components/index'
 
 import { CompanyFeatures } from '../../../features/company';
+import { useRedirectIfNoCompanies } from '../../../shared/hooks/useRedirectIfNoCompanies';
+import { useSelector } from 'react-redux';
 
 export const CompaniesHeader = () => {
 
@@ -33,6 +35,9 @@ export const CompaniesHeader = () => {
     const companySettingsPopup = usePopup();
     const createCompanyPopup = usePopup();
     const createDepartmentPopup = usePopup();
+
+    const {companyID, companiesList} = useSelector(state => state.company);
+    useRedirectIfNoCompanies({companyID, companiesList, createCompanyPopup })
 
     return (
         <div>

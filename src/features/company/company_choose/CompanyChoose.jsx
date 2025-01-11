@@ -2,17 +2,29 @@ import { useEffect, useState } from "react";
 import useOnClickOutside from "react-cool-onclickoutside";
 import { changeCompany } from "../../../app/store/slices/companySlice";
 import { useDispatch, useSelector } from "react-redux";
+import styles from './styles.module.css'
 
-export const CompanyChoose = ({ testid, onAddCompany, styles }) => {
+export const CompanyChoose = ({ testid, onAddCompany }) => {
     const dispatch = useDispatch();
     const [isOpen, setIsOpen] = useState(false);
     
-    const { companiesList, companyTitle } = useSelector(state => state.company);
-    const [ selectedOption, setSelectedOption ] = useState(companyTitle || "Выберите компанию");
+    const { companiesList, companyID } = useSelector(state => state.company);
+
+    
+    const [ selectedOption, setSelectedOption ] = useState("Выберите компанию");
 
     useEffect(() => {
-        setSelectedOption(companyTitle || "Выберите компанию");
-    }, [companyTitle]);
+        if (Array.isArray(companiesList)) {
+            const company = companiesList.find(company => company.id === companyID);
+            if (company) {
+                setSelectedOption(company.title);
+            } else {
+                setSelectedOption("Выберите компанию");
+            }
+        } else {
+            setSelectedOption("Выберите компанию");
+        }
+    }, [companyID, companiesList]);
 
     const handleClickBtn = () => {
         setIsOpen(prevIsOpen => !prevIsOpen);
