@@ -1,1 +1,1 @@
-export {Login} from "./ui/Login";
+export {ResetPassword} from "./ui/ResetPassword";

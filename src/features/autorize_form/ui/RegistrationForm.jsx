@@ -1,12 +1,15 @@
 import styles from './styles.module.css'
-import { useDispatch} from "react-redux"
+import { useDispatch, useSelector} from "react-redux"
 import { registerAPI } from "../../../app/store/slices/authSlice"
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
+import { useResetErrorState } from '../../../shared/hooks'
 
 export const RegistrationForm = () => {
 
-    // const {error} = useSelector(state => state.auth)
+    useResetErrorState()
+
+    const {error} = useSelector(state => state.auth)
     
     const initialValues = {
         first_name: '',
@@ -91,6 +94,8 @@ export const RegistrationForm = () => {
                     </div>
                     <ErrorMessage name="password2" component="div" className={styles.errorMessage} />
                 </div>
+
+                {error && <div className={styles.errorMessage}>{error}</div>}
                     
                 <div className ={styles.login}>
                     <button className={`${styles.btn} ${(!isValid || !dirty || !values.checkbox) ? styles.disabled : ''}`}

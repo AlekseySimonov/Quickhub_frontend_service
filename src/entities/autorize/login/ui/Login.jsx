@@ -12,7 +12,7 @@ export const Login = () =>{
             <Link to="/auth/registration">Создайте аккаунт</Link>
         </div> 
         <LoginForm />
-        <a href="" className = {styles.forgot_password}>Забыли пароль?</a>
+        <Link className ={styles.forgot_password} to="/auth/resetPassword">Забыли пароль?</Link>
         </>
     )
 }

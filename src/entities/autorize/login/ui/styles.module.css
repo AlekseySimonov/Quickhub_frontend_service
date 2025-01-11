@@ -22,6 +22,8 @@
 
 .forgot_password{
     text-align: center;
+    text-decoration: none;
+    color: rgb(65, 95, 243);
 }
 
 

@@ -5,12 +5,14 @@ import { loginAPI } from '../../../app/store/slices/authSlice'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import { useState } from 'react'
+import { useResetErrorState } from '../../../shared/hooks'
 
 export const  LoginForm = () => {
+
+    useResetErrorState()
+    const dispatch = useDispatch()
     
     const {error} = useSelector(state => state.auth)
-
-    const dispatch = useDispatch()
     const handleSubmit = (values) => {
         dispatch(loginAPI({ email: values.email, password: values.password, remember }));
     }
@@ -25,7 +27,7 @@ export const  LoginForm = () => {
 
     const validationSchema = Yup.object({
         email: Yup.string()
-            .email('Некорректный email')
+            .email('Некорректный Email')
             .required('Email обязателен'),
         password: Yup.string()
             .required('Пароль обязателен'),
@@ -45,7 +47,7 @@ export const  LoginForm = () => {
                     <img src={icons.login} alt="#" />
                     <Field
                         name="email"
-                        placeholder="Логин"
+                        placeholder="Почта"
                     />
                 </div>
                 <ErrorMessage name="email" component="div" className={styles.errorMessage} />

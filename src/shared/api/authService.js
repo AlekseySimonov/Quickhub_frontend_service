@@ -4,20 +4,27 @@ import {api} from '../config/axios'
 import * as URL from './urls';
 import { API } from './urls';
 
-const login = (email, password)=>{
+export const login = (email, password)=>{
     return axios.post(API + URL.LOGIN, {email, password})
 }
 
-const register =  (first_name,  last_name, email, password,password2)=>{
+export const register =  (first_name,  last_name, email, password,password2)=>{
     return axios.post(API + URL.REGISTRATION, {first_name,  last_name, email, password, password2})
 }
 
-const refreshToken = (refresh) =>{
+export const resetPassword =  (email)=>{
+    return axios.post(API + URL.REGISTRATION, {email})
+}
+
+export const emailVerify = (refresh_token) => {
+    return api.post(URL.LOGOUT, {refresh_token}) //*! in development */
+}
+
+export const refreshToken = (refresh) =>{
     return api.post(URL.REFRESH, {refresh})
 }
 
-const logout = (refresh_token) => {
+export const logout = (refresh_token) => {
     return api.post(URL.LOGOUT, {refresh_token})
 }
 
-export {login, register, refreshToken, logout}

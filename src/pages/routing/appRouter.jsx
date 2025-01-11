@@ -27,10 +27,12 @@ import { ProjectTable } from "../../entities/project_table";
 import { ProjectCalendar } from "../../entities/project_calendar";
 import { ProjectGantt } from "../../entities/project_gantt";
 import { ProjectMyPlan } from "../../entities/project_myplan";
+import { ResetPassword } from "../../entities/autorize/resetPassword";
 
 export const authTitles = {
     '/auth/login': 'Вход',
     '/auth/registration': 'Регистрация',
+    '/auth/resetPassword': 'Восстановление пароля',
 }
 
 export const baseTitles = [
@@ -166,6 +168,10 @@ export const appRouter = createBrowserRouter([
             {
                 path:'registration',
                 element: <Registration />,
+            },
+            {
+                path:'resetPassword',
+                element: <ResetPassword />,
             },
         ],
     },

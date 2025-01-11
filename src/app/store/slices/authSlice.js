@@ -31,15 +31,29 @@ export const registerAPI = createAsyncThunk(
         try {
             const response = await authService.register(first_name,  last_name, email, password,password2)
             alert("Вы успешно зарегистрировались");
-            window.location('/login')
+            window.location('auth/login')
             return response
         } catch (err) {
             if (err.response.status === 400) {
-                return rejectWithValue(err.response.data.error)
+                return rejectWithValue('Пользователь с данной почтой уже существует')
         }
         return rejectWithValue(err.response.data)
     }}
 )
+
+// export const resetPasswordAPI = createAsyncThunk(
+//     'auth/resetPasswordAPI',
+//     async ({ email}, { rejectWithValue }) => {
+//         try {
+//             const response = await authService.login(email)
+//             window.location.reload()
+//         } catch (err) {
+//             if (err.response.status === 400 || err.response.status === 401) {  
+//                 return rejectWithValue('Неверный e-mail или пароль')
+//             }
+//         return rejectWithValue(err.response.data)
+//     }}
+// )
 
 export const logoutAPI = createAsyncThunk(
     'auth/logoutAPI',
@@ -82,7 +96,11 @@ export const refreshTokenAPI = createAsyncThunk(
 const authSlice = createSlice({
     name: 'auth',
     initialState,
-    reducers: {},
+    reducers: {
+        resetErrorState(state) {
+            state.error = null;
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(loginAPI.pending, (state) => {
@@ -144,6 +162,6 @@ const authSlice = createSlice({
         }
     })
 
-export const {removeAuth} = authSlice.actions
+export const {resetErrorState} = authSlice.actions
 
 export default authSlice.reducer
