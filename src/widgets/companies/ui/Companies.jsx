@@ -3,26 +3,27 @@ import { CompaniesHeader } from "./CompaniesHeader"
 import styles from './styles.module.css'
 import { useEffect } from "react"
 import { useDispatch, useSelector} from "react-redux"
-import { getCompaniesAPI, setCompanyID, checkCompanyID, getCompanyUsersAPI} from "../../../app/store/slices/companySlice"
+import {setCompanyID, checkCompanyID, getCompanyUsersAPI, useGetCompaniesQuery} from "../../../app/store/slices/companySlice"
 import { Loader } from "../../../shared/ui/components"
 import { useGlobalLoading } from "../../../shared/hooks"
 
 export const Companies = () =>{
     const dispatch = useDispatch()
-    const {companyID, status} = useSelector(state => state.company)
+    const {companyID} = useSelector(state => state.company)
 
+    const {isSuccess } = useGetCompaniesQuery()
     const isLoading = useGlobalLoading()
 
     useEffect(() => {
-        if (status === 'succeeded' && companyID === null) {
+        if (isSuccess && companyID === null) {
             dispatch(setCompanyID());
-        }else if (status === 'succeeded' && companyID !== null) {
+        }else if (isSuccess && companyID !== null) {
             dispatch(checkCompanyID())
         }
-    }, [status, companyID, dispatch]);
+    }, [companyID, dispatch, isSuccess]);
 
     useEffect(() => {
-        dispatch(getCompaniesAPI())
+        useGetCompaniesQuery
     }, [dispatch])
 
     useEffect(() => {
@@ -33,8 +34,8 @@ export const Companies = () =>{
 
     return(
         <>
-        <div className={`${styles.content} ${status === 'loading' || isLoading ? styles.loading : ''}`}>
-            {status === 'loading' && (<Loader style = {styles.loader}/>)}
+        <div className={`${styles.content} ${ isLoading ? styles.loading : ''}`}>
+            {isLoading && (<Loader style = {styles.loader}/>)}
             <CompaniesHeader/>
             <div className={styles.main}>
                 <Outlet/>

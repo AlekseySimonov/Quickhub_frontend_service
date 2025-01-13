@@ -10,14 +10,27 @@ const initialState ={
     companyTitle: null,
     companyDescription: null,
     companyUsers: [],
-    status: 'loading',
+    status: '',
     error: null,
 }
 
 export const companyApiSlice = createApi({
-    reducerPath: 'companyRtk',
+    reducerPath: 'companyApi',
     baseQuery: apiBaseQuery(),
     endpoints: (builder) => ({
+        getCompanies: builder.query({
+            query: () => ({
+                url: `${URLS.COMPANIES}`,
+                method: 'get'
+            }),
+        }),
+        postCompany: builder.mutation({
+            query: (body) => ({
+                url: `${URLS.COMPANIES}`,
+                method: 'POST',
+                body: body,
+            }),
+        }),
         getUsersCompany: builder.query({
             query: (companyPk) => ({ 
                 url: `${URLS.COMPANY_USERS}/${companyPk}`, 
@@ -26,7 +39,11 @@ export const companyApiSlice = createApi({
         }),
     })
 })
-export const {useGetUsersCompanyQuery} = companyApiSlice
+export const {
+    useGetUsersCompanyQuery, 
+    useGetCompaniesQuery, 
+    usePostCompanyMutation,
+    } = companyApiSlice
 
 export const departmentsApiSlice = createApi({
     reducerPath: 'departments',
@@ -78,18 +95,6 @@ export const {
     usePostDepartmentMutation, 
     usePatchDepartmentMutation,
 } = departmentsApiSlice
-
-
-export const getCompaniesAPI = createAsyncThunk(
-    'company/getCompaniesAPI',
-    async (_, { rejectWithValue }) => {
-        try {
-            const response = await companiesService.getCompanies()
-            return response.data
-        } catch (err) {
-            return rejectWithValue(err.response)
-    }}
-)
 
 export const postCompanyAPI = createAsyncThunk(
     'company/createCompanyAPI',
@@ -179,19 +184,6 @@ const companySlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(getCompaniesAPI.pending, (state) => {
-                state.status = 'loading'
-            })
-            .addCase(getCompaniesAPI.fulfilled, (state,action) => {
-                state.status = 'succeeded'
-                state.companiesList = action.payload;
-            })
-            .addCase(getCompaniesAPI.rejected, (state, action) => {
-                state.status = 'failed'
-                state.error = action.payload
-            })
-
-            
 
             .addCase(postCompanyAPI.pending, (state) => {
                 state.status = 'loading'
@@ -204,12 +196,10 @@ const companySlice = createSlice({
                 }
                 state.companiesList.push(action.payload);
                 state.companyID = action.payload.id
-                state.companyTitle = action.payload.title
             })
 
             .addCase(postCompanyAPI.rejected, (state) => {
                 state.status = 'failed'
-                state.error = 'postError'
             })
 
             .addCase(deleteCompanyAPI.pending, (state) => {
@@ -220,12 +210,10 @@ const companySlice = createSlice({
                 state.status = 'succeeded';
                 const idToDelete = action.payload;
 
-                // Проверяем, что companiesList это массив перед операциями с ним
                 if (Array.isArray(state.companiesList)) {
                     state.companiesList = state.companiesList.filter(company => company.id !== idToDelete);
                 }
 
-                // Если список пустой, устанавливаем его в undefined и сбрасываем companyID
                 if (state.companiesList && Array.isArray(state.companiesList) && state.companiesList.length === 0) {
                     state.companiesList = undefined;
                     state.companyID = null;
@@ -261,6 +249,19 @@ const companySlice = createSlice({
             })
             .addCase(getCompanyUsersAPI.rejected, (state) => {
                 state.status = 'failed'
+            })
+
+            .addMatcher(
+                companyApiSlice.endpoints.getCompanies.matchFulfilled,
+                (state, action) => {
+                    state.companiesList = action.payload;
+                }
+            )
+            .addMatcher(
+                companyApiSlice.endpoints.postCompany.matchFulfilled, 
+                (state, action) => {
+                    console.log('hello', action.payload)
+                    state.companyID = action.payload.id
             })
         }
     })

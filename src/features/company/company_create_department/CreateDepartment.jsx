@@ -14,8 +14,8 @@ export const CreateDepartment = ({ onClose }) => {
     const [postDepartment] = usePostDepartmentMutation()
 
     const [departmentName, setDepartmentName] = useState("")
-    const [addedDepartment, setAddedDepartment] = useState(null)
-    const [addedSupervisor, setAddedSupervisor] = useState(null)
+    const [addedDepartment, setAddedDepartment] = useState('0')
+    const [addedOwner, setAddedOwner] = useState('')
     const [addedEmployees, setAddedEmployees] = useState([])
 
     const [newEmployee, setNewEmployee] = useState('');
@@ -30,12 +30,15 @@ export const CreateDepartment = ({ onClose }) => {
         const body = {
             company: companyID,
             title: departmentName,
-            parent: addedDepartment?.id || '',
+            parent: addedDepartment?.id,
+            "is_remove": false,
             users: addedEmployees.map(emp => ({ email: emp.email })),
+            owner: addedOwner.email,
         };
 
         try {
-            await postDepartment({ companyPk: companyID, body }).unwrap();
+            console.log({ companyPk: companyID, body: body })
+            await postDepartment({ companyPk: companyID, body: body }).unwrap();
             onClose();
         } catch (error) {
             console.error("Ошибка создания отдела:", error);
@@ -55,7 +58,7 @@ export const CreateDepartment = ({ onClose }) => {
     };
 
     const supervisorSelect = (item) => {
-        setAddedSupervisor(item);
+        setAddedOwner(item);
     };
     
     return (

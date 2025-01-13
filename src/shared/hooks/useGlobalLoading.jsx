@@ -1,13 +1,10 @@
-import { useSelector } from 'react-redux';
+import { useGetCompaniesQuery, useGetDepartmentsQuery } from "../../app/store/slices/companySlice";
+import { useGetProjectsQuery } from "../../app/store/slices/projectsSlice";
 
 export const useGlobalLoading = () => {
-    const isLoadingQueries = useSelector((state) =>
-        Object.values(state.departments.queries).some(query => query?.status === 'pending')
-    );
+    const { isLoading: isCompaniesLoading } = useGetCompaniesQuery();
+    const { isLoading: isUsersCompanyLoading } = useGetProjectsQuery();
+    const { isLoading: isDepartmentsLoading } = useGetDepartmentsQuery();
 
-    const isLoadingMutations = useSelector((state) =>
-        Object.values(state.departments.mutations).some(mutation => mutation?.status === 'pending')
-    );
-
-    return isLoadingQueries || isLoadingMutations;
+    return isCompaniesLoading || isUsersCompanyLoading || isDepartmentsLoading;
 };
