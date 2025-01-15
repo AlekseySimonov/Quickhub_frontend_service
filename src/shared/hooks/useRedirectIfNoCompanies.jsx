@@ -1,25 +1,23 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useGetCompaniesQuery } from "../../app/store/slices/companySlice";
 
 export const useRedirectIfNoCompanies = (params = {}) => {
-    const { companiesList, companyID, createCompanyPopup  } = params || {}
-    const navigate = useNavigate()
-    const location = useLocation()
-    const status = useSelector(state => state.company.status)
+    const { companyID, createCompanyPopup } = params;
+    const navigate = useNavigate();
+    const location = useLocation();
+    const { data: companiesList, isSuccess } = useGetCompaniesQuery();
 
     useEffect(() => {
-        if (!companyID) {
+        if (!companyID && isSuccess) {
             if (!location.pathname.includes("/companies")) {
                 navigate("/companies");
-                return
+                return;
             }
-            if (!Array.isArray(companiesList) || companiesList.length === 0 || status === 'succeeded') {
-                if (createCompanyPopup && typeof createCompanyPopup.openPopup === 'function') {
-                    console.log("Opening popup because companiesList is empty");
-                    createCompanyPopup.openPopup();
-                }
+
+            if (!Array.isArray(companiesList) || companiesList.length === 0) {
+                createCompanyPopup?.openPopup?.();
             }
-        } 
-    }, [companiesList, navigate, createCompanyPopup, companyID, location.pathname,status]);
+        }
+    }, [companiesList, navigate, createCompanyPopup, companyID, location.pathname, isSuccess]);
 };

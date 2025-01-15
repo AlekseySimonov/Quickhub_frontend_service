@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import styles from './CompanyList.module.css';
 import { icons } from '../../shared/ui/icons/companies';
-import { useSelector } from 'react-redux';
 import { CompanyFeatures } from '../../features/company';
+import { useSelector } from 'react-redux';
 export const CompanyList = () => {
-  const {companyUsers} = useSelector(state => state.company);
+
+  const {companyUsers} = useSelector(state => state.company.companyUsers)
+
   const employees = companyUsers ? companyUsers : [];
 
   const employeesPerPage = 8;

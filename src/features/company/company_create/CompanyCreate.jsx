@@ -1,14 +1,13 @@
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import styles from './CompanyCreate.module.css'
-import { postCompanyAPI, usePostCompanyMutation } from '../../../app/store/slices/companySlice';
+import { usePostCompanyMutation } from '../../../app/store/slices/companySlice';
 import { GenericPopup } from '../../../shared/ui/components/GenericPopup/GenericPopup';
 
 export const CompanyCreate = ({ onClose }) => {
-  const dispatch = useDispatch();
   const email = useSelector(state => state.user.email);
   const [companyName, setCompanyName] = useState('');
-  const [postCompany, { isLoading, error }] = usePostCompanyMutation();
+  const [postCompany, { isLoading, isSuccess, error }] = usePostCompanyMutation();
 
   const handleInputChange = (event) => {
     setCompanyName(event.target.value);
@@ -16,26 +15,26 @@ export const CompanyCreate = ({ onClose }) => {
 
   const body = {
   title: companyName,
-  users: [
-      {
-        email: email,
-      }
-    ],
+  users: [{email: email}],
   }
 
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (isLoading) return;
+    if (isLoading){
+      return
+    }
     if (!companyName.trim()) {
       alert('Название компании не может быть пустым');
       return;
     }
     try {
-      console.log(body)
-        await postCompany(body).unwrap();
+        await postCompany({body: body}).unwrap();
+        if (isSuccess){
+          onClose()
+        }
     } catch (err) {
-        alert('Failed to create company: ', err)
+        alert('Failed to create company: ', error)
     }
     onClose();
   };

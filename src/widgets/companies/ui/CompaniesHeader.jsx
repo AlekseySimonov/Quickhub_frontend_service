@@ -36,8 +36,8 @@ export const CompaniesHeader = () => {
     const createCompanyPopup = usePopup();
     const createDepartmentPopup = usePopup();
 
-    const {companyID, companiesList} = useSelector(state => state.company);
-    useRedirectIfNoCompanies({companyID, companiesList, createCompanyPopup })
+    const {companyID} = useSelector(state => state.company);
+    useRedirectIfNoCompanies({companyID, createCompanyPopup })
 
     return (
         <div>

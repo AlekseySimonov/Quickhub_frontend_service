@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./slices/authSlice"
 import companyReducer, { companyApiSlice, departmentsApiSlice } from "./slices/companySlice"
-import userReducer from "./slices/userSlice"
+import userReducer, { userApiSlice } from "./slices/userSlice"
 import { projectsApiSlice } from "./slices/projectsSlice";
 
 const store = configureStore({
@@ -12,12 +12,14 @@ const store = configureStore({
         [projectsApiSlice.reducerPath]: projectsApiSlice.reducer,
         [companyApiSlice.reducerPath]: companyApiSlice.reducer,
         [departmentsApiSlice.reducerPath]: departmentsApiSlice.reducer,
+        [userApiSlice.reducerPath]: userApiSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware()
             .concat(projectsApiSlice.middleware)
             .concat(companyApiSlice.middleware)
             .concat(departmentsApiSlice.middleware)
+            .concat(userApiSlice.middleware)
 })
 
 export default store;
