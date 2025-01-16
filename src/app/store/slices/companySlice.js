@@ -76,7 +76,7 @@ export const departmentsApiSlice = createApi({
     endpoints: (builder) => ({
         getDepartments: builder.query({
             query: (companyPk) => ({ 
-                url: URLS.DEPARTMENTS_USERS_DATA.replace('{company_pk}', companyPk), 
+                url: URLS.DEPARTMENTS.replace('{company_pk}', companyPk), 
                 method: 'get' 
             }),
             providesTags: (result) => result

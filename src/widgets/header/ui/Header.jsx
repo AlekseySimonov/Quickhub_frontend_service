@@ -1,17 +1,24 @@
 import styles from './styles.module.css'
 import { icons } from '../../../shared/ui/icons/header';
 import {DropDown} from '../../../shared/ui/components/index'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { logoutAPI } from '../../../app/store/slices/authSlice';
 import { useNavigate } from 'react-router-dom';
+import { useGetUserInfoQuery } from '../../../app/store/slices/userSlice';
 
 export const Header = ({burgerClick}) => {
         const navigate = useNavigate();
         const dispatch = useDispatch()
 
+        const userId = useSelector((state) => state.user.userId)
+        console.log(userId)
+        const { data: userInfo} = useGetUserInfoQuery(userId, {
+            skip: !userId,
+            enabled: userId != null,
+        });
+
         const dropDownOptions = [
         { label: 'Профиль', action: () => navigate('/profile')  },
-        { label: 'Настройки', action: () => console.log('Открыть настройки') },
         { label: 'Выйти', action: () => dispatch(logoutAPI()) },
     ];
 
@@ -52,9 +59,8 @@ export const Header = ({burgerClick}) => {
 
             <div className={styles.account}>
                     <DropDown
-                        styles = {styles}
-                        titleIcon={icons.profile} 
-                        titleName="Симонов Алексей"
+                        titleIcon ={icons.profile} 
+                        titleName = {userInfo ? `${userInfo.last_name}   ${userInfo.first_name}` : 'Loading...'}
                         options = {dropDownOptions}
                     />
                 </div>

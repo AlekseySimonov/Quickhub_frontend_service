@@ -9,6 +9,7 @@ import isChecked from './isChecked.svg'
 import deleteBtn from './delete.png'
 import arrowPrev from './arrowPrev.svg'
 import arrowNext from './arrowNext.svg'
+import pencil from './pencil.png'
 
 export const icons = {  
     arrow,
@@ -21,5 +22,6 @@ export const icons = {
     deleteBtn,
     isChecked,
     arrowPrev,
-    arrowNext
+    arrowNext,
+    pencil
 }

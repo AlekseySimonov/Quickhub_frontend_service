@@ -38,6 +38,15 @@ export const DepartmentNode = ({ data }) => {
     }
     };
 
+    const patchDepartmentClick = async ({companyID, id}) => {
+    try {
+        await deleteDepartment({ companyPk: companyID, id }).unwrap();
+        console.log('Department deleted successfully.');
+    } catch (error) {
+        console.error('Failed to delete department:', error);
+    }
+    };
+
     const employees = data.companyUsers || [];
     const users = Array.isArray(employees) && employees.length > 0 
     ? employees.map(employee => ({
@@ -61,9 +70,15 @@ export const DepartmentNode = ({ data }) => {
                             {data.title}
                         </div>
                         <img 
+                        className={styles.changeBtn} 
+                        onClick={() => patchDepartmentClick({companyID, id: data.id})} 
+                        src={icons.pencil}
+                        alt={'Change'}
+                        />
+                        <img 
                         className={styles.deleteBtn} 
                         onClick={() => deleteDepartmentClick({companyID, id: data.id})} 
-                        src={icons.deleteBtn} 
+                        src={icons.deleteBtn}
                         alt={'Delete'}
                         />
                     </div>

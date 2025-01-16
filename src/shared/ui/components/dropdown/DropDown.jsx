@@ -1,7 +1,8 @@
 import { useState } from "react"
 import useOnClickOutside from "react-cool-onclickoutside";
+import styles from "./styles.module.css"
 
-export const DropDown = ({ styles, titleIcon, titleName, options }) => {
+export const DropDown = ({ titleIcon, titleName, options }) => {
 
     const [isOpen, setIsOpen] = useState(false);
 

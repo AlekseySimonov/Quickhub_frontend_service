@@ -54,6 +54,17 @@
         cursor: default;
     }
 
+    .changeBtn{
+        width: 20px;
+        height: 20px;
+        opacity: 0; 
+        transition: opacity 0.15s;
+        pointer-events: none;
+        justify-content: end;
+        margin-left: auto;
+        transform: scaleY(-1);
+    }
+
     .deleteBtn {
         width: 15px;
         height: 15px;
@@ -61,7 +72,13 @@
         transition: opacity 0.15s, transform 0.15s;
         pointer-events: none;
         justify-content: end;
-        margin-left: auto;
+        margin-left: 15px;
+    }
+
+    .label:hover .changeBtn {
+        opacity: 1;  
+        pointer-events: visible; 
+        cursor: pointer;
     }
 
     .label:hover .deleteBtn {
