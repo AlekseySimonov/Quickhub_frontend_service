@@ -112,12 +112,16 @@
         display: flex;
         background-color: #FFF3D6;
         width: 270px;
-        justify-content: space-between;
+        /* justify-content: space-between; */
         padding-inline: 25px;
         padding-left: 35px;
         padding-block: 7px;
         border-radius: 10px;
         align-items: center;
+    }
+
+    .dropdown span{
+        margin-left: 10px;
     }
 
     .arrow {
@@ -128,6 +132,7 @@
         border-bottom: 2px solid #000;
         border-right: 2px solid #000;
         transition: transform 0.2s;
+        margin-left: auto;
     }
 
     .dropdown.active .arrow {     

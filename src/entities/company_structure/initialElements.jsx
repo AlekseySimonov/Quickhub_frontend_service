@@ -35,7 +35,6 @@ export const createGraph = (data, companyUsers) => {
             return
         }
 
-
         nodes.push({
             style: { zIndex: zIndexCounter }, 
             id: nodeId,
@@ -43,11 +42,12 @@ export const createGraph = (data, companyUsers) => {
             data: {
                 title: g.node(nodeId).label,
                 photo: icons.profile,
-                parent: g.node(nodeId).parent,
+                owner: departmentData.owner,
+                parent:departmentData.parent,
                 users: departmentData.users,
                 id: departmentData.id,
                 color: departmentData.color,
-                companyUsers: companyUsers
+                companyUsers: companyUsers,
             },
             position: { x, y },
             draggable: false,

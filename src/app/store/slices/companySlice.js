@@ -86,6 +86,14 @@ export const departmentsApiSlice = createApi({
                 ]
                 : [{type: 'Departments', id: 'LIST'}],
         }),
+        getDepartment: builder.query({
+            query: ({ companyPk, id }) => ({
+                url: `${URLS.DEPARTMENTS.replace('{company_pk}', companyPk)}${id}/`,
+                method: 'get',
+            }),
+            providesTags: (result, args) => 
+                result && args?.id ? [{ type: 'Departments', id: args.id }] : [],
+        }),
         postDepartment: builder.mutation({
             query: ({companyPk, body}) => ({
                 url:`${URLS.DEPARTMENTS.replace('{company_pk}', companyPk)}`,
@@ -97,7 +105,7 @@ export const departmentsApiSlice = createApi({
 
         patchDepartment: builder.mutation({
             query: ({companyPk, id, body}) => ({
-                url:`${URLS.DEPARTMENTS.replace('{company_pk}', companyPk)}/${id}/`,
+                url:`${URLS.DEPARTMENTS.replace('{company_pk}', companyPk)}${id}/`,
                 method: 'patch',
                 data:body,
             }),
@@ -114,6 +122,7 @@ export const departmentsApiSlice = createApi({
     })
 })
 export const {
+    useGetDepartmentQuery,
     useGetDepartmentsQuery, 
     useDeleteDepartmentMutation,
     usePostDepartmentMutation, 

@@ -8,21 +8,23 @@ export const DepartmentEmployeesList = ({ data, onToggle,  onAdd, color, photo }
     const companyID = useSelector(state => state.company.companyID)
     const [deleteEmployee] = usePatchDepartmentMutation()
 
+    const departmentEmployees = data.companyUsers.filter(user =>
+        user.email !== data.owner && 
+        data.users.some(dataUser => dataUser.email === user.email)
+    );
+
     const deleteEmployeeClick = async (email) =>{
         const updatedUsers = data.users
             .filter(user => user.email !== email)
             .map(user => ({ email: user.email }))
-            console.log({ users: updatedUsers, "is_remove": true  })
-
         try {
             await deleteEmployee({ companyPk: companyID, id: data.id, body: { users: updatedUsers, "is_remove": true  } }).unwrap();
-            console.log('Employee deleted successfully.');
         } catch (error) {
-            console.error('Failed to delete employee:', error);
+            alert('Ошибка при удалении сотрудника:', error)
         }
     }
     
-    if (!Array.isArray(data.users) || data.users.length <= 1) 
+    if (!Array.isArray(data.users) || data.users.length <= 0) 
         return null;
 
     return (
@@ -33,12 +35,12 @@ export const DepartmentEmployeesList = ({ data, onToggle,  onAdd, color, photo }
                 alt="Close"
                 onClick={onToggle}
             />
-            {data.users.slice(1).map((user,index) => (
+            {departmentEmployees.slice(0).map((user,index) => (
                 <div key={user.id || `employee-${index}`} className={styles.employee} style={{ backgroundColor: color }}>
                     <img 
                         className={styles.photo} 
                         src={photo}
-                        alt={user.first_name} 
+                        alt={'photo'} 
                     />
                     <div className={styles.label__employee}>
                         <div className={styles.name}>

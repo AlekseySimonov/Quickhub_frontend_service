@@ -3,9 +3,14 @@ import styles from './CompanyList.module.css';
 import { icons } from '../../shared/ui/icons/companies';
 import { CompanyFeatures } from '../../features/company';
 import { useSelector } from 'react-redux';
+import { useGetUsersCompanyQuery } from '../../app/store/slices/companySlice';
 export const CompanyList = () => {
 
-  const {companyUsers} = useSelector(state => state.company.companyUsers)
+  const companyID = useSelector(state => state.company.companyID)
+
+  const {data: companyUsers = []} = useGetUsersCompanyQuery(companyID, {
+        skip: !companyID,
+    });
 
   const employees = companyUsers ? companyUsers : [];
 

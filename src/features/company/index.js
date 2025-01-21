@@ -7,6 +7,7 @@ import { CompanyListSettings } from "./company_list-settings/CompanyListSettings
 
 import { DepartmentEmployeesList } from "./department_employees-list/DepartmentEmployeesList";
 import { AddDepartmentEmployee } from "./department_add-employee/AddDepartmentEmployee";
+import { ChangeDepartment } from "./company_change/ChangeDepartment";
 
 
 export const CompanyFeatures = {
@@ -17,5 +18,6 @@ export const CompanyFeatures = {
     CreateDepartment,
     CompanyListSettings,
     AddDepartmentEmployee,
-    DepartmentEmployeesList
+    DepartmentEmployeesList,
+    ChangeDepartment,
 }

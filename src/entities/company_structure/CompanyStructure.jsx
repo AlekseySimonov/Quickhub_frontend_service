@@ -4,16 +4,21 @@ import styles from './styles.module.css'
 import {DepartmentNode} from './CustomNodes';
 import {  useSelector } from 'react-redux';
 import { createGraph } from './initialElements';
-import { useGetDepartmentsQuery } from '../../app/store/slices/companySlice';
+import { useGetDepartmentsQuery, useGetUsersCompanyQuery } from '../../app/store/slices/companySlice';
 
 export const CompanyStructure = ()=>{
     const companyID = useSelector(state => state.company.companyID)
 
-    const { data = [] } = useGetDepartmentsQuery(companyID, {
+    const { data: departmentData = [] } = useGetDepartmentsQuery(companyID, {
         skip: !companyID,
     });
 
-    const { nodes, edges } = createGraph(data)
+    const {data: companyUsers = []} = useGetUsersCompanyQuery(companyID, {
+        skip: !companyID,
+    });
+    
+
+    const { nodes, edges } = createGraph(departmentData, companyUsers)
 
     const nodeTypes = {
     departmentNode: DepartmentNode
@@ -21,12 +26,12 @@ export const CompanyStructure = ()=>{
 
     return (
         <div className={styles.reactFlow}>
-            {data.length === 0 && 
+            {departmentData.length === 0 && 
             <div className={styles.container_empty}>
             На данный момент в компании нет отделов
             </div>
             }
-            {data.length > 0 &&
+            {departmentData.length > 0 &&
                 <ReactFlow
                 nodes={nodes}
                 edges={edges}

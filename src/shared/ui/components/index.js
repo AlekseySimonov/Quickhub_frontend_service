@@ -6,3 +6,4 @@ export { Filter } from "./filter/Filter";
 export { Loader } from "./loader/Loader";
 export { ErrorPage } from "./error/ErrorPage";
 export { Selector } from "./selector/index";
+export { GenericPopup } from "./GenericPopup";

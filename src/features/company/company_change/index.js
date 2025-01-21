@@ -1,0 +1,1 @@
+export { ChangeDepartment } from "./CreateDepartment";

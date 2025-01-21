@@ -2,9 +2,9 @@ import { useState } from "react";
 import styles from "./styles.module.css";
 import useOnclickOutside from "react-cool-onclickoutside";
 
-export const Selector = ({ list, label, inputLabel, onSelect, width }) => {
+export const Selector = ({ list, label, inputLabel, onSelect, width, initialSearchTerm}) => {
     const [isDropdownOpen, setDropdownOpen] = useState(false);
-    const [searchTerm, setSearchTerm] = useState('');
+    const [searchTerm, setSearchTerm] = useState(initialSearchTerm?.title || '');
 
     const filter = Array.isArray(list)
     ? list.filter(item => item && item.title && item.title.toLowerCase().includes(searchTerm.toLowerCase()))

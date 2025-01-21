@@ -11,7 +11,6 @@ export const Header = ({burgerClick}) => {
         const dispatch = useDispatch()
 
         const userId = useSelector((state) => state.user.userId)
-        console.log(userId)
         const { data: userInfo} = useGetUserInfoQuery(userId, {
             skip: !userId,
             enabled: userId != null,
