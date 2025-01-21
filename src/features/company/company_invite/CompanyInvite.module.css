@@ -30,7 +30,6 @@
   }
 
 .container {
-    width: calc(1380px - 90px);
     display: flex;
     justify-content: space-between;
     margin: 0 auto;
@@ -39,18 +38,15 @@
 
 button {border: none; background: transparent;}
 
-.content {
-    height: 100%;
-}
-
 .content .container {
-    width: calc(1380px - 30px);
+    width: calc(1280px - 30px);
     height: 100%;
     padding: 36px 0px;
     gap: 80px;
 }
 .nav {
-    width: 300px;
+    margin-right: 20px;
+    width: 275px;
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -61,7 +57,7 @@ button {border: none; background: transparent;}
     font-size: 18px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    
 }
 .nav_item.current {
     background-color: #898888;
@@ -69,7 +65,7 @@ button {border: none; background: transparent;}
     border-radius: 30px;
 }
 .form {
-    width: calc(100%-300px);
+    width: 900px;
     min-height: 500px;
     display: flex;
     flex-direction: column;
@@ -93,7 +89,7 @@ button {border: none; background: transparent;}
 .form.byPersonal .labels {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 5px;
+    margin-bottom: 20px;
 }
 .form.byPersonal .label {
     width: 300px;
@@ -102,16 +98,17 @@ button {border: none; background: transparent;}
 }
 .form.byPersonal .rows {
     display: flex;
-    height: 300px;
+    max-height: 300px;
     margin-bottom: 20px;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     overflow-y: auto;
-    padding-right: 10px;
     gap: 10px;
 }
 .form.byPersonal .row {
     display: flex;
     flex-direction: row;
+    margin-right: 20px;
 }
 .form.byPersonal .input {
     width: 300px;
@@ -138,7 +135,6 @@ button {border: none; background: transparent;}
 .form.byPersonal .delete {
     cursor: pointer;
     font-size: 16px;
-    margin-left: 5px;
     display: flex;
     align-items: center;
     gap: 5px;
@@ -152,13 +148,11 @@ button {border: none; background: transparent;}
     display: none;
 }
 .form.byPersonal .actions{
-    position: absolute;
-    left: 50%;
-    bottom: 35px;
-    transform: translateX(-50%);
+    margin-top: auto;
+    transform: translateX(-15%);
 }
 .row {
-    width: 100%;
+    width: max-content;
     display: flex;
     gap: 15px;
     flex-direction: column;
@@ -213,7 +207,6 @@ button {border: none; background: transparent;}
     height: 50px;
     padding: 10px;
     font-size: 18px;
-    color: #b7b7b7;
     border: 1px solid #898888 !important;
     background-color: #e1e1e1;
     border-radius: 5px;
