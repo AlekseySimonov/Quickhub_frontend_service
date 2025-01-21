@@ -114,7 +114,7 @@ export const departmentsApiSlice = createApi({
 
         deleteDepartment: builder.mutation({
             query: ({companyPk, id}) => ({
-                url:`${URLS.DEPARTMENTS.replace('{company_pk}', companyPk)}/${id}/`,
+                url:`${URLS.DEPARTMENTS.replace('{company_pk}', companyPk)}${id}/`,
                 method: 'delete',
             }), 
             invalidatesTags: [{type: 'Departments', id: 'LIST'}]

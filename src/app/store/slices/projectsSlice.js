@@ -20,11 +20,34 @@ export const projectsApiSlice = createApi({
                 ]
                 : [{type: 'Projects', id: 'LIST'}],
         }),
+        getProject: builder.mutation({
+            query: ({companyPk, id}) => ({
+                url:`${URLS.PROJECTS.replace('{company_pk}', companyPk)}${id}/`,
+                method: 'get',
+            }), 
+            providesTags: (result, args) => 
+                result && args?.id ? [{ type: 'Projects', id: args.id }] : [],
+        }),
         postProject: builder.mutation({
             query: ({companyPk, body}) => ({
                 url:`${URLS.PROJECTS.replace('{company_pk}', companyPk)}`,
                 method: 'POST',
                 data: body,
+            }), 
+            invalidatesTags: [{type: 'Projects', id: 'LIST'}]
+        }),
+        patchProject: builder.mutation({
+            query: ({companyPk, id, body}) => ({
+                url:`${URLS.PROJECTS.replace('{company_pk}', companyPk)}${id}/`,
+                method: 'patch',
+                data: body,
+            }), 
+            invalidatesTags: [{type: 'Projects', id: 'LIST'}]
+        }),
+        deleteProject: builder.mutation({
+            query: ({companyPk, id}) => ({
+                url:`${URLS.PROJECTS.replace('{company_pk}', companyPk)}${id}/`,
+                method: 'delete',
             }), 
             invalidatesTags: [{type: 'Projects', id: 'LIST'}]
         }),
@@ -34,4 +57,6 @@ export const projectsApiSlice = createApi({
 export const {
     useGetProjectsQuery, 
     usePostProjectMutation,
+    usePatchProjectMutation,
+    useDeleteProjectMutation,
 } = projectsApiSlice
