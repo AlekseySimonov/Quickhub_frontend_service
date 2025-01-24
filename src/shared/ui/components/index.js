@@ -7,3 +7,4 @@ export { Loader } from "./loader/Loader";
 export { ErrorPage } from "./error/ErrorPage";
 export { Selector } from "./selector/index";
 export { GenericPopup } from "./GenericPopup";
+export { Pagination } from "./pagination/Pagination";
