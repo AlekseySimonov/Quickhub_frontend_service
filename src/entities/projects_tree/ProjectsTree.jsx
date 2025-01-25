@@ -5,12 +5,15 @@ import { CompanyNode, ProjectNode } from './CustomNodes';
 import { createGraph } from './initialElements';
 import { useSelector } from 'react-redux';
 import { useGetProjectsQuery } from '../../app/store/slices/projectsSlice';
+import { useGetCompaniesQuery } from '../../app/store/slices/companySlice';
 
 export const ProjectsTree = () => {
-    const {companyTitle, companyID} = useSelector(state => state.company)
+    const {companyID} = useSelector(state => state.company)
     const {data = []} = useGetProjectsQuery(companyID)
+    const {data: companies = []} = useGetCompaniesQuery()
+    const companyTitle = companies.find(company => company.id === Number(companyID))?.title || ''
 
-    const { nodes, edges } = createGraph({ data, companyTitle })
+    const { nodes, edges } = createGraph({ data, companyTitle})
 
     const nodeTypes = {
         projectNode: ProjectNode,

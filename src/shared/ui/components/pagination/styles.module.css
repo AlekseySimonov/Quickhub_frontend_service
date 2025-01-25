@@ -4,7 +4,8 @@
     display: flex;
     align-items: center;
     position: relative;
-
+    width: 100%;
+    border-top: 1px solid #e1e1e1;
 }
 .pagination__container {
     width: max-content;
