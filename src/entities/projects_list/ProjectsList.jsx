@@ -6,21 +6,27 @@ import { icons } from '../../shared/ui/icons/projects';
 import { CompanyFeatures } from '../../features/company';
 import { useGetProjectsQuery } from '../../app/store/slices/projectsSlice';
 import { Link } from 'react-router-dom';
+import { usePopup } from '../../shared/hooks';
+import Popup from 'reactjs-popup';
+import { ProjectsFeatures } from './../../features/projects/index';
+import { useGetUsersCompanyQuery } from '../../app/store/slices/companySlice';
 
 export const ProjectsList = () => {
 
     const companyID = useSelector(state => state.company.companyID)
+    useGetUsersCompanyQuery(companyID)
 
     const { data: projects = [] } = useGetProjectsQuery(companyID, {
         skip: !companyID,
-    });
+    })
+
+    const { isVisible, openPopup, closePopup } = usePopup();
 
     const projectsPerPage = 8;
     const totalPages = Math.ceil(projects.length / projectsPerPage);
 
     const [currentPage, setCurrentPage] = useState(1)
     const [selectedProjectIds, setSelectedProjectIds] = useState([])
-    console.log('selectedProjectIds:', selectedProjectIds)
 
     const handleCheckboxChange = (projectId) => {
         setSelectedProjectIds((prevSelected) =>
@@ -53,16 +59,13 @@ export const ProjectsList = () => {
 
     const handleSaveSettings = (settings) => {
         setShowColumns(settings);
-        localStorage.setItem('companyListSettings', JSON.stringify(settings));
+        localStorage.setItem('projectsListSettings', JSON.stringify(settings));
         setIsSettingsOpen(false);
     };
 
-    const handleEditProject = () => {
-        console.log('EditProject')
-    }
-
     const handleDeleteProject = () => {
         console.log('DeleteProject')
+        /** Добавить удаление проектов с помощью метода patch  */ 
     }
 
     const handleArchiveProject = () => {
@@ -88,7 +91,7 @@ export const ProjectsList = () => {
                                     Открыть
                                 </Link>
                             </button>
-                            <button onClick={() => handleEditProject(selectedProjectIds[0])}>Редактировать</button>
+                            <button onClick={openPopup}>Редактировать</button>
                         </>
                     )}
                     <button onClick={handleDeleteProject}>Удалить</button>
@@ -102,7 +105,9 @@ export const ProjectsList = () => {
             {projects.length > 0 && (
                 <table className={styles.projects}>
                     <tr className={styles.projects__header}>
-                        <th className={styles.projects__settings} onClick={() => setIsSettingsOpen(true)}>
+                        <th className={styles.projects__settings} 
+                        // onClick={() => setIsSettingsOpen(true)}
+                        >
                             <img src={icons.settingsGrey} alt="Настройки" />
                         </th>
                         {[
@@ -166,14 +171,17 @@ export const ProjectsList = () => {
                 </table>
             )}
             {totalPages >= 1 && (
-                        <Pagination
-                            totalItems={projects.length}
-                            totalPages={totalPages}
-                            currentPage={currentPage}
-                            onPageChange={setCurrentPage}
-                            labels={{ items: 'Проектов', pages: 'Страниц' }}
-                        />
-                )}
+                <Pagination
+                    totalItems={projects.length}
+                    totalPages={totalPages}
+                    currentPage={currentPage}
+                    onPageChange={setCurrentPage}
+                    labels={{ items: 'Проектов', pages: 'Страниц' }}
+                />
+            )}
+            <Popup open={isVisible} closeOnDocumentClick onClose={closePopup}>
+                <ProjectsFeatures.EditProject onClose={closePopup} projectData={projects.find(project => project.id === selectedProjectIds[0])} />
+            </Popup>
         </div>
     );
 }

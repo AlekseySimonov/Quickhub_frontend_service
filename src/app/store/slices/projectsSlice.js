@@ -2,7 +2,6 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import {apiBaseQuery} from "../../../shared/config";
 import { URLS } from "../../../shared/api";
 
-
 export const projectsApiSlice = createApi({
     reducerPath: 'projects',
     baseQuery: apiBaseQuery(),
