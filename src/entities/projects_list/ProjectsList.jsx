@@ -104,81 +104,70 @@ export const ProjectsList = () => {
             )}
             {projects.length > 0 && (
                 <table className={styles.projects}>
-                    <tr className={styles.projects__header}>
-                        <th className={styles.projects__settings}
-                        onClick={() => setIsSettingsOpen(true)}
-                        >
-                            <img src={icons.settingsGrey} alt="Настройки" />
-                        </th>
-                        {[
-                            { key: 'title', label: 'Название' },
-                            { key: 'date_of_update', label: 'Активность' },
-                            { key: 'priority', label: 'Приоритет' },
-                            { key: 'creation_date', label: 'Дата создания' },
-                            { key: 'departments', label: 'Отделы' },
-                            { key: 'owner', label: 'Руководитель' },
-                            { key: 'users', label: 'Участники' },
-                        ]
-                            .filter(column => showColumns[column.key])
-                            .map(column => (
-                                <th key={column.key}>{column.label}</th>
-                            ))}
-                    </tr>
-                    {currentProjects.map((project) => (
-                        <tr key={project.id} className={`${styles.projects__item} ${selectedProjectIds.includes(project.id) ? styles.selected : ''
-                            }`}>
-                            <td>
-                                <input
-                                    className={styles.checkbox}
-                                    type="checkbox"
-                                    checked={selectedProjectIds.includes(project.id)}
-                                    onChange={() => handleCheckboxChange(project.id)}
-                                />
-                            </td>
-                            {showColumns.title && (
-                                <td>
-                                    <Link to={`/projects/${project.id}`} className={styles.title}>{project.title || '-'}</Link>
-                                </td>
-                            )}
-                            {showColumns.date_of_update && (
-                                <td>{project.date_of_update || '-'}</td>
-                            )}
-                            {showColumns.priority && (
-                                <td>{project.priority || '-'}</td>
-                            )}
-                            {showColumns.creation_date && (
-                                <td>{project.creation_date || '-'}</td>
-                            )}
-                            {showColumns.departments && (
-                                <td>{project.departments.map((dep) => dep.description).join(', ') || '-'}</td>
-                            )}
-                            {showColumns.owner && (
-                                <td>{project.owner || '-'}</td>
-                            )}
-                            {showColumns.users && (
-                                <td >{project.users.map((user) => user.email).join(', ') || '-'}</td>
-                            )}
+                    <thead>
+                        <tr className={styles.projects__header}>
+                            <th
+                                className={styles.projects__settings}
+                                onClick={() => setIsSettingsOpen(true)}
+                            >
+                                <img src={icons.settingsGrey} alt="Настройки" />
+                            </th>
+                            {[
+                                { key: 'title', label: 'Название' },
+                                { key: 'date_of_update', label: 'Активность' },
+                                { key: 'priority', label: 'Приоритет' },
+                                { key: 'creation_date', label: 'Дата создания' },
+                                { key: 'departments', label: 'Отделы' },
+                                { key: 'owner', label: 'Руководитель' },
+                                { key: 'users', label: 'Участники' },
+                            ]
+                                .filter(column => showColumns[column.key])
+                                .map(column => (
+                                    <th key={column.key}>{column.label}</th>
+                                ))}
                         </tr>
-                    ))}
-
-                    {isSettingsOpen && (
-                        <SettingsPopup
-                            title="Настройки списка проектов"
-                            initialSettings={showColumns}
-                            checkboxLabels={{
-                                title: "Название",
-                                progress: "Прогресс",
-                                date_of_update: "Активность",
-                                priority: "Приоритет",
-                                creation_date: "Дата создания",
-                                departments: "Отделы",
-                                owner: "Руководитель",
-                                users: "Участники",
-                            }}
-                            onSave={handleSaveSettings}
-                            onClose={() => setIsSettingsOpen(false)}
-                        />
-                    )}
+                    </thead>
+                    <tbody>
+                        {currentProjects.map((project) => (
+                            <tr
+                                key={project.id}
+                                className={`${styles.projects__item} ${selectedProjectIds.includes(project.id) ? styles.selected : ''
+                                    }`}
+                            >
+                                <td>
+                                    <input
+                                        className={styles.checkbox}
+                                        type="checkbox"
+                                        checked={selectedProjectIds.includes(project.id)}
+                                        onChange={() => handleCheckboxChange(project.id)}
+                                    />
+                                </td>
+                                {showColumns.title && (
+                                    <td>
+                                        <Link to={`/projects/${project.id}`} className={styles.title}>{project.title || '-'}</Link>
+                                    </td>
+                                )}
+                                {showColumns.date_of_update && (
+                                    <td>{project.date_of_update || '-'}</td>
+                                )}
+                                {showColumns.priority && (
+                                    <td>{project.priority || '-'}</td>
+                                )}
+                                {showColumns.creation_date && (
+                                    <td>{project.creation_date || '-'}</td>
+                                )}
+                                {showColumns.departments && (
+                                    <td>{project.departments.map((dep) => dep.description).join(', ') || '-'}</td>
+                                )}
+                                {showColumns.owner && (
+                                    <td>{project.owner || '-'}</td>
+                                )}
+                                {showColumns.users && (
+                                    <td>{project.users.map((user) => user.email).join(', ') || '-'}</td>
+                                )}
+                            </tr>
+                        ))}
+                    </tbody>
                 </table>
             )}
             {totalPages >= 1 && (
@@ -193,6 +182,25 @@ export const ProjectsList = () => {
             <Popup open={isVisible} closeOnDocumentClick onClose={closePopup}>
                 <ProjectsFeatures.EditProject onClose={closePopup} projectData={projects.find(project => project.id === selectedProjectIds[0])} />
             </Popup>
+            
+            {isSettingsOpen && (
+                <SettingsPopup
+                    title="Настройки списка проектов"
+                    initialSettings={showColumns}
+                    checkboxLabels={{
+                        title: "Название",
+                        progress: "Прогресс",
+                        date_of_update: "Активность",
+                        priority: "Приоритет",
+                        creation_date: "Дата создания",
+                        departments: "Отделы",
+                        owner: "Руководитель",
+                        users: "Участники",
+                    }}
+                    onSave={handleSaveSettings}
+                    onClose={() => setIsSettingsOpen(false)}
+                />
+            )}
         </div>
     );
 }

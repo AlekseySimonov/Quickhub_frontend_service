@@ -36,24 +36,24 @@ export const authTitles = {
 }
 
 export const baseTitles = [
-        { path: '/tasks', title: 'Мои задачи' },
-        { path: '/projects', title: 'Проекты' },
-        { path: '/companies', title: 'Компании' },
-        { path: '/settings', title: 'Настройки' },
-        { path: '/help', title: 'Поддержка' },
-        { path: '/profile', title: 'Профиль'}
-    ];
+    { path: '/tasks', title: 'Мои задачи' },
+    { path: '/projects', title: 'Проекты' },
+    { path: '/companies', title: 'Компании' },
+    { path: '/settings', title: 'Настройки' },
+    { path: '/help', title: 'Поддержка' },
+    { path: '/profile', title: 'Профиль' }
+];
 
 export const appRouter = createBrowserRouter([
     {
         path: '/',
-        element: 
-                <CheckAuth>
-                    <Suspense fallback={<Loader />}>
-                        <Base />
-                    </Suspense>,
-                </CheckAuth>
-                ,
+        element:
+            <CheckAuth>
+                <Suspense fallback={<Loader />}>
+                    <Base />
+                </Suspense>,
+            </CheckAuth>
+        ,
         errorElement: <ErrorPage />,
         children: [
             {
@@ -63,7 +63,7 @@ export const appRouter = createBrowserRouter([
             {
                 path: 'profile',
                 element: <User />
-            },   
+            },
             {
                 path: 'tasks',
                 element: <MyTasks />,
@@ -71,7 +71,7 @@ export const appRouter = createBrowserRouter([
             {
                 path: 'projects',
                 element: <Projects />,
-                children:[
+                children: [
                     {
                         index: true,
                         element: <Navigate to="list" replace />,
@@ -82,18 +82,18 @@ export const appRouter = createBrowserRouter([
                     },
                     {
                         path: 'list',
-                        element: <ProjectsList/>,
+                        element: <ProjectsList />,
                     },
                     {
                         path: 'events',
-                        element: <ProjectsEvents/>,
+                        element: <ProjectsEvents />,
                     },
                 ],
             },
             {
-                path: 'projects/:projectid',
+                path: 'projects/:projectId',
                 element: <Project />,
-                children:[
+                children: [
                     {
                         index: true,
                         element: <Navigate to="table" replace />,
@@ -108,22 +108,22 @@ export const appRouter = createBrowserRouter([
                     },
                     {
                         path: 'calendar',
-                        element: <ProjectCalendar/>,
+                        element: <ProjectCalendar />,
                     },
                     {
                         path: 'gantt',
-                        element: <ProjectGantt/>,
+                        element: <ProjectGantt />,
                     },
                     {
                         path: 'myplan',
-                        element: <ProjectMyPlan/>,
+                        element: <ProjectMyPlan />,
                     },
                 ],
             },
             {
                 path: 'companies',
                 element: <Companies />,
-                children:[
+                children: [
                     {
                         index: true,
                         element: <Navigate to="list" replace />,
@@ -134,7 +134,7 @@ export const appRouter = createBrowserRouter([
                     },
                     {
                         path: 'list',
-                        element: <CompanyList/>,
+                        element: <CompanyList />,
                     },
                 ],
             },
@@ -155,22 +155,22 @@ export const appRouter = createBrowserRouter([
     {
         path: '/auth',
         element:
-                <IsAuth>
+            <IsAuth>
                 <AutorizePage />
-                </IsAuth>
-                ,
+            </IsAuth>
+        ,
         errorElement: <ErrorPage />,
         children: [
             {
-                path:'login',
-                element: <Login/>,
+                path: 'login',
+                element: <Login />,
             },
             {
-                path:'registration',
+                path: 'registration',
                 element: <Registration />,
             },
             {
-                path:'resetPassword',
+                path: 'resetPassword',
                 element: <ResetPassword />,
             },
         ],
