@@ -3,13 +3,13 @@ import { useSelector } from 'react-redux';
 import { Pagination } from "../../shared/ui/components";
 import styles from './styles.module.css'
 import { icons } from '../../shared/ui/icons/projects';
-import { CompanyFeatures } from '../../features/company';
 import { useGetProjectsQuery } from '../../app/store/slices/projectsSlice';
 import { Link } from 'react-router-dom';
 import { usePopup } from '../../shared/hooks';
 import Popup from 'reactjs-popup';
 import { ProjectsFeatures } from './../../features/projects/index';
 import { useGetUsersCompanyQuery } from '../../app/store/slices/companySlice';
+import { SettingsPopup } from '../../shared/ui/components/settingsPopup';
 
 export const ProjectsList = () => {
 
@@ -65,7 +65,7 @@ export const ProjectsList = () => {
 
     const handleDeleteProject = () => {
         console.log('DeleteProject')
-        /** Добавить удаление проектов с помощью метода patch  */ 
+        /** Добавить удаление проектов с помощью метода patch  */
     }
 
     const handleArchiveProject = () => {
@@ -105,8 +105,8 @@ export const ProjectsList = () => {
             {projects.length > 0 && (
                 <table className={styles.projects}>
                     <tr className={styles.projects__header}>
-                        <th className={styles.projects__settings} 
-                        // onClick={() => setIsSettingsOpen(true)}
+                        <th className={styles.projects__settings}
+                        onClick={() => setIsSettingsOpen(true)}
                         >
                             <img src={icons.settingsGrey} alt="Настройки" />
                         </th>
@@ -162,10 +162,21 @@ export const ProjectsList = () => {
                     ))}
 
                     {isSettingsOpen && (
-                        <CompanyFeatures.CompanyListSettings
+                        <SettingsPopup
+                            title="Настройки списка проектов"
+                            initialSettings={showColumns}
+                            checkboxLabels={{
+                                title: "Название",
+                                progress: "Прогресс",
+                                date_of_update: "Активность",
+                                priority: "Приоритет",
+                                creation_date: "Дата создания",
+                                departments: "Отделы",
+                                owner: "Руководитель",
+                                users: "Участники",
+                            }}
                             onSave={handleSaveSettings}
                             onClose={() => setIsSettingsOpen(false)}
-                            initialSettings={showColumns}
                         />
                     )}
                 </table>

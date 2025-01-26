@@ -6,17 +6,17 @@
     display: flex;
     gap: 23px;
     width: 1000px;
-}
-
-.column {
-    flex: 33.333% 0 1;
+    max-height: 400px;
     padding: 10px 0px;
     display: flex;
     justify-content: space-between;
     gap: 30px;
     align-items: flex-start;
     flex-direction: column;
+    flex-wrap: wrap;
+    
 }
+
 .actions {
     position: relative;
     display: flex;
