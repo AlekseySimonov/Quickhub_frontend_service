@@ -15,3 +15,7 @@ export const DEPARTMENTS_USERS_DATA ='/profile/api/v1/profile/company/{company_p
 export const PROJECTS = '/company-service/api/v1/company/companies/{company_pk}/projects/'
 
 export const PROFILE = '/profile/api/v1/profile/'
+
+export const CUSTOM_COLUMN = '/task-service/api/v1/custom-columns/'
+export const SUBTASK = '/task-service/api/v1/subtasks/'
+export const TASKS = '/task-service/api/v1/tasks/'

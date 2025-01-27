@@ -19,7 +19,7 @@ export const projectsApiSlice = createApi({
                 ]
                 : [{type: 'Projects', id: 'LIST'}],
         }),
-        getProject: builder.mutation({
+        getProject: builder.query({
             query: ({companyPk, id}) => ({
                 url:`${URLS.PROJECTS.replace('{company_pk}', companyPk)}${id}/`,
                 method: 'get',
@@ -55,6 +55,7 @@ export const projectsApiSlice = createApi({
 
 export const {
     useGetProjectsQuery, 
+    useGetProjectQuery, 
     usePostProjectMutation,
     usePatchProjectMutation,
     useDeleteProjectMutation,
