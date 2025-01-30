@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styles from './CompanyList.module.css';
+import styles from './styles.module.css';
 import { icons } from '../../shared/ui/icons/companies';
 import { useSelector } from 'react-redux';
 import { useGetUsersCompanyQuery } from '../../app/store/slices/companySlice';

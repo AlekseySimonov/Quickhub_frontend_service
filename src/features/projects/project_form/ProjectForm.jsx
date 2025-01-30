@@ -22,6 +22,8 @@ export const ProjectForm = ({
 	const [employees, setEmployees] = useState(
 		users.filter((user) => projectData.users?.some((emp) => emp.email === user.email)) || []
 	);
+
+	console.log(employees)
 	const [showDescriptionInput, setShowDescriptionInput] = useState(!!projectData.description);
 
 	const usersList = users.map((user) => ({

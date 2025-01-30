@@ -16,7 +16,7 @@ export const EmployeesList = ({ employees, onRemove }) => (
 						>
 							×
 						</div>
-						<div className={styles.employee__name}>{employee.title}</div>
+						<div className={styles.employee__name}>{employee.last_name + ' ' + employee.first_name}</div>
 					</div>
 				))}
 			</div>
